@@ -1,0 +1,306 @@
+{
+    "user": {
+        "firstName": {
+            "label": "First Name",
+            "placeholder": "Enter first name"
+        },
+        "lastName": {
+            "label": "Last Name",
+            "placeholder": "Enter last name"
+        },
+        "email": {
+            "label": "Email Address",
+            "placeholder": "Enter email address"
+        },
+        "telephone": {
+            "label": "Telephone",
+            "placeholder": "Enter telephone"
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "Enter Password"
+        },
+        "conPassword": {
+            "label": "Confirm Password",
+            "placeholder": "Re-type Password"
+        }
+    },
+    "project": {
+        "projectName": {
+            "label": "Project Name",
+            "placeholder": "Enter project name"
+        },
+        "client": {
+            "label": "Client Name",
+            "placeholder": "Enter client name"
+        },
+        "country": {
+            "label": "Country",
+            "placeholder": "Enter country name"
+        },
+        "country_Code": {
+            "label": "Country Code",
+            "placeholder": "Enter country code"
+        },
+        "language": {
+            "label": "Language",
+            "placeholder": "Enter language"
+        },
+        "coordinates": {
+            "label": "Coordinates",
+            "placeholder": "Enter coordinates"
+        },
+        "currency": {
+            "label": "Currency",
+            "placeholder": "Enter currency"
+        },
+        "measurements": {
+            "label": "Measurements",
+            "placeholder": "Enter measurements"
+        },
+        "comments": "Comments",
+        "register_Date": "Registered"
+    },
+    "location": {
+        "location": "Name of Community",
+        "area_of_Influence": {
+            "label": "Area of Influence",
+            "nucleus": "Nucleus",
+            "direct": "Direct",
+            "indirect": "Indirect",
+            "not-applicable": "Not-Applicable"
+        },
+        "division": {
+            "federation": "Federation",
+            "state": "State",
+            "province": "Province",
+            "municipality": "Municipality",
+            "community": "Community",
+            "parish": "Parish",
+            "settlement": "Settlement"
+        },
+        "organization_Type": {
+            "label": "Geographical Political Organization",
+            "community": "Community",
+            "settlement": "Settlement",
+            "town": "Town",
+            "communal_land": "Communal land",
+            "colony": "Colony"
+        },
+        "scope": {
+            "label": "Scope",
+            "rural": "Rural",
+            "urban": "Urban"
+        }      
+    },
+    "stakeholder": {
+        "firstName": {
+            "label": "First Name",
+            "placeholder": "Enter first name"
+        },
+        "lastName": {
+            "label": "Last Name",
+            "placeholder": "Enter last name"
+        },
+        "alias": {
+            "label": "Alias (if applicable)",
+            "placeholder": "Enter alias"
+        },
+        "email": {
+            "label": "Email Address",
+            "placeholder": "Enter email address"
+        },
+        "telephone": {
+            "label": "Telephone",
+            "placeholder": "Enter telephone"
+        },
+        "gender": {
+            "label": "Gender",
+            "male": "Male",
+            "female": "Female",
+            "other": "Other"
+        },
+        "birthdate": {
+            "label": "BirthDate"
+        },
+        "ethnicity": {
+            "label": "Ethnicity",
+            "placeholder": "Enter ethnicity"
+        },
+        "register_Date": "Registered",
+        "social_Media": {
+            "label": "Social Media",
+            "placeholder": "Enter website"
+        },
+        "question": "Does the stakeholder belong to an organization?",
+        "organization": {
+            "yes": "Yes",
+            "no": "No"
+        },
+        "orgPosition": {
+            "question": "What is the stakeholder's position in the organization?",
+            "placeholder": "Enter stakeholder position"
+        }
+        
+    },
+    "organization": {
+       "organization_name": {
+            "label": "Name of Organization",
+            "placeholder": "Enter name of organization"
+       },
+       "political_Division": {
+           "label": "Political Division"
+       },
+       "address": {
+           "label": "Address",
+           "placeholder": "Enter Address"
+       },
+       "email": {
+           "label": "Email Address",
+           "placeholder": "Enter email"
+       },
+       "telephone": {
+           "label": "Telephone",
+           "placeholder": "Enter telephone"
+       },
+       "social_Media": {
+           "label": "Social Media",
+           "placeholder": "Enter website"
+       },
+       "organization_Members": {
+           "label": "Organization Members"
+       },
+       "stakeholder": {
+           "label": "stakeholder"
+       },
+       "register_Date": "Registered"
+       
+    },
+    "landownership": {
+        "negotiationProgress": {
+            "label": "Negotiation Progress",
+            "contact": "No Contact",
+            "initial": "Initial Contact Made",
+            "survey": "Allow to Survey",
+            "purchased": "Client Purchased"
+        },
+        "stakeholderOwned": {
+            "label": "Does a stakeholder own this land?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "paperworkExist": {
+            "label": "Does paperwork exist?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "paperwork": {
+            "label": "Upload paperwork"
+        },
+        "landMeasured": {
+            "label": "Has the land been measured?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "measurements": {
+            "label": "Measurements",
+            "placeholder": "Enter measurements"
+        },
+        "economicActivityExist": {
+            "label": "Does economic activity exist?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "economicActivity": {
+            "label": "Economic Activity",
+            "housing": "Housing",
+            "pasteur": "Pasteur",
+            "crops": "Crops"
+        },
+        "impactProject": {
+            "label": "Is there an impact to the project?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "comments": {
+            "label": "Comments",
+            "placeholder": "Enter comments"
+        }
+    },
+    "activity": {
+        "activity": {
+            "label": "Activity Type",
+            "informalConsultation": "Informal consultation",
+            "formalMeeting": "Formal meeting",
+            "informalCommunity": "Informal community assembly",
+            "formalCommunity": "Formal community assembly",
+            "geologySupport": "Geology support"
+        },
+        "hours": {
+            "label": "Hours",
+            "placeholder": "Enter activity hours"
+        },
+        "date": {
+            "label": "Date"
+        },
+        "location": {
+            "label": "Address",
+            "placeholder": "Enter Address"
+        },
+        "parties": {
+            "label": "Parties Involved"
+        },
+        "discussion": {
+            "label": "Discussion"
+        },
+        "commitment": {
+            "label": "Is there a commitment?",
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
+    "influence": {
+        "position": "What is the stakeholder's position in regards to the project?",
+        "influence": "What is the stakeholder's level of influence at it's community?",
+        "impact": "What is the stakeholder's possible impact on the project?"
+    },
+    "division": {
+        "federation": "Federation",
+        "state": "State",
+        "province": "Province",
+        "municipality": "Municipality",
+        "community": "Community",
+        "parish": "Parish",
+        "settlement": "Settlement"
+    },
+    "action": {
+        "assign": "Assign",
+        "update": "Update",
+        "submit": "Submit",
+        "continue": "Continue",
+        "previous": "Previous",
+        "register": "Register",
+        "select": "--select--",
+        "delete": "Delete",
+        "add": "Add",
+        "search": "search"
+    },
+    "tables": {
+        "dashboard": "Dashboard",
+        "location": "Community",
+        "organization": "Organization",
+        "stakeholder": "Stakeholder",
+        "activity": "Activity",
+        "influence": "Influence",
+        "project": "Project",
+        "commitment": "Commitment"
+    },
+    "utility": {
+        "status": "Status",
+        "open": "Open",
+        "close": "Close",
+        "active": "Active",
+        "inactive": "Inactive",
+        "surveyor": "Surveyor"
+    }
+}

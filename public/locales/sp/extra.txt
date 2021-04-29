@@ -1,0 +1,145 @@
+{
+    "project": {
+        "projectName": {
+            "label": "Project Name",
+            "placeholder": "Enter project name"
+        },
+        "client": {
+            "label": "Client Name",
+            "placeholder": "Enter client name"
+        },
+        "country": {
+            "label": "Country",
+            "placeholder": "Enter country name"
+        },
+        "country_Code": {
+            "label": "Country Code",
+            "placeholder": "Enter country code"
+        },
+        "language": {
+            "label": "Language",
+            "placeholder": "Enter language"
+        },
+        "coordinates": {
+            "label": "Coordinates",
+            "placeholder": "Enter coordinates"
+        },
+        "currency": {
+            "label": "Currency",
+            "placeholder": "Enter currency"
+        },
+        "measurements": {
+            "label": "Measurements",
+            "placeholder": "Enter measurements"
+        },
+        "comments": "Comments"
+    },
+    "location": {
+        "location": "Comunidade",
+        "area_of_Influence": {
+            "label": "Área de influencia",
+            "nucleus": "Nucleus",
+            "direct": "Direct",
+            "indirect": "Indirect",
+            "not-applicable": "Not-applicable"
+        },
+        "division": {
+            "federation": "Federation",
+            "state": "State",
+            "province": "Province",
+            "municipality": "Municipality",
+            "community": "Community",
+            "parish": "Parish",
+            "settlement": "Settlement",
+            "ejido": "ejido"
+        },
+        "organization_Type": {
+            "label": "Tipo de Organización",
+            "community": "Community",
+            "settlement": "Settlement",
+            "town": "Town",
+            "communal_land": "Communal land",
+            "colony": "Colony"
+        },
+        "scope": {
+            "label": "Scope",
+            "rural": "Rural",
+            "urban": "Urban"
+        }
+    },
+    "stakeholder": {
+        "alias": "alias",
+        "question": "Does the stakeholder belong to an organization?"
+    },
+    "landownership": {
+        "negotiationProgress": {
+            "label": "Negotiation progress",
+            "contact": "No Contact",
+            "initial": "Initial Contact made",
+            "survey": "Allow to survey",
+            "purchased": "Client purchased"
+        },
+        "stakeholderOwned": {
+            "label": "Does a stakeholder own this land?"
+        },
+        "paperworkExist": {
+            "label": "Does paperwork exist?"
+        },
+        "paperwork": {
+            "label": "Upload paperwork"
+        },
+        "landMeasured": {
+            "label": "Has the land been measured?"
+        },
+        "measurements": {
+            "label": "Measurements",
+            "placeholder": "Enter measurements"
+        },
+        "economicActivityExist": {
+            "label": "Does economic activity exist?"
+        },
+        "economicActivity": {
+            "label": "Economic Activity",
+            "housing": "Housing",
+            "pasteur": "Pasteur",
+            "crops": "Crops"
+        },
+        "impactProject": {
+            "label": "Is there an impact to the project?"
+        },
+        "comments": {
+            "label": "Comments",
+            "placeholder": "Enter comments"
+        }
+    },
+    "activity": {
+        "activity": {
+            "label": "Activity Type",
+            "informalConsultation": "Informal consultation",
+            "formalMeeting": "Formal meeting",
+            "informalCommunity": "Informal community assembly",
+            "formalCommunity": "Formal community assembly",
+            "geologySupport": "Geology support"
+        }
+    },
+    "division": {
+        "federation": "Federation",
+        "state": "State",
+        "province": "Province",
+        "municipality": "Municipality",
+        "community": "Community",
+        "parish": "Parish",
+        "settlement": "Settlement"
+    },
+    "action": {
+        "joined": "joined"
+    },
+    "tables": {
+        "user": "user"
+    },
+    "utility": {
+        "surveyor": "Surveyor",
+        "admin": "admin",
+        "administrator": "administrator"
+    }
+}
