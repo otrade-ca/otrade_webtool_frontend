@@ -47,7 +47,7 @@ const Sidebar = () => {
 					</div>
 					<hr />
 				</div>
-				{/* {projects && (
+				{projects && (
 					<ListGroup variant="flush">
 						{projects.map((project, index) => (
 							<ListGroup.Item key={index}>
@@ -57,7 +57,7 @@ const Sidebar = () => {
 							</ListGroup.Item>
 						))}
 					</ListGroup>
-				)} */}
+				)}
 			</div>
 		</>
 	);
