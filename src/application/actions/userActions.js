@@ -24,6 +24,7 @@ import {
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants';
+import { getURL } from '../api';
 
 import { PROJECT_LIST_RESET } from '../constants/projectConstants';
 import { STAKEHOLDER_LIST_RESET } from '../constants/stakeholderConstants';
@@ -45,7 +46,7 @@ export const login = (email, password) => async (dispatch) => {
 		};
 
 		const { data } = await axios.post(
-			'/api/v1/users/login',
+			`${getURL()}/api/v1/users/login`,
 			{ email, password },
 			config
 		);
@@ -142,7 +143,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		//pass name, email, password, and config to api
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/users/${id}`, config);
+		} = await axios.get(`${getURL()}/api/v1/users/${id}`, config);
 
 		//dispatch
 		dispatch({
@@ -178,7 +179,11 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.put(`/api/v1/users/profile`, user, config);
+		const { data } = await axios.put(
+			`${getURL()}/api/v1/users/profile`,
+			user,
+			config
+		);
 		dispatch(setAlert('User successfully updated', 'success'));
 		dispatch({
 			type: USER_PROFILE_UPDATE_SUCCESS,
@@ -225,7 +230,7 @@ export const listUsers = (keyword = '', pageNumber = '') => async (
 		};
 
 		const { data } = await axios.get(
-			`/api/v1/users?keyword=${keyword}&pageNumber=${pageNumber}`,
+			`${getURL()}/api/v1/users?keyword=${keyword}&pageNumber=${pageNumber}`,
 			config
 		);
 
@@ -258,7 +263,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		await axios.delete(`/api/v1/users/${id}`, config);
+		await axios.delete(`${getURL()}/api/v1/users/${id}`, config);
 
 		dispatch({
 			type: USER_DELETE_SUCCESS,
@@ -296,7 +301,11 @@ export const updateUser = (user) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.put(`/api/v1/users/${user._id}`, user, config);
+		const { data } = await axios.put(
+			`${getURL()}/api/v1/users/${user._id}`,
+			user,
+			config
+		);
 
 		dispatch({
 			type: USER_UPDATE_SUCCESS,

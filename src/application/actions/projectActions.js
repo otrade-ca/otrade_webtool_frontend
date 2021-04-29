@@ -26,6 +26,7 @@ import {
 	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 // add project
 export const addProject = (project) => async (dispatch, getState) => {
@@ -45,7 +46,7 @@ export const addProject = (project) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.post(`/api/v1/projects/`, project, config);
+		} = await axios.post(`${getURL()}/api/v1/projects/`, project, config);
 
 		dispatch({ type: PROJECT_ADD_SUCCESS, payload: data });
 	} catch (error) {
@@ -78,7 +79,10 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/v1/projects/${id}`, config);
+		const { data } = await axios.get(
+			`${getURL()}/api/v1/projects/${id}`,
+			config
+		);
 
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
 
@@ -113,7 +117,7 @@ export const updateProject = (project) => async (dispatch, getState) => {
 
 		//pass id, project, and config file to api
 		const { data } = await axios.put(
-			`/api/v1/projects/${project._id}`,
+			`${getURL()}/api/v1/projects/${project._id}`,
 			project,
 			config
 		);
@@ -147,7 +151,7 @@ export const deleteProject = (id) => async (dispatch, getState) => {
 			},
 		};
 		//pass id, project, and config file to api
-		await axios.delete(`/api/v1/projects/${id}`, config);
+		await axios.delete(`${getURL()}/api/v1/projects/${id}`, config);
 
 		dispatch({ type: PROJECT_DELETE_SUCCESS });
 		dispatch(setAlert('Project successfully deleted', 'success'));
@@ -182,7 +186,7 @@ export const listProjects = (keyword = '', pageNumber = '') => async (
 
 		//pass keyword and pageNumber, along with config to api
 		const { data } = await axios.get(
-			`/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
+			`${getURL()}/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
 			config
 		);
 
@@ -213,7 +217,10 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/v1/projects/user/${id}`, config);
+		const { data } = await axios.get(
+			`${getURL()}/api/v1/projects/user/${id}`,
+			config
+		);
 
 		dispatch({ type: PROJECT_USER_SUCCESS, payload: data });
 	} catch (error) {
@@ -250,7 +257,7 @@ export const assignProjectUser = (projectId, assignments) => async (
 		const {
 			data: { data },
 		} = await axios.put(
-			`/api/v1/projects/${projectId}/assign`,
+			`${getURL()}/api/v1/projects/${projectId}/assign`,
 			assignments,
 			config
 		);

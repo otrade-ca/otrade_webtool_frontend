@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
 import Placeholder from '../../img/placeholder.png';
 import { listUserProjects } from '../../../application/actions/projectActions';
+import { getURL } from '../../../application/api';
 
 const Sidebar = () => {
 	const userLogin = useSelector((state) => state.userLogin);
@@ -47,11 +48,12 @@ const Sidebar = () => {
 					</div>
 					<hr />
 				</div>
+				<h4>Projects</h4>
 				{projects && (
 					<ListGroup variant="flush">
 						{projects.map((project, index) => (
 							<ListGroup.Item key={index}>
-								<Link to={`project/${project._id}`}>
+								<Link to={`/project/${project._id}`}>
 									<span>{project.projectName}</span>
 								</Link>
 							</ListGroup.Item>
