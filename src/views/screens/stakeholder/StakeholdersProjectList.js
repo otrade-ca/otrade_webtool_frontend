@@ -14,6 +14,9 @@ import {
 } from '../../../application/actions/stakeholderActions';
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -129,11 +132,34 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 								  stakeholders.map((item, index) => (
 										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="card-header-item">
-													{item.firstName} {item.lastName}
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: 'grey', size: '2em' }}
+														>
+															<IoIcons.IoMdPeople />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">Stakeholder</div>
+													</div>
 												</div>
-												<div>{item.location && item.location.location}</div>
-												<div>{item.project && item.project.projectName}</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: 'grey', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>

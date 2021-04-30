@@ -115,6 +115,10 @@ label {
 	height: 100vh !important;
 }
 
+.form-container {
+	padding-top: 6rem !important;
+}
+
 /*border-radius for profile, containers, etc.*/
 /*input fields*/
 .form-control,
@@ -459,4 +463,22 @@ hr {
 .profile-top {
 	display: flex;
 	flex-direction: row;
+}
+
+.table-card-item {
+	width: 12rem;
+	float: left;
+	/* border: 1px solid black; */
+	display: flex;
+	align-items: center;
+}
+
+.item-one {
+	margin-right: 1rem;
+}
+
+.item-category {
+	font-size: small;
+	font-weight: bolder;
+	color: grey;
 }
