@@ -69,7 +69,7 @@ const LocationList = ({ match }) => {
 				<Accordion defaultActiveKey={1}>
 					{filtered
 						? filtered.map((location, index) => (
-								<Card className="table-card">
+								<Card className="table-card" key={index}>
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 										<p>{location.location}</p>
 										<p>{location.createdAt.substring(0, 10)}</p>
@@ -110,7 +110,7 @@ const LocationList = ({ match }) => {
 						  ))
 						: locations &&
 						  locations.map((location, index) => (
-								<Card className="table-card">
+								<Card className="table-card" key={index}>
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 										<p>{location.location}</p>
 										<p>{location.createdAt.substring(0, 10)}</p>

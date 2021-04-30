@@ -32,6 +32,7 @@ import {
 	stakeholderLocationListReducer,
 	stakeholderSaveReducer,
 	stakeholderAssignReducer,
+	stakeholderProjectListReducer,
 } from './reducers/stakeholderReducer';
 import {
 	organizationAddReducer,
@@ -126,6 +127,7 @@ const reducer = combineReducers({
 	stakeholderList: stakeholderListReducer,
 	stakeholderUserList: stakeholderUserListReducer,
 	stakeholderLocationList: stakeholderLocationListReducer,
+	stakeholderProjectList: stakeholderProjectListReducer,
 	stakeholderSave: stakeholderSaveReducer,
 	stakeholderAssign: stakeholderAssignReducer,
 

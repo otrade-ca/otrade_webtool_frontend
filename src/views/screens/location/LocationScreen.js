@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import ProfileTop from '../../components/ProfileTop';
 import { btnlinks, navbarlinks, routes } from './utilities';
+import { NavLink, Link } from 'react-router-dom';
+import Placeholder from '../../img/placeholder.png';
+import { useTranslation } from 'react-i18next';
 import { getLocationDetails } from '../../../application/actions/locationActions';
 import { listStakeholders } from '../../../application/actions/stakeholderActions';
 import { listOrganizations } from '../../../application/actions/organizationAction';
@@ -14,6 +16,7 @@ const LocationScreen = ({ match }) => {
 	const locationId = match.params.id;
 
 	const { url, path } = useRouteMatch();
+	const { t } = useTranslation();
 
 	// get userDispatch
 	const dispatch = useDispatch();
@@ -36,13 +39,76 @@ const LocationScreen = ({ match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
-					<ProfileTop
-						url={url}
-						path={path}
-						profile={location}
-						btnlinks={btnlinks}
-						navbarlinks={navbarlinks}
-					/>
+					{location && (
+						<div className="profile-container">
+							<Row>
+								<Col md={2} className="image-container">
+									{location.image ? (
+										<img
+											src={location.image}
+											alt="profile"
+											className="profile-image"
+										/>
+									) : (
+										<img
+											src={Placeholder}
+											alt="profile"
+											className="profile-image"
+										/>
+									)}
+								</Col>
+								<Col md={10}>
+									<h1>
+										<strong>
+											<>
+												<em>{t('tables.location')}:</em> {location.location}
+											</>
+										</strong>
+									</h1>
+
+									<Row className="middle-row d-flex justify-content-between">
+										<div className="ml-3">
+											<strong>{location.area_influence}</strong>
+											<br />
+											<strong>{location.organization_type}</strong>
+										</div>
+										<div className="mr-3 d-flex justify-content-end align-items-end">
+											{btnlinks.map((item, index) => (
+												<Link
+													key={index}
+													to={`${url}${item.link}`}
+													className={item.class}
+												>
+													<i className={item.icon}></i>
+													{item.type}
+												</Link>
+											))}
+										</div>
+									</Row>
+									<hr className="profile-container-hr" />
+									<Row className="lower-row ml-1">
+										<ul className="my-navbar">
+											{navbarlinks.map((item, index) => (
+												<li key={index}>
+													<NavLink
+														activeClassName="selected"
+														activeStyle={{
+															fontWeight: 'bold',
+															color: 'blue',
+															textDecoration: 'underline',
+														}}
+														to={`${url}${item.link}`}
+													>
+														{item.type}
+													</NavLink>
+												</li>
+											))}
+										</ul>
+									</Row>
+								</Col>
+							</Row>
+						</div>
+					)}
 
 					<Switch>
 						{routes.map((item, index) => (

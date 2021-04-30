@@ -15,13 +15,13 @@ import {
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
 
-const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
+const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 	const locationId = match.params.id;
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
 
-	//get stakeholders
+	//get stakeholders who belong to a particular project
 	const dispatch = useDispatch();
 	const stakeholderLocationList = useSelector(
 		(state) => state.stakeholderLocationList
@@ -35,7 +35,7 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 
 	useEffect(() => {
 		if (success) {
-			dispatch((locationId, keyword));
+			dispatch(listLocationStakeholders(locationId, keyword));
 			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
 			dispatch(listLocationStakeholders(locationId, keyword));
@@ -182,4 +182,4 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 	);
 });
 
-export default StakeholdersLocationList;
+export default StakeholdersProjectList;

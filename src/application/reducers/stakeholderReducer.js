@@ -29,6 +29,11 @@ import {
 	STAKEHOLDER_LOCATION_LIST_FAIL,
 	STAKEHOLDER_LOCATION_FILTER,
 	STAKEHOLDER_LOCATION_FILTER_CLEAR,
+	STAKEHOLDER_PROJECT_LIST_REQUEST,
+	STAKEHOLDER_PROJECT_LIST_SUCCESS,
+	STAKEHOLDER_PROJECT_LIST_FAIL,
+	STAKEHOLDER_PROJECT_LIST_FILTER,
+	STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR,
 	STAKEHOLDER_ASSIGN_REQUEST,
 	STAKEHOLDER_ASSIGN_SUCCESS,
 	STAKEHOLDER_ASSIGN_RESET,
@@ -194,6 +199,38 @@ export const stakeholderLocationListReducer = (
 				filtered: null,
 			};
 		case STAKEHOLDER_LOCATION_LIST_FAIL:
+			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+// get all stakeholders for a project
+export const stakeholderProjectListReducer = (
+	state = { stakeholders: [], filtered: [] },
+	action
+) => {
+	switch (action.type) {
+		case STAKEHOLDER_PROJECT_LIST_REQUEST:
+			return { loading: true, stakeholders: [] };
+		case STAKEHOLDER_PROJECT_LIST_SUCCESS:
+			return { loading: false, stakeholders: action.payload };
+		case STAKEHOLDER_PROJECT_LIST_FILTER:
+			return {
+				...state,
+				filtered: state.stakeholders.filter((contact) => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return (
+						contact.firstName.match(regex) || contact.lastName.match(regex)
+					);
+				}),
+			};
+		case STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR:
+			return {
+				...state,
+				filtered: null,
+			};
+		case STAKEHOLDER_PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		default:
 			return state;

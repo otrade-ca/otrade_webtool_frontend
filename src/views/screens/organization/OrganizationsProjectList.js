@@ -3,7 +3,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	listOrganizations,
+	listProjectOrganizations,
 	deleteOrganization,
 } from '../../../application/actions/organizationAction';
 import Message from '../../components/Message';
@@ -13,8 +13,8 @@ import Empty from '../../components/Empty';
 import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organizationConstants';
 import { useTranslation } from 'react-i18next';
 
-const OrganizationsList = memo(({ match }) => {
-	const locationId = match.params.id;
+const OrganizationsProjectList = memo(({ match }) => {
+	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -28,12 +28,12 @@ const OrganizationsList = memo(({ match }) => {
 
 	useEffect(() => {
 		if (success) {
-			dispatch(listOrganizations(locationId));
+			dispatch(listProjectOrganizations(projectId));
 			dispatch({ type: ORGANIZATION_DELETE_RESET });
 		} else {
-			dispatch(listOrganizations(locationId));
+			dispatch(listProjectOrganizations(projectId));
 		}
-	}, [dispatch, locationId, success]);
+	}, [dispatch, projectId, success]);
 
 	//delete user
 	const deleteHandler = (id) => {
@@ -169,4 +169,4 @@ const OrganizationsList = memo(({ match }) => {
 	);
 });
 
-export default OrganizationsList;
+export default OrganizationsProjectList;

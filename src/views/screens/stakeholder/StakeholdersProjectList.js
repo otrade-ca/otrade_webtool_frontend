@@ -9,34 +9,36 @@ import {
 	Empty,
 } from '../../components/HelperComponents';
 import {
-	listUserStakeholders,
+	listProjectStakeholders,
 	deleteStakeholder,
 } from '../../../application/actions/stakeholderActions';
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
 
-const StakeholdersUserList = memo(({ match, keyword = '' }) => {
+const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
 
-	//get stakeholders a user registered
+	//get stakeholders who belong to a particular location
 	const dispatch = useDispatch();
-	const stakeholderUserList = useSelector((state) => state.stakeholderUserList);
-	const { loading, error, filtered, stakeholders } = stakeholderUserList;
+	const stakeholderProjectList = useSelector(
+		(state) => state.stakeholderProjectList
+	);
+	const { loading, error, filtered, stakeholders } = stakeholderProjectList;
 
-	console.log(stakeholders);
+	console.log(filtered);
 
 	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
 	const { success } = stakeholderDelete;
 
 	useEffect(() => {
 		if (success) {
-			dispatch(listUserStakeholders(projectId, keyword));
+			dispatch(listProjectStakeholders(projectId, keyword));
 			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
-			dispatch(listUserStakeholders(projectId, keyword));
+			dispatch(listProjectStakeholders(projectId, keyword));
 		}
 	}, [dispatch, keyword, projectId, success]);
 
@@ -180,4 +182,4 @@ const StakeholdersUserList = memo(({ match, keyword = '' }) => {
 	);
 });
 
-export default StakeholdersUserList;
+export default StakeholdersLocationList;

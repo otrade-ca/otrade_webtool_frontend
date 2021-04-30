@@ -170,6 +170,44 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 };
 
 // list all organizations for a project
+export const listProjectOrganizations = (id, keyword = '') => async (
+	dispatch,
+	getState
+) => {
+	try {
+		dispatch({ type: ORGANIZATION_LIST_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const {
+			data: { data },
+		} = await axios.get(
+			`/api/v1/projects/${id}/organizations?keyword=${keyword}`,
+			config
+		);
+
+		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+		localStorage.setItem('organizationsListInfo', JSON.stringify(data));
+	} catch (error) {
+		dispatch({
+			type: ORGANIZATION_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
+// list all organizations for a location or community
 export const listOrganizations = (id, keyword = '') => async (
 	dispatch,
 	getState

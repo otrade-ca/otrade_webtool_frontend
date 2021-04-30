@@ -454,3 +454,9 @@ hr {
 .table-card-body {
 	margin: 0 0 !important;
 }
+
+/*profile-top*/
+.profile-top {
+	display: flex;
+	flex-direction: row;
+}

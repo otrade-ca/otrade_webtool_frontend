@@ -23,6 +23,11 @@ import {
 	STAKEHOLDER_LOCATION_LIST_REQUEST,
 	STAKEHOLDER_LOCATION_LIST_SUCCESS,
 	STAKEHOLDER_LOCATION_LIST_FAIL,
+	STAKEHOLDER_PROJECT_LIST_REQUEST,
+	STAKEHOLDER_PROJECT_LIST_SUCCESS,
+	STAKEHOLDER_PROJECT_LIST_FAIL,
+	STAKEHOLDER_PROJECT_LIST_FILTER,
+	STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR,
 	STAKEHOLDER_USER_FILTER,
 	STAKEHOLDER_USER_FILTER_CLEAR,
 	STAKEHOLDER_LOCATION_FILTER,
@@ -277,6 +282,37 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 	}
 };
 
+// list all stakeholders across a project
+export const listProjectStakeholders = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: STAKEHOLDER_PROJECT_LIST_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const {
+			data: { data },
+		} = await axios.get(`/api/v1/stakeholders/project/${id}`, config);
+
+		dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: STAKEHOLDER_PROJECT_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
 // adds a stakeholder to a list of stakeholders for dropdown
 export const assignStakeholder = (data) => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST });
@@ -326,4 +362,14 @@ export const filterLocationStakeholders = (text) => (dispatch) => {
 // clear Location projects filter
 export const clearLocationStakeholdersFilter = () => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_LOCATION_FILTER_CLEAR });
+};
+
+// filter location stakeholders
+export const filterProjectListStakeholders = (text) => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_PROJECT_LIST_FILTER, payload: text });
+};
+
+// clear Location projects filter
+export const clearProjectListStakeholdersFilter = () => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR });
 };

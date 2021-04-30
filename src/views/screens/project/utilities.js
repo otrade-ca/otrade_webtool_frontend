@@ -3,6 +3,8 @@ import EditProjectPhoto from '../project/EditProjectPhoto';
 import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 import LocationList from '../location/LocationList';
 import LocationForm from '../location/LocationForm';
+import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
+import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 
 export const btnlinks = [
 	{
@@ -55,6 +57,22 @@ export const routes = [
 	},
 	{
 		path: '/communities/register',
+		component: ({ match }) => <LocationForm match={match} />,
+	},
+	{
+		path: '/stakeholders',
+		component: ({ match }) => <StakeholdersProjectList match={match} />,
+	},
+	{
+		path: '/stakeholders/register',
+		component: ({ match }) => <LocationForm match={match} />,
+	},
+	{
+		path: '/organizations',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/register',
 		component: ({ match }) => <LocationForm match={match} />,
 	},
 	{

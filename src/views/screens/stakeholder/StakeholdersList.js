@@ -88,7 +88,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 																{t('stakeholder.firstName.label')}
 																{': '}
 																<strong>
-																	<Link to={`/stakeholders/${item._id}`}>
+																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
 																</strong>
@@ -136,7 +136,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 																{t('stakeholder.firstName.label')}
 																{': '}
 																<strong>
-																	<Link to={`/stakeholders/${item._id}`}>
+																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
 																</strong>
