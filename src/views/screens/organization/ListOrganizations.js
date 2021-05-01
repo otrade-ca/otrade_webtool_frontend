@@ -12,6 +12,9 @@ import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organizationConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 const OrganizationsList = memo(({ match }) => {
 	const locationId = match.params.id;
@@ -71,8 +74,34 @@ const OrganizationsList = memo(({ match }) => {
 								? filtered.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>{item.name}</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">Stakeholder</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>

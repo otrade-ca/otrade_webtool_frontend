@@ -7,12 +7,12 @@ import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 
 export const btnlinks = [
-	{
-		link: '/photo',
-		class: 'btn btn-primary',
-		icon: 'fas fa-edit',
-		type: 'Photo',
-	},
+	// {
+	// 	link: '/photo',
+	// 	class: 'btn btn-primary',
+	// 	icon: 'fas fa-edit',
+	// 	type: 'Photo',
+	// },
 ];
 
 export const navbarlinks = [
@@ -20,10 +20,10 @@ export const navbarlinks = [
 	// 	link: '/dashboard',
 	// 	type: 'Dashboard',
 	// },
-	{
-		link: '/about',
-		type: 'About',
-	},
+	// {
+	// 	link: '/about',
+	// 	type: 'About',
+	// },
 	{
 		link: '/communities',
 		type: 'Communities',

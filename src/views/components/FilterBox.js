@@ -99,7 +99,7 @@ const FilterBox = ({ searchWord }) => {
 	};
 
 	return (
-		<Form className="filter-form" style={{ width: '20rem' }}>
+		<Form className="filter-form" style={{ width: '15rem' }}>
 			<Form.Control
 				type="text"
 				onChange={onChange}

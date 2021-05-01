@@ -31,8 +31,6 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 	);
 	const { loading, error, filtered, stakeholders } = stakeholderProjectList;
 
-	console.log(filtered);
-
 	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
 	const { success } = stakeholderDelete;
 
@@ -69,25 +67,44 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<h4>Stakeholders</h4>
+							<h4>{t('tables.stakeholder')}</h4>
 							<FilterBox searchWord={'UserStakeholders'} />
 						</Card.Header>
 					)}
 					<Card.Body>
-						{/* <Card.Body className="card-header-table">
-					<div className="card-header-title">Community</div>
-					<div className="card-header-title">Project</div>
-				</Card.Body> */}
 						<Accordion defaultActiveKey={1}>
 							{filtered
 								? filtered.map((item, index) => (
 										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="card-header-item">
-													{item.firstName} {item.lastName}
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">Stakeholder</div>
+													</div>
 												</div>
-												<div>{item.location && item.location.location}</div>
-												<div>{item.project && item.project.projectName}</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
@@ -135,9 +152,9 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 												<div className="table-card-item">
 													<div className="item-one">
 														<IconContext.Provider
-															value={{ color: 'grey', size: '2em' }}
+															value={{ color: '#008cba', size: '2em' }}
 														>
-															<IoIcons.IoMdPeople />
+															<IoIcons.IoMdPerson />
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
@@ -150,7 +167,7 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 												<div className="table-card-item">
 													<div className="item-one">
 														<IconContext.Provider
-															value={{ color: 'grey', size: '2em' }}
+															value={{ color: '#008cba', size: '2em' }}
 														>
 															<RiIcons.RiCommunityLine />
 														</IconContext.Provider>

@@ -9,6 +9,9 @@ import {
 } from '../../../application/actions/locationActions';
 import { LOCATION_DELETE_RESET } from '../../../application/constants/locationConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 const LocationList = ({ match }) => {
 	const projectId = match.params.id;
@@ -71,8 +74,19 @@ const LocationList = ({ match }) => {
 						? filtered.map((location, index) => (
 								<Card className="table-card" key={index}>
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-										<p>{location.location}</p>
-										<p>{location.createdAt.substring(0, 10)}</p>
+										<div className="table-card-item">
+											<div className="item-one">
+												<IconContext.Provider
+													value={{ color: '#008cba', size: '2em' }}
+												>
+													<RiIcons.RiCommunityLine />
+												</IconContext.Provider>
+											</div>
+											<div className="item-two">
+												<div>{location.location}</div>
+												<div className="item-category">Community</div>
+											</div>
+										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
@@ -112,28 +126,35 @@ const LocationList = ({ match }) => {
 						  locations.map((location, index) => (
 								<Card className="table-card" key={index}>
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-										<p>{location.location}</p>
-										<p>{location.createdAt.substring(0, 10)}</p>
+										<div className="table-card-item">
+											<div className="item-one">
+												<IconContext.Provider
+													value={{ color: '#008cba', size: '2em' }}
+												>
+													<RiIcons.RiCommunityLine />
+												</IconContext.Provider>
+											</div>
+											<div className="item-two">
+												<div>{location.location}</div>
+												<div className="item-category">Community</div>
+											</div>
+										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
 											<div className="d-flex justify-content-between">
 												<div>
-													<p>
-														{t('location.location')}
-														{': '}
-														<strong>
-															<Link to={`/location/${location._id}`}>
-																{location.location}
-															</Link>
-														</strong>
-														<br />
-														{t('location.area_of_Influence.label')}
-														{': '} {location.area_influence}
-														<br />
-														{t('location.organization_Type.label')}
-														{': '} {location.organization_type}
-													</p>
+													<strong>
+														<Link to={`/location/${location._id}`}>
+															{location.location}
+														</Link>
+													</strong>
+													<br />
+													{t('location.area_of_Influence.label')}
+													{': '} {location.area_influence}
+													<br />
+													{t('location.organization_Type.label')}
+													{': '} {location.organization_type}
 												</div>
 												<div className="d-flex align-items-center">
 													<Button

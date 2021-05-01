@@ -12,6 +12,10 @@ import FilterBox from '../../components/FilterBox';
 import Empty from '../../components/Empty';
 import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organizationConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
+import * as VscIcons from 'react-icons/vsc';
 
 const OrganizationsProjectList = memo(({ match }) => {
 	const projectId = match.params.id;
@@ -71,34 +75,54 @@ const OrganizationsProjectList = memo(({ match }) => {
 								? filtered.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>{item.name}</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<VscIcons.VscOrganization />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
 													<div className="d-flex justify-content-between">
 														<div>
-															<p>
-																{t('tables.organization')}
-																{': '}
-																<strong>
-																	<Link to={`${url}/${item._id}/profile/view`}>
-																		{item.name}
-																	</Link>
-																</strong>
-																<br />
-																{t('organization.address')}
-																{': '} <strong>{item.address}</strong>
-																<br />
-																{t('organization.email')}
-																{': '} <strong>{item.email}</strong>
-																<br />
-																{t('organization.telephone')}
-																{': '} <strong>{item.telephone}</strong>
-																<br />
-																{t('organization.registered')}
-																{': '} {item.createdAt.substring(0, 10)}
-															</p>
+															<strong>
+																<Link to={`${url}/${item._id}/profile/view`}>
+																	{item.name}
+																</Link>
+															</strong>
+															<br />
+															{t('organization.address.label')}
+															{': '} <strong>{item.address}</strong>
+															<br />
+															{t('organization.email.label')}
+															{': '} <strong>{item.email}</strong>
+															<br />
+															{t('organization.telephone.label')}
+															{': '} <strong>{item.telephone}</strong>
+															<br />
+															{t('organization.register_Date')}
+															{': '} {item.createdAt.substring(0, 10)}
 														</div>
 														<div className="d-flex align-items-center">
 															<Button
@@ -118,34 +142,54 @@ const OrganizationsProjectList = memo(({ match }) => {
 								  organizations.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>{item.name}</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<VscIcons.VscOrganization />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
 													<div className="d-flex justify-content-between">
 														<div>
-															<p>
-																{t('tables.organization')}
-																{': '}
-																<strong>
-																	<Link to={`${url}/${item._id}/profile`}>
-																		{item.name}
-																	</Link>
-																</strong>
-																<br />
-																{t('organization.address.label')}
-																{': '} <strong>{item.address}</strong>
-																<br />
-																{t('organization.email.label')}
-																{': '} <strong>{item.email}</strong>
-																<br />
-																{t('organization.telephone.label')}
-																{': '} <strong>{item.telephone}</strong>
-																<br />
-																{t('organization.register_Date')}
-																{': '} {item.createdAt.substring(0, 10)}
-															</p>
+															<strong>
+																<Link to={`${url}/${item._id}/profile`}>
+																	{item.name}
+																</Link>
+															</strong>
+															<br />
+															{t('organization.address.label')}
+															{': '} <strong>{item.address}</strong>
+															<br />
+															{t('organization.email.label')}
+															{': '} <strong>{item.email}</strong>
+															<br />
+															{t('organization.telephone.label')}
+															{': '} <strong>{item.telephone}</strong>
+															<br />
+															{t('organization.register_Date')}
+															{': '} {item.createdAt.substring(0, 10)}
 														</div>
 														<div className="d-flex align-items-center">
 															<Button
