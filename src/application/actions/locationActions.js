@@ -22,6 +22,7 @@ import {
 	LOCATION_USER_LIST_FILTER_CLEAR,
 } from '../constants/locationConstants';
 import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 // add location
 export const addLocation = (location, projectId) => async (
@@ -45,7 +46,7 @@ export const addLocation = (location, projectId) => async (
 		const {
 			data: { data },
 		} = await axios.post(
-			`/api/v1/projects/${projectId}/locations`,
+			`${getURL()}/api/v1/projects/${projectId}/locations`,
 			location,
 			config
 		);
@@ -82,7 +83,7 @@ export const getLocationDetails = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/locations/${id}`, config);
+		} = await axios.get(`${getURL()}/api/v1/locations/${id}`, config);
 
 		dispatch({ type: LOCATION_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -117,7 +118,7 @@ export const updateLocation = (location, id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.put(`/api/v1/locations/${id}`, location, config);
+		} = await axios.put(`${getURL()}/api/v1/locations/${id}`, location, config);
 
 		dispatch({ type: LOCATION_UPDATE_SUCCESS, payload: data });
 		dispatch(setAlert('Location successfully updated', 'success'));
@@ -150,7 +151,7 @@ export const deleteLocation = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		await axios.delete(`/api/v1/locations/${id}`, config);
+		await axios.delete(`${getURL()}/api/v1/locations/${id}`, config);
 
 		dispatch({ type: LOCATION_DELETE_SUCCESS });
 		dispatch(setAlert('Location successfully removed', 'success'));
@@ -184,7 +185,10 @@ export const listLocations = (projectId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/projects/${projectId}/locations`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/projects/${projectId}/locations`,
+			config
+		);
 
 		dispatch({ type: LOCATION_LIST_SUCCESS, payload: data });
 	} catch (error) {
@@ -219,7 +223,7 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/locations/user/${userId}`, config);
+		} = await axios.get(`${getURL()}/api/v1/locations/user/${userId}`, config);
 
 		console.log(data);
 

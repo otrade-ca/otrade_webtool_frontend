@@ -26,13 +26,13 @@ import {
 	ACTIVITY_SAVE_RESET,
 } from '../constants/activityConstants';
 import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 // add activity to a project
 export const addActivity = (activity, projectId) => async (
 	dispatch,
 	getState
 ) => {
-
 	try {
 		dispatch({ type: ACTIVITY_ADD_REQUEST });
 
@@ -50,7 +50,7 @@ export const addActivity = (activity, projectId) => async (
 		const {
 			data: { data },
 		} = await axios.post(
-			`/api/v1/projects/${projectId}/activities`,
+			`${getURL()}/api/v1/projects/${projectId}/activities`,
 			activity,
 			config
 		);
@@ -87,7 +87,7 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/activities/${id}`, config);
+		} = await axios.get(`${getURL()}/api/v1/activities/${id}`, config);
 
 		dispatch({ type: ACTIVITY_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -121,7 +121,11 @@ export const updateActivity = (activity, id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.put(`/api/v1/activities/${id}`, activity, config);
+		} = await axios.put(
+			`${getURL()}/api/v1/activities/${id}`,
+			activity,
+			config
+		);
 
 		dispatch({ type: ACTIVITY_UPDATE_SUCCESS, payload: data });
 		dispatch(setAlert('Activity successfully updated', 'success'));
@@ -153,7 +157,7 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		await axios.delete(`/api/v1/activities/${id}`, config);
+		await axios.delete(`${getURL()}/api/v1/activities/${id}`, config);
 
 		dispatch({ type: ACTIVITY_DELETE_SUCCESS });
 		dispatch(setAlert('Activity successfully deleted', 'success'));
@@ -185,7 +189,10 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/projects/${projectId}/activities`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/projects/${projectId}/activities`,
+			config
+		);
 
 		dispatch({ type: ACTIVITY_LIST_SUCCESS, payload: data });
 	} catch (error) {
@@ -222,7 +229,7 @@ export const listStakeholderActivities = (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
+			`${getURL()}/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
 			config
 		);
 

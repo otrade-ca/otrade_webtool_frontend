@@ -25,7 +25,6 @@ import {
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 import { getURL } from '../api';
-
 import { PROJECT_LIST_RESET } from '../constants/projectConstants';
 import { STAKEHOLDER_LIST_RESET } from '../constants/stakeholderConstants';
 import { ORGANIZATION_LIST_RESET } from '../constants/organizationConstants';
@@ -87,7 +86,7 @@ export const registerUser = (user) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.post('/api/v1/users', user, config);
+		const { data } = await axios.post(`${getURL()}/api/v1/users`, user, config);
 
 		dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 	} catch (error) {
@@ -124,8 +123,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: USER_DETAILS_REQUEST,
 		});
-
-		console.log('emter getUserDetails');
 
 		//get userInfo from state
 		const {

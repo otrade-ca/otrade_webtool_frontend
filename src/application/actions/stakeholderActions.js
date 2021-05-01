@@ -38,6 +38,7 @@ import {
 	STAKEHOLDER_PROJECT_FILTER,
 } from '../constants/stakeholderConstants';
 import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 // add stakeholder
 export const addStakeholder = (stakeholder, locationId) => async (
@@ -62,7 +63,7 @@ export const addStakeholder = (stakeholder, locationId) => async (
 		const {
 			data: { data },
 		} = await axios.post(
-			`/api/v1/locations/${locationId}/stakeholders`,
+			`${getURL()}/api/v1/locations/${locationId}/stakeholders`,
 			stakeholder,
 			config
 		);
@@ -99,7 +100,7 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/stakeholders/${id}`, config);
+		} = await axios.get(`${getURL()}/api/v1/stakeholders/${id}`, config);
 
 		dispatch({ type: STAKEHOLDER_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -136,7 +137,11 @@ export const updateStakeholder = (stakeholder, id) => async (
 
 		const {
 			data: { data },
-		} = await axios.put(`/api/v1/stakeholders/${id}`, stakeholder, config);
+		} = await axios.put(
+			`${getURL()}/api/v1/stakeholders/${id}`,
+			stakeholder,
+			config
+		);
 
 		dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
 		dispatch(setAlert('Stakeholder successfully updated', 'success'));
@@ -166,7 +171,7 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		await axios.delete(`/api/v1/stakeholders/${id}`, config);
+		await axios.delete(`${getURL()}/api/v1/stakeholders/${id}`, config);
 
 		dispatch({ type: STAKEHOLDER_DELETE_SUCCESS });
 		dispatch(setAlert('Stakeholder successfully deleted', 'success'));
@@ -202,7 +207,7 @@ export const listStakeholders = (id, keyword = '') => async (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/locations/${id}/stakeholders?keyword=${keyword}`,
+			`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}`,
 			config
 		);
 
@@ -237,7 +242,7 @@ export const listUserStakeholders = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/stakeholders/user/${id}`, config);
+		} = await axios.get(`${getURL()}/api/v1/stakeholders/user/${id}`, config);
 
 		dispatch({ type: STAKEHOLDER_USER_LIST_SUCCESS, payload: data });
 	} catch (error) {
@@ -268,7 +273,10 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/stakeholders/location/${id}`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/stakeholders/location/${id}`,
+			config
+		);
 
 		dispatch({ type: STAKEHOLDER_LOCATION_LIST_SUCCESS, payload: data });
 	} catch (error) {
@@ -299,7 +307,10 @@ export const listProjectStakeholders = (id) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/stakeholders/project/${id}`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/stakeholders/project/${id}`,
+			config
+		);
 
 		dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
 	} catch (error) {

@@ -29,6 +29,7 @@ import {
 	ORGANIZAION_UPDATED_LIST_SUCCESS,
 } from '../constants/organizationConstants';
 import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 // add an organization to a project
 export const addOrganization = (organization, id) => async (
@@ -52,7 +53,7 @@ export const addOrganization = (organization, id) => async (
 		const {
 			data: { data },
 		} = await axios.post(
-			`/api/v1/locations/${id}/organizations`,
+			`${getURL()}/api/v1/locations/${id}/organizations`,
 			organization,
 			config
 		);
@@ -89,7 +90,7 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/organizations/${orgId}`, config);
+		} = await axios.get(`${getURL()}/api/v1/organizations/${orgId}`, config);
 
 		dispatch({ type: ORGANIZATION_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -124,7 +125,7 @@ export const updateOrganization = (org, orgId) => async (
 			},
 		};
 
-		await axios.put(`/api/v1/organizations/${orgId}`, org, config);
+		await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
 
 		dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
 		dispatch(setAlert('Organization successfully updated', 'success'));
@@ -154,7 +155,7 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 			},
 		};
 
-		await axios.delete(`/api/v1/organizations/${orgId}`, config);
+		await axios.delete(`${getURL()}/api/v1/organizations/${orgId}`, config);
 
 		dispatch({ type: ORGANIZATION_DELETE_SUCCESS });
 		dispatch(setAlert('Organization successfully deleted', 'success'));
@@ -190,7 +191,7 @@ export const listProjectOrganizations = (id, keyword = '') => async (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/projects/${id}/organizations?keyword=${keyword}`,
+			`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}`,
 			config
 		);
 
@@ -228,7 +229,7 @@ export const listOrganizations = (id, keyword = '') => async (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/locations/${id}/organizations?keyword=${keyword}`,
+			`${getURL()}/api/v1/locations/${id}/organizations?keyword=${keyword}`,
 			config
 		);
 
@@ -268,7 +269,7 @@ export const listStakeholderOrganizations = (
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
+			`${getURL()}/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
 			config
 		);
 		console.log('data', data);
@@ -307,7 +308,7 @@ export const assignStakeholder = (organizationId, assignments) => async (
 		const {
 			data: { data },
 		} = await axios.put(
-			`/api/v1/organizations/${organizationId}/assign`,
+			`${getURL()}/api/v1/organizations/${organizationId}/assign`,
 			assignments,
 			config
 		);

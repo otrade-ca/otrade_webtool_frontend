@@ -16,6 +16,7 @@ import {
 	COMMITMENT_LIST_SUCCESS,
 	COMMITMENT_LIST_FAIL,
 } from '../constants/commitmentConstants';
+import { getURL } from '../api';
 
 // add commitment
 export const addCommitment = () => async (dispatch, getState) => {
