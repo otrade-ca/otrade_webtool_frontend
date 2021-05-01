@@ -38,7 +38,7 @@ export const addCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.post(``, config);
+		} = await axios.post(`${getURL()}`, config);
 
 		dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
 	} catch (error) {
@@ -71,7 +71,7 @@ export const getCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(``, config);
+		} = await axios.get(`${getURL()}`, config);
 
 		dispatch({ type: COMMITMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -105,7 +105,7 @@ export const updateCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.put(``, config);
+		} = await axios.put(`${getURL()}`, config);
 
 		dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
@@ -138,7 +138,7 @@ export const deleteCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.delete(``, config);
+		} = await axios.delete(`${getURL()}`, config);
 
 		dispatch({ type: COMMITMENT_DELETE_SUCCESS, payload: data });
 	} catch (error) {
@@ -171,7 +171,7 @@ export const listCommitments = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(``, config);
+		} = await axios.get(`${getURL()}`, config);
 
 		dispatch({ type: COMMITMENT_LIST_SUCCESS, payload: data });
 	} catch (error) {
