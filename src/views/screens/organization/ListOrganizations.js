@@ -13,8 +13,8 @@ import Empty from '../../components/Empty';
 import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organizationConstants';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import * as VscIcons from 'react-icons/vsc';
 
 const OrganizationsList = memo(({ match }) => {
 	const locationId = match.params.id;
@@ -79,14 +79,12 @@ const OrganizationsList = memo(({ match }) => {
 														<IconContext.Provider
 															value={{ color: '#008cba', size: '2em' }}
 														>
-															<IoIcons.IoMdPerson />
+															<VscIcons.VscOrganization />
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
-														<div>
-															{item.firstName} {item.lastName}
-														</div>
-														<div className="item-category">Stakeholder</div>
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
 													</div>
 												</div>
 												<div className="table-card-item">
@@ -147,8 +145,32 @@ const OrganizationsList = memo(({ match }) => {
 								  organizations.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>{item.name}</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<VscIcons.VscOrganization />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>

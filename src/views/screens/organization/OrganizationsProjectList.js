@@ -13,7 +13,6 @@ import Empty from '../../components/Empty';
 import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organizationConstants';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as VscIcons from 'react-icons/vsc';
 

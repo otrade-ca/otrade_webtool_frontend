@@ -161,7 +161,26 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 														<div>
 															{item.firstName} {item.lastName}
 														</div>
-														<div className="item-category">Stakeholder</div>
+														<div className="item-category">
+															Stakeholder |{' '}
+															{item.status === 'active' ? (
+																<strong className="text-success">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</strong>
+															) : (
+																<em className="text-danger">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</em>
+															)}
+														</div>
 													</div>
 												</div>
 												<div className="table-card-item">
@@ -183,18 +202,14 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('stakeholder.firstName.label')}
-																{': '}
 																<strong>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
 																</strong>
 																<br />
-																{t('stakeholder.email.label')}
-																{': '} <strong>{item.email}</strong>
+																<strong>{item.email}</strong>
 																<br />
-																{t('stakeholder.telephone.label')}{' '}
 																<strong>{item.telephone}</strong>
 																<br />
 																{t('stakeholder.register_Date')}

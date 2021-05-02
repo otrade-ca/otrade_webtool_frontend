@@ -40,26 +40,32 @@ const Sidebar = () => {
 					</div>
 					<div className="sidebar-info">
 						{userInfo && (
-							<p>
+							<>
 								{userInfo.firstName} {userInfo.lastName} <br />
-								{userInfo.role}
-							</p>
+								{userInfo.role} {userInfo.status}
+							</>
 						)}
 					</div>
 					<hr />
+					<div className="sidebar-menu">
+						<h4>Projects</h4>
+						<div className="sidebar-meu-items">
+							{projects ? (
+								<ListGroup variant="flush">
+									{projects.map((project, index) => (
+										<ListGroup.Item key={index}>
+											<Link to={`/project/${project._id}`}>
+												<span>{project.projectName}</span>
+											</Link>
+										</ListGroup.Item>
+									))}
+								</ListGroup>
+							) : (
+								<span>There are no Projects</span>
+							)}
+						</div>
+					</div>
 				</div>
-				<h4>Projects</h4>
-				{projects && (
-					<ListGroup variant="flush">
-						{projects.map((project, index) => (
-							<ListGroup.Item key={index}>
-								<Link to={`/project/${project._id}`}>
-									<span>{project.projectName}</span>
-								</Link>
-							</ListGroup.Item>
-						))}
-					</ListGroup>
-				)}
 			</div>
 		</>
 	);

@@ -24,7 +24,7 @@
 }
 
 .sidebar-info {
-	padding-left: 1rem;
+	padding-left: 3rem;
 }
 
 .sidebar-image-container {
@@ -39,6 +39,14 @@
 
 .sidebar-wrapper .list-group {
 	width: 15rem;
+}
+
+.sidebar-menu h4 {
+	padding-left: 2rem;
+}
+
+.sidebar-menu-items {
+	padding: 0.25rem !important;
 }
 
 .page-content-wrapper {

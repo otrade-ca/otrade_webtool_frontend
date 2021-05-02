@@ -87,6 +87,14 @@ const LocationList = ({ match }) => {
 												<div className="item-category">Community</div>
 											</div>
 										</div>
+										<div className="table-card-item">
+											<div className="item-two">
+												<div>
+													<strong>{location.createdAt.substring(0, 10)}</strong>{' '}
+												</div>
+												<div className="item-category">Registered Date</div>
+											</div>
+										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
@@ -139,6 +147,14 @@ const LocationList = ({ match }) => {
 												<div className="item-category">Community</div>
 											</div>
 										</div>
+										<div className="table-card-item">
+											<div className="item-two">
+												<div>
+													<strong>{location.createdAt.substring(0, 10)}</strong>{' '}
+												</div>
+												<div className="item-category">Registered Date</div>
+											</div>
+										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
@@ -150,10 +166,14 @@ const LocationList = ({ match }) => {
 														</Link>
 													</strong>
 													<br />
-													{t('location.area_of_Influence.label')}
+													<strong>
+														{t('location.area_of_Influence.label')}
+													</strong>
 													{': '} {location.area_influence}
 													<br />
-													{t('location.organization_Type.label')}
+													<strong>
+														{t('location.organization_Type.label')}
+													</strong>
 													{': '} {location.organization_type}
 												</div>
 												<div className="d-flex align-items-center">

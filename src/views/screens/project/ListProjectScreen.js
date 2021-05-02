@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Row, Col, Button, Accordion, Card } from 'react-bootstrap';
+import { Row, Button, Accordion, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	listProjects,
@@ -9,12 +9,11 @@ import {
 } from '../../../application/actions/projectActions';
 import Paginate from '../../components/Paginate';
 import SearchBox from '../../components/SearchBox';
-import {
-	Message,
-	Loader,
-	BorderContainer,
-} from '../../components/HelperComponents';
+import { Message, Loader } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as AiIcons from 'react-icons/ai';
 
 const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -76,16 +75,55 @@ const ListProjectScreen = ({ history, match }) => {
 								projects.map((project, index) => (
 									<Card className="table-card">
 										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<p>{project.projectName}</p>
-											<p>{project.createdAt.substring(0, 10)}</p>
+											<div className="table-card-item">
+												<div className="item-one">
+													<IconContext.Provider
+														value={{ color: '#008cba', size: '2em' }}
+													>
+														<AiIcons.AiOutlineProject />
+													</IconContext.Provider>
+												</div>
+												<div className="item-two">
+													<div>{project.projectName}</div>
+													<div className="item-category">
+														Project |{' '}
+														{project.status === 'active' ||
+														project.status === 'open' ? (
+															<strong className="text-success">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</strong>
+														) : (
+															<em className="text-danger">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</em>
+														)}
+													</div>
+												</div>
+											</div>
+											<div className="table-card-item">
+												<div className="item-two">
+													<div>
+														<strong>
+															{project.createdAt.substring(0, 10)}
+														</strong>{' '}
+													</div>
+													<div className="item-category">Registered Date</div>
+												</div>
+											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
 														<p>
-															{t('project.projectName.label')}
-															{': '}
 															<strong>
 																<Link to={`/project/${project._id}`}>
 																	{project.projectName}
@@ -109,27 +147,6 @@ const ListProjectScreen = ({ history, match }) => {
 																	<strong>{project.coordinates}</strong>
 																	<br />
 																</>
-															)}
-															{t('project.register_Date')}
-															{': '}
-															{project.createdAt.substring(0, 10)}
-															<br />
-															<strong>
-																{t('utility.status')}
-																{': '}
-															</strong>
-															{project.status === 'open' ? (
-																<strong>
-																	<em className="text-success">
-																		{project.status}
-																	</em>
-																</strong>
-															) : (
-																<strong>
-																	<em className="text-danger">
-																		{project.status}
-																	</em>
-																</strong>
 															)}
 														</p>
 													</div>

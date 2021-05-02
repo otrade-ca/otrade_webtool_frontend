@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Accordion, Card, Button, Row, Col } from 'react-bootstrap';
+import { Accordion, Card, Button, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message.js';
 import Loader from '../../components/Loader.js';
@@ -11,9 +11,10 @@ import {
 } from '../../../application/actions/userActions';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
-import BorderContainer from '../../components/BorderContainer.js';
 import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const UserListScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -81,52 +82,59 @@ const UserListScreen = ({ history, match }) => {
 							users.map((user, index) => (
 								<Card className="table-card">
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-										<p>
-											{user.firstName} {user.lastName}
-										</p>
-
-										<p>{user.createdAt.substring(0, 10)}</p>
+										<div className="table-card-item">
+											<div className="item-one">
+												<IconContext.Provider
+													value={{ color: '#008cba', size: '2em' }}
+												>
+													<IoIcons.IoMdPerson />
+												</IconContext.Provider>
+											</div>
+											<div className="item-two">
+												<div>
+													{user.firstName} {user.lastName}
+												</div>
+												<div className="item-category">
+													{user.role.substring(0, 1).toUpperCase() +
+														user.role.substring(1, user.role.length)}{' '}
+													|{' '}
+													{user.status === 'active' ? (
+														<strong className="text-success">
+															{user.status.substring(0, 1).toUpperCase() +
+																user.status.substring(1, user.status.length)}
+														</strong>
+													) : (
+														<em className="text-danger">
+															{user.status.substring(0, 1).toUpperCase() +
+																user.status.substring(1, user.status.length)}
+														</em>
+													)}
+												</div>
+											</div>
+										</div>
+										<div className="table-card-item">
+											<div className="item-two">
+												<div>
+													<strong>{user.createdAt.substring(0, 10)}</strong>{' '}
+												</div>
+												<div className="item-category">Joined Otrade</div>
+											</div>
+										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
 											<div className="d-flex justify-content-between">
 												<div>
 													<p>
-														<strong>User: </strong>
-														<Link to={`/profile/${user._id}`}>
-															{user.lastName}, {user.firstName}
-														</Link>
+														{user.firstName} {user.lastName}
 														<br />
-														{t('user.email.label')}:{' '}
 														<em>
 															<a href={`mailto:${user.email}`}>{user.email}</a>
 														</em>
 														<br />
-														{t('user.telephone.label')}:{' '}
 														<strong>
 															<em>{user.telephone}</em>
 														</strong>
-														<br />
-														Role:{' '}
-														<strong>
-															<em>{user.role}</em>
-														</strong>
-														<br />
-														<strong>{t('utility.status')}: </strong>
-														{user.status === 'active' ? (
-															<strong>
-																<em className="text-success">{user.status}</em>
-															</strong>
-														) : (
-															<strong>
-																<em className="text-danger">{user.status}</em>
-															</strong>
-														)}
-														<br />
-														Joined:{' '}
-														<strong>
-															{user.createdAt.substring(0, 10)}
-														</strong>{' '}
 														<br />
 													</p>
 												</div>
