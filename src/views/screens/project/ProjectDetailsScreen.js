@@ -39,7 +39,7 @@ const ProjectDetailsScreen = () => {
 						<h4>{t('tables.project')}</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form className="mt-3">
+						<Form>
 							<Row>
 								<Col>
 									<Form.Group id="summary">

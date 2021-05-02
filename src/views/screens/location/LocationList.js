@@ -62,7 +62,7 @@ const LocationList = ({ match }) => {
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.location')}</h4>
 							<Link to={`${url}/register`} className="btn btn-primary ml-2">
-								<i className="fas fa-plus"></i> {t('tables.location')}
+								<i className="fas fa-plus"></i> {t('action.register')}
 							</Link>
 						</Card.Header>
 					)}

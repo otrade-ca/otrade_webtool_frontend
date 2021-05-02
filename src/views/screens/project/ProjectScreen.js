@@ -56,9 +56,7 @@ const ProjectScreen = ({ match }) => {
 								<Col md={10}>
 									<h1>
 										<strong>
-											<>
-												<em>{t('tables.project')}:</em> {project.projectName}
-											</>
+											<>{project.projectName}</>
 										</strong>
 									</h1>
 

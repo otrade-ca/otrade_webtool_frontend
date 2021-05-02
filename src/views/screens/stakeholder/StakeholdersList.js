@@ -57,7 +57,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 						<Empty
 							itemLink={'register'}
 							url={url}
-							type={'Register'}
+							type={t('tables.stakeholder')}
 							group={'stakeholders'}
 						/>
 					) : (

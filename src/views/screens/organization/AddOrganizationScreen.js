@@ -51,10 +51,12 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 	return (
 		<Card className="my-card">
 			<Card.Header className="my-card-header">
-				<h4>{t('tables.organization')}</h4>
+				<h4>
+					{t('tables.organization')} {t('action.register')}
+				</h4>
 			</Card.Header>
 			<Card.Body>
-				<Form onSubmit={submitHandler} className="mt-3 mb-3">
+				<Form onSubmit={submitHandler} className="mb-3">
 					<Row>
 						<Col md={6}>
 							<Form.Group controlId="organization">

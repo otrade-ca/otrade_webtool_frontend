@@ -102,7 +102,7 @@ const UserAddScreen = ({ history }) => {
 					<h4>User Registration</h4>
 				</Card.Header>
 				<Card.Body>
-					<Form onSubmit={submitHandler} className="mt-4 mb-3">
+					<Form onSubmit={submitHandler} className="mb-3">
 						<Row>
 							<Col md={6}>
 								<Form.Group controlId="firstName">

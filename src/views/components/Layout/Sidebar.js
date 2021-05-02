@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
 import Placeholder from '../../img/placeholder.png';
 import { listUserProjects } from '../../../application/actions/projectActions';
-import { getURL } from '../../../application/api';
 
 const Sidebar = () => {
 	const userLogin = useSelector((state) => state.userLogin);

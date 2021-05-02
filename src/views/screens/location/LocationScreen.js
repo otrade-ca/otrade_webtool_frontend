@@ -60,9 +60,7 @@ const LocationScreen = ({ match }) => {
 								<Col md={10}>
 									<h1>
 										<strong>
-											<>
-												<em>{t('tables.location')}:</em> {location.location}
-											</>
+											<>{location.location}</>
 										</strong>
 									</h1>
 

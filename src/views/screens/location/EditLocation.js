@@ -71,11 +71,11 @@ const EditLocation = ({ match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Card className="my-card">
-					<Card.Header>
+					<Card.Header className="my-card-header">
 						<h4>{t('tables.location')}</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler} className="mt-3 mb-3">
+						<Form onSubmit={submitHandler} className="mb-3">
 							<Row>
 								<Col md={12}>
 									<Form.Group controlId="location">
