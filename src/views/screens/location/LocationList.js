@@ -10,7 +10,6 @@ import {
 import { LOCATION_DELETE_RESET } from '../../../application/constants/locationConstants';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
 const LocationList = ({ match }) => {

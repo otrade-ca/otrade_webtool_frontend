@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useParams, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	addStakeholder,
-	saveStakeholderInfo,
-} from '../../../application/actions/stakeholderActions';
-import { STAKEHOLDER_ADD_RESET } from '../../../application/constants/stakeholderConstants';
+import { addStakeholder } from '../../../application/actions/stakeholderActions';
 import { CardContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
@@ -21,9 +17,6 @@ const StakeholderContactInfo = ({ history }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
 
-	const stakeholderAdd = useSelector((state) => state.stakeholderAdd);
-	const { success, stakeholder } = stakeholderAdd;
-
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -36,27 +29,6 @@ const StakeholderContactInfo = ({ history }) => {
 	const [organization, setOrganization] = useState('');
 	const [orgPosition, setOrgPosition] = useState('');
 	const [media, setMedia] = useState([{ website: '' }]);
-
-	useEffect(() => {
-		if (success) {
-			// save stakeholder in localstorage
-			dispatch(saveStakeholderInfo(stakeholder));
-
-			// if organization response is "yes" or "Yes", navigate to org/registration
-			//if (
-			//	stakeholder.organization === 'yes' ||
-			//	stakeholder.organization === 'Yes'
-			//) {
-			// history.push(`/locations/${id}/organizations/register`);
-			//} else {
-			// nvaigate to influence registration
-			history.push(`/locations/${id}/influences/register`);
-			//}
-
-			//reset success
-			dispatch({ type: STAKEHOLDER_ADD_RESET });
-		}
-	}, [dispatch, history, id, stakeholder, success]);
 
 	//add input field
 	const addHandler = (i) => {
@@ -96,13 +68,14 @@ const StakeholderContactInfo = ({ history }) => {
 					org_Position: orgPosition,
 					project: project._id,
 				},
-				id
+				id,
+				history
 			)
 		);
 	};
 
 	return (
-		<CardContainer title={'Stakeholder Registration'}>
+		<CardContainer title={'Stakeholder Registrations'}>
 			<Form onSubmit={submitHandler}>
 				<Row>
 					<Col md={6}>

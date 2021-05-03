@@ -4,7 +4,7 @@ import LandownershipList from '../landownership/LandownershipList';
 import AddOrganizationScreen from '../organization/AddOrganizationScreen';
 import ListOrganizations from '../organization/ListOrganizations';
 import OrganizationScreen from '../organization/OrganizationScreen';
-import StakeholderForm from '../stakeholder/StakeHolderForm';
+import StakeholderForm from '../stakeholder/StakeholderForm';
 import StakeholdersList from '../stakeholder/StakeholdersList';
 import EditLocation from './EditLocation';
 import EditLocationPhoto from './EditLocationPhoto';

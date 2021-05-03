@@ -29,7 +29,7 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add activity to a project
-export const addActivity = (activity, projectId) => async (
+export const addActivity = (activity, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -49,14 +49,15 @@ export const addActivity = (activity, projectId) => async (
 
 		const {
 			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/projects/${projectId}/activities`,
-			activity,
-			config
-		);
+		} = await axios.post(`${getURL()}/api/v1/activities`, activity, config);
 
 		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
-		dispatch(setAlert('Activity successfully added', 'success'));
+
+		const { stakeholders } = data;
+
+		stakeholders.forEach((i) =>
+			history.push(`/influences/register/stakeholder/${i}`)
+		);
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_ADD_FAIL,

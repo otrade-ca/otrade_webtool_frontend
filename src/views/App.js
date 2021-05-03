@@ -12,13 +12,17 @@ import ProjectScreen from './screens/project/ProjectScreen';
 import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
 import StakeholdersUserList from './screens/stakeholder/StakeholdersUserList';
 import AdminRoutes from './components/Routing/AdminRoutes';
-import ActivityForm from './screens/activity/ActivityForm';
+import ActivityNew from './screens/activity/form/ActivityNew';
+import LocationForm from './screens/location/LocationForm';
 import LocationScreen from './screens/location/LocationScreen';
+import ActivityScreen from './screens/activity/ActivityScreen';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
 import UserProjects from './screens/project/UserProjects';
 import UserLocationsList from './screens/location/UserLocations';
+import ActivityType from './screens/activity/ActivityType';
+import InfluenceForm from './screens/influence/InfluenceForm';
 
 const Home = () => {
 	const { i18n } = useTranslation();
@@ -56,6 +60,10 @@ const Home = () => {
 					{/*project routes*/}
 					<PrivateRoute path="/projects/:id" component={UserProjects} />
 					<PrivateRoute path="/project/:id" component={ProjectScreen} />
+					<PrivateRoute
+						path="/project/:id/communities/register"
+						component={LocationForm}
+					/>
 
 					{/*location routes*/}
 					<PrivateRoute path="/locations/:id" component={UserLocationsList} />
@@ -67,11 +75,19 @@ const Home = () => {
 						component={StakeholdersUserList}
 					/>
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
+					<PrivateRoute path="/activities/register" component={ActivityType} />
+
 					<PrivateRoute
-						exact
-						path="/activities/register"
-						component={ActivityForm}
+						path="/influences/register/stakeholder/:stakeholderId"
+						component={InfluenceForm}
 					/>
+
+					<PrivateRoute
+						path="/influences/register/activity/:activityId"
+						component={InfluenceForm}
+					/>
+
+					{/*influence route */}
 					<Route component={AdminRoutes} />
 				</Container>
 				<Footer />

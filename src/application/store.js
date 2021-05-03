@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { reducer as reduxForm } from 'redux-form';
 
 // import reducers
 import {
@@ -196,6 +197,9 @@ const reducer = combineReducers({
 
 	// geocode reducer
 	geocodeFetch: geocodeFetchReducer,
+
+	// reduxForm
+	form: reduxForm,
 });
 
 // localStorages

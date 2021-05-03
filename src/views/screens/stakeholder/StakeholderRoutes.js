@@ -11,12 +11,12 @@ import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
 
 export const btnlinks = [
-	{
-		link: '/photo',
-		class: 'btn btn-primary mr-3',
-		icon: 'fas fa-edit',
-		type: 'Photo',
-	},
+	// {
+	// 	link: '/photo',
+	// 	class: 'btn btn-primary mr-3',
+	// 	icon: 'fas fa-edit',
+	// 	type: 'Photo',
+	// },
 	{
 		link: '/profile',
 		class: 'btn btn-primary',
@@ -57,10 +57,10 @@ export const routes = [
 		path: '/profile/edit',
 		component: ({ match }) => <EditStakeholderScreen match={match} />,
 	},
-	{
-		path: '/photo',
-		component: ({ match }) => <EditStakeholderPhoto match={match} />,
-	},
+	// {
+	// 	path: '/photo',
+	// 	component: ({ match }) => <EditStakeholderPhoto match={match} />,
+	// },
 	{
 		path: '/organizations',
 		component: ({ match }) => <ListStakeholderOrganizations match={match} />,

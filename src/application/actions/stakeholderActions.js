@@ -41,7 +41,7 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add stakeholder
-export const addStakeholder = (stakeholder, locationId) => async (
+export const addStakeholder = (stakeholder, locationId, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -68,8 +68,13 @@ export const addStakeholder = (stakeholder, locationId) => async (
 			config
 		);
 
+		const { organization, _id } = data;
+
+		// if (organization === 'Yes' || organization === 'yes') {
+		// 	history.push('')
+		// }
+
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
-		dispatch(setAlert('Stakeholder successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_ADD_FAIL,

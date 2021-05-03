@@ -56,10 +56,6 @@ export const routes = [
 		component: ({ match }) => <LocationList match={match} />,
 	},
 	{
-		path: '/communities/register',
-		component: ({ match }) => <LocationForm match={match} />,
-	},
-	{
 		path: '/stakeholders',
 		component: ({ match }) => <StakeholdersProjectList match={match} />,
 	},

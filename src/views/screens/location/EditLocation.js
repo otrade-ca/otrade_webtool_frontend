@@ -23,11 +23,7 @@ const EditLocation = ({ match }) => {
 
 	// get locationUpdate
 	const locationUpdate = useSelector((state) => state.locationUpdate);
-	const {
-		success: successUpdate,
-		loading: loadingUpdate,
-		error: errorUpdate,
-	} = locationUpdate;
+	const { success: successUpdate } = locationUpdate;
 
 	//state
 	const [location, setLocation] = useState('');

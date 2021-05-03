@@ -8,7 +8,7 @@ import {
 } from '../../application/actions/stakeholderActions';
 import { setAlert } from '../../application/actions/alertActions';
 
-const MemberDropdown = ({ label, history }) => {
+const CommunityDropDown = ({ label }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 
@@ -19,30 +19,30 @@ const MemberDropdown = ({ label, history }) => {
 	const { stakeholders } = stakeholderUserList;
 
 	// useState
-	const [members, setMembers] = useState([{ member: '' }]);
+	const [communities, setCommunities] = useState([{ member: '' }]);
 
 	//add select field
 	const addHandler = () => {
-		setMembers([...members, { member: '' }]);
+		setCommunities([...communities, { member: '' }]);
 	};
 
 	useEffect(() => {
 		dispatch(listUserStakeholders(userInfo._id));
 	}, [dispatch, userInfo]);
 
-	// filter out element i and update members
+	// filter out element i and update communities
 	const removeHandler = (i) => {
-		const stakeholderToRemove = members[i];
-		const list = members.filter((i) => i !== stakeholderToRemove);
-		setMembers(list);
+		const stakeholderToRemove = communities[i];
+		const list = communities.filter((i) => i !== stakeholderToRemove);
+		setCommunities(list);
 	};
 
 	// add element to array && provide validation
 	const handleInputChange = (e, i) => {
 		e.preventDefault();
 
-		// spread all members into a list
-		const list = [...members];
+		// spread all communities into a list
+		const list = [...communities];
 
 		if (
 			list.includes(e.target.value) ||
@@ -57,7 +57,7 @@ const MemberDropdown = ({ label, history }) => {
 		} else {
 			list[i] = e.target.value;
 			dispatch(assignStakeholder(list)); // add to state
-			setMembers(list); // add selected drop down to list
+			setCommunities(list); // add selected drop down to list
 		}
 	};
 
@@ -65,8 +65,8 @@ const MemberDropdown = ({ label, history }) => {
 		<Row className="mt-4">
 			<Col md={8}>
 				<Form.Label>{label}</Form.Label>
-				{members &&
-					members.map((assignee, i) => (
+				{communities &&
+					communities.map((assignee, i) => (
 						<Row key={i}>
 							<Col md={9}>
 								<Form.Control
@@ -85,7 +85,7 @@ const MemberDropdown = ({ label, history }) => {
 								</Form.Control>
 							</Col>
 							<Col md={3} className="mb-2">
-								{members && members.length !== 1 && (
+								{communities && communities.length !== 1 && (
 									<Button
 										variant="danger"
 										className="btn-md mr-3"
@@ -94,7 +94,7 @@ const MemberDropdown = ({ label, history }) => {
 										<i className="fas fa-trash"></i> Remove
 									</Button>
 								)}
-								{members && members.length - 1 === i && (
+								{communities && communities.length - 1 === i && (
 									<Button className="px-3" onClick={() => addHandler(i)}>
 										<i className="fas fa-plus"></i> Stakeholder
 									</Button>
@@ -107,4 +107,4 @@ const MemberDropdown = ({ label, history }) => {
 	);
 };
 
-export default withRouter(MemberDropdown);
+export default withRouter(CommunityDropDown);
