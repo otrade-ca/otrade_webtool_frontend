@@ -15,19 +15,20 @@ import {
 	INFLUENCE_LIST_FILTER,
 	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
+import { useSelector } from 'react-redux';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
+import { getStakeholderDetails } from './stakeholderActions';
 
 // add influence
-export const addInfluence = (influence, stakeholderId) => async (
-	dispatch,
-	getState
-) => {
+export const addInfluence = (
+	influence,
+	stakeholderId,
+	history,
+	stakeholder
+) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: INFLUENCE_ADD_REQUEST });
-
-		console.log(influence);
-		console.log(stakeholderId);
 
 		const {
 			userLogin: { userInfo },
@@ -49,7 +50,6 @@ export const addInfluence = (influence, stakeholderId) => async (
 		);
 
 		dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
-		dispatch(setAlert('Influence successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
 			type: INFLUENCE_ADD_FAIL,
@@ -149,6 +149,8 @@ export const listInfluences = (stakeholderId) => async (dispatch, getState) => {
 			`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences`,
 			config
 		);
+
+		console.log('influences', data);
 
 		dispatch({ type: INFLUENCE_LIST_SUCCESS, payload: data });
 	} catch (error) {

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivityDetails } from '../../../application/actions/activityActions';
+import {
+	getActivityDetails,
+	updateActivity,
+} from '../../../application/actions/activityActions';
+import { ACTIVITY_UPDATE_RESET } from '../../../application/constants/activityConstants';
 import BorderContainer from '../../components/BorderContainer';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -18,6 +22,10 @@ const ActivityScreen = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
+	// get success on update
+	const activityUpdate = useSelector((state) => state.activityUpdate);
+	const { success } = activityUpdate;
+
 	// define state
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
@@ -28,18 +36,73 @@ const ActivityScreen = ({ match }) => {
 	const [compromise, setcompromise] = useState('');
 
 	useEffect(() => {
-		if (!activity.activity || activity._id !== activityId) {
+		if (success) {
 			dispatch(getActivityDetails(activityId));
+			dispatch({ type: ACTIVITY_UPDATE_RESET });
 		} else {
-			setActivityType(activity.activity);
-			setActHours(activity.hours);
-			setDate(activity.date.substring(0, 10));
-			setLocation(activity.location);
-			setMembers(activity.stakeholders);
-			setcompromise(activity.compromise);
-			setDispoints(activity.discussPoints);
+			if (!activity.activity || activity._id !== activityId) {
+				dispatch(getActivityDetails(activityId));
+			} else {
+				setActivityType(activity.activity);
+				setActHours(activity.hours);
+				setDate(activity.date.substring(0, 10));
+				setLocation(activity.location);
+				setMembers(activity.stakeholders);
+				setcompromise(activity.compromise);
+				setDispoints(activity.discussPoints);
+			}
 		}
-	}, [dispatch, activity, activityId]);
+	}, [dispatch, activity, activityId, success]);
+
+	//add select field
+	const addHandler = () => {
+		setMembers([...members, { member: '' }]);
+	};
+
+	//filter out element i
+	const removeHandler = (i) => {
+		const stakeholderToRemove = members[i];
+		const list = members.filter((i) => i !== stakeholderToRemove);
+		setMembers(list);
+	};
+
+	//add element to array && provide validation
+	const handleInputChange = (e, i) => {
+		e.preventDefault();
+
+		//spread all members into a list
+		const list = [...members];
+
+		if (
+			list.includes(e.target.value) ||
+			list.some((item) => item._id === e.target.value)
+		) {
+			setAlert('Please make sure the same stakeholder is not added twice.');
+		} else {
+			list[i] = e.target.value;
+			setMembers(list);
+		}
+	};
+
+	//handle submit form
+	const submitHandler = (e) => {
+		e.preventDefault();
+
+		dispatch(
+			updateActivity(
+				{
+					activity: activityType,
+					date,
+					hours: actHours,
+					location,
+					stakeholders: members,
+					compromise,
+					discussPoints: disPoints,
+				},
+				activityId
+			)
+		);
+	};
 
 	return (
 		<BorderContainer>
@@ -49,7 +112,7 @@ const ActivityScreen = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					<Form className="mb-3">
+					<Form onSubmit={submitHandler} className="mt-4 mb-3">
 						<Row>
 							<Col md={4}>
 								<Form.Group controlId="activity">
@@ -158,6 +221,7 @@ const ActivityScreen = ({ match }) => {
 												<Form.Control
 													as="select"
 													value={assignee}
+													onChange={(e) => handleInputChange(e, i)}
 													className="px-5 mb-3"
 												>
 													<option value="">--Select--</option>
@@ -173,12 +237,19 @@ const ActivityScreen = ({ match }) => {
 											</Col>
 											<Col md={5}>
 												{members.length !== 1 && (
-													<Button variant="danger" className="btn-md mr-3">
+													<Button
+														variant="danger"
+														className="btn-md mr-3"
+														onClick={() => removeHandler(i)}
+													>
 														<i className="fas fa-trash"></i>
 													</Button>
 												)}
 												{members.length - 1 === i && (
-													<Button className="px-3">
+													<Button
+														className="px-3"
+														onClick={() => addHandler(i)}
+													>
 														<i className="fas fa-plus"></i> Stakeholder
 													</Button>
 												)}

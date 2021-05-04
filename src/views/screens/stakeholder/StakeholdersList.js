@@ -14,6 +14,9 @@ import {
 } from '../../../application/actions/stakeholderActions';
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 const StakeholdersList = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
@@ -63,10 +66,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'Stakeholders'} />
-							<Link
-								to={`${url}/register`}
-								className="btn btn-primary ml-2 mb-3"
-							>
+							<Link to={`${url}/register`} className="btn btn-primary ml-2">
 								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
 							</Link>
 						</Card.Header>
@@ -77,8 +77,34 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 								? filtered.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>{item.name}</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">Stakeholder</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
@@ -123,10 +149,34 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 								  stakeholders.map((item, index) => (
 										<Card className="table-card">
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<p>
-													{item.firstName} {item.lastName}
-												</p>
-												<p>{item.createdAt.substring(0, 10)}</p>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">Stakeholder</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>

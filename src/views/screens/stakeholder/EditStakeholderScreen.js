@@ -282,7 +282,7 @@ const EditStakeholderScreen = ({ match }) => {
 															className="btn-md mr-3 mb-1"
 															onClick={() => removeHandler(i)}
 														>
-															<i className="fas fa-trash"></i>
+															<i className="fas fa-trash"></i> Delete
 														</Button>
 													)}
 													{media.length - 1 === i && (

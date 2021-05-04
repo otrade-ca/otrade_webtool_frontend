@@ -243,13 +243,12 @@ const StakeholderContactInfo = ({ history }) => {
 												className="btn-md mr-3"
 												onClick={() => removeHandler(i)}
 											>
-												<i className="fas fa-trash"></i>
+												<i className="fas fa-trash"></i> Delete
 											</Button>
 										)}
 										{media.length - 1 === i && (
 											<Button className="px-3" onClick={() => addHandler(i)}>
-												<i className="fas fa-plus"></i>{' '}
-												{t('tables.stakeholder')}
+												<i className="fas fa-plus"></i> Add
 											</Button>
 										)}
 									</Col>

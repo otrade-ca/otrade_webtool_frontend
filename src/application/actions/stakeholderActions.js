@@ -68,13 +68,10 @@ export const addStakeholder = (stakeholder, locationId, history) => async (
 			config
 		);
 
-		const { organization, _id } = data;
-
-		// if (organization === 'Yes' || organization === 'yes') {
-		// 	history.push('')
-		// }
-
 		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
+
+		const { _id } = data;
+		history.push(`/influences/register/stakeholder/${_id}`);
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_ADD_FAIL,

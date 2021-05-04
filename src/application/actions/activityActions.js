@@ -53,11 +53,17 @@ export const addActivity = (activity, history) => async (
 
 		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
-		const { stakeholders } = data;
+		const { _id, stakeholders, compromise } = data;
 
-		stakeholders.forEach((i) =>
-			history.push(`/influences/register/stakeholder/${i}`)
-		);
+		console.log(compromise);
+
+		if (compromise === 'Yes' || compromise === 'yes') {
+			history.push(`/commitments/register/activity/${_id}`);
+		}
+
+		// stakeholders.forEach((i) =>
+		// 	history.push(`/influences/register/stakeholder/${i}`)
+		// );
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_ADD_FAIL,
@@ -86,9 +92,13 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
+		console.log('entered get activity Details');
+
 		const {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/activities/${id}`, config);
+
+		console.log(data);
 
 		dispatch({ type: ACTIVITY_DETAILS_SUCCESS, payload: data });
 	} catch (error) {

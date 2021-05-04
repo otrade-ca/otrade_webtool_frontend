@@ -2,8 +2,9 @@ import EditStakeholderScreen from './EditStakeholderScreen';
 import EditStakeholderPhoto from './EditStakeholderPhoto';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
+import ActivityScreen from '../activity/ActivityScreen';
 import LandownershipList from '../landownership/LandownershipList';
-import Dashboard from '../../components/Dashboard';
+import Dashboard from '../../screens/stakeholder/Dashboard';
 import AddOrganizationScreen from '../organization/AddOrganizationScreen';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
 import StepForm from '../landownership/StepForm';
@@ -34,21 +35,21 @@ export const navbarlinks = [
 		link: '/activities',
 		type: 'Activities',
 	},
-	{
-		link: '/landownerships',
-		type: 'Landownership',
-	},
+	// {
+	// 	link: '/landownerships',
+	// 	type: 'Landownership',
+	// },
 ];
 
 export const routes = [
-	// {
-	// 	path: '',
-	// 	component: ({ match }) => <Dashboard match={match} />,
-	// },
 	{
-		path: '/',
-		component: ({ match }) => <ViewStakeholderScreen match={match} />,
+		path: '',
+		component: ({ match }) => <Dashboard match={match} />,
 	},
+	// {
+	// 	path: '/',
+	// 	component: ({ match }) => <ViewStakeholderScreen match={match} />,
+	// },
 	{
 		path: '/profile',
 		component: ({ match }) => <ViewStakeholderScreen match={match} />,
@@ -61,24 +62,32 @@ export const routes = [
 	// 	path: '/photo',
 	// 	component: ({ match }) => <EditStakeholderPhoto match={match} />,
 	// },
-	{
-		path: '/organizations',
-		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
-	},
+	// {
+	// 	path: '/organizations',
+	// 	component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+	// },
 	{
 		path: '/organizations/register',
 		component: ({ match }) => <AddOrganizationScreen match={match} />,
 	},
 	{
-		path: '/organizations/:id/profile',
+		path: '/organizations/:organizationId/profile/view',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:id/profile/edit',
+		path: '/organizations/:organizationId/profile/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{
 		path: '/activities',
+		component: ({ match }) => <ListStakeholderActivities match={match} />,
+	},
+	{
+		path: '/activities/:activityId/profile/view',
+		component: ({ match }) => <ActivityScreen match={match} />,
+	},
+	{
+		path: '/activities/:activityId/profile/edit',
 		component: ({ match }) => <ListStakeholderActivities match={match} />,
 	},
 	{

@@ -165,7 +165,6 @@ hr {
 /*container for the top*/
 .profile-container {
 	padding: 0.5rem 1rem;
-	margin-bottom: 0.5rem;
 }
 
 .profile-container-hr {
@@ -357,7 +356,7 @@ hr {
 	border-radius: 5px !important;
 	max-width: 1000px;
 	min-height: 10rem;
-	margin: auto !important;
+	margin: 0.5rem auto 0 auto !important;
 }
 
 .card-header {

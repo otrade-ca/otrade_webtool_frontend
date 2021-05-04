@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const OrganizationScreen = ({ match }) => {
 	const projectId = match.params.projectId;
-	const organizationId = match.params.id;
+	const organizationId = match.params.organizationId;
 
 	const { t } = useTranslation();
 
@@ -23,8 +23,6 @@ const OrganizationScreen = ({ match }) => {
 	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
-
-	console.log(orgDetails);
 
 	// get success on update
 	const organizationUpdate = useSelector((state) => state.organizationUpdate);
@@ -39,11 +37,10 @@ const OrganizationScreen = ({ match }) => {
 	const [website, setWebsite] = useState('');
 	const [stakeholders, setStakeholders] = useState([{ member: '' }]);
 
-	console.log(stakeholders);
-
 	useEffect(() => {
 		if (success) {
 			dispatch(getOrganizationDetails(organizationId));
+			//dispatch(getStak);
 			dispatch({ type: ORGANIZATION_UPDATE_RESET });
 		} else {
 			if (!orgDetails.name || orgDetails._id !== organizationId) {

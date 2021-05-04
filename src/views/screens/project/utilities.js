@@ -5,6 +5,8 @@ import LocationList from '../location/LocationList';
 import LocationForm from '../location/LocationForm';
 import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
+import ViewOrganization from '../organization/ViewOrganization';
+import OrganizationScreen from '../organization/OrganizationScreen';
 
 export const btnlinks = [
 	// {
@@ -68,8 +70,12 @@ export const routes = [
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},
 	{
-		path: '/organizations/register',
-		component: ({ match }) => <LocationForm match={match} />,
+		path: '/organizations/:organizationId/profile',
+		component: ({ match }) => <ViewOrganization match={match} />,
+	},
+	{
+		path: '/organizations/:organizationId/profile/edit',
+		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{
 		path: '/photo',

@@ -62,10 +62,11 @@ const OrganizationsProjectList = memo(({ match }) => {
 						/>
 					) : (
 						<Card.Header className="my-card-header">
+							<h4>{t('tables.organization')}</h4>
 							<FilterBox searchWord={'Organizations'} />
-							<Link to={`${url}/register`} className="btn btn-primary ml-2">
+							{/* <Link to={`${url}/register`} className="btn btn-primary ml-2">
 								<i className="fas fa-plus"></i> {t('tables.organization')}
-							</Link>
+							</Link> */}
 						</Card.Header>
 					)}
 					<Card.Body>

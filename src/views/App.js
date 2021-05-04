@@ -23,6 +23,8 @@ import UserProjects from './screens/project/UserProjects';
 import UserLocationsList from './screens/location/UserLocations';
 import ActivityType from './screens/activity/ActivityType';
 import InfluenceForm from './screens/influence/InfluenceForm';
+import OrganizationScreen from './screens/organization/OrganizationScreen';
+import CommitmentForm from './screens/commitment/CommitmentForm';
 
 const Home = () => {
 	const { i18n } = useTranslation();
@@ -76,6 +78,10 @@ const Home = () => {
 					/>
 					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
 					<PrivateRoute path="/activities/register" component={ActivityType} />
+					<PrivateRoute
+						path="/organizations/register"
+						component={OrganizationScreen}
+					/>
 
 					<PrivateRoute
 						path="/influences/register/stakeholder/:stakeholderId"
@@ -83,8 +89,8 @@ const Home = () => {
 					/>
 
 					<PrivateRoute
-						path="/influences/register/activity/:activityId"
-						component={InfluenceForm}
+						path="/commitments/register/activity/:activityId"
+						component={CommitmentForm}
 					/>
 
 					{/*influence route */}

@@ -124,7 +124,7 @@ const Assignment = ({ history, match }) => {
 						<h4>Assignment</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler} className="mt-4 mb-3">
+						<Form onSubmit={submitHandler} className="mb-3">
 							<Form.Group>
 								<Row className="pl-3">
 									<Form.Label>Select Surveyor to Assign</Form.Label>
@@ -163,7 +163,7 @@ const Assignment = ({ history, match }) => {
 																		className="btn-md mr-3"
 																		onClick={() => removeHandler(i)}
 																	>
-																		<i className="fas fa-trash"></i>
+																		<i className="fas fa-trash"></i> Remove
 																	</Button>
 																)}
 																{assignments.length - 1 === i && (
@@ -185,7 +185,7 @@ const Assignment = ({ history, match }) => {
 							<hr />
 							<Row>
 								<Col>
-									<Button type="submit" variant="primary" className="px-5 mt-3">
+									<Button type="submit" variant="primary" className="px-5">
 										Update
 									</Button>
 								</Col>

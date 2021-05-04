@@ -1,4 +1,4 @@
-import Dashboard from '../../components/Dashboard';
+import Dashboard from '../../screens/location/Dashboard';
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
 import AddOrganizationScreen from '../organization/AddOrganizationScreen';
@@ -14,12 +14,12 @@ import StakeholderContactInfo from '../stakeholder/StakeHolderContactInfo';
 import InfluenceForm from '../influence/InfluenceForm';
 
 export const btnlinks = [
-	{
-		link: '/photo',
-		class: 'btn btn-primary mr-3',
-		icon: 'fas fa-edit',
-		type: 'Photo',
-	},
+	// {
+	// 	link: '/photo',
+	// 	class: 'btn btn-primary mr-3',
+	// 	icon: 'fas fa-edit',
+	// 	type: 'Photo',
+	// },
 	{
 		link: '/profile',
 		class: 'btn btn-primary',
@@ -37,16 +37,16 @@ export const navbarlinks = [
 		link: '/stakeholders',
 		type: 'Stakeholders',
 	},
-	{
-		link: '/landownerships',
-		type: 'Landownership',
-	},
+	// {
+	// 	link: '/landownerships',
+	// 	type: 'Landownership',
+	// },
 ];
 
 export const routes = [
 	{
 		path: '',
-		component: ({ match }) => <ViewLocation match={match} />,
+		component: ({ match }) => <Dashboard match={match} />,
 	},
 	{
 		path: '/edit',

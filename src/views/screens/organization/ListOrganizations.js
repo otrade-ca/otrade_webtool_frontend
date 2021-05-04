@@ -167,7 +167,7 @@ const OrganizationsList = memo(({ match }) => {
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
-														<div>{item.location.location}</div>
+														<div>{item.location && item.location.location}</div>
 														<div className="item-category">Community</div>
 													</div>
 												</div>
@@ -177,8 +177,6 @@ const OrganizationsList = memo(({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('tables.organization')}
-																{': '}
 																<strong>
 																	<Link to={`${url}/${item._id}/profile`}>
 																		{item.name}

@@ -4,7 +4,7 @@
 
 .sidebar-wrapper {
 	min-height: 100vh;
-	margin-left: -15rem;
+	margin-left: -13rem;
 	background-color: #fff;
 	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
 	border: 2px solid transparent;
@@ -39,7 +39,7 @@
 }
 
 .sidebar-wrapper .list-group {
-	width: 15rem;
+	width: 12rem;
 }
 
 .sidebar-menu h4 {
@@ -80,4 +80,5 @@
 
 .list-group-item {
 	border: none !important;
+	padding: 0.5rem !important;
 }

@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 const ViewOrganization = ({ match }) => {
-	const organizationId = match.params.id;
+	const organizationId = match.params.organizationId;
 
 	const { t } = useTranslation();
 
@@ -175,14 +175,15 @@ const ViewOrganization = ({ match }) => {
 													disabled
 												>
 													<option value="">{t('action.select')}</option>
-													{stakeholderList.stakeholders.map((stakeholder) => (
-														<option
-															key={stakeholder._id}
-															value={stakeholder._id}
-														>
-															{stakeholder.firstName} {stakeholder.lastName}
-														</option>
-													))}
+													{stakeholderList &&
+														stakeholderList.stakeholders.map((stakeholder) => (
+															<option
+																key={stakeholder._id}
+																value={stakeholder._id}
+															>
+																{stakeholder.firstName} {stakeholder.lastName}
+															</option>
+														))}
 												</Form.Control>
 											</Col>
 											<Col md={5}>

@@ -19,7 +19,7 @@ import {
 import { getURL } from '../api';
 
 // add commitment
-export const addCommitment = () => async (dispatch, getState) => {
+export const addCommitment = (commitment, id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMITMENT_ADD_REQUEST });
 
@@ -38,7 +38,11 @@ export const addCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.post(`${getURL()}`, config);
+		} = await axios.post(
+			`${getURL()}/api/v1/activities/${id}/commitments`,
+			commitment,
+			config
+		);
 
 		dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
 	} catch (error) {
@@ -86,7 +90,10 @@ export const getCommitment = () => async (dispatch, getState) => {
 };
 
 // update commitment
-export const updateCommitment = () => async (dispatch, getState) => {
+export const updateCommitment = (commitment, id) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: COMMITMENT_UPDATE_REQUEST });
 
@@ -105,7 +112,11 @@ export const updateCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.put(`${getURL()}`, config);
+		} = await axios.put(
+			`${getURL()}/api/v1/commitment/${id}`,
+			commitment,
+			config
+		);
 
 		dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
@@ -120,7 +131,7 @@ export const updateCommitment = () => async (dispatch, getState) => {
 };
 
 // delete commitment
-export const deleteCommitment = () => async (dispatch, getState) => {
+export const deleteCommitment = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMITMENT_DELETE_REQUEST });
 
@@ -138,7 +149,7 @@ export const deleteCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.delete(`${getURL()}`, config);
+		} = await axios.delete(`${getURL()}/api/v1/commitment/${id}`, config);
 
 		dispatch({ type: COMMITMENT_DELETE_SUCCESS, payload: data });
 	} catch (error) {

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { ProfileContainer } from '../../components/HelperComponents';
 import { getStakeholderDetails } from '../../../application/actions/stakeholderActions';
 import { addInfluence } from '../../../application/actions/influenceActions';
+import { getActivityDetails } from '../../../application/actions/activityActions';
 
 const InfluenceForm = ({ history, match }) => {
 	const id = match.params.stakeholderId;
@@ -16,6 +16,7 @@ const InfluenceForm = ({ history, match }) => {
 
 	//state
 	const [firstName, setFirstName] = useState('');
+	const [type, setType] = useState('');
 	const [position, setPosition] = useState('');
 	const [influence, setInfluence] = useState('');
 	const [projImpact, setProjImpact] = useState('');
@@ -23,6 +24,7 @@ const InfluenceForm = ({ history, match }) => {
 	useEffect(() => {
 		if (!stakeholder.firstName || stakeholder._id !== id) {
 			dispatch(getStakeholderDetails(id));
+			dispatch(getActivityDetails());
 		} else {
 			setFirstName(stakeholder.firstName);
 		}
@@ -34,6 +36,7 @@ const InfluenceForm = ({ history, match }) => {
 		dispatch(
 			addInfluence(
 				{
+					type: type,
 					position: position,
 					influence: influence,
 					projImpact: projImpact,
@@ -50,6 +53,26 @@ const InfluenceForm = ({ history, match }) => {
 			</Card.Header>
 			<Card.Body>
 				<Form onSubmit={submitHandler} className="mb-3">
+					<Form.Group controlId="position">
+						<Row>
+							<Col md={8}>
+								<Form.Label>Assessment Type</Form.Label>
+							</Col>
+							<Col md={4}>
+								<Form.Control
+									as="select"
+									value={type}
+									required
+									onChange={(e) => setType(e.target.value)}
+								>
+									<option value="">--Select--</option>
+									<option value="initial">initial</option>
+									<option value="follow-up">follow-up</option>
+									<option value="final">final</option>
+								</Form.Control>
+							</Col>
+						</Row>
+					</Form.Group>
 					<Form.Group controlId="position">
 						<Row>
 							<Col md={8}>
