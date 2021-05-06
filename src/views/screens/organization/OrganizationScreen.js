@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const OrganizationScreen = ({ match }) => {
 	const projectId = match.params.projectId;
-	const organizationId = match.params.organizationId;
+	const organizationId = match.params.id;
 
 	const { t } = useTranslation();
 

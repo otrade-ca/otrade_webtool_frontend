@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
-import { ProfileContainer } from '../../components/HelperComponents';
 import MemberDropdown from '../../components/MemberDropdown';
 import { useTranslation } from 'react-i18next';
 
-const AddOrganizationScreen = ({ keyword = '' }) => {
+const AddOrganizationScreen = ({ keyword = '', history }) => {
 	const { id } = useParams();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
@@ -43,7 +42,8 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 					project: project._id,
 					stakeholders: members,
 				},
-				id
+				id,
+				history
 			)
 		);
 	};
@@ -169,4 +169,4 @@ const AddOrganizationScreen = ({ keyword = '' }) => {
 	);
 };
 
-export default AddOrganizationScreen;
+export default withRouter(AddOrganizationScreen);

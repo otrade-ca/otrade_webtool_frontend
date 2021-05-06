@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { addLocation } from '../../../application/actions/locationActions';
 import { useTranslation } from 'react-i18next';
 
-const LocationForm = () => {
+const LocationForm = ({ history }) => {
 	const { id } = useParams();
 	const { t } = useTranslation();
 
@@ -28,7 +28,8 @@ const LocationForm = () => {
 					organization_type: orgType,
 					scope,
 				},
-				id
+				id,
+				history
 			)
 		);
 	};

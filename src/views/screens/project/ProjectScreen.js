@@ -145,13 +145,3 @@ const ProjectScreen = ({ match }) => {
 };
 
 export default ProjectScreen;
-
-{
-	/* <ProfileTop
-							url={url}
-							path={path}
-							profile={project}
-							btnlinks={btnlinks}
-							navbarlinks={navbarlinks}
-						/> */
-}

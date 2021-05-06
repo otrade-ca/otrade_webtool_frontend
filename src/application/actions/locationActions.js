@@ -25,7 +25,7 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add location
-export const addLocation = (location, projectId) => async (
+export const addLocation = (location, projectId, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -52,6 +52,7 @@ export const addLocation = (location, projectId) => async (
 		);
 
 		dispatch({ type: LOCATION_ADD_SUCCESS, payload: data });
+		history.go(-1);
 		dispatch(setAlert('Location successfully added', 'success'));
 	} catch (error) {
 		dispatch({

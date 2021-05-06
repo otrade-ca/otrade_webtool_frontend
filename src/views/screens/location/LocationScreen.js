@@ -12,9 +12,8 @@ import { getLocationDetails } from '../../../application/actions/locationActions
 import { listStakeholders } from '../../../application/actions/stakeholderActions';
 import { listOrganizations } from '../../../application/actions/organizationAction';
 
-const LocationScreen = ({ match }) => {
+const LocationScreen = ({ match, history }) => {
 	const locationId = match.params.id;
-
 	const { url, path } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -115,6 +114,7 @@ const LocationScreen = ({ match }) => {
 								exact
 								path={`${path}${item.path}`}
 								render={item.component}
+								history={history}
 							/>
 						))}
 					</Switch>

@@ -32,7 +32,7 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add an organization to a project
-export const addOrganization = (organization, id) => async (
+export const addOrganization = (organization, id, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -59,6 +59,8 @@ export const addOrganization = (organization, id) => async (
 		);
 
 		dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
+		console.log(history);
+		history.go(-1);
 		dispatch(setAlert('Organization successfully added', 'success'));
 	} catch (error) {
 		dispatch({
