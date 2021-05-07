@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../application/actions/userActions';
-import {
-	ProfileContainer,
-	Loader,
-	Message,
-} from '../../components/HelperComponents';
+import { Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
 const UserAddScreen = ({ history }) => {
@@ -26,7 +22,7 @@ const UserAddScreen = ({ history }) => {
 
 	//add fileupload
 	const [image, setImage] = useState('');
-	const [uploading, setUploading] = useState(false);
+	//const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -49,28 +45,28 @@ const UserAddScreen = ({ history }) => {
 		}
 	}, [dispatch, history, userInfo, success]);
 
-	const uploadFileHandler = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('image', file);
-		setUploading(true);
+	// const uploadFileHandler = async (e) => {
+	// 	const file = e.target.files[0];
+	// 	const formData = new FormData();
+	// 	formData.append('image', file);
+	// 	setUploading(true);
 
-		try {
-			const config = {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			};
+	// 	try {
+	// 		const config = {
+	// 			headers: {
+	// 				'Content-Type': 'multipart/form-data',
+	// 			},
+	// 		};
 
-			const { data } = await axios.post('/api/v1/uploads', formData, config);
+	// 		const { data } = await axios.post('/api/v1/uploads', formData, config);
 
-			setImage(data);
-			setUploading(false);
-		} catch (error) {
-			console.error(error);
-			setUploading(false);
-		}
-	};
+	// 		setImage(data);
+	// 		setUploading(false);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setUploading(false);
+	// 	}
+	// };
 
 	const submitHandler = (e) => {
 		e.preventDefault();

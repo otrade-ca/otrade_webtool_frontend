@@ -8,6 +8,8 @@ import {
 	Loader,
 	CardContainer,
 } from '../../components/HelperComponents';
+import { IconContext } from 'react-icons';
+import * as AiIcons from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 
 const UserProjects = memo(({ match }) => {
@@ -99,8 +101,49 @@ const UserProjects = memo(({ match }) => {
 							  projects.map((project, index) => (
 									<Card className="table-card">
 										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<p>{project.projectName}</p>
-											<p>{project.createdAt.substring(0, 10)}</p>
+											<div className="table-card-item">
+												<div className="item-one">
+													<IconContext.Provider
+														value={{ color: '#008cba', size: '2em' }}
+													>
+														<AiIcons.AiOutlineProject />
+													</IconContext.Provider>
+												</div>
+												<div className="item-two">
+													<div>{project.projectName}</div>
+													<div className="item-category">
+														Project |{' '}
+														{project.status === 'active' ||
+														project.status === 'open' ? (
+															<strong className="text-success">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</strong>
+														) : (
+															<em className="text-danger">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</em>
+														)}
+													</div>
+												</div>
+											</div>
+											<div className="table-card-item">
+												<div className="item-two">
+													<div>
+														<strong>
+															{project.createdAt.substring(0, 10)}
+														</strong>{' '}
+													</div>
+													<div className="item-category">Registered Date</div>
+												</div>
+											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>

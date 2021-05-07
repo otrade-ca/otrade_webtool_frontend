@@ -95,10 +95,12 @@ const OrganizationsList = memo(({ match }) => {
 															<RiIcons.RiCommunityLine />
 														</IconContext.Provider>
 													</div>
-													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
+													{item.location ? (
+														<div className="item-two">
+															<div>{item.location.location}</div>
+															<div className="item-category">Community</div>
+														</div>
+													) : null}
 												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
@@ -166,10 +168,12 @@ const OrganizationsList = memo(({ match }) => {
 															<RiIcons.RiCommunityLine />
 														</IconContext.Provider>
 													</div>
-													<div className="item-two">
-														<div>{item.location && item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
+													{item.location ? (
+														<div className="item-two">
+															<div>{item.location.location}</div>
+															<div className="item-category">Community</div>
+														</div>
+													) : null}
 												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>

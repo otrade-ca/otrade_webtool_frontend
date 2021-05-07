@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivityDetails } from '../../../application/actions/activityActions';
-import BorderContainer from '../../components/BorderContainer';
-import Message from '../../components/Message';
-import Loader from '../../components/Loader';
-import { setAlert } from '../../../application/actions/alertActions';
+import { Loader, Message } from '../../components/HelperComponents';
 
 const ActivityScreen = ({ match }) => {
 	const activityId = match.params.activityId;
@@ -13,7 +10,7 @@ const ActivityScreen = ({ match }) => {
 	// get activity details
 	const dispatch = useDispatch();
 	const stakeholderList = useSelector((state) => state.stakeholderList);
-
+	console.log(stakeholderList);
 	// get activityDetails
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
@@ -42,114 +39,118 @@ const ActivityScreen = ({ match }) => {
 	}, [dispatch, activity, activityId]);
 
 	return (
-		<BorderContainer>
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
-					<Form className="mb-3">
-						<Row>
-							<Col md={4}>
-								<Form.Group controlId="activity">
-									<Form.Label>Activity</Form.Label>
-									<Form.Control
-										as="select"
-										value={activityType}
-										onChange={(e) => setActivityType(e.target.value)}
-									>
-										<option value="select">--select--</option>
-										<option value="informal consultation">
-											informal consultation
-										</option>
-										<option value="formal meeting">formal meeting</option>
-										<option value="informal community assembly">
-											informal community assembly
-										</option>
-										<option value="formal community assembly">
-											formal community assembly
-										</option>
-										<option value="geology support">geology support</option>
-									</Form.Control>
-								</Form.Group>
-							</Col>
-							<Col md={4}>
-								<Form.Group controlId="hours">
-									<Form.Label>Hours</Form.Label>
-									<Form.Control
-										type="number"
-										placeholder="Enter activity hours"
-										value={actHours}
-										onChange={(e) => setActHours(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-							<Col md={4}>
-								<Form.Group controlId="date">
-									<Form.Label>Activity Date</Form.Label>
-									<Form.Control
-										type="date"
-										placeholder="Enter Date"
-										value={date}
-										onChange={(e) => setDate(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-						</Row>
-						<Row>
-							<Col md={12}>
-								<Form.Group controlId="location">
-									<Form.Label>
-										Location (street, city, state, country)
-									</Form.Label>
-									<Form.Control
-										type="text"
-										placeholder="Enter Location"
-										value={location}
-										onChange={(e) => setLocation(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-							</Col>
-						</Row>
-						<hr className="mt-3" />
-						<Row>
-							<Col>
-								<Form.Group controlId="compromise" className="mt-3">
-									<Row>
-										<Col md={9}>
-											<Form.Label>Is there a commitment?</Form.Label>
-										</Col>
-										<Col md={2}>
-											<Form.Control
-												as="select"
-												value={compromise}
-												onChange={(e) => setcompromise(e.target.value)}
-											>
-												<option value="">--Select--</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
-											</Form.Control>
-										</Col>
-									</Row>
-								</Form.Group>
-								<hr className="mt-3" />
-								<Form.Group controlId="discussion" className="mt-3">
-									<Form.Label>Discussion</Form.Label>
-									<Form.Group controlId="dispoints">
+				<Card className="my-card">
+					<Card.Header className="my-card-header">
+						<h4>Activity</h4>
+					</Card.Header>
+					<Card.Body>
+						<Form>
+							<Row>
+								<Col md={4}>
+									<Form.Group controlId="activity">
+										<Form.Label>Activity</Form.Label>
 										<Form.Control
-											as="textarea"
-											rows="6"
-											value={disPoints}
-											onChange={(e) => setDispoints(e.target.value)}
+											as="select"
+											value={activityType}
+											onChange={(e) => setActivityType(e.target.value)}
+										>
+											<option value="select">--select--</option>
+											<option value="informal consultation">
+												informal consultation
+											</option>
+											<option value="formal meeting">formal meeting</option>
+											<option value="informal community assembly">
+												informal community assembly
+											</option>
+											<option value="formal community assembly">
+												formal community assembly
+											</option>
+											<option value="geology support">geology support</option>
+										</Form.Control>
+									</Form.Group>
+								</Col>
+								<Col md={4}>
+									<Form.Group controlId="hours">
+										<Form.Label>Hours</Form.Label>
+										<Form.Control
+											type="number"
+											placeholder="Enter activity hours"
+											value={actHours}
+											onChange={(e) => setActHours(e.target.value)}
 										></Form.Control>
 									</Form.Group>
-								</Form.Group>
-							</Col>
-						</Row>
-						<hr className="mb-3" />
-						<Row className="mt-3 mb-5">
-							<Col md={8}>
+								</Col>
+								<Col md={4}>
+									<Form.Group controlId="date">
+										<Form.Label>Activity Date</Form.Label>
+										<Form.Control
+											type="date"
+											placeholder="Enter Date"
+											value={date}
+											onChange={(e) => setDate(e.target.value)}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={12}>
+									<Form.Group controlId="location">
+										<Form.Label>
+											Location (street, city, state, country)
+										</Form.Label>
+										<Form.Control
+											type="text"
+											placeholder="Enter Location"
+											value={location}
+											onChange={(e) => setLocation(e.target.value)}
+										></Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
+							<hr className="mt-3" />
+							<Row>
+								<Col>
+									<Form.Group controlId="compromise" className="mt-3">
+										<Row>
+											<Col md={9}>
+												<Form.Label>Is there a commitment?</Form.Label>
+											</Col>
+											<Col md={2}>
+												<Form.Control
+													as="select"
+													value={compromise}
+													onChange={(e) => setcompromise(e.target.value)}
+												>
+													<option value="">--Select--</option>
+													<option value="Yes">Yes</option>
+													<option value="No">No</option>
+												</Form.Control>
+											</Col>
+										</Row>
+									</Form.Group>
+									<hr className="mt-3" />
+									<Form.Group controlId="discussion" className="mt-3">
+										<Form.Label>Discussion</Form.Label>
+										<Form.Group controlId="dispoints">
+											<Form.Control
+												as="textarea"
+												rows="6"
+												value={disPoints}
+												onChange={(e) => setDispoints(e.target.value)}
+											></Form.Control>
+										</Form.Group>
+									</Form.Group>
+								</Col>
+							</Row>
+							<hr className="mb-3" />
+							<Row className="mt-3 mb-5">
+								{/* <Col md={8}>
 								<Form.Label>Parties Involved</Form.Label>
 								{members &&
 									members.map((assignee, i) => (
@@ -185,20 +186,21 @@ const ActivityScreen = ({ match }) => {
 											</Col>
 										</Row>
 									))}
-							</Col>
-						</Row>
+							</Col> */}
+							</Row>
 
-						<Row>
-							<Col>
-								<Button type="submit" variant="primary" className="px-5 mt-3">
-									Update
-								</Button>
-							</Col>
-						</Row>
-					</Form>
-				</>
+							<Row>
+								<Col>
+									<Button type="submit" variant="primary" className="px-5">
+										Update
+									</Button>
+								</Col>
+							</Row>
+						</Form>
+					</Card.Body>
+				</Card>
 			)}
-		</BorderContainer>
+		</>
 	);
 };
 

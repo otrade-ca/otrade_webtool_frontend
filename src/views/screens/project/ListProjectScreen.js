@@ -12,7 +12,6 @@ import SearchBox from '../../components/SearchBox';
 import { Message, Loader } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import * as AiIcons from 'react-icons/ai';
 
 const ListProjectScreen = ({ history, match }) => {

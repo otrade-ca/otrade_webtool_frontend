@@ -53,7 +53,7 @@ export const addActivity = (activity, history) => async (
 
 		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
-		const { _id, stakeholders, compromise } = data;
+		const { _id, compromise } = data;
 
 		console.log(compromise);
 

@@ -7,12 +7,16 @@ import {
 	deleteOrganization,
 } from '../../../application/actions/organizationAction';
 import {
-	CardContainer,
+	FilterBox,
+	Empty,
 	Message,
 	Loader,
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import { ORGANIZATION_DELETE_REQUEST } from '../../../application/constants/organizationConstants';
+import { IconContext } from 'react-icons';
+import * as RiIcons from 'react-icons/ri';
+import * as VscIcons from 'react-icons/vsc';
 
 const ListStakeholderOrganizations = ({ match }) => {
 	const stakeholderId = match.params.id;
@@ -56,134 +60,186 @@ const ListStakeholderOrganizations = ({ match }) => {
 	};
 
 	return (
-		<>
+		<Card className="my-card">
 			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<CardContainer searchWord={'Stakeholder'}></CardContainer>
+				<>
+					{organizations && organizations.length === 0 ? (
+						<Empty
+							itemLink={'/register'}
+							url={url}
+							type={'Register'}
+							group={'organizations'}
+						/>
+					) : (
+						<Card.Header className="my-card-header">
+							<FilterBox searchWord={'StakeholderOrganizations'} />
+							<Link
+								to={`${url}/register`}
+								className="btn btn-primary ml-2 mb-3"
+							>
+								<i className="fas fa-plus"></i> Register
+							</Link>
+						</Card.Header>
+					)}
+					<Card.Body>
+						<Accordion defaultActiveKey={1}>
+							{filtered
+								? filtered.map((item, index) => (
+										<Card className="table-card">
+											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<VscIcons.VscOrganization />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													{item.location ? (
+														<div className="item-two">
+															<div>{item.location.location}</div>
+															<div className="item-category">Community</div>
+														</div>
+													) : null}
+												</div>
+											</Accordion.Toggle>
+											<Accordion.Collapse eventKey={index + 1}>
+												<Card.Body>
+													<div className="d-flex justify-content-between">
+														<div>
+															<p>
+																{t('tables.organization')}
+																{': '}
+																<strong>
+																	<Link to={`${url}/${item._id}/profile`}>
+																		{item.name}
+																	</Link>
+																</strong>
+																<br />
+																{t('organization.address.label')}
+																{': '} <strong>{item.address}</strong>
+																<br />
+																{t('organization.email.label')}
+																{': '} <strong>{item.email}</strong>
+																<br />
+																{t('organization.telephone.label')}
+																{': '} <strong>{item.telephone}</strong>
+																<br />
+																{t('organization.register_Date')}
+																{': '} {item.createdAt.substring(0, 10)}
+															</p>
+														</div>
+														<div className="d-flex align-items-center">
+															<Button
+																variant="danger"
+																className="btn-md ml-3"
+																onClick={() => deleteHandler(item._id)}
+															>
+																<i className="fas fa-trash"></i> Delete
+															</Button>
+														</div>
+													</div>
+												</Card.Body>
+											</Accordion.Collapse>
+										</Card>
+								  ))
+								: organizations &&
+								  organizations.map((item, index) => (
+										<Card className="table-card">
+											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<VscIcons.VscOrganization />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.name}</div>
+														<div className="item-category">Organization</div>
+													</div>
+												</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													{item.location ? (
+														<div className="item-two">
+															<div>{item.location.location}</div>
+															<div className="item-category">Community</div>
+														</div>
+													) : null}
+												</div>
+											</Accordion.Toggle>
+											<Accordion.Collapse eventKey={index + 1}>
+												<Card.Body>
+													<div className="d-flex justify-content-between">
+														<div>
+															<p>
+																{t('tables.organization')}
+																{': '}
+																<strong>
+																	<Link to={`${url}/${item._id}/profile`}>
+																		{item.name}
+																	</Link>
+																</strong>
+																<br />
+																{t('organization.address.label')}
+																{': '} <strong>{item.address}</strong>
+																<br />
+																{t('organization.email.label')}
+																{': '} <strong>{item.email}</strong>
+																<br />
+																{t('organization.telephone.label')}
+																{': '} <strong>{item.telephone}</strong>
+																<br />
+																{t('organization.register_Date')}
+																{': '} {item.createdAt.substring(0, 10)}
+															</p>
+														</div>
+														<div className="d-flex align-items-center">
+															<Button
+																variant="danger"
+																className="btn-md ml-3"
+																onClick={() => deleteHandler(item._id)}
+															>
+																<i className="fas fa-trash"></i> Delete
+															</Button>
+														</div>
+													</div>
+												</Card.Body>
+											</Accordion.Collapse>
+										</Card>
+								  ))}
+						</Accordion>
+					</Card.Body>
+				</>
 			)}
-		</>
+		</Card>
 	);
 };
 
 export default ListStakeholderOrganizations;
-
-// {organizations && organizations.length === 0 ? (
-// 	<Empty
-// 		itemLink={'/register'}
-// 		url={url}
-// 		type={'Register'}
-// 		group={'organizations'}
-// 	/>
-// ) : (
-// 	<Card.Header className="my-card-header">
-// 		<FilterBox searchWord={'StakeholderOrganizations'} />
-// 		<Link
-// 			to={`${url}/register`}
-// 			className="btn btn-primary ml-2 mb-3"
-// 		>
-// 			<i className="fas fa-plus"></i> Register
-// 		</Link>
-// 	</Card.Header>
-// )}
-{
-	/* <Accordion defaultActiveKey={1}>
-	{filtered
-		? filtered.map((item, index) => (
-				<Card className="table-card">
-					<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-						<p>{item.name}</p>
-						<p>{item.createdAt.substring(0, 10)}</p>
-					</Accordion.Toggle>
-					<Accordion.Collapse eventKey={index + 1}>
-						<Card.Body>
-							<div className="d-flex justify-content-between">
-								<div>
-									<p>
-										{t('tables.organization')}
-										{': '}
-										<strong>
-											<Link to={`${url}/${item._id}/profile`}>
-												{item.name}
-											</Link>
-										</strong>
-										<br />
-										{t('organization.address')}
-										{': '} <strong>{item.address}</strong>
-										<br />
-										{t('organization.email')}
-										{': '} <strong>{item.email}</strong>
-										<br />
-										{t('organization.telephone')}
-										{': '} <strong>{item.telephone}</strong>
-										<br />
-										{t('organization.registered')}
-										{': '} {item.createdAt.substring(0, 10)}
-									</p>
-								</div>
-								<div className="d-flex align-items-center">
-									<Button
-										variant="danger"
-										className="btn-md ml-3"
-										onClick={() => deleteHandler(item._id)}
-									>
-										<i className="fas fa-trash"></i> Delete
-									</Button>
-								</div>
-							</div>
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-		  ))
-		: organizations &&
-		  organizations.map((item, index) => (
-				<Card className="table-card">
-					<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-						<p>{item.name}</p>
-						<p>{item.createdAt.substring(0, 10)}</p>
-					</Accordion.Toggle>
-					<Accordion.Collapse eventKey={index + 1}>
-						<Card.Body>
-							<div className="d-flex justify-content-between">
-								<div>
-									<p>
-										{t('tables.organization')}
-										{': '}
-										<strong>
-											<Link to={`${url}/${item._id}/profile`}>
-												{item.name}
-											</Link>
-										</strong>
-										<br />
-										{t('organization.address.label')}
-										{': '} <strong>{item.address}</strong>
-										<br />
-										{t('organization.email.label')}
-										{': '} <strong>{item.email}</strong>
-										<br />
-										{t('organization.telephone.label')}
-										{': '} <strong>{item.telephone}</strong>
-										<br />
-										{t('organization.register_Date')}
-										{': '} {item.createdAt.substring(0, 10)}
-									</p>
-								</div>
-								<div className="d-flex align-items-center">
-									<Button
-										variant="danger"
-										className="btn-md ml-3"
-										onClick={() => deleteHandler(item._id)}
-									>
-										<i className="fas fa-trash"></i> Delete
-									</Button>
-								</div>
-							</div>
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-		  ))}
-</Accordion> */
-}

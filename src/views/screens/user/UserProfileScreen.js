@@ -1,7 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader.js';
 import { getUserDetails } from '../../../application/actions/userActions';

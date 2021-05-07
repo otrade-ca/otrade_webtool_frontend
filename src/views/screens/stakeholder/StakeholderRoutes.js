@@ -62,10 +62,10 @@ export const routes = [
 	// 	path: '/photo',
 	// 	component: ({ match }) => <EditStakeholderPhoto match={match} />,
 	// },
-	// {
-	// 	path: '/organizations',
-	// 	component: ({ match }) => <ListStakeholderOrganizations match={match} />,
-	// },
+	{
+		path: '/organizations',
+		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+	},
 	{
 		path: '/organizations/register',
 		component: ({ match }) => <AddOrganizationScreen match={match} />,

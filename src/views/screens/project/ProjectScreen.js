@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { listProjectDetails } from '../../../application/actions/projectActions';

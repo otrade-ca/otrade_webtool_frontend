@@ -15,10 +15,8 @@ import {
 	INFLUENCE_LIST_FILTER,
 	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
-import { useSelector } from 'react-redux';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
-import { getStakeholderDetails } from './stakeholderActions';
 
 // add influence
 export const addInfluence = (

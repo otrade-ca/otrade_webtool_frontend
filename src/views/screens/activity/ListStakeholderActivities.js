@@ -111,9 +111,9 @@ const ListStakeholderActivities = ({ match }) => {
 												<div className="d-flex justify-content-between">
 													<div>
 														<strong>
-															{/* <Link to={`${url}/${item._id}/profile/view`}> */}
-															View Details
-															{/* </Link> */}
+															<Link to={`${url}/${item._id}/profile/view`}>
+																View Details
+															</Link>
 														</strong>
 														<br />
 														<strong>Commitment:</strong>{' '}

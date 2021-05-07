@@ -1,6 +1,7 @@
 // Activity Field contains the logic to handle an Activity Field Input
 import React from 'react';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ input, label }) => {
 	return (
 		<div>
