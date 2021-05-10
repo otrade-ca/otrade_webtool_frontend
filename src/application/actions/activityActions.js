@@ -92,13 +92,9 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		console.log('entered get activity Details');
-
 		const {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/activities/${id}`, config);
-
-		console.log(data);
 
 		dispatch({ type: ACTIVITY_DETAILS_SUCCESS, payload: data });
 	} catch (error) {

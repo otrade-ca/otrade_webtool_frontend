@@ -38,8 +38,47 @@ const UserProjects = memo(({ match }) => {
 							? filtered.map((project, index) => (
 									<Card className="table-card">
 										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<p>{project.projectName}</p>
-											<p>{project.createdAt.substring(0, 10)}</p>
+											<div className="table-card-item">
+												<div className="item-one">
+													<IconContext.Provider
+														value={{ color: '#008cba', size: '2em' }}
+													>
+														<AiIcons.AiOutlineProject />
+													</IconContext.Provider>
+												</div>
+												<div className="item-two">
+													<div>{project.projectName}</div>
+													<div className="item-category">
+														Project |{' '}
+														{project.status === 'active' ||
+														project.status === 'open' ? (
+															<strong className="text-success">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</strong>
+														) : (
+															<em className="text-danger">
+																{project.status.substring(0, 1).toUpperCase() +
+																	project.status.substring(
+																		1,
+																		project.status.length
+																	)}
+															</em>
+														)}
+													</div>
+												</div>
+											</div>
+											<div className="table-card-item">
+												<div className="item-two">
+													<div>
+														<>{project.createdAt.substring(0, 10)}</>{' '}
+													</div>
+													<div className="item-category">Registered Date</div>
+												</div>
+											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
@@ -47,48 +86,46 @@ const UserProjects = memo(({ match }) => {
 													<div>
 														<p>
 															{t('tables.project')}:{' '}
-															<strong>
+															<>
 																<Link to={`/project/${project._id}`}>
 																	{project.projectName}
 																</Link>
-															</strong>
+															</>
 															<br />
 															{t('project.client.label')}:{' '}
-															<strong>{project.projectClient}</strong>
+															<>{project.projectClient}</>
 															<br />
 															{t('project.country.label')}
 															{': '}
-															<strong>
+															<>
 																{project.country_code}, {project.country}
-															</strong>
+															</>
 															<br />
 															{project.coordinates && (
-																<strong>
+																<>
 																	{t('project.coordinates.label')}
 																	{': '}
-																	<strong>{project.coordinates}</strong>
+																	<>{project.coordinates}</>
 																	<br />
-																</strong>
+																</>
 															)}
-															{t('project.register_Date')}:{' '}
-															{project.createdAt.substring(0, 10)}
 														</p>
 													</div>
 													<div className="d-flex align-projects-start mr-5">
 														<p>
-															<strong>Status: </strong>
+															<>Status: </>
 															{project.status === 'open' ? (
-																<strong>
+																<>
 																	<em className="text-success">
 																		{project.status}
 																	</em>
-																</strong>
+																</>
 															) : (
-																<strong>
+																<>
 																	<em className="text-danger">
 																		{project.status}
 																	</em>
-																</strong>
+																</>
 															)}
 														</p>
 													</div>
@@ -137,9 +174,7 @@ const UserProjects = memo(({ match }) => {
 											<div className="table-card-item">
 												<div className="item-two">
 													<div>
-														<strong>
-															{project.createdAt.substring(0, 10)}
-														</strong>{' '}
+														<>{project.createdAt.substring(0, 10)}</>{' '}
 													</div>
 													<div className="item-category">Registered Date</div>
 												</div>
@@ -151,48 +186,46 @@ const UserProjects = memo(({ match }) => {
 													<div>
 														<p>
 															{t('tables.project')}:{' '}
-															<strong>
+															<>
 																<Link to={`/project/${project._id}`}>
 																	{project.projectName}
 																</Link>
-															</strong>
+															</>
 															<br />
 															{t('project.client.label')}:{' '}
-															<strong>{project.projectClient}</strong>
+															<>{project.projectClient}</>
 															<br />
 															{t('project.country.label')}
 															{': '}
-															<strong>
+															<>
 																{project.country_code}, {project.country}
-															</strong>
+															</>
 															<br />
 															{project.coordinates && (
-																<strong>
+																<>
 																	{t('project.coordinates.label')}
 																	{': '}
-																	<strong>{project.coordinates}</strong>
+																	<>{project.coordinates}</>
 																	<br />
-																</strong>
+																</>
 															)}
-															{t('project.register_Date')}:{' '}
-															{project.createdAt.substring(0, 10)}
 														</p>
 													</div>
 													<div className="d-flex align-items-start mr-5">
 														<p>
-															<strong>{t('utility.status')}: </strong>
+															<>{t('utility.status')}: </>
 															{project.status === 'open' ? (
-																<strong>
+																<>
 																	<em className="text-success">
 																		{project.status}
 																	</em>
-																</strong>
+																</>
 															) : (
-																<strong>
+																<>
 																	<em className="text-danger">
 																		{project.status}
 																	</em>
-																</strong>
+																</>
 															)}
 														</p>
 													</div>
@@ -209,13 +242,3 @@ const UserProjects = memo(({ match }) => {
 });
 
 export default UserProjects;
-
-// {/* <Card className="my-card">
-// 					<Card.Header className="my-card-header">
-// 						{/* <h4>{t('tables.project')}</h4> */}
-// 						<FilterBox searchWord={'Projects'} />
-// 					</Card.Header>
-// 					<Card.Body>
-
-// 					</Card.Body>
-// 				</Card> */}

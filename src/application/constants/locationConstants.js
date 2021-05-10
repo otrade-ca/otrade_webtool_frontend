@@ -42,3 +42,6 @@ export const LOCATION_USER_LIST_RESET = 'LOCATION_USER_LIST_RESET';
 export const LOCATION_USER_LIST_FILTER = 'LOCATION_USER_LIST_FILTER';
 export const LOCATION_USER_LIST_FILTER_CLEAR =
 	'USER_LOCATION_LIST_FILTER_CLEAR';
+
+// save locationId to localStorage to use for retreiving stakeholders and organizations
+export const LOCATION_ID_REQUEST = 'LOCATION_ID_REQUEST';

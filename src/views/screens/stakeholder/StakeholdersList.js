@@ -113,17 +113,17 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 															<p>
 																{t('stakeholder.firstName.label')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('stakeholder.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('stakeholder.telephone.label')}{' '}
-																<strong>{item.telephone}</strong>
+																<>{item.telephone}</>
 																<br />
 																{t('stakeholder.register_Date')}
 																{': '}
@@ -185,17 +185,17 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 															<p>
 																{t('stakeholder.firstName.label')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('stakeholder.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('stakeholder.telephone.label')}{' '}
-																<strong>{item.telephone}</strong>
+																<>{item.telephone}</>
 																<br />
 																{t('stakeholder.register_Date')}
 																{': '}

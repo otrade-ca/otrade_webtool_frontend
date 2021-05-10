@@ -87,6 +87,7 @@ export const getLocationDetails = (id) => async (dispatch, getState) => {
 		} = await axios.get(`${getURL()}/api/v1/locations/${id}`, config);
 
 		dispatch({ type: LOCATION_DETAILS_SUCCESS, payload: data });
+		localStorage.setItem('locationId', JSON.stringify(data._id));
 	} catch (error) {
 		dispatch({
 			type: LOCATION_DETAILS_FAIL,

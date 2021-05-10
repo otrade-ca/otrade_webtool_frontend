@@ -188,7 +188,7 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 	}
 };
 
-// list all stakeholders in a project
+// list all stakeholders in a project location
 export const listStakeholders = (id, keyword = '') => async (
 	dispatch,
 	getState
@@ -262,7 +262,6 @@ export const listUserStakeholders = (id) => async (dispatch, getState) => {
 export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_LOCATION_LIST_REQUEST });
-
 		const {
 			userLogin: { userInfo },
 		} = getState();
@@ -276,7 +275,7 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 		const {
 			data: { data },
 		} = await axios.get(
-			`${getURL()}/api/v1/stakeholders/location/${id}`,
+			`${getURL()}/api/v1/locations/${id}/stakeholders`,
 			config
 		);
 

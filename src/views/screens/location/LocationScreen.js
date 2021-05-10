@@ -58,16 +58,16 @@ const LocationScreen = ({ match, history }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<strong>
+										<>
 											<>{location.location}</>
-										</strong>
+										</>
 									</h1>
 
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">
-											<strong>{location.area_influence}</strong>
+											<>{location.area_influence}</>
 											<br />
-											<strong>{location.organization_type}</strong>
+											<>{location.organization_type}</>
 										</div>
 										<div className="mr-3 d-flex justify-content-end align-items-end">
 											{btnlinks.map((item, index) => (

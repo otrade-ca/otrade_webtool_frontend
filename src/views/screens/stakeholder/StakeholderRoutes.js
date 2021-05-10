@@ -2,7 +2,8 @@ import EditStakeholderScreen from './EditStakeholderScreen';
 import EditStakeholderPhoto from './EditStakeholderPhoto';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
-import ActivityScreen from '../activity/ActivityScreen';
+import ActivityView from '../activity/ActivityView';
+import ActivityEdit from '../activity/ActivityEdit';
 import LandownershipList from '../landownership/LandownershipList';
 import Dashboard from '../../screens/stakeholder/Dashboard';
 import AddOrganizationScreen from '../organization/AddOrganizationScreen';
@@ -72,11 +73,11 @@ export const routes = [
 		component: ({ match }) => <AddOrganizationScreen match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/profile/view',
+		path: '/organizations/:organizationId/view',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/profile/edit',
+		path: '/organizations/:organizationId/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{
@@ -84,12 +85,12 @@ export const routes = [
 		component: ({ match }) => <ListStakeholderActivities match={match} />,
 	},
 	{
-		path: '/activities/:activityId/profile/view',
-		component: ({ match }) => <ActivityScreen match={match} />,
+		path: '/activities/:activityId/view',
+		component: ({ match }) => <ActivityView match={match} />,
 	},
 	{
-		path: '/activities/:activityId/profile/edit',
-		component: ({ match }) => <ListStakeholderActivities match={match} />,
+		path: '/activities/:activityId/view/edit',
+		component: ({ match }) => <ActivityEdit match={match} />,
 	},
 	{
 		path: '/activities/:activityId/commitment',

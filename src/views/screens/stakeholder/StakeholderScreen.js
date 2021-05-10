@@ -65,28 +65,28 @@ const StakeholderScreen = ({ match }) => {
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">
 											<>
-												<strong>{stakeholder.telephone}</strong>
+												<>{stakeholder.telephone}</>
 												<br />
 											</>
 											{stakeholder.status === 'active' ||
 											stakeholder.status === 'open' ? (
 												<>
-													<strong>
+													<>
 														{t('utility.status')}:{' '}
 														<em className="text-success">
 															{stakeholder.status}
 														</em>
-													</strong>
+													</>
 												</>
 											) : stakeholder.status === 'inactive' ||
 											  stakeholder.status === 'close' ? (
 												<>
-													<strong>
+													<>
 														{t('utility.status')}:{' '}
 														<em className="text-danger">
 															{stakeholder.status}
 														</em>
-													</strong>
+													</>
 												</>
 											) : null}
 										</div>

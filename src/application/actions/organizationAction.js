@@ -236,7 +236,6 @@ export const listOrganizations = (id, keyword = '') => async (
 		);
 
 		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
-		localStorage.setItem('organizationsListInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: ORGANIZATION_LIST_FAIL,

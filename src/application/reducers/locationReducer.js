@@ -24,6 +24,7 @@ import {
 	LOCATION_LIST_FILTER_CLEAR,
 	LOCATION_USER_LIST_FILTER,
 	LOCATION_USER_LIST_FILTER_CLEAR,
+	LOCATION_ID_REQUEST,
 } from '../constants/locationConstants';
 
 // add location
@@ -51,6 +52,8 @@ export const locationDetailsReducer = (state = { location: {} }, action) => {
 			return { loading: false, success: true, location: action.payload };
 		case LOCATION_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case LOCATION_ID_REQUEST:
+			return;
 		default:
 			return state;
 	}

@@ -32,8 +32,6 @@ const ListStakeholderActivities = ({ match }) => {
 		filtered,
 	} = activityStakeholderList;
 
-	console.log(stakeholderactivities);
-
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
 
@@ -113,7 +111,7 @@ const ListStakeholderActivities = ({ match }) => {
 												<div className="d-flex justify-content-between">
 													<div>
 														<em>
-															<Link to={`${url}/${item._id}/profile/view`}>
+															<Link to={`${url}/${item._id}/view`}>
 																View Details
 															</Link>
 														</em>

@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Form, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivityDetails } from '../../../application/actions/activityActions';
 import { Loader, Message } from '../../components/HelperComponents';
+import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
+import { getLocationId } from '../../../application/localStorage';
 
-const ActivityScreen = ({ match }) => {
+const ActivityView = ({ match }) => {
 	const activityId = match.params.activityId;
+
+	const { url } = useRouteMatch();
+
+	// get locationId from localStorage
+	const locationId = getLocationId();
 
 	// get activity details
 	const dispatch = useDispatch();
-	const stakeholderList = useSelector((state) => state.stakeholderList);
-	console.log(stakeholderList);
+
 	// get activityDetails
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
+
+	const stakeholderLocationList = useSelector(
+		(state) => state.stakeholderLocationList
+	);
+	const { stakeholders } = stakeholderLocationList;
 
 	// define state
 	const [activityType, setActivityType] = useState();
@@ -23,10 +35,12 @@ const ActivityScreen = ({ match }) => {
 	const [location, setLocation] = useState();
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [compromise, setcompromise] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
 		if (!activity.activity || activity._id !== activityId) {
 			dispatch(getActivityDetails(activityId));
+			dispatch(listLocationStakeholders(locationId));
 		} else {
 			setActivityType(activity.activity);
 			setActHours(activity.hours);
@@ -35,8 +49,9 @@ const ActivityScreen = ({ match }) => {
 			setMembers(activity.stakeholders);
 			setcompromise(activity.compromise);
 			setDispoints(activity.discussPoints);
+			setUpdatedDate(activity.updatedAt);
 		}
-	}, [dispatch, activity, activityId]);
+	}, [dispatch, activity, activityId, locationId]);
 
 	return (
 		<>
@@ -48,6 +63,9 @@ const ActivityScreen = ({ match }) => {
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
 						<h4>Activity</h4>
+						<Link to={`${url}/edit`} className="btn btn-light ml-2">
+							<i className="fas fa-edit"></i> Edit {url}
+						</Link>
 					</Card.Header>
 					<Card.Body>
 						<Form>
@@ -58,7 +76,8 @@ const ActivityScreen = ({ match }) => {
 										<Form.Control
 											as="select"
 											value={activityType}
-											onChange={(e) => setActivityType(e.target.value)}
+											disabled
+											readOnly
 										>
 											<option value="select">--select--</option>
 											<option value="informal consultation">
@@ -82,7 +101,8 @@ const ActivityScreen = ({ match }) => {
 											type="number"
 											placeholder="Enter activity hours"
 											value={actHours}
-											onChange={(e) => setActHours(e.target.value)}
+											disabled
+											readOnly
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -93,7 +113,8 @@ const ActivityScreen = ({ match }) => {
 											type="date"
 											placeholder="Enter Date"
 											value={date}
-											onChange={(e) => setDate(e.target.value)}
+											disabled
+											readOnly
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -108,7 +129,8 @@ const ActivityScreen = ({ match }) => {
 											type="text"
 											placeholder="Enter Location"
 											value={location}
-											onChange={(e) => setLocation(e.target.value)}
+											disabled
+											readOnly
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -118,14 +140,15 @@ const ActivityScreen = ({ match }) => {
 								<Col>
 									<Form.Group controlId="compromise" className="mt-3">
 										<Row>
-											<Col md={9}>
+											<Col md={8}>
 												<Form.Label>Is there a commitment?</Form.Label>
 											</Col>
-											<Col md={2}>
+											<Col md={4}>
 												<Form.Control
 													as="select"
 													value={compromise}
-													onChange={(e) => setcompromise(e.target.value)}
+													disabled
+													readOnly
 												>
 													<option value="">--Select--</option>
 													<option value="Yes">Yes</option>
@@ -142,58 +165,47 @@ const ActivityScreen = ({ match }) => {
 												as="textarea"
 												rows="6"
 												value={disPoints}
-												onChange={(e) => setDispoints(e.target.value)}
+												disabled
+												readOnly
 											></Form.Control>
 										</Form.Group>
 									</Form.Group>
 								</Col>
 							</Row>
 							<hr className="mb-3" />
-							<Row className="mt-3 mb-5">
-								{/* <Col md={8}>
-								<Form.Label>Parties Involved</Form.Label>
-								{members &&
-									members.map((assignee, i) => (
-										<Row key={assignee._id}>
-											<Col md={7}>
-												<Form.Control
-													as="select"
-													value={assignee}
-													className="px-5 mb-3"
-												>
-													<option value="">--Select--</option>
-													{stakeholderList.stakeholders.map((stakeholder) => (
-														<option
-															key={stakeholder._id}
-															value={stakeholder._id}
-														>
-															{stakeholder.firstName} {stakeholder.lastName}
-														</option>
-													))}
-												</Form.Control>
-											</Col>
-											<Col md={5}>
-												{members.length !== 1 && (
-													<Button variant="danger" className="btn-md mr-3">
-														<i className="fas fa-trash"></i>
-													</Button>
-												)}
-												{members.length - 1 === i && (
-													<Button className="px-3">
-														<i className="fas fa-plus"></i> Stakeholder
-													</Button>
-												)}
-											</Col>
-										</Row>
-									))}
-							</Col> */}
+							<Row className="mt-3">
+								<Col md={8}>
+									<Form.Label>Parties Involved</Form.Label>
+									{members &&
+										members.map((assignee, i) => (
+											<Row key={assignee._id}>
+												<Col md={7}>
+													<Form.Control
+														as="select"
+														value={assignee}
+														className="px-5 mb-3"
+														disabled
+														readOnly
+													>
+														<option value="">--Select--</option>
+														{stakeholders &&
+															stakeholders.map((stakeholder) => (
+																<option
+																	key={stakeholder._id}
+																	value={stakeholder._id}
+																>
+																	{stakeholder.firstName} {stakeholder.lastName}
+																</option>
+															))}
+													</Form.Control>
+												</Col>
+											</Row>
+										))}
+								</Col>
 							</Row>
-
 							<Row>
-								<Col>
-									<Button type="submit" variant="primary" className="px-5">
-										Update
-									</Button>
+								<Col className="text-right">
+									<p>updated on: {updatedDate.substring(0, 10)}</p>
 								</Col>
 							</Row>
 						</Form>
@@ -204,4 +216,4 @@ const ActivityScreen = ({ match }) => {
 	);
 };
 
-export default ActivityScreen;
+export default ActivityView;

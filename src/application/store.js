@@ -214,13 +214,17 @@ const projectInfoFromStorage = localStorage.getItem('projectDetailsInfo')
 const stakeholderListInfoFromStorage = localStorage.getItem(
 	'stakeholderListInfo'
 )
-	? JSON.parse(localStorage.get('stakeholderListInfo'))
+	? JSON.parse(localStorage.getItem('stakeholderListInfo'))
 	: null;
 
 const organizationsListInfoFromStorage = localStorage.getItem(
 	'organizationsListInfo'
 )
 	? JSON.parse(localStorage.getItem('organizationsListInfo'))
+	: null;
+
+const locationIdFromStorage = localStorage.getItem('locationId')
+	? JSON.parse(localStorage.getItem('locationId'))
 	: null;
 
 // persistedState for overriding initial reducer states
@@ -236,6 +240,9 @@ const persistedState = {
 
 	// saves stakeholders to stakeholderList reducer
 	stakeholderList: { stakeholders: stakeholderListInfoFromStorage },
+
+	// saves the locationId of a location the user navigates to into storage
+	locationDetails: { locationId: locationIdFromStorage },
 };
 
 const middleware = [thunk];

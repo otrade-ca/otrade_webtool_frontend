@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
 import { Card, Button, Accordion } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,7 +14,6 @@ import * as MdIcons from 'react-icons/md';
 
 const StakeholderInfluences = ({ match }) => {
 	const stakeholderId = match.params.id;
-	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
 
@@ -76,16 +74,16 @@ const StakeholderInfluences = ({ match }) => {
 													</IconContext.Provider>
 												</div>
 												<div className="item-two">
-													<div>{item.activity}</div>
+													<div>{item.activity && item.activity}</div>
 													<div className="item-category">Asessment</div>
 												</div>
 											</div>
 											<div className="table-card-item">
 												<div className="item-two">
 													<div>
-														<strong>{item.createdAt.substring(0, 10)}</strong>{' '}
+														<>{item.createdAt.substring(0, 10)}</>{' '}
 													</div>
-													<div className="item-category">Registered Date</div>
+													<div className="item-category">Updated Date</div>
 												</div>
 											</div>
 										</Accordion.Toggle>
@@ -93,14 +91,13 @@ const StakeholderInfluences = ({ match }) => {
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
-														<strong>Type:</strong> {item.type}
+														<>Type:</> {item.type}
 														<br />
-														<strong>Position:</strong> {item.position}
+														<>Position:</> {item.position}
 														<br />
-														<strong>Influence: </strong> {item.influence}
+														<>Influence: </> {item.influence}
 														<br />
-														<strong>Impact to project: </strong>{' '}
-														{item.projImpact}
+														<>Impact to project: </> {item.projImpact}
 													</div>
 													<div className="d-flex align-items-center">
 														<Button

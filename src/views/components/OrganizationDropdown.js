@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import { listOrganizations } from '../../application/actions/organizationAction';
 import { setAlert } from '../../application/actions/alertActions';
+import { getLocationId } from '../../application/localStorage';
 
 const OrganizationDropdown = ({ setMessage, label }) => {
+	const locationId = getLocationId();
+
 	//get list of organizations
 	const dispatch = useDispatch();
 	const organizationList = useSelector((state) => state.organizationList);
@@ -16,6 +20,10 @@ const OrganizationDropdown = ({ setMessage, label }) => {
 	const addHandler = () => {
 		setOrgs([...orgs, { organization: '' }]);
 	};
+
+	useEffect(() => {
+		dispatch(listOrganizations(locationId));
+	}, [dispatch, locationId]);
 
 	// filter out element
 	const removeHandler = (i) => {
@@ -40,7 +48,7 @@ const OrganizationDropdown = ({ setMessage, label }) => {
 		) {
 			dispatch(
 				setAlert(
-					'Please make sure not to add the same stakeholder twice',
+					'Please make sure not to add the same organization twice',
 					'danger'
 				)
 			);

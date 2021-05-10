@@ -14,6 +14,9 @@ import {
 } from '../../../application/actions/stakeholderActions';
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 	const locationId = match.params.id;
@@ -71,20 +74,58 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 						</Card.Header>
 					)}
 					<Card.Body>
-						{/* <Card.Body className="card-header-table">
-					<div className="card-header-title">Community</div>
-					<div className="card-header-title">Project</div>
-				</Card.Body> */}
 						<Accordion defaultActiveKey={1}>
 							{filtered
 								? filtered.map((item, index) => (
 										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="card-header-item">
-													{item.firstName} {item.lastName}
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">
+															Stakeholder |{' '}
+															{item.status === 'active' ? (
+																<strong className="text-success">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</strong>
+															) : (
+																<em className="text-danger">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</em>
+															)}
+														</div>
+													</div>
 												</div>
-												<div>{item.location && item.location.location}</div>
-												<div>{item.project && item.project.projectName}</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
@@ -93,17 +134,17 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 															<p>
 																{t('stakeholder.firstName.label')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('stakeholder.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('stakeholder.telephone.label')}{' '}
-																<strong>{item.telephone}</strong>
+																<>{item.telephone}</>
 																<br />
 																{t('stakeholder.register_Date')}
 																{': '}
@@ -129,11 +170,53 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 								  stakeholders.map((item, index) => (
 										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="card-header-item">
-													{item.firstName} {item.lastName}
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<IoIcons.IoMdPerson />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>
+															{item.firstName} {item.lastName}
+														</div>
+														<div className="item-category">
+															Stakeholder |{' '}
+															{item.status === 'active' ? (
+																<strong className="text-success">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</strong>
+															) : (
+																<em className="text-danger">
+																	{item.status.substring(0, 1).toUpperCase() +
+																		item.status.substring(
+																			1,
+																			item.status.length
+																		)}
+																</em>
+															)}
+														</div>
+													</div>
 												</div>
-												<div>{item.location && item.location.location}</div>
-												<div>{item.project && item.project.projectName}</div>
+												<div className="table-card-item">
+													<div className="item-one">
+														<IconContext.Provider
+															value={{ color: '#008cba', size: '2em' }}
+														>
+															<RiIcons.RiCommunityLine />
+														</IconContext.Provider>
+													</div>
+													<div className="item-two">
+														<div>{item.location.location}</div>
+														<div className="item-category">Community</div>
+													</div>
+												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
 												<Card.Body>
@@ -142,17 +225,17 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 															<p>
 																{t('stakeholder.firstName.label')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('stakeholder.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('stakeholder.telephone.label')}{' '}
-																<strong>{item.telephone}</strong>
+																<>{item.telephone}</>
 																<br />
 																{t('stakeholder.register_Date')}
 																{': '}

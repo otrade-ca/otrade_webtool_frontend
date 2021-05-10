@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import {
 	assignStakeholder,
-	listUserStakeholders,
+	listLocationStakeholders,
 } from '../../application/actions/stakeholderActions';
 import { setAlert } from '../../application/actions/alertActions';
+import { getLocationId } from '../../application/localStorage';
 
 const MemberDropdown = ({ label, history }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
+	const locationId = getLocationId();
 
-	const stakeholderUserList = useSelector((state) => state.stakeholderUserList);
-	const { stakeholders } = stakeholderUserList;
+	const stakeholderLocationList = useSelector(
+		(state) => state.stakeholderLocationList
+	);
+	const { stakeholders } = stakeholderLocationList;
 
 	// useState
 	const [members, setMembers] = useState([{ member: '' }]);
@@ -27,8 +29,8 @@ const MemberDropdown = ({ label, history }) => {
 	};
 
 	useEffect(() => {
-		dispatch(listUserStakeholders(userInfo._id));
-	}, [dispatch, userInfo]);
+		dispatch(listLocationStakeholders(locationId));
+	}, [dispatch, locationId]);
 
 	// filter out element i and update members
 	const removeHandler = (i) => {

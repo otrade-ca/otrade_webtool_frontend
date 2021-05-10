@@ -89,7 +89,7 @@ const LocationList = ({ match }) => {
 										<div className="table-card-item">
 											<div className="item-two">
 												<div>
-													<strong>{location.createdAt.substring(0, 10)}</strong>{' '}
+													<>{location.createdAt.substring(0, 10)}</>{' '}
 												</div>
 												<div className="item-category">Registered Date</div>
 											</div>
@@ -99,21 +99,17 @@ const LocationList = ({ match }) => {
 										<Card.Body>
 											<div className="d-flex justify-content-between">
 												<div>
-													<p>
-														{t('location.location')}
-														{': '}
-														<strong>
-															<Link to={`/location/${location._id}`}>
-																{location.location}
-															</Link>
-														</strong>
-														<br />
-														{t('location.area_of_Influence.label')}
-														{': '} {location.area_influence}
-														<br />
-														{t('location.organization_Type.label')}
-														{': '} {location.organization_type}
-													</p>
+													<>
+														<Link to={`/location/${location._id}`}>
+															{location.location}
+														</Link>
+													</>
+													<br />
+													<>{t('location.area_of_Influence.label')}</>
+													{': '} {location.area_influence}
+													<br />
+													<>{t('location.organization_Type.label')}</>
+													{': '} {location.organization_type}
 												</div>
 												<div className="d-flex align-items-center">
 													<Button
@@ -149,7 +145,7 @@ const LocationList = ({ match }) => {
 										<div className="table-card-item">
 											<div className="item-two">
 												<div>
-													<strong>{location.createdAt.substring(0, 10)}</strong>{' '}
+													<>{location.createdAt.substring(0, 10)}</>{' '}
 												</div>
 												<div className="item-category">Registered Date</div>
 											</div>
@@ -159,20 +155,16 @@ const LocationList = ({ match }) => {
 										<Card.Body>
 											<div className="d-flex justify-content-between">
 												<div>
-													<strong>
+													<>
 														<Link to={`/location/${location._id}`}>
 															{location.location}
 														</Link>
-													</strong>
+													</>
 													<br />
-													<strong>
-														{t('location.area_of_Influence.label')}
-													</strong>
+													<>{t('location.area_of_Influence.label')}</>
 													{': '} {location.area_influence}
 													<br />
-													<strong>
-														{t('location.organization_Type.label')}
-													</strong>
+													<>{t('location.organization_Type.label')}</>
 													{': '} {location.organization_type}
 												</div>
 												<div className="d-flex align-items-center">

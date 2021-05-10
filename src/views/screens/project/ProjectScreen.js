@@ -63,12 +63,10 @@ const ProjectScreen = ({ match }) => {
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">
 											<strong>
-												<em>
-													{project.projectClient}
-													<br />
-												</em>
+												<em>Client</em>{' '}
 											</strong>
-
+											: {project.projectClient}
+											<br />
 											{/* profile status */}
 											{(project && project.status === 'active') ||
 											project.status === 'open' ? (

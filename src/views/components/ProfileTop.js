@@ -19,7 +19,7 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 				</Col>
 				<Col md={10}>
 					<h1>
-						<strong>
+						<>
 							{profile && profile.firstName ? (
 								<>
 									{profile.firstName} {profile.lastName}
@@ -29,41 +29,41 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 							) : (
 								<>{profile.location}</>
 							)}
-						</strong>
+						</>
 					</h1>
 
 					<Row className="middle-row d-flex justify-content-between">
 						<div className="ml-3">
 							{/* projectclient information */}
 							{profile && profile.projectClient && (
-								<strong>
+								<>
 									<em>
 										{profile.projectClient}
 										<br />
 									</em>
-								</strong>
+								</>
 							)}
 
 							{/* telephone or country code */}
 							{profile && profile.telephone ? (
 								<>
-									<strong>{profile.telephone}</strong>
+									<>{profile.telephone}</>
 									<br />
 								</>
 							) : profile.country ? (
 								<>
-									<strong>
+									<>
 										{profile.country_code}
 										{', '}
 										{profile.country}
 										<br />
-									</strong>
+									</>
 								</>
 							) : (
 								<>
-									<strong>
+									<>
 										<em>TBD</em>
-									</strong>
+									</>
 									<br />
 								</>
 							)}
@@ -72,18 +72,18 @@ const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 							{(profile && profile.status === 'active') ||
 							profile.status === 'open' ? (
 								<>
-									<strong>
+									<>
 										{t('utility.status')}:{' '}
 										<em className="text-success">{profile.status}</em>
-									</strong>
+									</>
 								</>
 							) : profile.status === 'inactive' ||
 							  profile.status === 'close' ? (
 								<>
-									<strong>
+									<>
 										{t('utility.status')}:{' '}
 										<em className="text-danger">{profile.status}</em>
-									</strong>
+									</>
 								</>
 							) : null}
 

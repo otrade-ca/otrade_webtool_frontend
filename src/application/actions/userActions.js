@@ -64,7 +64,6 @@ export const login = (email, password) => async (dispatch) => {
 					? error.response.data.message
 					: error.messsage,
 		});
-		//dispatch(setAlert(error.message, 'danger'));
 	}
 };
 

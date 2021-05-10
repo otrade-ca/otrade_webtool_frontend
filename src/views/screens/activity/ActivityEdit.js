@@ -6,21 +6,32 @@ import {
 	updateActivity,
 } from '../../../application/actions/activityActions';
 import { ACTIVITY_UPDATE_RESET } from '../../../application/constants/activityConstants';
-import BorderContainer from '../../components/BorderContainer';
-import Message from '../../components/Message';
-import Loader from '../../components/Loader';
+import {
+	Message,
+	Loader,
+	CardContainer,
+} from '../../components/HelperComponents';
+
+import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
+import { getLocationId } from '../../../application/localStorage';
 import { setAlert } from '../../../application/actions/alertActions';
 
 const ActivityScreen = ({ match }) => {
 	const activityId = match.params.activityId;
 
+	const locationId = getLocationId();
+
 	// get activity details
 	const dispatch = useDispatch();
-	const stakeholderList = useSelector((state) => state.stakeholderList);
 
 	// get activityDetails
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
+
+	const stakeholderLocationList = useSelector(
+		(state) => state.stakeholderLocationList
+	);
+	const { stakeholders } = stakeholderLocationList;
 
 	// get success on update
 	const activityUpdate = useSelector((state) => state.activityUpdate);
@@ -42,6 +53,7 @@ const ActivityScreen = ({ match }) => {
 		} else {
 			if (!activity.activity || activity._id !== activityId) {
 				dispatch(getActivityDetails(activityId));
+				dispatch(listLocationStakeholders(locationId));
 			} else {
 				setActivityType(activity.activity);
 				setActHours(activity.hours);
@@ -52,7 +64,7 @@ const ActivityScreen = ({ match }) => {
 				setDispoints(activity.discussPoints);
 			}
 		}
-	}, [dispatch, activity, activityId, success]);
+	}, [dispatch, activity, activityId, success, locationId]);
 
 	//add select field
 	const addHandler = () => {
@@ -105,13 +117,13 @@ const ActivityScreen = ({ match }) => {
 	};
 
 	return (
-		<BorderContainer>
+		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
+				<CardContainer title={'Activity'}>
 					<Form onSubmit={submitHandler} className="mt-4 mb-3">
 						<Row>
 							<Col md={4}>
@@ -225,14 +237,15 @@ const ActivityScreen = ({ match }) => {
 													className="px-5 mb-3"
 												>
 													<option value="">--Select--</option>
-													{stakeholderList.stakeholders.map((stakeholder) => (
-														<option
-															key={stakeholder._id}
-															value={stakeholder._id}
-														>
-															{stakeholder.firstName} {stakeholder.lastName}
-														</option>
-													))}
+													{stakeholders &&
+														stakeholders.map((stakeholder) => (
+															<option
+																key={stakeholder._id}
+																value={stakeholder._id}
+															>
+																{stakeholder.firstName} {stakeholder.lastName}
+															</option>
+														))}
 												</Form.Control>
 											</Col>
 											<Col md={5}>
@@ -258,7 +271,6 @@ const ActivityScreen = ({ match }) => {
 									))}
 							</Col>
 						</Row>
-
 						<Row>
 							<Col>
 								<Button type="submit" variant="primary" className="px-5 mt-3">
@@ -267,9 +279,9 @@ const ActivityScreen = ({ match }) => {
 							</Col>
 						</Row>
 					</Form>
-				</>
+				</CardContainer>
 			)}
-		</BorderContainer>
+		</>
 	);
 };
 
