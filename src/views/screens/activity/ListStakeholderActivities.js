@@ -93,14 +93,16 @@ const ListStakeholderActivities = ({ match }) => {
 													</IconContext.Provider>
 												</div>
 												<div className="item-two">
-													<div>{item.activity}</div>
+													<div>
+														<strong>{item.activity}</strong>
+													</div>
 													<div className="item-category">Activity Type</div>
 												</div>
 											</div>
 											<div className="table-card-item">
 												<div className="item-two">
 													<div>
-														<strong>{item.date.substring(0, 10)}</strong>{' '}
+														<>{item.date.substring(0, 10)}</>{' '}
 													</div>
 													<div className="item-category">Activity Date</div>
 												</div>
@@ -110,20 +112,22 @@ const ListStakeholderActivities = ({ match }) => {
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
-														<strong>
+														<em>
 															<Link to={`${url}/${item._id}/profile/view`}>
 																View Details
 															</Link>
-														</strong>
+														</em>
 														<br />
-														<strong>Commitment:</strong>{' '}
+														Commitment:{' '}
 														{item.compromise === 'Yes' ? (
-															<Link>{item.compromise}</Link>
+															<Link to={`${url}/${item._id}/commitment`}>
+																{item.compromise}
+															</Link>
 														) : (
 															<>{item.compromise}</>
 														)}
 														<br />
-														<strong>Other stakeholders: </strong>{' '}
+														Other stakeholders:{' '}
 														{item.stakeholders &&
 														item.stakeholders.length < 2 ? (
 															'None'

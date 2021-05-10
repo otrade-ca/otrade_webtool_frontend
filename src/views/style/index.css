@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 :root {
 	--primary-color: #17a2b8;
@@ -83,7 +83,7 @@ body {
 
 label {
 	font-size: 1rem !important;
-	font-weight: 900;
+	/* font-weight: 900; */
 }
 
 .alert {
@@ -371,8 +371,8 @@ hr {
 
 .my-card-header h4 {
 	margin: 0;
-	/* font-size: 0.85rem !important;
-	font-weight: 900; */
+	font-size: 0.9375rem !important;
+	font-weight: 600;
 }
 
 .my-card-header h4,
@@ -465,6 +465,4 @@ hr {
 
 .item-category {
 	font-size: small;
-	font-weight: bolder;
-	color: grey;
 }

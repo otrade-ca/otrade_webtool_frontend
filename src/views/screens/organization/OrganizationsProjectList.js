@@ -97,8 +97,12 @@ const OrganizationsProjectList = memo(({ match }) => {
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
+														{item.location && (
+															<>
+																<div>{item.location.location}</div>
+																<div className="item-category">Community</div>
+															</>
+														)}
 													</div>
 												</div>
 											</Accordion.Toggle>
@@ -164,8 +168,12 @@ const OrganizationsProjectList = memo(({ match }) => {
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
+														{item.location && (
+															<>
+																<div>{item.location.location}</div>
+																<div className="item-category">Community</div>
+															</>
+														)}
 													</div>
 												</div>
 											</Accordion.Toggle>

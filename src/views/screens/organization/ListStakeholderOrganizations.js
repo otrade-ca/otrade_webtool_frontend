@@ -70,7 +70,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 				<>
 					{organizations && organizations.length === 0 ? (
 						<Empty
-							itemLink={'/register'}
+							itemLink={'register'}
 							url={url}
 							type={'Register'}
 							group={'organizations'}

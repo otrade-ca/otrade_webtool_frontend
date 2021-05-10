@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { addCommitment } from '../../../application/actions/commitmentActions';
+import { getCommitment } from '../../../application/actions/commitmentActions';
 
-const CommitmentDetails = ({ match }) => {
+const CommitmentForm = ({ match }) => {
 	const id = match.params.activityId;
 
-	//define states
+	// usedispatch
+	const dispatch = useDispatch();
+	const commitmentDetails = useSelector((state) => state.commitmentDetails);
+	const { commitment } = commitmentDetails;
+
+	console.log(commitment);
+
 	const [comment, setComment] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
 	const [isComplete, setIsComplete] = useState(false);
 
-	const dispatch = useDispatch();
-
-	//handle submit form
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		//dispatch
-		dispatch(
-			addCommitment(
-				{
-					details: comment,
-					completion_date: completionDate,
-					is_complete: isComplete,
-				},
-				id
-			)
-		);
-	};
+	useEffect(() => {
+		if (!commitment.details || commitment._id !== id) {
+			dispatch(getCommitment(id));
+		} else {
+			setComment(commitment.details);
+			setCompletionDate(commitment.completionDate);
+			setIsComplete(commitment.isComplete);
+		}
+	}, [dispatch, id, commitment]);
 
 	return (
 		<Card className="my-card">
@@ -36,7 +33,7 @@ const CommitmentDetails = ({ match }) => {
 				<h4>Commitment</h4>
 			</Card.Header>
 			<Card.Body>
-				<Form onSubmit={submitHandler} className="mb-3">
+				<Form className="mb-3">
 					<Form.Group controlId="discussion">
 						<Form.Label>Compromise Details</Form.Label>
 						<Row>
@@ -46,6 +43,7 @@ const CommitmentDetails = ({ match }) => {
 									as="textarea"
 									rows="4"
 									placeholder="Enter Details"
+									value={comment}
 									required
 									onChange={(e) => setComment(e.target.value)}
 								></Form.Control>
@@ -59,6 +57,7 @@ const CommitmentDetails = ({ match }) => {
 								<Form.Control
 									type="date"
 									placeholder="Enter Date"
+									value={completionDate}
 									required
 									onChange={(e) => setCompletionDate(e.target.value)}
 								></Form.Control>
@@ -87,4 +86,4 @@ const CommitmentDetails = ({ match }) => {
 	);
 };
 
-export default CommitmentDetails;
+export default CommitmentForm;

@@ -37,11 +37,11 @@ export const commitmentDetailsReducer = (
 ) => {
 	switch (action.type) {
 		case COMMITMENT_DETAILS_REQUEST:
-			return { loading: true };
+			return { loading: true, ...state };
 		case COMMITMENT_DETAILS_SUCCESS:
-			return { loading: false };
+			return { loading: false, success: true, commitment: action.payload };
 		case COMMITMENT_DETAILS_FAIL:
-			return { loading: false };
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}

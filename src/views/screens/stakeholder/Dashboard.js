@@ -5,9 +5,8 @@ import StakeholderInfluences from '../influence/StakeholderInfluences';
 const Dashboard = ({ match }) => {
 	return (
 		<div>
-			<ListStakeholderActivities match={match} />
-
 			<StakeholderInfluences match={match} />
+			<ListStakeholderActivities match={match} />
 		</div>
 	);
 };

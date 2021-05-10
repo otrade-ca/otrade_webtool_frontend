@@ -10,6 +10,7 @@ import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
 import StepForm from '../landownership/StepForm';
 import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
+import CommitmentDetails from '../commitment/CommitmentDetails';
 
 export const btnlinks = [
 	// {
@@ -89,6 +90,10 @@ export const routes = [
 	{
 		path: '/activities/:activityId/profile/edit',
 		component: ({ match }) => <ListStakeholderActivities match={match} />,
+	},
+	{
+		path: '/activities/:activityId/commitment',
+		component: ({ match }) => <CommitmentDetails match={match} />,
 	},
 	{
 		path: '/landownerships',

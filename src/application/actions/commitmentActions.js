@@ -56,8 +56,8 @@ export const addCommitment = (commitment, id) => async (dispatch, getState) => {
 	}
 };
 
-// get commitment details
-export const getCommitment = () => async (dispatch, getState) => {
+// get commitment details for an activity
+export const getCommitment = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMITMENT_DETAILS_REQUEST });
 
@@ -75,7 +75,12 @@ export const getCommitment = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`${getURL()}`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/activities/${id}/commitment`,
+			config
+		);
+
+		console.log(data);
 
 		dispatch({ type: COMMITMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -163,8 +168,8 @@ export const deleteCommitment = (id) => async (dispatch, getState) => {
 	}
 };
 
-// get list of commitments
-export const listCommitments = () => async (dispatch, getState) => {
+// get list of commitments for a stakeholder
+export const listCommitments = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: COMMITMENT_LIST_REQUEST });
 
@@ -182,7 +187,10 @@ export const listCommitments = () => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`${getURL()}`, config);
+		} = await axios.get(
+			`${getURL()}/api/v1/stakeholders/${id}/commitments`,
+			config
+		);
 
 		dispatch({ type: COMMITMENT_LIST_SUCCESS, payload: data });
 	} catch (error) {
