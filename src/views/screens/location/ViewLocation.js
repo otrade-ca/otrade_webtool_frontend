@@ -34,7 +34,7 @@ const ViewLocation = ({ match }) => {
 			setOrgType(loc.organization_type);
 			setUpdatedDate(loc.updatedAt);
 		}
-	}, [dispatch, locationId, loc.location, loc._id, loc]);
+	}, [dispatch, locationId, loc]);
 
 	return (
 		<>
