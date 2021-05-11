@@ -70,7 +70,7 @@ const ListStakeholderActivities = ({ match }) => {
 							<h4>{t('tables.activity')}</h4>
 							<Link
 								to={`/activities/register`}
-								className="btn btn-primary ml-2"
+								className="btn btn-primary btn-sm ml-2"
 							>
 								<i className="fas fa-plus"></i> {t('tables.activity')}
 							</Link>
@@ -102,7 +102,7 @@ const ListStakeholderActivities = ({ match }) => {
 													<div>
 														<>{item.date.substring(0, 10)}</>{' '}
 													</div>
-													<div className="item-category">Activity Date</div>
+													<div className="item-category">Updated Date</div>
 												</div>
 											</div>
 										</Accordion.Toggle>
@@ -142,7 +142,7 @@ const ListStakeholderActivities = ({ match }) => {
 													<div className="d-flex align-items-center">
 														<Button
 															variant="danger"
-															className="btn-md ml-3"
+															className=" ml-3"
 															onClick={() => deleteHandler(item._id)}
 														>
 															<i className="fas fa-trash"></i> Delete

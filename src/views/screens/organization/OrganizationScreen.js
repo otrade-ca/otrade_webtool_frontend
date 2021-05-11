@@ -6,15 +6,20 @@ import {
 	updateOrganization,
 } from '../../../application/actions/organizationAction';
 import { ORGANIZATION_UPDATE_RESET } from '../../../application/constants/organizationConstants';
+import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
+import { getLocationId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
 import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 
 const OrganizationScreen = ({ match }) => {
 	const projectId = match.params.projectId;
-	const organizationId = match.params.id;
+	const organizationId = match.params.organizationId;
 
 	const { t } = useTranslation();
+
+	// get locationId from localStorage
+	const locationId = getLocationId();
 
 	// get stakeholderList
 	const dispatch = useDispatch();
@@ -23,6 +28,11 @@ const OrganizationScreen = ({ match }) => {
 	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
+
+	const stakeholderLocationList = useSelector(
+		(state) => state.stakeholderLocationList
+	);
+	const { stakeholders: members } = stakeholderLocationList;
 
 	// get success on update
 	const organizationUpdate = useSelector((state) => state.organizationUpdate);
@@ -40,11 +50,11 @@ const OrganizationScreen = ({ match }) => {
 	useEffect(() => {
 		if (success) {
 			dispatch(getOrganizationDetails(organizationId));
-			//dispatch(getStak);
 			dispatch({ type: ORGANIZATION_UPDATE_RESET });
 		} else {
 			if (!orgDetails.name || orgDetails._id !== organizationId) {
 				dispatch(getOrganizationDetails(organizationId));
+				dispatch(listLocationStakeholders(locationId));
 			} else {
 				setOrganization(orgDetails.name);
 				setDivision(orgDetails.division);
@@ -55,7 +65,7 @@ const OrganizationScreen = ({ match }) => {
 				setStakeholders(orgDetails.stakeholders);
 			}
 		}
-	}, [dispatch, orgDetails, organizationId, success]);
+	}, [dispatch, orgDetails, organizationId, success, locationId]);
 
 	//add select field
 	const addHandler = () => {
@@ -121,7 +131,7 @@ const OrganizationScreen = ({ match }) => {
 						<h4>{t('tables.organization')}</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler} className="mt-3 mb-3">
+						<Form onSubmit={submitHandler}>
 							<Row>
 								<Col md={6}>
 									<Form.Group controlId="organization">
@@ -241,14 +251,15 @@ const OrganizationScreen = ({ match }) => {
 														className="px-5 mb-3"
 													>
 														<option value="">{t('action.select')}</option>
-														{stakeholderList.stakeholders.map((stakeholder) => (
-															<option
-																key={stakeholder._id}
-																value={stakeholder._id}
-															>
-																{stakeholder.firstName} {stakeholder.lastName}
-															</option>
-														))}
+														{members &&
+															members.map((stakeholder) => (
+																<option
+																	key={stakeholder._id}
+																	value={stakeholder._id}
+																>
+																	{stakeholder.firstName} {stakeholder.lastName}
+																</option>
+															))}
 													</Form.Control>
 												</Col>
 												<Col md={5}>
@@ -275,7 +286,6 @@ const OrganizationScreen = ({ match }) => {
 										))}
 								</Col>
 							</Row>
-							<hr />
 							<Row className="mt-3">
 								<Col>
 									<Button type="submit" variant="primary" className="px-5 mt-3">

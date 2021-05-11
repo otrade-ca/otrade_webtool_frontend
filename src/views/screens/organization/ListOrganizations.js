@@ -108,25 +108,21 @@ const OrganizationsList = memo(({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('tables.organization')}
-																{': '}
 																<>
 																	<Link to={`${url}/${item._id}/profile/view`}>
 																		{item.name}
 																	</Link>
 																</>
 																<br />
-																{t('organization.address')}
+																{t('organization.address.label')}
 																{': '} <>{item.address}</>
 																<br />
-																{t('organization.email')}
+																{t('organization.email.label')}
 																{': '} <>{item.email}</>
 																<br />
-																{t('organization.telephone')}
+																{t('organization.telephone.label')}
 																{': '} <>{item.telephone}</>
 																<br />
-																{t('organization.registered')}
-																{': '} {item.createdAt.substring(0, 10)}
 															</p>
 														</div>
 														<div className="d-flex align-items-center">
@@ -181,25 +177,21 @@ const OrganizationsList = memo(({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('tables.organization')}
-																{': '}
 																<>
 																	<Link to={`${url}/${item._id}/profile/view`}>
 																		{item.name}
 																	</Link>
 																</>
 																<br />
-																{t('organization.address')}
+																{t('organization.address.label')}
 																{': '} <>{item.address}</>
 																<br />
-																{t('organization.email')}
+																{t('organization.email.label')}
 																{': '} <>{item.email}</>
 																<br />
-																{t('organization.telephone')}
+																{t('organization.telephone.label')}
 																{': '} <>{item.telephone}</>
 																<br />
-																{t('organization.registered')}
-																{': '} {item.createdAt.substring(0, 10)}
 															</p>
 														</div>
 														<div className="d-flex align-items-center">

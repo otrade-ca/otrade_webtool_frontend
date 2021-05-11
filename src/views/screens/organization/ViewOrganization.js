@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Form, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrganizationDetails } from '../../../application/actions/organizationAction';
+import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
+import { getLocationId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
 const ViewOrganization = ({ match }) => {
-	const organizationId = match.params.id;
+	const organizationId = match.params.organizationId;
+
+	const { url } = useRouteMatch();
+
 	const { t } = useTranslation();
+
+	// get locationId from localStorage
+	const locationId = getLocationId();
 
 	// get stakeholderList
 	const dispatch = useDispatch();
-	const stakeholderList = useSelector((state) => state.stakeholderList);
 
 	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
-	console.log(orgDetails);
+	const stakeholderLocationList = useSelector(
+		(state) => state.stakeholderLocationList
+	);
+	const { stakeholders: members } = stakeholderLocationList;
 
 	// define states
 	const [organization, setOrganization] = useState('');
@@ -32,6 +43,7 @@ const ViewOrganization = ({ match }) => {
 	useEffect(() => {
 		if (!orgDetails.name || orgDetails._id !== organizationId) {
 			dispatch(getOrganizationDetails(organizationId));
+			dispatch(listLocationStakeholders(locationId));
 		} else {
 			setOrganization(orgDetails.name);
 			setDivision(orgDetails.division);
@@ -42,7 +54,7 @@ const ViewOrganization = ({ match }) => {
 			setStakeholders(orgDetails.stakeholders);
 			setUpdatedAt(orgDetails.updatedAt);
 		}
-	}, [dispatch, orgDetails, organizationId]);
+	}, [dispatch, orgDetails, organizationId, locationId]);
 
 	return (
 		<>
@@ -54,9 +66,12 @@ const ViewOrganization = ({ match }) => {
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
 						<h4>{t('tables.organization')}</h4>
+						<Link to={`${url}/edit`} className="btn btn-light ml-2">
+							<i className="fas fa-edit"></i> Edit
+						</Link>
 					</Card.Header>
 					<Card.Body>
-						<Form className="mb-3">
+						<Form>
 							<Row>
 								<Col md={6}>
 									<Form.Group controlId="organization">
@@ -181,42 +196,21 @@ const ViewOrganization = ({ match }) => {
 														disabled
 													>
 														<option value="">{t('action.select')}</option>
-														{stakeholderList &&
-															stakeholderList.stakeholders.map(
-																(stakeholder) => (
-																	<option
-																		key={stakeholder._id}
-																		value={stakeholder._id}
-																	>
-																		{stakeholder.firstName}{' '}
-																		{stakeholder.lastName}
-																	</option>
-																)
-															)}
+														{members &&
+															members.map((stakeholder) => (
+																<option
+																	key={stakeholder._id}
+																	value={stakeholder._id}
+																>
+																	{stakeholder.firstName} {stakeholder.lastName}
+																</option>
+															))}
 													</Form.Control>
-												</Col>
-												<Col md={5}>
-													{stakeholders.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3"
-															disabled
-														>
-															<i className="fas fa-trash"></i>
-														</Button>
-													)}
-													{stakeholders.length - 1 === i && (
-														<Button className="px-3" disabled>
-															<i className="fas fa-plus"></i>{' '}
-															{t('tables.stakeholder')}
-														</Button>
-													)}
 												</Col>
 											</Row>
 										))}
 								</Col>
 							</Row>
-							<hr />
 							<Row className="mt-3">
 								<Col className="text-right">
 									<p>updated on: {updatedAt.substring(0, 10)}</p>

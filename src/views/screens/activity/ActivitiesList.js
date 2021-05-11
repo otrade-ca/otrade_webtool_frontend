@@ -1,15 +1,18 @@
-import React, { memo, useEffect} from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listActivities, deleteActivity } from '../../../application/actions/activityActions';
 import {
-	Message, 
-	Loader, 
-	BorderContainer, 
-	TableHelper, 
-	FilterBox, 
-	Empty
+	listActivities,
+	deleteActivity,
+} from '../../../application/actions/activityActions';
+import {
+	Message,
+	Loader,
+	BorderContainer,
+	TableHelper,
+	FilterBox,
+	Empty,
 } from '../../components/HelperComponents';
 import Activity from '../../components/Entity/Activity';
 import { ACTIVITY_DELETE_RESET } from '../../../application/constants/activityConstants';

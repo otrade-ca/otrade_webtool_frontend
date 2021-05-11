@@ -20,7 +20,9 @@ import * as VscIcons from 'react-icons/vsc';
 
 const ListStakeholderOrganizations = ({ match }) => {
 	const stakeholderId = match.params.id;
+
 	const { url } = useRouteMatch();
+
 	const { t } = useTranslation();
 
 	//get organizations for stakeholder
@@ -78,10 +80,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'StakeholderOrganizations'} />
-							<Link
-								to={`${url}/register`}
-								className="btn btn-primary ml-2 mb-3"
-							>
+							<Link to={`${url}/register`} className="btn btn-primary ml-2">
 								<i className="fas fa-plus"></i> Register
 							</Link>
 						</Card.Header>
@@ -126,25 +125,17 @@ const ListStakeholderOrganizations = ({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('tables.organization')}
-																{': '}
 																<>
-																	<Link to={`${url}/${item._id}/profile`}>
+																	<Link to={`${url}/${item._id}/view`}>
 																		{item.name}
 																	</Link>
 																</>
 																<br />
-																{t('organization.address.label')}
-																{': '} <>{item.address}</>
+																<>{item.address}</>
 																<br />
-																{t('organization.email.label')}
-																{': '} <>{item.email}</>
+																<>{item.email}</>
 																<br />
-																{t('organization.telephone.label')}
-																{': '} <>{item.telephone}</>
-																<br />
-																{t('organization.register_Date')}
-																{': '} {item.createdAt.substring(0, 10)}
+																<>{item.telephone}</>
 															</p>
 														</div>
 														<div className="d-flex align-items-center">
@@ -200,7 +191,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 														<div>
 															<p>
 																<>
-																	<Link to={`${url}/${item._id}/profile`}>
+																	<Link to={`${url}/${item._id}/view`}>
 																		{item.name}
 																	</Link>
 																</>

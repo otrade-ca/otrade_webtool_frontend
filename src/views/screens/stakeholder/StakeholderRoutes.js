@@ -77,7 +77,7 @@ export const routes = [
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/edit',
+		path: '/organizations/:organizationId/view/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{

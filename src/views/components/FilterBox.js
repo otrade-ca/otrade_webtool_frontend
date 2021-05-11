@@ -103,7 +103,7 @@ const FilterBox = ({ searchWord }) => {
 			<Form.Control
 				type="text"
 				onChange={onChange}
-				placeholder={`Filter ${searchWord}...`}
+				placeholder={`Filter...`}
 			></Form.Control>
 		</Form>
 	);

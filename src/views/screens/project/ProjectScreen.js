@@ -55,34 +55,34 @@ const ProjectScreen = ({ match }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<strong>
-											<>{project.projectName}</>
-										</strong>
+										<>
+											<strong>{project.projectName}</strong>
+										</>
 									</h1>
 
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">
-											<strong>
-												<em>Client</em>{' '}
-											</strong>
-											: {project.projectClient}
+											<>
+												<>Client</>{' '}
+											</>
+											: <em>{project.projectClient}</em>
 											<br />
 											{/* profile status */}
 											{(project && project.status === 'active') ||
 											project.status === 'open' ? (
 												<>
-													<strong>
+													<>
 														{t('utility.status')}:{' '}
 														<em className="text-success">{project.status}</em>
-													</strong>
+													</>
 												</>
 											) : project.status === 'inactive' ||
 											  project.status === 'close' ? (
 												<>
-													<strong>
+													<>
 														{t('utility.status')}:{' '}
 														<em className="text-danger">{project.status}</em>
-													</strong>
+													</>
 												</>
 											) : null}
 										</div>

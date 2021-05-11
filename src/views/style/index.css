@@ -367,11 +367,12 @@ hr {
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.5rem 1.25rem 0.5rem 1.25rem !important;
+	height: 3.5rem;
 }
 
 .my-card-header h4 {
 	margin: 0;
-	font-size: 0.9375rem !important;
+	font-size: 1rem !important;
 	font-weight: 600;
 }
 

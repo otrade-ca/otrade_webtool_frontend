@@ -64,7 +64,7 @@ const ActivityView = ({ match }) => {
 					<Card.Header className="my-card-header">
 						<h4>Activity</h4>
 						<Link to={`${url}/edit`} className="btn btn-light ml-2">
-							<i className="fas fa-edit"></i> Edit {url}
+							<i className="fas fa-edit"></i> Edit
 						</Link>
 					</Card.Header>
 					<Card.Body>
