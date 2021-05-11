@@ -92,7 +92,7 @@ const ListStakeholderActivities = ({ match }) => {
 												</div>
 												<div className="item-two">
 													<div>
-														<strong>{item.activity}</strong>
+														<>{item.activity}</>
 													</div>
 													<div className="item-category">Activity Type</div>
 												</div>

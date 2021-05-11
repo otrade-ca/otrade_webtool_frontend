@@ -110,20 +110,20 @@ const OrganizationsList = memo(({ match }) => {
 															<p>
 																{t('tables.organization')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`${url}/${item._id}/profile/view`}>
 																		{item.name}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('organization.address')}
-																{': '} <strong>{item.address}</strong>
+																{': '} <>{item.address}</>
 																<br />
 																{t('organization.email')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('organization.telephone')}
-																{': '} <strong>{item.telephone}</strong>
+																{': '} <>{item.telephone}</>
 																<br />
 																{t('organization.registered')}
 																{': '} {item.createdAt.substring(0, 10)}
@@ -181,22 +181,24 @@ const OrganizationsList = memo(({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																<strong>
-																	<Link to={`${url}/${item._id}/profile`}>
+																{t('tables.organization')}
+																{': '}
+																<>
+																	<Link to={`${url}/${item._id}/profile/view`}>
 																		{item.name}
 																	</Link>
-																</strong>
+																</>
 																<br />
-																{t('organization.address.label')}
-																{': '} <strong>{item.address}</strong>
+																{t('organization.address')}
+																{': '} <>{item.address}</>
 																<br />
-																{t('organization.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{t('organization.email')}
+																{': '} <>{item.email}</>
 																<br />
-																{t('organization.telephone.label')}
-																{': '} <strong>{item.telephone}</strong>
+																{t('organization.telephone')}
+																{': '} <>{item.telephone}</>
 																<br />
-																{t('organization.register_Date')}
+																{t('organization.registered')}
 																{': '} {item.createdAt.substring(0, 10)}
 															</p>
 														</div>

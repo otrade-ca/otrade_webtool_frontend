@@ -366,7 +366,7 @@ hr {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0.5rem 1.25rem !important;
+	padding: 0.5rem 1.25rem 0.5rem 1.25rem !important;
 }
 
 .my-card-header h4 {
@@ -377,7 +377,7 @@ hr {
 
 .my-card-header h4,
 .item-two div {
-	color: black !important;
+	color: black;
 }
 
 .card-header p {
@@ -412,14 +412,6 @@ hr {
 	flex-direction: row;
 	justify-content: space-between;
 }
-
-/* .table-card:first-child {
-	border-radius: 5px 5px 0 0 !important;
-}
-
-.table-card:last-child {
-	border-radius: 0 0 5px 5px !important;
-} */
 
 .card-header-table {
 	background-color: #fff !important;
@@ -465,4 +457,6 @@ hr {
 
 .item-category {
 	font-size: small;
+	font-weight: 600;
+	color: rgb(143, 142, 142) !important;
 }

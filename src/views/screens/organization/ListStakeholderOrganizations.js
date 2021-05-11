@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Accordion, Button, Card } from 'react-bootstrap';
+import { Accordion, Button, Card } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -128,20 +128,20 @@ const ListStakeholderOrganizations = ({ match }) => {
 															<p>
 																{t('tables.organization')}
 																{': '}
-																<strong>
+																<>
 																	<Link to={`${url}/${item._id}/profile`}>
 																		{item.name}
 																	</Link>
-																</strong>
+																</>
 																<br />
 																{t('organization.address.label')}
-																{': '} <strong>{item.address}</strong>
+																{': '} <>{item.address}</>
 																<br />
 																{t('organization.email.label')}
-																{': '} <strong>{item.email}</strong>
+																{': '} <>{item.email}</>
 																<br />
 																{t('organization.telephone.label')}
-																{': '} <strong>{item.telephone}</strong>
+																{': '} <>{item.telephone}</>
 																<br />
 																{t('organization.register_Date')}
 																{': '} {item.createdAt.substring(0, 10)}
@@ -199,25 +199,17 @@ const ListStakeholderOrganizations = ({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('tables.organization')}
-																{': '}
-																<strong>
+																<>
 																	<Link to={`${url}/${item._id}/profile`}>
 																		{item.name}
 																	</Link>
-																</strong>
+																</>
 																<br />
-																{t('organization.address.label')}
-																{': '} <strong>{item.address}</strong>
+																<>{item.address}</>
 																<br />
-																{t('organization.email.label')}
-																{': '} <strong>{item.email}</strong>
+																<>{item.email}</>
 																<br />
-																{t('organization.telephone.label')}
-																{': '} <strong>{item.telephone}</strong>
-																<br />
-																{t('organization.register_Date')}
-																{': '} {item.createdAt.substring(0, 10)}
+																<>{item.telephone}</>
 															</p>
 														</div>
 														<div className="d-flex align-items-center">

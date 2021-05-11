@@ -147,7 +147,7 @@ const LocationList = ({ match }) => {
 												<div>
 													<>{location.createdAt.substring(0, 10)}</>{' '}
 												</div>
-												<div className="item-category">Registered Date</div>
+												<div className="item-category">Updated Date</div>
 											</div>
 										</div>
 									</Accordion.Toggle>
