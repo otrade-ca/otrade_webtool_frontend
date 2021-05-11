@@ -64,9 +64,6 @@ const OrganizationsProjectList = memo(({ match }) => {
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.organization')}</h4>
 							<FilterBox searchWord={'Organizations'} />
-							{/* <Link to={`${url}/register`} className="btn btn-primary ml-2">
-								<i className="fas fa-plus"></i> {t('tables.organization')}
-							</Link> */}
 						</Card.Header>
 					)}
 					<Card.Body>
@@ -110,23 +107,18 @@ const OrganizationsProjectList = memo(({ match }) => {
 												<Card.Body>
 													<div className="d-flex justify-content-between">
 														<div>
-															<strong>
-																<Link to={`${url}/${item._id}/profile/view`}>
+															<>
+																<Link to={`${url}/${item._id}/profile`}>
 																	{item.name}
 																</Link>
-															</strong>
+															</>
 															<br />
-															{t('organization.address.label')}
-															{': '} <strong>{item.address}</strong>
+															<>{item.address}</>
 															<br />
-															{t('organization.email.label')}
-															{': '} <strong>{item.email}</strong>
+															<>{item.email}</>
 															<br />
-															{t('organization.telephone.label')}
-															{': '} <strong>{item.telephone}</strong>
+															<>{item.telephone}</>
 															<br />
-															{t('organization.register_Date')}
-															{': '} {item.createdAt.substring(0, 10)}
 														</div>
 														<div className="d-flex align-items-center">
 															<Button
@@ -181,23 +173,18 @@ const OrganizationsProjectList = memo(({ match }) => {
 												<Card.Body>
 													<div className="d-flex justify-content-between">
 														<div>
-															<strong>
+															<>
 																<Link to={`${url}/${item._id}/profile`}>
 																	{item.name}
 																</Link>
-															</strong>
+															</>
 															<br />
-															{t('organization.address.label')}
-															{': '} <strong>{item.address}</strong>
+															<>{item.address}</>
 															<br />
-															{t('organization.email.label')}
-															{': '} <strong>{item.email}</strong>
+															<>{item.email}</>
 															<br />
-															{t('organization.telephone.label')}
-															{': '} <strong>{item.telephone}</strong>
+															<>{item.telephone}</>
 															<br />
-															{t('organization.register_Date')}
-															{': '} {item.createdAt.substring(0, 10)}
 														</div>
 														<div className="d-flex align-items-center">
 															<Button

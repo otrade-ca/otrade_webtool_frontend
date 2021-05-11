@@ -19,12 +19,10 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add influence
-export const addInfluence = (
-	influence,
-	stakeholderId,
-	history,
-	stakeholder
-) => async (dispatch, getState) => {
+export const addInfluence = (influence, stakeholderId, history) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: INFLUENCE_ADD_REQUEST });
 
@@ -48,6 +46,8 @@ export const addInfluence = (
 		);
 
 		dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
+		history.go(-2);
+		dispatch(setAlert('Stakeholder Status successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
 			type: INFLUENCE_ADD_FAIL,

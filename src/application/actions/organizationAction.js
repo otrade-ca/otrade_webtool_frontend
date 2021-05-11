@@ -59,7 +59,6 @@ export const addOrganization = (organization, id, history) => async (
 		);
 
 		dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
-		console.log(history);
 		history.go(-1);
 		dispatch(setAlert('Organization successfully added', 'success'));
 	} catch (error) {

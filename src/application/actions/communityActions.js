@@ -16,7 +16,6 @@ import {
 	COMMUNITY_LIST_SUCCESS,
 	COMMUNITY_LIST_FAIL,
 } from '../constants/communityConstants';
-import { getURL } from '../api';
 
 // add community
 export const addCommunity = () => async (dispatch, getState) => {

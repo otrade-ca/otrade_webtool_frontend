@@ -17,9 +17,13 @@ import {
 	COMMITMENT_LIST_FAIL,
 } from '../constants/commitmentConstants';
 import { getURL } from '../api';
+import { setAlert } from '../actions/alertActions';
 
 // add commitment
-export const addCommitment = (commitment, id) => async (dispatch, getState) => {
+export const addCommitment = (commitment, id, history) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: COMMITMENT_ADD_REQUEST });
 
@@ -45,6 +49,8 @@ export const addCommitment = (commitment, id) => async (dispatch, getState) => {
 		);
 
 		dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
+		history.go(-2);
+		dispatch(setAlert('Commitment successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: COMMITMENT_ADD_FAIL,

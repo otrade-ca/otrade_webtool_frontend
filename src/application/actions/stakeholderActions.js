@@ -72,6 +72,7 @@ export const addStakeholder = (stakeholder, locationId, history) => async (
 
 		const { _id } = data;
 		history.push(`/influences/register/stakeholder/${_id}`);
+		dispatch(setAlert('Stakeholder successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: STAKEHOLDER_ADD_FAIL,

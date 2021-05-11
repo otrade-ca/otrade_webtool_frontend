@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { addCommitment } from '../../../application/actions/commitmentActions';
 
-const CommitmentDetails = ({ match }) => {
+const CommitmentDetails = ({ match, history }) => {
 	const id = match.params.activityId;
 
 	//define states
@@ -25,7 +25,8 @@ const CommitmentDetails = ({ match }) => {
 					completion_date: completionDate,
 					is_complete: isComplete,
 				},
-				id
+				id,
+				history
 			)
 		);
 	};

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { getStakeholderDetails } from '../../../application/actions/stakeholderActions';
 import { addInfluence } from '../../../application/actions/influenceActions';
-import { getActivityDetails } from '../../../application/actions/activityActions';
 
 const InfluenceForm = ({ history, match }) => {
 	const id = match.params.stakeholderId;
@@ -24,7 +23,6 @@ const InfluenceForm = ({ history, match }) => {
 	useEffect(() => {
 		if (!stakeholder.firstName || stakeholder._id !== id) {
 			dispatch(getStakeholderDetails(id));
-			dispatch(getActivityDetails());
 		} else {
 			setFirstName(stakeholder.firstName);
 		}
@@ -41,7 +39,8 @@ const InfluenceForm = ({ history, match }) => {
 					influence: influence,
 					projImpact: projImpact,
 				},
-				id
+				id,
+				history
 			)
 		);
 	};

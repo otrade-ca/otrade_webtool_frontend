@@ -107,6 +107,8 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('projectInfo');
 	localStorage.removeItem('stakeholdersListInfo');
 	localStorage.removeItem('organizationsListInfo');
+	localStorage.removeItem('locationId');
+	localStorage.removeItem('projectDetailsInfo');
 
 	dispatch({ type: USER_LOGOUT });
 	dispatch({ type: USER_DETAILS_RESET });

@@ -53,17 +53,15 @@ export const addActivity = (activity, history) => async (
 
 		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
-		const { _id, compromise } = data;
-
-		console.log(compromise);
+		const { _id, stakeholders, compromise } = data;
 
 		if (compromise === 'Yes' || compromise === 'yes') {
 			history.push(`/commitments/register/activity/${_id}`);
 		}
 
-		// stakeholders.forEach((i) =>
-		// 	history.push(`/influences/register/stakeholder/${i}`)
-		// );
+		stakeholders.forEach((i) =>
+			history.push(`/influences/register/stakeholder/${i}`)
+		);
 	} catch (error) {
 		dispatch({
 			type: ACTIVITY_ADD_FAIL,
