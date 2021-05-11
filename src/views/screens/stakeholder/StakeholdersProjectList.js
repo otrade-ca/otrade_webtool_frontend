@@ -60,9 +60,9 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 				<>
 					{!filtered && stakeholders && stakeholders.length === 0 ? (
 						<Empty
-							itemLink={'register'}
+							// itemLink={'register'}
 							url={url}
-							type={'Register'}
+							type={'Stakeholder'}
 							group={'stakeholders'}
 						/>
 					) : (

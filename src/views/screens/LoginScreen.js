@@ -57,11 +57,11 @@ const LoginScreen = ({ history }) => {
 					Sign In
 				</Button>
 			</Form>
-			<Row className="py-3">
+			{/* <Row className="py-3">
 				<Col>
 					Cannot remember password? <Link>Reset Password</Link>
 				</Col>
-			</Row>
+			</Row> */}
 		</FormContainer>
 	);
 };

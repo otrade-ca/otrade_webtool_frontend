@@ -108,7 +108,7 @@ const Assignment = ({ history, match }) => {
 				'danger'
 			);
 		} else {
-			dispatch(assignProjectUser(projectId, assignments));
+			dispatch(assignProjectUser(projectId, assignments, history));
 		}
 	};
 

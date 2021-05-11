@@ -44,9 +44,17 @@ export const navbarlinks = [
 ];
 
 export const routes = [
+	// {
+	// 	path: '',
+	// 	component: ({ match }) => <Dashboard match={match} />,
+	// },
 	{
-		path: '',
-		component: ({ match }) => <Dashboard match={match} />,
+		path: '/',
+		component: ({ match }) => <ViewLocation match={match} />,
+	},
+	{
+		path: '/edit',
+		component: ({ match }) => <EditLocation match={match} />,
 	},
 	{
 		path: '/edit',

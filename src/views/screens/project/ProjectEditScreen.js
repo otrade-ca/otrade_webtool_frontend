@@ -96,19 +96,22 @@ const ProjectEditScreen = ({ match, history }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(
-			updateProject({
-				_id: projectId,
-				projectName,
-				projectClient,
-				country,
-				country_code: countryCode,
-				language,
-				coordinates,
-				currency,
-				measurements,
-				status,
-				comment,
-			})
+			updateProject(
+				{
+					_id: projectId,
+					projectName,
+					projectClient,
+					country,
+					country_code: countryCode,
+					language,
+					coordinates,
+					currency,
+					measurements,
+					status,
+					comment,
+				},
+				history
+			)
 		);
 	};
 

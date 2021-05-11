@@ -57,8 +57,8 @@ const ProjectDetailsScreen = () => {
 							<hr />
 							<Form.Label>Collaborators</Form.Label>
 							{project &&
-								project.assignees.map((i) => (
-									<Row className="my-3">
+								project.assignees.map((i, index) => (
+									<Row className="my-3" key={index}>
 										<Col md={4}>
 											<Form.Label>Surveyor</Form.Label>
 											<Form.Control

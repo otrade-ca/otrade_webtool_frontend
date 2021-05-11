@@ -55,7 +55,7 @@ const OrganizationsProjectList = memo(({ match }) => {
 				<>
 					{!filtered && organizations && organizations.length === 0 ? (
 						<Empty
-							itemLink={'register'}
+							// itemLink={'register'}
 							url={url}
 							type={'Organization'}
 							group={'organizations'}

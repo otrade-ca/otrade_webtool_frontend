@@ -110,11 +110,9 @@ const ListProjectScreen = ({ history, match }) => {
 											<div className="table-card-item">
 												<div className="item-two">
 													<div>
-														<strong>
-															{project.createdAt.substring(0, 10)}
-														</strong>{' '}
+														<>{project.createdAt.substring(0, 10)}</>{' '}
 													</div>
-													<div className="item-category">Registered Date</div>
+													<div className="item-category">Updated Date</div>
 												</div>
 											</div>
 										</Accordion.Toggle>
@@ -123,27 +121,27 @@ const ListProjectScreen = ({ history, match }) => {
 												<div className="d-flex justify-content-between">
 													<div>
 														<p>
-															<strong>
+															<>
 																<Link to={`/project/${project._id}`}>
 																	{project.projectName}
 																</Link>
-															</strong>
+															</>
 															<br />
 															{t('project.client.label')}
 															{': '}
-															<strong>{project.projectClient}</strong>
+															<>{project.projectClient}</>
 															<br />
 															{t('project.country.label')}
 															{': '}
-															<strong>
+															<>
 																{project.country_code}, {project.country}
-															</strong>
+															</>
 															<br />
 															{project.coordinates && (
 																<>
 																	{t('project.coordinates.label')}
 																	{': '}
-																	<strong>{project.coordinates}</strong>
+																	<>{project.coordinates}</>
 																	<br />
 																</>
 															)}

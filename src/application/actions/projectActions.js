@@ -100,7 +100,10 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 };
 
 // update project
-export const updateProject = (project) => async (dispatch, getState) => {
+export const updateProject = (project, history) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: PROJECT_UPDATE_REQUEST });
 
@@ -123,6 +126,7 @@ export const updateProject = (project) => async (dispatch, getState) => {
 		);
 
 		dispatch({ type: PROJECT_UPDATE_SUCCESS, payload: data });
+		history.go(-1);
 		dispatch(setAlert('Project successfully updated', 'success'));
 	} catch (error) {
 		dispatch({
@@ -235,7 +239,7 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 };
 
 //assign user to project
-export const assignProjectUser = (projectId, assignments) => async (
+export const assignProjectUser = (projectId, assignments, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -263,6 +267,7 @@ export const assignProjectUser = (projectId, assignments) => async (
 		);
 
 		dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
+		history.go(-1);
 		dispatch(setAlert('Project successfully updated', 'success'));
 	} catch (error) {
 		const message =
