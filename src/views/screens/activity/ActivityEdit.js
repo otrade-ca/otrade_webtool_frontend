@@ -124,7 +124,7 @@ const ActivityScreen = ({ match }) => {
 				<Message>{error}</Message>
 			) : (
 				<CardContainer title={'Activity'}>
-					<Form onSubmit={submitHandler} className="mt-4 mb-3">
+					<Form onSubmit={submitHandler}>
 						<Row>
 							<Col md={4}>
 								<Form.Group controlId="activity">
@@ -255,7 +255,7 @@ const ActivityScreen = ({ match }) => {
 														className="btn-md mr-3"
 														onClick={() => removeHandler(i)}
 													>
-														<i className="fas fa-trash"></i>
+														<i className="fas fa-trash"></i> Remove
 													</Button>
 												)}
 												{members.length - 1 === i && (
@@ -271,6 +271,7 @@ const ActivityScreen = ({ match }) => {
 									))}
 							</Col>
 						</Row>
+						<hr />
 						<Row>
 							<Col>
 								<Button type="submit" variant="primary" className="px-5 mt-3">

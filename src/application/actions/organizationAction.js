@@ -106,7 +106,7 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 };
 
 // update organization
-export const updateOrganization = (org, orgId) => async (
+export const updateOrganization = (org, orgId, history) => async (
 	dispatch,
 	getState
 ) => {
@@ -129,6 +129,7 @@ export const updateOrganization = (org, orgId) => async (
 		await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
 
 		dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
+		history.go(-1);
 		dispatch(setAlert('Organization successfully updated', 'success'));
 	} catch (error) {
 		dispatch({

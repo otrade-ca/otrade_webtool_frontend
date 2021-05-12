@@ -211,6 +211,7 @@ const ViewOrganization = ({ match }) => {
 										))}
 								</Col>
 							</Row>
+							<hr />
 							<Row className="mt-3">
 								<Col className="text-right">
 									<p>updated on: {updatedAt.substring(0, 10)}</p>

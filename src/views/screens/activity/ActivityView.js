@@ -203,6 +203,7 @@ const ActivityView = ({ match }) => {
 										))}
 								</Col>
 							</Row>
+							<hr />
 							<Row>
 								<Col className="text-right">
 									<p>updated on: {updatedDate.substring(0, 10)}</p>

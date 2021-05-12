@@ -80,8 +80,11 @@ const ListStakeholderOrganizations = ({ match }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'StakeholderOrganizations'} />
-							<Link to={`${url}/register`} className="btn btn-primary ml-2">
-								<i className="fas fa-plus"></i> Register
+							<Link
+								to={`organizations/register`}
+								className="btn btn-primary ml-2"
+							>
+								<i className="fas fa-plus"></i> Organization
 							</Link>
 						</Card.Header>
 					)}

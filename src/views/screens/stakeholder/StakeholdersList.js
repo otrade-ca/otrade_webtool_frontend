@@ -111,23 +111,16 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('stakeholder.firstName.label')}
-																{': '}
 																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
 																</>
 																<br />
-																{t('stakeholder.email.label')}
-																{': '} <>{item.email}</>
+																<>{item.email}</>
 																<br />
-																{t('stakeholder.telephone.label')}{' '}
 																<>{item.telephone}</>
 																<br />
-																{t('stakeholder.register_Date')}
-																{': '}
-																{item.createdAt.substring(0, 10)}
 															</p>
 														</div>
 														<div className="d-flex align-items-center">
@@ -183,23 +176,16 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('stakeholder.firstName.label')}
-																{': '}
 																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
 																	</Link>
 																</>
 																<br />
-																{t('stakeholder.email.label')}
-																{': '} <>{item.email}</>
+																<>{item.email}</>
 																<br />
-																{t('stakeholder.telephone.label')}{' '}
 																<>{item.telephone}</>
 																<br />
-																{t('stakeholder.register_Date')}
-																{': '}
-																{item.createdAt.substring(0, 10)}
 															</p>
 														</div>
 														<div className="d-flex align-items-center">

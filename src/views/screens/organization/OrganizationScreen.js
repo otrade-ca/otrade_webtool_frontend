@@ -12,7 +12,7 @@ import { Loader, Message } from '../../components/HelperComponents';
 import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 
-const OrganizationScreen = ({ match }) => {
+const OrganizationScreen = ({ match, history }) => {
 	const projectId = match.params.projectId;
 	const organizationId = match.params.organizationId;
 
@@ -23,7 +23,6 @@ const OrganizationScreen = ({ match }) => {
 
 	// get stakeholderList
 	const dispatch = useDispatch();
-	const stakeholderList = useSelector((state) => state.stakeholderList);
 
 	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
@@ -114,7 +113,8 @@ const OrganizationScreen = ({ match }) => {
 					stakeholders,
 					project: projectId,
 				},
-				organizationId
+				organizationId,
+				history
 			)
 		);
 	};
@@ -269,7 +269,7 @@ const OrganizationScreen = ({ match }) => {
 															className="btn-md mr-3"
 															onClick={() => removeHandler(i)}
 														>
-															<i className="fas fa-trash"></i>
+															<i className="fas fa-trash"></i> Remove
 														</Button>
 													)}
 													{stakeholders.length - 1 === i && (
@@ -286,6 +286,7 @@ const OrganizationScreen = ({ match }) => {
 										))}
 								</Col>
 							</Row>
+							<hr />
 							<Row className="mt-3">
 								<Col>
 									<Button type="submit" variant="primary" className="px-5 mt-3">

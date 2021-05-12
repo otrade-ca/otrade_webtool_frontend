@@ -19,7 +19,7 @@ const ViewLocation = ({ match }) => {
 	const locationDetails = useSelector((state) => state.locationDetails);
 	const { loading, error, location: loc } = locationDetails;
 
-	//state
+	// state
 	const [location, setLocation] = useState('');
 	const [influence, setInfluence] = useState('');
 	const [orgType, setOrgType] = useState('');

@@ -104,10 +104,10 @@ const UserListScreen = ({ history, match }) => {
 																user.status.substring(1, user.status.length)}
 														</strong>
 													) : (
-														<em className="text-danger">
+														<strong className="text-danger">
 															{user.status.substring(0, 1).toUpperCase() +
 																user.status.substring(1, user.status.length)}
-														</em>
+														</strong>
 													)}
 												</div>
 											</div>
@@ -115,7 +115,7 @@ const UserListScreen = ({ history, match }) => {
 										<div className="table-card-item">
 											<div className="item-two">
 												<div>
-													<strong>{user.createdAt.substring(0, 10)}</strong>{' '}
+													<>{user.createdAt.substring(0, 10)}</>{' '}
 												</div>
 												<div className="item-category">Joined Otrade</div>
 											</div>
@@ -132,9 +132,9 @@ const UserListScreen = ({ history, match }) => {
 															<a href={`mailto:${user.email}`}>{user.email}</a>
 														</em>
 														<br />
-														<strong>
+														<>
 															<em>{user.telephone}</em>
-														</strong>
+														</>
 														<br />
 													</p>
 												</div>

@@ -15,8 +15,7 @@ const Sidebar = () => {
 
 	useEffect(() => {
 		dispatch(listUserProjects(userInfo._id));
-		// eslint-disable-next-line
-	}, []);
+	}, [dispatch, userInfo]);
 
 	return (
 		<>

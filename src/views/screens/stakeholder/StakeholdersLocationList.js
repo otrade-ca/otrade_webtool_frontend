@@ -132,8 +132,6 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('stakeholder.firstName.label')}
-																{': '}
 																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
@@ -223,8 +221,6 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<p>
-																{t('stakeholder.firstName.label')}
-																{': '}
 																<>
 																	<Link to={`/stakeholder/${item._id}`}>
 																		{item.firstName} {item.lastName}
