@@ -24,8 +24,10 @@ const ProjectScreen = ({ match }) => {
 	const { loading, error, project } = projectDetails;
 
 	useEffect(() => {
-		dispatch(listProjectDetails(projectId));
-	}, [dispatch, projectId]);
+		if (!project.projectName || project._id !== projectId) {
+			dispatch(listProjectDetails(projectId));
+		}
+	}, [dispatch, projectId, project]);
 
 	return (
 		<>

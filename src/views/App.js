@@ -51,7 +51,7 @@ const Home = () => {
 	return (
 		<Router>
 			<Wrapper>
-				<Container fluid="md" className="content-container">
+				<Container fluid="lg" className="content-container">
 					<Alert />
 					<Route exact path="/" component={HomeScreen} />
 					<Route exact path="/login" component={LoginScreen} />

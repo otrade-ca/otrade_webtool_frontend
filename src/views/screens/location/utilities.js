@@ -85,11 +85,11 @@ export const routes = [
 		component: ({ match }) => <InfluenceForm match={match} />,
 	},
 	{
-		path: '/organizations/:id/profile',
+		path: '/organizations/:organizationId/profile',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:id/profile/edit',
+		path: '/organizations/:organizationId/profile/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{

@@ -109,7 +109,7 @@ const OrganizationsList = memo(({ match }) => {
 														<div>
 															<p>
 																<>
-																	<Link to={`${url}/${item._id}/profile/view`}>
+																	<Link to={`${url}/${item._id}/profile`}>
 																		{item.name}
 																	</Link>
 																</>
@@ -178,7 +178,7 @@ const OrganizationsList = memo(({ match }) => {
 														<div>
 															<p>
 																<>
-																	<Link to={`${url}/${item._id}/profile/view`}>
+																	<Link to={`${url}/${item._id}/profile`}>
 																		{item.name}
 																	</Link>
 																</>

@@ -9,8 +9,6 @@ import { useTranslation } from 'react-i18next';
 const ViewLocation = ({ match }) => {
 	const locationId = match.params.id;
 
-	console.log(locationId);
-
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
@@ -22,6 +20,8 @@ const ViewLocation = ({ match }) => {
 	const locationDetails = useSelector((state) => state.locationDetails);
 	const { loading, error, location } = locationDetails;
 
+	console.log(location);
+
 	// state
 	const [community, setCommunity] = useState('');
 	const [influence, setInfluence] = useState('');
@@ -29,7 +29,7 @@ const ViewLocation = ({ match }) => {
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
-		if (!location.location || location._id !== locationId) {
+		if (!location.area_influence || location._id !== locationId) {
 			dispatch(getLocationDetails(locationId));
 		} else {
 			setCommunity(location.location);
