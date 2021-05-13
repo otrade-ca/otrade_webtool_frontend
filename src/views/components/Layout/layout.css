@@ -7,7 +7,7 @@
 	margin-left: -13rem;
 	background-color: #fff;
 	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
-	border: 2px solid transparent;
+	/* border: 2px solid transparent; */
 	-webkit-transition: margin 0.25s ease-out;
 	-moz-transition: margin 0.25s ease-out;
 	-o-transition: margin 0.25s ease-out;
@@ -69,13 +69,14 @@
 	}
 
 	.wrapper.closed .sidebar-wrapper {
-		margin-left: -15rem;
+		margin-left: -13rem;
 	}
 }
 
 .wrapper {
 	display: flex;
 	flex-direction: row;
+	position: relative;
 }
 
 .list-group-item {

@@ -397,8 +397,9 @@ hr {
 }
 
 .content-container {
+	/* position: relative; */
 	padding-top: 6rem;
-	height: 100vh!;
+	/* height: 100vh !important; */
 }
 
 /*Stakeholder, Project, Community, Organization, Activity List*/
@@ -461,3 +462,9 @@ hr {
 	font-weight: 600;
 	color: rgb(143, 142, 142) !important;
 }
+
+/* .footer-container {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+} */

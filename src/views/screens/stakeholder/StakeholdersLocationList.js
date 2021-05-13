@@ -31,7 +31,7 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 	);
 	const { loading, error, filtered, stakeholders } = stakeholderLocationList;
 
-	console.log(stakeholders);
+	console.log('filtered', filtered);
 
 	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
 	const { success } = stakeholderDelete;

@@ -66,7 +66,7 @@ const Home = () => {
 					/>
 
 					{/*location routes*/}
-					<PrivateRoute path="/locations/:id" component={UserLocationsList} />
+					{/* <PrivateRoute path="/locations/:id" component={UserLocationsList} /> */}
 					<PrivateRoute path="/location/:id" component={LocationScreen} />
 
 					{/*stakeholder routes*/}

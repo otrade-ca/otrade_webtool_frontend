@@ -8,6 +8,9 @@ import { useTranslation } from 'react-i18next';
 
 const ViewLocation = ({ match }) => {
 	const locationId = match.params.id;
+
+	console.log(locationId);
+
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
@@ -17,24 +20,24 @@ const ViewLocation = ({ match }) => {
 
 	// get locationDetails
 	const locationDetails = useSelector((state) => state.locationDetails);
-	const { loading, error, location: loc } = locationDetails;
+	const { loading, error, location } = locationDetails;
 
 	// state
-	const [location, setLocation] = useState('');
+	const [community, setCommunity] = useState('');
 	const [influence, setInfluence] = useState('');
 	const [orgType, setOrgType] = useState('');
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
-		if (!loc.location || loc._id !== locationId) {
+		if (!location.location || location._id !== locationId) {
 			dispatch(getLocationDetails(locationId));
 		} else {
-			setLocation(loc.location);
-			setInfluence(loc.area_influence);
-			setOrgType(loc.organization_type);
-			setUpdatedDate(loc.updatedAt);
+			setCommunity(location.location);
+			setInfluence(location.area_influence);
+			setOrgType(location.organization_type);
+			setUpdatedDate(location.updatedAt);
 		}
-	}, [dispatch, locationId, loc]);
+	}, [dispatch, locationId, location]);
 
 	return (
 		<>
@@ -58,7 +61,7 @@ const ViewLocation = ({ match }) => {
 										<Form.Label>{t('location.location')}</Form.Label>
 										<Form.Control
 											type="text"
-											value={location}
+											value={community}
 											readOnly
 											disabled
 										></Form.Control>
