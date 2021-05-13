@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	Message,
@@ -17,6 +17,7 @@ import countries from '../../selectCountries.json';
 
 const ProjectEditScreen = ({ match, history }) => {
 	const projectId = match.params.id;
+
 	const { t } = useTranslation();
 
 	const [projectName, setProjectName] = useState('');
@@ -68,7 +69,7 @@ const ProjectEditScreen = ({ match, history }) => {
 				setMeasurements(project.measurements);
 			}
 		}
-	}, [dispatch, history, projectId, project, successUpdate]);
+	}, [dispatch, projectId, project, successUpdate]);
 
 	const onTextChange = (e) => {
 		e.preventDefault();

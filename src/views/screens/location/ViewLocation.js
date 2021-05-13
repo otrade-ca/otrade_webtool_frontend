@@ -10,8 +10,13 @@ const ViewLocation = ({ match }) => {
 	const locationId = match.params.id;
 
 	const { url } = useRouteMatch();
-
 	const { t } = useTranslation();
+
+	// state
+	const [community, setCommunity] = useState('');
+	const [influence, setInfluence] = useState('');
+	const [orgType, setOrgType] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
 
 	// dispatch
 	const dispatch = useDispatch();
@@ -22,16 +27,13 @@ const ViewLocation = ({ match }) => {
 
 	console.log(location);
 
-	// state
-	const [community, setCommunity] = useState('');
-	const [influence, setInfluence] = useState('');
-	const [orgType, setOrgType] = useState('');
-	const [updatedDate, setUpdatedDate] = useState('');
-
 	useEffect(() => {
-		if (!location.area_influence || location._id !== locationId) {
+		console.log('getting there');
+		if (!location.location || location._id !== locationId) {
+			console.log('getting info');
 			dispatch(getLocationDetails(locationId));
 		} else {
+			console.log('setting code');
 			setCommunity(location.location);
 			setInfluence(location.area_influence);
 			setOrgType(location.organization_type);

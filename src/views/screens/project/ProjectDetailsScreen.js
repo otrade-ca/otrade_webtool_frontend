@@ -6,17 +6,17 @@ import { useParams } from 'react-router-dom';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const ProjectDetailsScreen = () => {
-	const dispatch = useDispatch();
-
+const ProjectDetailsScreen = ({ match }) => {
 	const { id } = useParams();
 	const { t } = useTranslation();
 
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { loading, error, project } = projectDetails;
-
 	const [comments, setComments] = useState('');
 	const [updatedAt, setUpdatedAt] = useState('');
+
+	const dispatch = useDispatch();
+
+	const projectDetails = useSelector((state) => state.projectDetails);
+	const { loading, error, project } = projectDetails;
 
 	useEffect(() => {
 		if (!project.projectName || project._id !== id) {
