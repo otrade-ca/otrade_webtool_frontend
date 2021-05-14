@@ -19,7 +19,7 @@ const ProjectDetailsScreen = ({ match }) => {
 	const { loading, error, project } = projectDetails;
 
 	useEffect(() => {
-		if (!project.projectName || project._id !== id) {
+		if (!project && project._id !== id) {
 			dispatch(listProjectDetails(id));
 		} else {
 			setComments(project.comment);

@@ -53,7 +53,7 @@ const ProjectEditScreen = ({ match, history }) => {
 			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
 		} else {
-			if (!project.projectName || project._id !== projectId) {
+			if (!project && project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
 			} else {
 				setProjectName(project.projectName);
