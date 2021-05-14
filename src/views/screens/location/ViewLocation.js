@@ -29,11 +29,10 @@ const ViewLocation = ({ match }) => {
 
 	useEffect(() => {
 		console.log('getting there');
-		if (!location.location || location._id !== locationId) {
+		if (!location && location._id !== locationId) {
 			console.log('getting info');
 			dispatch(getLocationDetails(locationId));
 		} else {
-			console.log('setting code');
 			setCommunity(location.location);
 			setInfluence(location.area_influence);
 			setOrgType(location.organization_type);
