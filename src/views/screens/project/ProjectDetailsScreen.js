@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProjectDetails } from '../../../application/actions/projectActions';
 import { Form, Row, Col, Card } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
 const ProjectDetailsScreen = ({ match }) => {
-	const { id } = useParams();
+	const id = match.params.id;
 	const { t } = useTranslation();
 
 	const [comments, setComments] = useState('');
@@ -18,8 +17,10 @@ const ProjectDetailsScreen = ({ match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
+	console.log(project);
+
 	useEffect(() => {
-		if (!project && project._id !== id) {
+		if (!project.projectName && project._id !== id) {
 			dispatch(listProjectDetails(id));
 		} else {
 			setComments(project.comment);
@@ -56,7 +57,7 @@ const ProjectDetailsScreen = ({ match }) => {
 							</Row>
 							<hr />
 							<Form.Label>Collaborators</Form.Label>
-							{project &&
+							{project.assignees &&
 								project.assignees.map((i, index) => (
 									<Row className="my-3" key={index}>
 										<Col md={4}>
