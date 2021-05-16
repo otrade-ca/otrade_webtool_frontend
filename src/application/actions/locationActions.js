@@ -25,45 +25,43 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add location
-export const addLocation = (location, projectId, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: LOCATION_ADD_REQUEST });
+export const addLocation =
+	(location, projectId, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: LOCATION_ADD_REQUEST });
 
-		// get logged in user
-		const { userLogin } = getState();
+			// get logged in user
+			const { userLogin } = getState();
 
-		// create config object
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userLogin.userInfo.token}`,
-			},
-		};
+			// create config object
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userLogin.userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/projects/${projectId}/locations`,
-			location,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/projects/${projectId}/locations`,
+				location,
+				config
+			);
 
-		dispatch({ type: LOCATION_ADD_SUCCESS, payload: data });
-		history.go(-1);
-		dispatch(setAlert('Location successfully added', 'success'));
-	} catch (error) {
-		dispatch({
-			type: LOCATION_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: LOCATION_ADD_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Location successfully added', 'success'));
+		} catch (error) {
+			dispatch({
+				type: LOCATION_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // get location details
 export const getLocationDetails = (id) => async (dispatch, getState) => {
