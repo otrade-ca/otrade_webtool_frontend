@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -187,4 +187,4 @@ const LocationList = ({ match }) => {
 	);
 };
 
-export default LocationList;
+export default memo(LocationList);

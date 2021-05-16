@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Switch } from 'react-router-dom';
-import UserListScreen from '../../screens/user/UserListScreen';
-import ListProjectScreen from '../../screens/project/ListProjectScreen';
-import ProjectEditScreen from '../../screens/project/ProjectEditScreen';
-import AdminEditUserProfileScreen from '../../screens/user/AdminEditUserProfileScreen';
-import UserAddScreen from '../../screens/user/UserAddScreen';
-import ProjectAddScreen from '../../screens/project/ProjectAddScreen';
-import AdminPrivateRoute from '../Routing/AdminPrivateRoute';
-import Assignment from '../Assignment';
+const UserListScreen = lazy(() => import('../../screens/user/UserListScreen'));
+const ListProjectScreen = lazy(() =>
+	import('../../screens/project/ListProjectScreen')
+);
+const ProjectEditScreen = lazy(() =>
+	import('../../screens/project/ProjectEditScreen')
+);
+const AdminEditUserProfileScreen = lazy(() =>
+	import('../../screens/user/AdminEditUserProfileScreen')
+);
+const UserAddScreen = lazy(() => import('../../screens/user/UserAddScreen'));
+const ProjectAddScreen = lazy(() =>
+	import('../../screens/project/ProjectAddScreen')
+);
+const AdminPrivateRoute = lazy(() => import('../Routing/AdminPrivateRoute'));
+const Assignment = lazy(() => import('../Assignment'));
 
 const AdminRoutes = () => {
 	return (

@@ -16,7 +16,7 @@ import { IconContext } from 'react-icons';
 import * as RiIcons from 'react-icons/ri';
 import * as VscIcons from 'react-icons/vsc';
 
-const OrganizationsProjectList = memo(({ match }) => {
+const OrganizationsProjectList = ({ match }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
@@ -206,6 +206,6 @@ const OrganizationsProjectList = memo(({ match }) => {
 			)}
 		</Card>
 	);
-});
+};
 
-export default OrganizationsProjectList;
+export default memo(OrganizationsProjectList);

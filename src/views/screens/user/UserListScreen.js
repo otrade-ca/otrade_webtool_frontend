@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Accordion, Card, Button, Row } from 'react-bootstrap';
@@ -172,4 +172,4 @@ const UserListScreen = ({ history, match }) => {
 	);
 };
 
-export default UserListScreen;
+export default memo(UserListScreen);

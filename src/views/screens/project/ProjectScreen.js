@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
@@ -144,4 +144,4 @@ const ProjectScreen = ({ match }) => {
 	);
 };
 
-export default ProjectScreen;
+export default memo(ProjectScreen);

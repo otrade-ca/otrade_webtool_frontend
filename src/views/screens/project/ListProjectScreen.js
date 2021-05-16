@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Row, Button, Accordion, Card } from 'react-bootstrap';
@@ -194,4 +194,4 @@ const ListProjectScreen = ({ history, match }) => {
 	);
 };
 
-export default ListProjectScreen;
+export default memo(ListProjectScreen);

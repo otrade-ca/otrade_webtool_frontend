@@ -18,7 +18,7 @@ import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
-const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
+const StakeholdersLocationList = ({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
@@ -254,6 +254,6 @@ const StakeholdersLocationList = memo(({ match, keyword = '' }) => {
 			)}
 		</Card>
 	);
-});
+};
 
-export default StakeholdersLocationList;
+export default memo(StakeholdersLocationList);

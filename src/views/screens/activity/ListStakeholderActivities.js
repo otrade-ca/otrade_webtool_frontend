@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Card, Button, Accordion } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,12 +25,8 @@ const ListStakeholderActivities = ({ match }) => {
 		(state) => state.activityStakeholderList
 	);
 
-	const {
-		loading,
-		error,
-		stakeholderactivities,
-		filtered,
-	} = activityStakeholderList;
+	const { loading, error, stakeholderactivities, filtered } =
+		activityStakeholderList;
 
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
@@ -161,4 +157,4 @@ const ListStakeholderActivities = ({ match }) => {
 	);
 };
 
-export default ListStakeholderActivities;
+export default memo(ListStakeholderActivities);

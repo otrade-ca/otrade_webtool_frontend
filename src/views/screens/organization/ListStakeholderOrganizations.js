@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Accordion, Button, Card } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,12 +31,8 @@ const ListStakeholderOrganizations = ({ match }) => {
 		(state) => state.organizationStakeholderList
 	);
 
-	const {
-		loading,
-		error,
-		organizations,
-		filtered,
-	} = organizationStakeholderList;
+	const { loading, error, organizations, filtered } =
+		organizationStakeholderList;
 
 	const organizationDelete = useSelector((state) => state.organizationDelete);
 	const { success } = organizationDelete;
@@ -228,4 +224,4 @@ const ListStakeholderOrganizations = ({ match }) => {
 	);
 };
 
-export default ListStakeholderOrganizations;
+export default memo(ListStakeholderOrganizations);

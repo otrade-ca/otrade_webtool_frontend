@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -151,4 +151,4 @@ const ViewLocation = ({ match }) => {
 	);
 };
 
-export default ViewLocation;
+export default memo(ViewLocation);

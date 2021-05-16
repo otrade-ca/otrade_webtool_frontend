@@ -1,10 +1,8 @@
-import Dashboard from '../../screens/location/Dashboard';
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
 import AddOrganizationScreen from '../organization/AddOrganizationScreen';
 import ListOrganizations from '../organization/ListOrganizations';
 import OrganizationScreen from '../organization/OrganizationScreen';
-import StakeholderForm from '../stakeholder/StakeholderForm';
 import StakeholdersList from '../stakeholder/StakeholdersList';
 import EditLocation from './EditLocation';
 import EditLocationPhoto from './EditLocationPhoto';
@@ -37,17 +35,9 @@ export const navbarlinks = [
 		link: '/stakeholders',
 		type: 'Stakeholders',
 	},
-	// {
-	// 	link: '/landownerships',
-	// 	type: 'Landownership',
-	// },
 ];
 
 export const routes = [
-	// {
-	// 	path: '',
-	// 	component: ({ match }) => <Dashboard match={match} />,
-	// },
 	{
 		path: '/',
 		component: ({ match }) => <ViewLocation match={match} />,
