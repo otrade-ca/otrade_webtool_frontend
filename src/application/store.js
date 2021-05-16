@@ -207,10 +207,6 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
 	: null;
 
-const projectInfoFromStorage = localStorage.getItem('projectDetailsInfo')
-	? JSON.parse(localStorage.getItem('projectDetailsInfo'))
-	: null;
-
 const stakeholderListInfoFromStorage = localStorage.getItem(
 	'stakeholderListInfo'
 )
@@ -231,9 +227,6 @@ const locationIdFromStorage = localStorage.getItem('locationId')
 const persistedState = {
 	// saves login to userLogin reducer
 	userLogin: { userInfo: userInfoFromStorage },
-
-	// saves project to projectDetails reducer
-	projectDetails: { project: projectInfoFromStorage },
 
 	// saves organizations to organizationList reducer
 	organizationList: { organizations: organizationsListInfoFromStorage },

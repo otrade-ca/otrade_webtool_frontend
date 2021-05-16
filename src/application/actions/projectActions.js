@@ -85,9 +85,6 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 		);
 
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
-
-		// save project details in local storage for later use
-		localStorage.setItem('projectDetailsInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: PROJECT_DETAILS_FAIL,
@@ -100,44 +97,42 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 };
 
 // update project
-export const updateProject = (project, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: PROJECT_UPDATE_REQUEST });
+export const updateProject =
+	(project, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: PROJECT_UPDATE_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		//pass id, project, and config file to api
-		const { data } = await axios.put(
-			`${getURL()}/api/v1/projects/${project._id}`,
-			project,
-			config
-		);
+			//pass id, project, and config file to api
+			const { data } = await axios.put(
+				`${getURL()}/api/v1/projects/${project._id}`,
+				project,
+				config
+			);
 
-		dispatch({ type: PROJECT_UPDATE_SUCCESS, payload: data });
-		history.go(-1);
-		dispatch(setAlert('Project successfully updated', 'success'));
-	} catch (error) {
-		dispatch({
-			type: PROJECT_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			dispatch({ type: PROJECT_UPDATE_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Project successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: PROJECT_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // delete a project
 export const deleteProject = (id) => async (dispatch, getState) => {
@@ -171,40 +166,39 @@ export const deleteProject = (id) => async (dispatch, getState) => {
 };
 
 // get all projects
-export const listProjects = (keyword = '', pageNumber = '') => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: PROJECT_LIST_REQUEST });
+export const listProjects =
+	(keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: PROJECT_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		//pass keyword and pageNumber, along with config to api
-		const { data } = await axios.get(
-			`${getURL()}/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
-			config
-		);
+			//pass keyword and pageNumber, along with config to api
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: PROJECT_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: PROJECT_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: PROJECT_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // list all projects for a user
 export const listUserProjects = (id) => async (dispatch, getState) => {
@@ -239,48 +233,46 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 };
 
 //assign user to project
-export const assignProjectUser = (projectId, assignments, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: PROJECT_ASSIGNMENT_REQUEST });
+export const assignProjectUser =
+	(projectId, assignments, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: PROJECT_ASSIGNMENT_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		//pass id, project, and config file to api
-		const {
-			data: { data },
-		} = await axios.put(
-			`${getURL()}/api/v1/projects/${projectId}/assign`,
-			assignments,
-			config
-		);
+			//pass id, project, and config file to api
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/projects/${projectId}/assign`,
+				assignments,
+				config
+			);
 
-		dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
-		history.go(-1);
-		dispatch(setAlert('Project successfully updated', 'success'));
-	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
+			dispatch({ type: PROJECT_ASSIGNMENT_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Project successfully updated', 'success'));
+		} catch (error) {
+			const message =
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message;
 
-		dispatch({
-			type: PROJECT_ASSIGNMENT_FAIL,
-			payload: message,
-		});
-	}
-};
+			dispatch({
+				type: PROJECT_ASSIGNMENT_FAIL,
+				payload: message,
+			});
+		}
+	};
 
 // save projectInfo
 export const saveProjectInfo = (data) => (dispatch) => {

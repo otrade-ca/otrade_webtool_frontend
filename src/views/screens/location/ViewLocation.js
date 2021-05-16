@@ -25,11 +25,9 @@ const ViewLocation = ({ match }) => {
 	const locationDetails = useSelector((state) => state.locationDetails);
 	const { loading, error, location } = locationDetails;
 
-	console.log(location);
-
 	useEffect(() => {
 		console.log('getting there');
-		if (!location && location._id !== locationId) {
+		if (location._id !== locationId) {
 			console.log('getting info');
 			dispatch(getLocationDetails(locationId));
 		} else {
