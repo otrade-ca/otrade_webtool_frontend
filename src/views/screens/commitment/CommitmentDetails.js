@@ -37,7 +37,7 @@ const CommitmentForm = ({ match }) => {
 			<Card.Body>
 				<Form className="mb-3">
 					<Form.Group controlId="discussion">
-						<Form.Label>Compromise Details</Form.Label>
+						<Form.Label>Commitment Details</Form.Label>
 						<Row>
 							<Col md={12}>
 								<Form.Control
