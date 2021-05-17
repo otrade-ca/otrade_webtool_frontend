@@ -32,45 +32,43 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add an organization to a project
-export const addOrganization = (organization, id, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ORGANIZATION_ADD_REQUEST });
+export const addOrganization =
+	(organization, id, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_ADD_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/locations/${id}/organizations`,
-			organization,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/locations/${id}/organizations`,
+				organization,
+				config
+			);
 
-		dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
-		history.go(-1);
-		dispatch(setAlert('Organization successfully added', 'success'));
-	} catch (error) {
-		dispatch({
-			type: ORGANIZATION_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Organization successfully added', 'success'));
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // get organization details
 export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
@@ -106,41 +104,39 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 };
 
 // update organization
-export const updateOrganization = (org, orgId, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ORGANIZATION_UPDATE_REQUEST });
+export const updateOrganization =
+	(org, orgId, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_UPDATE_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			'Content-Type': 'application/json',
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				'Content-Type': 'application/json',
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
+			await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
 
-		dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
-		history.go(-1);
-		dispatch(setAlert('Organization successfully updated', 'success'));
-	} catch (error) {
-		dispatch({
-			type: ORGANIZATION_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
+			history.go(-1);
+			dispatch(setAlert('Organization successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // delete organization
 export const deleteOrganization = (orgId) => async (dispatch, getState) => {
@@ -173,160 +169,153 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 };
 
 // list all organizations for a project
-export const listProjectOrganizations = (id, keyword = '') => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ORGANIZATION_LIST_REQUEST });
+export const listProjectOrganizations =
+	(id, keyword = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}`,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.get(
+				`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}`,
+				config
+			);
 
-		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
-		localStorage.setItem('organizationsListInfo', JSON.stringify(data));
-	} catch (error) {
-		dispatch({
-			type: ORGANIZATION_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+			localStorage.setItem('organizationsListInfo', JSON.stringify(data));
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // list all organizations for a location or community
-export const listOrganizations = (id, keyword = '') => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ORGANIZATION_LIST_REQUEST });
+export const listOrganizations =
+	(id, keyword = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/locations/${id}/organizations?keyword=${keyword}`,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.get(
+				`${getURL()}/api/v1/locations/${id}/organizations?keyword=${keyword}`,
+				config
+			);
 
-		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: ORGANIZATION_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // list all organizations for a stakeholder
-export const listStakeholderOrganizations = (
-	stakeholderId,
-	keyword = ''
-) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_REQUEST });
+export const listStakeholderOrganizations =
+	(stakeholderId, keyword = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		console.log('stakeholderId: ', stakeholderId);
+			const {
+				data: { data },
+			} = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
+				config
+			);
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
-			config
-		);
-		console.log('data', data);
-		dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: ORGANIZATION_STAKEHOLDER_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_STAKEHOLDER_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // assign stakeholder to organization
-export const assignStakeholder = (organizationId, assignments) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
+export const assignStakeholder =
+	(organizationId, assignments) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		//pass id, project, and config file to api
-		const {
-			data: { data },
-		} = await axios.put(
-			`${getURL()}/api/v1/organizations/${organizationId}/assign`,
-			assignments,
-			config
-		);
+			//pass id, project, and config file to api
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/organizations/${organizationId}/assign`,
+				assignments,
+				config
+			);
 
-		dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
-	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
+			dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
+		} catch (error) {
+			const message =
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message;
 
-		dispatch({
-			type: ORGANIZATION_ASSIGNMENT_FAIL,
-			payload: message,
-		});
-	}
-};
+			dispatch({
+				type: ORGANIZATION_ASSIGNMENT_FAIL,
+				payload: message,
+			});
+		}
+	};
 
 // organization assignment
 export const assignOrganization = (data) => (dispatch) => {
@@ -346,7 +335,6 @@ export const clearProjectOrganizationsFilter = () => (dispatch) => {
 
 // filter stakeholder Organizations
 export const filterStakeholderOrganizations = (text) => (dispatch) => {
-	console.log(text);
 	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER, payload: text });
 };
 

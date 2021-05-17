@@ -6,6 +6,8 @@ import { getCommitment } from '../../../application/actions/commitmentActions';
 const CommitmentForm = ({ match }) => {
 	const activityId = match.params.activityId;
 
+	console.log(activityId);
+
 	// usedispatch
 	const dispatch = useDispatch();
 	const commitmentDetails = useSelector((state) => state.commitmentDetails);

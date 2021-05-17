@@ -84,8 +84,6 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 			config
 		);
 
-		console.log('returned data, ', data);
-
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

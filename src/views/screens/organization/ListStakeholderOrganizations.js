@@ -70,7 +70,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 						<Empty
 							itemLink={'register'}
 							url={url}
-							type={'Register'}
+							type={'Organization'}
 							group={'organizations'}
 						/>
 					) : (
@@ -88,7 +88,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 						<Accordion defaultActiveKey={1}>
 							{filtered
 								? filtered.map((item, index) => (
-										<Card className="table-card">
+										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 												<div className="table-card-item">
 													<div className="item-one">
@@ -153,7 +153,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 								  ))
 								: organizations &&
 								  organizations.map((item, index) => (
-										<Card className="table-card">
+										<Card className="table-card" key={index}>
 											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 												<div className="table-card-item">
 													<div className="item-one">

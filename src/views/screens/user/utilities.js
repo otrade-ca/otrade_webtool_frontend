@@ -2,7 +2,6 @@ import EditUser from '../user/EditUser';
 import EditUserPhoto from '../user/EditUserPhoto';
 import UserProjects from '../project/UserProjects';
 import ViewUser from './ViewUser';
-import Dashboard from '../../components/Dashboard';
 
 export const btnlinks = [
 	// {

@@ -136,7 +136,6 @@ export const updateLocation = (location, id) => async (dispatch, getState) => {
 // delete location
 export const deleteLocation = (id) => async (dispatch, getState) => {
 	try {
-		console.log(id);
 		dispatch({ type: LOCATION_DELETE_REQUEST });
 
 		// get logged in user
@@ -207,8 +206,6 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: LOCATION_USER_LIST_REQUEST });
 
-		console.log('enter listUserlocations');
-
 		// get logged in user
 		const {
 			userLogin: { userInfo },
@@ -224,8 +221,6 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 		const {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/locations/user/${userId}`, config);
-
-		console.log(data);
 
 		dispatch({ type: LOCATION_USER_LIST_SUCCESS, payload: data });
 	} catch (error) {

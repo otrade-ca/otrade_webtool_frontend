@@ -19,45 +19,43 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add influence
-export const addInfluence = (influence, stakeholderId, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: INFLUENCE_ADD_REQUEST });
+export const addInfluence =
+	(influence, stakeholderId, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: INFLUENCE_ADD_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences`,
-			influence,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences`,
+				influence,
+				config
+			);
 
-		dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
-		history.go(-2);
-		dispatch(setAlert('Stakeholder Status successfully updated', 'success'));
-	} catch (error) {
-		dispatch({
-			type: INFLUENCE_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
+			history.go(-2);
+			dispatch(setAlert('Stakeholder Status successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: INFLUENCE_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // get influence
 export const getInfluenceDetails = (id) => async (dispatch, getState) => {
@@ -147,8 +145,6 @@ export const listInfluences = (stakeholderId) => async (dispatch, getState) => {
 			`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences`,
 			config
 		);
-
-		console.log('influences', data);
 
 		dispatch({ type: INFLUENCE_LIST_SUCCESS, payload: data });
 	} catch (error) {

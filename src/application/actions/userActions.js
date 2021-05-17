@@ -88,7 +88,6 @@ export const registerUser = (user) => async (dispatch, getState) => {
 
 		dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 	} catch (error) {
-		console.log(error.response);
 		dispatch({
 			type: USER_REGISTER_FAIL,
 			payload:
@@ -209,39 +208,38 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 };
 
 // list all users
-export const listUsers = (keyword = '', pageNumber = '') => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: USER_LIST_REQUEST });
+export const listUsers =
+	(keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const { data } = await axios.get(
-			`${getURL()}/api/v1/users?keyword=${keyword}&pageNumber=${pageNumber}`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/users?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: USER_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: USER_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: USER_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: USER_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // delete a user
 export const deleteUser = (id) => async (dispatch, getState) => {

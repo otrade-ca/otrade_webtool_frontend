@@ -20,47 +20,45 @@ import { getURL } from '../api';
 import { setAlert } from '../actions/alertActions';
 
 // add commitment
-export const addCommitment = (commitment, id, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: COMMITMENT_ADD_REQUEST });
+export const addCommitment =
+	(commitment, id, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: COMMITMENT_ADD_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			'Content-Type': 'application/json',
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				'Content-Type': 'application/json',
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/activities/${id}/commitments`,
-			commitment,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/activities/${id}/commitments`,
+				commitment,
+				config
+			);
 
-		dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
-		history.go(-2);
-		dispatch(setAlert('Commitment successfully added', 'success'));
-	} catch (error) {
-		dispatch({
-			type: COMMITMENT_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
+			history.go(-2);
+			dispatch(setAlert('Commitment successfully added', 'success'));
+		} catch (error) {
+			dispatch({
+				type: COMMITMENT_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // get commitment details for an activity
 export const getCommitment = (id) => async (dispatch, getState) => {
@@ -86,8 +84,6 @@ export const getCommitment = (id) => async (dispatch, getState) => {
 			config
 		);
 
-		console.log(data);
-
 		dispatch({ type: COMMITMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -101,45 +97,43 @@ export const getCommitment = (id) => async (dispatch, getState) => {
 };
 
 // update commitment
-export const updateCommitment = (commitment, id) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: COMMITMENT_UPDATE_REQUEST });
+export const updateCommitment =
+	(commitment, id) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: COMMITMENT_UPDATE_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			'Content-Type': 'application/json',
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				'Content-Type': 'application/json',
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.put(
-			`${getURL()}/api/v1/commitment/${id}`,
-			commitment,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/commitment/${id}`,
+				commitment,
+				config
+			);
 
-		dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: COMMITMENT_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: COMMITMENT_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // delete commitment
 export const deleteCommitment = (id) => async (dispatch, getState) => {

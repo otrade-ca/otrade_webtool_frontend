@@ -18,7 +18,6 @@ import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
 import UserProjects from './screens/project/UserProjects';
-import UserLocationsList from './screens/location/UserLocations';
 import ActivityType from './screens/activity/ActivityType';
 import InfluenceForm from './screens/influence/InfluenceForm';
 import OrganizationScreen from './screens/organization/OrganizationScreen';

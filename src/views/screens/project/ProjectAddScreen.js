@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { addProject } from '../../../application/actions/projectActions';
 import { PROJECT_ADD_RESET } from '../../../application/constants/projectConstants';
-import { ProfileContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import countries from '../../selectCountries.json';
 
