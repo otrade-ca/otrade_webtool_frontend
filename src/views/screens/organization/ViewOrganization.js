@@ -11,8 +11,6 @@ import { useTranslation } from 'react-i18next';
 const ViewOrganization = ({ match }) => {
 	const organizationId = match.params.organizationId;
 
-	console.log(match);
-
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
@@ -26,8 +24,6 @@ const ViewOrganization = ({ match }) => {
 	// get organization
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
-
-	console.log(orgDetails);
 
 	const stakeholderLocationList = useSelector(
 		(state) => state.stakeholderLocationList

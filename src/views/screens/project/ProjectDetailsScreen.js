@@ -17,8 +17,6 @@ const ProjectDetailsScreen = ({ match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
-	console.log(project);
-
 	useEffect(() => {
 		if (!project.projectName && project._id !== id) {
 			dispatch(listProjectDetails(id));

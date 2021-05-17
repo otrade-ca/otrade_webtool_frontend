@@ -26,9 +26,7 @@ const ViewLocation = ({ match }) => {
 	const { loading, error, location } = locationDetails;
 
 	useEffect(() => {
-		console.log('getting there');
 		if (location._id !== locationId) {
-			console.log('getting info');
 			dispatch(getLocationDetails(locationId));
 		} else {
 			setCommunity(location.location);
