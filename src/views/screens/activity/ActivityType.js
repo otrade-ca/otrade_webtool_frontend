@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../../../application/actions/activityActions';
-import MemberDropdown from '../../components/MemberDropdown';
+import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 
 const ActivityType = ({ history }) => {
@@ -115,7 +115,7 @@ const ActivityType = ({ history }) => {
 						</Col>
 					</Row>
 					<hr />
-					<MemberDropdown label={'Stakeholders'} />
+					<MemberDropdownProject label={'Stakeholders'} />
 					<hr />
 					<Form.Group controlId="discussion">
 						<Form.Label>{t('activity.discussion.label')}</Form.Label>

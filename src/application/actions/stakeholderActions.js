@@ -41,48 +41,46 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add stakeholder
-export const addStakeholder = (stakeholder, locationId, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: STAKEHOLDER_ADD_REQUEST });
+export const addStakeholder =
+	(stakeholder, locationId, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_ADD_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		//pass id, project, and config file to api
-		const {
-			data: { data },
-		} = await axios.post(
-			`${getURL()}/api/v1/locations/${locationId}/stakeholders`,
-			stakeholder,
-			config
-		);
+			//pass id, project, and config file to api
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/locations/${locationId}/stakeholders`,
+				stakeholder,
+				config
+			);
 
-		dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
+			dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
 
-		const { _id } = data;
-		history.push(`/influences/register/stakeholder/${_id}`);
-		dispatch(setAlert('Stakeholder successfully added', 'success'));
-	} catch (error) {
-		dispatch({
-			type: STAKEHOLDER_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			const { _id } = data;
+			history.push(`/influences/register/stakeholder/${_id}`);
+			dispatch(setAlert('Stakeholder successfully added', 'success'));
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // get stakeholder details
 export const getStakeholderDetails = (id) => async (dispatch, getState) => {
@@ -118,46 +116,44 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 };
 
 // update stakeholder
-export const updateStakeholder = (stakeholder, id) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: STAKEHOLDER_UPDATE_REQUEST });
+export const updateStakeholder =
+	(stakeholder, id) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_UPDATE_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config obj
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config obj
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.put(
-			`${getURL()}/api/v1/stakeholders/${id}`,
-			stakeholder,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/stakeholders/${id}`,
+				stakeholder,
+				config
+			);
 
-		dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
-		dispatch(setAlert('Stakeholder successfully updated', 'success'));
-	} catch (error) {
-		dispatch({
-			type: STAKEHOLDER_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
+			dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
+			dispatch(setAlert('Stakeholder successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 // delete stakeholder
 export const deleteStakeholder = (id) => async (dispatch, getState) => {
@@ -190,43 +186,42 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 };
 
 // list all stakeholders in a project location
-export const listStakeholders = (id, keyword = '') => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: STAKEHOLDER_LIST_REQUEST });
+export const listStakeholders =
+	(id, keyword = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}`,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.get(
+				`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}`,
+				config
+			);
 
-		dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
+			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
 
-		localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
-	} catch (error) {
-		dispatch({
-			type: STAKEHOLDER_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // list all stakeholders across all projects for a user
 export const listUserStakeholders = (id) => async (dispatch, getState) => {

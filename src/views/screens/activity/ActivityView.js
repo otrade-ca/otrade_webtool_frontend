@@ -22,10 +22,10 @@ const ActivityView = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
-	const stakeholderLocationList = useSelector(
-		(state) => state.stakeholderLocationList
+	const stakeholderProjectList = useSelector(
+		(state) => state.stakeholderProjectList
 	);
-	const { stakeholders } = stakeholderLocationList;
+	const { stakeholders } = stakeholderProjectList;
 
 	// define state
 	const [activityType, setActivityType] = useState();

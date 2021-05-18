@@ -85,6 +85,7 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 		);
 
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
+		localStorage.setItem('projectId', JSON.stringify(data._id));
 	} catch (error) {
 		dispatch({
 			type: PROJECT_DETAILS_FAIL,

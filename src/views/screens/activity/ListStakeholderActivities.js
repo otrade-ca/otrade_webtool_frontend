@@ -28,6 +28,8 @@ const ListStakeholderActivities = ({ match }) => {
 	const { loading, error, stakeholderactivities, filtered } =
 		activityStakeholderList;
 
+	console.log(stakeholderactivities);
+
 	const activityDelete = useSelector((state) => state.activityDelete);
 	const { success } = activityDelete;
 
@@ -126,12 +128,15 @@ const ListStakeholderActivities = ({ match }) => {
 														item.stakeholders.length < 2 ? (
 															'None'
 														) : (
-															<>
-																{item.stakeholders.filter(
-																	(person) =>
-																		person.firstName === item.firstName
-																)}
-															</>
+															<div className="activityStakeholders">
+																{item.stakeholders &&
+																	item.stakeholders.map((person) => (
+																		<>
+																			<br />
+																			{person.firstName} {person.lastName}
+																		</>
+																	))}
+															</div>
 														)}
 														<br />
 													</div>

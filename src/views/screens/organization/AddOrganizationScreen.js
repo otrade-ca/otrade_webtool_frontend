@@ -3,7 +3,7 @@ import { useParams, withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
-import MemberDropdown from '../../components/MemberDropdown';
+import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 
 const AddOrganizationScreen = ({ keyword = '', history }) => {
@@ -152,7 +152,7 @@ const AddOrganizationScreen = ({ keyword = '', history }) => {
 						</Col>
 					</Row>
 					<hr className="mt-3" />
-					<MemberDropdown label={'Organization Members'} />
+					<MemberDropdownProject label={'Organization Members'} />
 					<hr />
 					<Row className="mt-3">
 						<Col>

@@ -25,10 +25,10 @@ const ViewOrganization = ({ match }) => {
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
-	const stakeholderLocationList = useSelector(
-		(state) => state.stakeholderLocationList
+	const stakeholderProjectList = useSelector(
+		(state) => state.stakeholderProjectList
 	);
-	const { stakeholders: members } = stakeholderLocationList;
+	const { stakeholders: members } = stakeholderProjectList;
 
 	// define states
 	const [organization, setOrganization] = useState('');

@@ -28,10 +28,10 @@ const ActivityScreen = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
-	const stakeholderLocationList = useSelector(
-		(state) => state.stakeholderLocationList
+	const stakeholderProjectList = useSelector(
+		(state) => state.stakeholderProjectList
 	);
-	const { stakeholders } = stakeholderLocationList;
+	const { stakeholders } = stakeholderProjectList;
 
 	// get success on update
 	const activityUpdate = useSelector((state) => state.activityUpdate);
