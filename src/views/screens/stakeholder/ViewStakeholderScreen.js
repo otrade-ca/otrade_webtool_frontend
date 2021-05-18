@@ -227,22 +227,6 @@ const ViewStakeholderScreen = ({ match }) => {
 														disabled
 													></Form.Control>
 												</Col>
-												<Col>
-													{media.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3 mb-1"
-															disabled
-														>
-															<i className="fas fa-trash"></i>
-														</Button>
-													)}
-													{media.length - 1 === i && (
-														<Button className="px-3" disabled>
-															<i className="fas fa-plus"></i> Add
-														</Button>
-													)}
-												</Col>
 											</Row>
 										))}
 								</Form.Group>
