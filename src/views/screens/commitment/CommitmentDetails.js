@@ -6,12 +6,12 @@ import { getCommitment } from '../../../application/actions/commitmentActions';
 const CommitmentForm = ({ match }) => {
 	const activityId = match.params.activityId;
 
-	console.log(activityId);
-
 	// usedispatch
 	const dispatch = useDispatch();
 	const commitmentDetails = useSelector((state) => state.commitmentDetails);
 	const { commitment } = commitmentDetails;
+
+	console.log(commitment);
 
 	const [comment, setComment] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
@@ -19,7 +19,7 @@ const CommitmentForm = ({ match }) => {
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
-		if (!commitment.details || commitment.activity !== activityId) {
+		if (!commitment || commitment.activity !== activityId) {
 			dispatch(getCommitment(activityId));
 		} else {
 			setComment(commitment.details);
