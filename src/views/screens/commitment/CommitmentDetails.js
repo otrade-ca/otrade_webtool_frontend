@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { getCommitment } from '../../../application/actions/commitmentActions';
+import { Loader, Message } from '../../components/HelperComponents';
 
 const CommitmentForm = ({ match }) => {
 	const activityId = match.params.activityId;
@@ -9,9 +10,7 @@ const CommitmentForm = ({ match }) => {
 	// usedispatch
 	const dispatch = useDispatch();
 	const commitmentDetails = useSelector((state) => state.commitmentDetails);
-	const { commitment } = commitmentDetails;
-
-	console.log(commitment);
+	const { commitment, loading, error } = commitmentDetails;
 
 	const [comment, setComment] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
@@ -19,7 +18,7 @@ const CommitmentForm = ({ match }) => {
 	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
-		if (!commitment || commitment.activity !== activityId) {
+		if (!commitment.activity || commitment.activity !== activityId) {
 			dispatch(getCommitment(activityId));
 		} else {
 			setComment(commitment.details);
@@ -30,60 +29,68 @@ const CommitmentForm = ({ match }) => {
 	}, [dispatch, commitment, activityId]);
 
 	return (
-		<Card className="my-card">
-			<Card.Header className="my-card-header">
-				<h4>Commitment</h4>
-			</Card.Header>
-			<Card.Body>
-				<Form className="mb-3">
-					<Form.Group controlId="discussion">
-						<Form.Label>Commitment Details</Form.Label>
-						<Row>
-							<Col md={12}>
-								<Form.Control
-									className="mb-3"
-									as="textarea"
-									rows="4"
-									placeholder="Enter Details"
-									value={comment}
+		<>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message>{error.message}</Message>
+			) : (
+				<Card className="my-card">
+					<Card.Header className="my-card-header">
+						<h4>Commitment</h4>
+					</Card.Header>
+					<Card.Body>
+						<Form className="mb-3">
+							<Form.Group controlId="discussion">
+								<Form.Label>Commitment Details</Form.Label>
+								<Row>
+									<Col md={12}>
+										<Form.Control
+											className="mb-3"
+											as="textarea"
+											rows="4"
+											placeholder="Enter Details"
+											value={comment}
+											readOnly
+											disabled
+										></Form.Control>
+									</Col>
+								</Row>
+							</Form.Group>
+							<Form.Group controlId="date">
+								<Row>
+									<Col md={4}>
+										<Form.Label>Completion Date</Form.Label>
+										<Form.Control
+											type="date"
+											placeholder="Enter Date"
+											value={completionDate && completionDate.substring(0, 10)}
+											readOnly
+											disabled
+										></Form.Control>
+									</Col>
+								</Row>
+							</Form.Group>
+							<Form.Group controlId="complete" className="mt-5">
+								<Form.Check
+									type="checkbox"
+									label="Completed?"
+									checked={isComplete}
 									readOnly
 									disabled
-								></Form.Control>
-							</Col>
-						</Row>
-					</Form.Group>
-					<Form.Group controlId="date">
-						<Row>
-							<Col md={4}>
-								<Form.Label>Completion Date</Form.Label>
-								<Form.Control
-									type="date"
-									placeholder="Enter Date"
-									value={completionDate && completionDate.substring(0, 10)}
-									readOnly
-									disabled
-								></Form.Control>
-							</Col>
-						</Row>
-					</Form.Group>
-					<Form.Group controlId="complete" className="mt-5">
-						<Form.Check
-							type="checkbox"
-							label="Completed?"
-							checked={isComplete}
-							readOnly
-							disabled
-						></Form.Check>
-					</Form.Group>
-					<hr />
-					<Row>
-						<Col className="text-right">
-							<p>updated on: {updatedDate.substring(0, 10)}</p>
-						</Col>
-					</Row>
-				</Form>
-			</Card.Body>
-		</Card>
+								></Form.Check>
+							</Form.Group>
+							<hr />
+							<Row>
+								<Col className="text-right">
+									<p>updated on: {updatedDate.substring(0, 10)}</p>
+								</Col>
+							</Row>
+						</Form>
+					</Card.Body>
+				</Card>
+			)}
+		</>
 	);
 };
 
