@@ -8,6 +8,7 @@ import {
 } from '../../application/actions/stakeholderActions';
 import { setAlert } from '../../application/actions/alertActions';
 import { getLocationId } from '../../application/localStorage';
+import { Loader, Message } from '../components/HelperComponents';
 
 const MemberDropdown = ({ label, history }) => {
 	// get list of stakeholders
@@ -18,7 +19,7 @@ const MemberDropdown = ({ label, history }) => {
 	const stakeholderLocationList = useSelector(
 		(state) => state.stakeholderLocationList
 	);
-	const { stakeholders } = stakeholderLocationList;
+	const { loading, stakeholders, error } = stakeholderLocationList;
 
 	// useState
 	const [members, setMembers] = useState([{ member: '' }]);
@@ -64,48 +65,56 @@ const MemberDropdown = ({ label, history }) => {
 	};
 
 	return (
-		<Row className="mt-4">
-			<Col md={8}>
-				<Form.Label>{label}</Form.Label>
-				{members &&
-					members.map((assignee, i) => (
-						<Row key={i}>
-							<Col md={9}>
-								<Form.Control
-									as="select"
-									value={assignee._id}
-									onChange={(e) => handleInputChange(e, i)}
-									className="px-5 mb-2"
-								>
-									<option value="">--Select--</option>
-									{stakeholders &&
-										stakeholders.map((stakeholder) => (
-											<option key={stakeholder._id} value={stakeholder._id}>
-												{stakeholder.firstName} {stakeholder.lastName}
-											</option>
-										))}
-								</Form.Control>
-							</Col>
-							<Col md={3} className="mb-2">
-								{members && members.length !== 1 && (
-									<Button
-										variant="danger"
-										className="btn-md mr-3"
-										onClick={() => removeHandler(i)}
-									>
-										<i className="fas fa-trash"></i> Remove
-									</Button>
-								)}
-								{members && members.length - 1 === i && (
-									<Button className="px-3" onClick={() => addHandler(i)}>
-										<i className="fas fa-plus"></i> Stakeholder
-									</Button>
-								)}
-							</Col>
-						</Row>
-					))}
-			</Col>
-		</Row>
+		<>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message>{error.message}</Message>
+			) : (
+				<Row className="mt-4">
+					<Col md={8}>
+						<Form.Label>{label}</Form.Label>
+						{members &&
+							members.map((assignee, i) => (
+								<Row key={i}>
+									<Col md={9}>
+										<Form.Control
+											as="select"
+											value={assignee._id}
+											onChange={(e) => handleInputChange(e, i)}
+											className="px-5 mb-2"
+										>
+											<option value="">--Select--</option>
+											{stakeholders &&
+												stakeholders.map((stakeholder) => (
+													<option key={stakeholder._id} value={stakeholder._id}>
+														{stakeholder.firstName} {stakeholder.lastName}
+													</option>
+												))}
+										</Form.Control>
+									</Col>
+									<Col md={3} className="mb-2">
+										{members && members.length !== 1 && (
+											<Button
+												variant="danger"
+												className="btn-md mr-3"
+												onClick={() => removeHandler(i)}
+											>
+												<i className="fas fa-trash"></i> Remove
+											</Button>
+										)}
+										{members && members.length - 1 === i && (
+											<Button className="px-3" onClick={() => addHandler(i)}>
+												<i className="fas fa-plus"></i> Stakeholder
+											</Button>
+										)}
+									</Col>
+								</Row>
+							))}
+					</Col>
+				</Row>
+			)}
+		</>
 	);
 };
 
