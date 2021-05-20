@@ -22,8 +22,6 @@ const MemberDropdown = ({ label, history }) => {
 	);
 	const { loading, stakeholders, error } = stakeholderLocationList;
 
-	console.log(stakeholders);
-
 	// useState
 	const [members, setMembers] = useState([{ member: '' }]);
 

@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import UserProjects from './screens/project/UserProjects';
 import ActivityType from './screens/activity/ActivityType';
 import InfluenceForm from './screens/influence/InfluenceForm';
-import OrganizationScreen from './screens/organization/OrganizationScreen';
+import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
 import CommitmentForm from './screens/commitment/CommitmentForm';
 
 const Home = () => {
@@ -77,7 +77,7 @@ const Home = () => {
 					<PrivateRoute path="/activities/register" component={ActivityType} />
 					<PrivateRoute
 						path="/organizations/register"
-						component={OrganizationScreen}
+						component={AddOrganizationScreen}
 					/>
 
 					<PrivateRoute

@@ -56,14 +56,17 @@ const OrganizationsList = memo(({ match }) => {
 					{!filtered && organizations && organizations.length === 0 ? (
 						<Empty
 							itemLink={'register'}
-							url={url}
-							type={'Organization'}
+							url={'/organizations'}
+							type={t('tables.organization')}
 							group={'organizations'}
 						/>
 					) : (
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'Organizations'} />
-							<Link to={`${url}/register`} className="btn btn-primary ml-2">
+							<Link
+								to={`/organizations/register`}
+								className="btn btn-primary ml-2"
+							>
 								<i className="fas fa-plus"></i> {t('tables.organization')}
 							</Link>
 						</Card.Header>

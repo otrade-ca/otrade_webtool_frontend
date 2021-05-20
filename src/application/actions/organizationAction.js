@@ -33,7 +33,7 @@ import { getURL } from '../api';
 
 // add an organization to a project
 export const addOrganization =
-	(organization, id, history) => async (dispatch, getState) => {
+	(organization, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_ADD_REQUEST });
 
@@ -51,10 +51,12 @@ export const addOrganization =
 			const {
 				data: { data },
 			} = await axios.post(
-				`${getURL()}/api/v1/locations/${id}/organizations`,
+				`${getURL()}/api/v1/organizations`,
 				organization,
 				config
 			);
+
+			console.log(data);
 
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 			history.go(-1);
