@@ -54,7 +54,7 @@ const LocationForm = ({ history }) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={4}>
+						<Col md={6}>
 							<Form.Group controlId="areaInfluence">
 								<Form.Label>{t('location.area_of_Influence.label')}</Form.Label>
 								<Form.Control
@@ -80,7 +80,7 @@ const LocationForm = ({ history }) => {
 								</Form.Control>
 							</Form.Group>
 						</Col>
-						<Col md={4}>
+						<Col md={6}>
 							<Form.Group controlId="locationType">
 								<Form.Label>{t('location.organization_Type.label')}</Form.Label>
 								<Form.Control
@@ -115,7 +115,9 @@ const LocationForm = ({ history }) => {
 								</Form.Control>
 							</Form.Group>
 						</Col>
-						<Col md={4}>
+					</Row>
+					<Row>
+						<Col md={6}>
 							<Form.Group controlId="scope">
 								<Form.Label>{t('location.scope.label')}</Form.Label>
 								<Form.Control

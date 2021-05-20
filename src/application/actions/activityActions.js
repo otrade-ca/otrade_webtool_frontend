@@ -29,49 +29,47 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add activity to a project
-export const addActivity = (activity, history) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: ACTIVITY_ADD_REQUEST });
+export const addActivity =
+	(activity, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: ACTIVITY_ADD_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(`${getURL()}/api/v1/activities`, activity, config);
+			const {
+				data: { data },
+			} = await axios.post(`${getURL()}/api/v1/activities`, activity, config);
 
-		dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
+			dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
-		const { _id, stakeholders, compromise } = data;
+			const { _id, compromise } = data;
 
-		if (compromise === 'Yes' || compromise === 'yes') {
-			history.push(`/commitments/register/activity/${_id}`);
+			if (compromise === 'Yes' || compromise === 'yes') {
+				history.push(`/commitments/register/activity/${_id}`);
+			}
+
+			// stakeholders.forEach((i) =>
+			// 	history.push(`/influences/register/stakeholder/${i}`)
+			// );
+		} catch (error) {
+			dispatch({
+				type: ACTIVITY_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
 		}
-
-		stakeholders.forEach((i) =>
-			history.push(`/influences/register/stakeholder/${i}`)
-		);
-	} catch (error) {
-		dispatch({
-			type: ACTIVITY_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+	};
 
 // get activity details
 export const getActivityDetails = (id) => async (dispatch, getState) => {
@@ -212,43 +210,42 @@ export const listActivities = (projectId) => async (dispatch, getState) => {
 };
 
 // get all activities belonging to a stakeholder
-export const listStakeholderActivities = (
-	stakeholderId,
-	keyword = ''
-) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_REQUEST });
+export const listStakeholderActivities =
+	(stakeholderId, keyword = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
+				config
+			);
 
-		dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: ACTIVITY_STAKEHOLDER_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: ACTIVITY_STAKEHOLDER_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // save stakeholder info to localstorage
 export const saveActivityInfo = (data) => (dispatch) => {

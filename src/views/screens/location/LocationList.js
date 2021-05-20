@@ -91,7 +91,7 @@ const LocationList = ({ match }) => {
 												<div>
 													<>{location.createdAt.substring(0, 10)}</>{' '}
 												</div>
-												<div className="item-category">Registered Date</div>
+												<div className="item-category">Updated Date</div>
 											</div>
 										</div>
 									</Accordion.Toggle>
@@ -110,6 +110,9 @@ const LocationList = ({ match }) => {
 													<br />
 													<>{t('location.organization_Type.label')}</>
 													{': '} {location.organization_type}
+													<br />
+													<>{t('location.scope.label')}</>
+													{': '} {location.scope}
 												</div>
 												<div className="d-flex align-items-center">
 													<Button
@@ -166,6 +169,9 @@ const LocationList = ({ match }) => {
 													<br />
 													<>{t('location.organization_Type.label')}</>
 													{': '} {location.organization_type}
+													<br />
+													<>{t('location.scope.label')}</>
+													{': '} {location.scope}
 												</div>
 												<div className="d-flex align-items-center">
 													<Button

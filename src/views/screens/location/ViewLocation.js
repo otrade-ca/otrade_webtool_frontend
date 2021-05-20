@@ -17,6 +17,7 @@ const ViewLocation = ({ match }) => {
 	const [influence, setInfluence] = useState('');
 	const [orgType, setOrgType] = useState('');
 	const [updatedDate, setUpdatedDate] = useState('');
+	const [scope, setScope] = useState('');
 
 	// dispatch
 	const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const ViewLocation = ({ match }) => {
 			setInfluence(location.area_influence);
 			setOrgType(location.organization_type);
 			setUpdatedDate(location.updatedAt);
+			setScope(location.scope);
 		}
 	}, [dispatch, locationId, location]);
 
@@ -44,14 +46,14 @@ const ViewLocation = ({ match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Card className="my-card">
-					<Card.Header className="my-card-Header">
+					<Card.Header className="my-card-header">
 						<h4>{t('tables.location')}</h4>
 						<Link to={`${url}/edit`} className="btn btn-light ml-2">
 							<i className="fas fa-edit"></i> Edit
 						</Link>
 					</Card.Header>
 					<Card.Body>
-						<Form className="mt-3">
+						<Form>
 							<Row>
 								<Col md={12}>
 									<Form.Group controlId="location">
@@ -127,6 +129,20 @@ const ViewLocation = ({ match }) => {
 											<option value={t('location.division.settlement')}>
 												{t('location.division.settlement')}
 											</option>
+										</Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={6}>
+									<Form.Group controlId="scope">
+										<Form.Label>{t('location.scope.label')}</Form.Label>
+										<Form.Control as="select" value={scope} readOnly disabled>
+											<option value={t('action.select')}>
+												{t('action.select')}
+											</option>
+											<option value="Urban">{t('location.scope.urban')}</option>
+											<option value="Rural">{t('location.scope.rural')}</option>
 										</Form.Control>
 									</Form.Group>
 								</Col>

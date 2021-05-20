@@ -66,10 +66,10 @@ export const routes = [
 		path: '/organizations',
 		component: ({ match }) => <ListOrganizations match={match} />,
 	},
-	{
-		path: '/organizations/register',
-		component: ({ match }) => <AddOrganizationScreen match={match} />,
-	},
+	// {
+	// 	path: '/organizations/register',
+	// 	component: ({ match }) => <AddOrganizationScreen match={match} />,
+	// },
 	{
 		path: '/influences/register',
 		component: ({ match }) => <InfluenceForm match={match} />,

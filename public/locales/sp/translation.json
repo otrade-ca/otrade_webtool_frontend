@@ -81,7 +81,7 @@
             "ejido": "ejido"
         },
         "organization_Type": {
-            "label": "Tipo de Organización",
+            "label": "Ámbito Geográfico",
             "community": "Community",
             "settlement": "Settlement",
             "town": "Town",
@@ -89,7 +89,7 @@
             "colony": "Colony"
         },
         "scope": {
-            "label": "Scope",
+            "label": "Ámbito",
             "rural": "Rural",
             "urban": "Urban"
         }      

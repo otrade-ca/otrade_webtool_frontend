@@ -4,7 +4,6 @@ import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
 import LandownershipList from '../landownership/LandownershipList';
-import AddOrganizationScreen from '../organization/AddOrganizationScreen';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
 import StepForm from '../landownership/StepForm';
 import OrganizationScreen from '../organization/OrganizationScreen';
@@ -35,17 +34,9 @@ export const navbarlinks = [
 		link: '/activities',
 		type: 'Activities',
 	},
-	// {
-	// 	link: '/landownerships',
-	// 	type: 'Landownership',
-	// },
 ];
 
 export const routes = [
-	// {
-	// 	path: '',
-	// 	component: ({ match }) => <Dashboard match={match} />,
-	// },
 	{
 		path: '/',
 		component: ({ match }) => <ViewStakeholderScreen match={match} />,
@@ -69,10 +60,6 @@ export const routes = [
 	{
 		path: '/organizations',
 		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
-	},
-	{
-		path: '/organizations/register',
-		component: ({ match }) => <AddOrganizationScreen match={match} />,
 	},
 	{
 		path: '/organizations/:organizationId/view',

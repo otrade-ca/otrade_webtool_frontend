@@ -6,6 +6,7 @@ import {
 	ORGANIZATION_DETAILS_REQUEST,
 	ORGANIZATION_DETAILS_SUCCESS,
 	ORGANIZATION_DETAILS_FAIL,
+	ORGANIZATION_DETAILS_RESET,
 	ORGANIZATION_UPDATE_REQUEST,
 	ORGANIZATION_UPDATE_SUCCESS,
 	ORGANIZATION_UPDATE_FAIL,
@@ -58,6 +59,8 @@ export const organizationDetailsReducer = (
 			return { loading: false, organization: action.payload };
 		case ORGANIZATION_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case ORGANIZATION_DETAILS_RESET:
+			return { organization: {} };
 		default:
 			return state;
 	}

@@ -29,6 +29,7 @@ const EditLocation = ({ match }) => {
 	const [location, setLocation] = useState('');
 	const [influence, setInfluence] = useState('');
 	const [orgType, setOrgType] = useState('');
+	const [scope, setScope] = useState('');
 
 	useEffect(() => {
 		if (successUpdate) {
@@ -41,6 +42,7 @@ const EditLocation = ({ match }) => {
 				setLocation(loc.location);
 				setInfluence(loc.area_influence);
 				setOrgType(loc.organization_type);
+				setScope(loc.scope);
 			}
 		}
 	}, [dispatch, locationId, loc.location, loc._id, successUpdate, loc]);
@@ -71,7 +73,7 @@ const EditLocation = ({ match }) => {
 						<h4>{t('tables.location')}</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler} className="mb-3">
+						<Form onSubmit={submitHandler}>
 							<Row>
 								<Col md={12}>
 									<Form.Group controlId="location">
@@ -149,6 +151,24 @@ const EditLocation = ({ match }) => {
 											<option value={t('location.division.settlement')}>
 												{t('location.division.settlement')}
 											</option>
+										</Form.Control>
+									</Form.Group>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={6}>
+									<Form.Group controlId="scope">
+										<Form.Label>{t('location.scope.label')}</Form.Label>
+										<Form.Control
+											as="select"
+											value={scope}
+											onChange={(e) => setScope(e.target.value)}
+										>
+											<option value={t('action.select')}>
+												{t('action.select')}
+											</option>
+											<option value="Urban">{t('location.scope.urban')}</option>
+											<option value="Rural">{t('location.scope.rural')}</option>
 										</Form.Control>
 									</Form.Group>
 								</Col>
