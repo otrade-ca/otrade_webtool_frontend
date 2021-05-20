@@ -16,47 +16,46 @@ import {
 	COMMENT_LIST_SUCCESS,
 	COMMENT_LIST_FAIL,
 } from '../constants/commentConstants';
+import { getURL } from '../api';
 
 // add comment
-export const addComment = (comment, stakeholderId) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: COMMENT_ADD_REQUEST });
+export const addComment =
+	(comment, stakeholderId) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: COMMENT_ADD_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			'Content-Type': 'application/json',
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				'Content-Type': 'application/json',
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.post(
-			`/api/v1/stakeholders/${stakeholderId}/comments`,
-			comment,
-			config
-		);
+			const {
+				data: { data },
+			} = await axios.post(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/comments`,
+				comment,
+				config
+			);
 
-		dispatch({ type: COMMENT_ADD_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: COMMENT_ADD_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: COMMENT_ADD_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: COMMENT_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // get a comment
 export const getComment = (commentId) => async (dispatch, getState) => {
@@ -77,7 +76,7 @@ export const getComment = (commentId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.get(`/api/v1/comments/${commentId}`, config);
+		} = await axios.get(`${getURL()}/api/v1/comments/${commentId}`, config);
 
 		dispatch({ type: COMMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -92,41 +91,43 @@ export const getComment = (commentId) => async (dispatch, getState) => {
 };
 
 // update a comment
-export const updateComment = (comment, commentId) => async (
-	dispatch,
-	getState
-) => {
-	try {
-		dispatch({ type: COMMENT_UPDATE_REQUEST });
+export const updateComment =
+	(comment, commentId) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: COMMENT_UPDATE_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config object
-		const config = {
-			'Content-Type': 'application/json',
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config object
+			const config = {
+				'Content-Type': 'application/json',
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.put(`/api/v1/comments/${commentId}`, comment, config);
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/comments/${commentId}`,
+				comment,
+				config
+			);
 
-		dispatch({ type: COMMENT_UPDATE_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: COMMENT_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: COMMENT_UPDATE_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: COMMENT_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // delete a comment
 export const deleteComment = (commentId) => async (dispatch, getState) => {
@@ -147,7 +148,7 @@ export const deleteComment = (commentId) => async (dispatch, getState) => {
 
 		const {
 			data: { data },
-		} = await axios.delete(`/api/v1/comments/${commentId}`, config);
+		} = await axios.delete(`${getURL()}/api/v1/comments/${commentId}`, config);
 
 		dispatch({ type: COMMENT_DELETE_SUCCESS, payload: data });
 	} catch (error) {
@@ -181,7 +182,7 @@ export const listComments = (stakeholderId) => async (dispatch, getState) => {
 		const {
 			data: { data },
 		} = await axios.get(
-			`/api/v1/stakeholders/${stakeholderId}/comments`,
+			`${getURL()}/api/v1/stakeholders/${stakeholderId}/comments`,
 			config
 		);
 

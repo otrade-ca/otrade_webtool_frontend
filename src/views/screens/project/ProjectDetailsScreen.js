@@ -9,11 +9,14 @@ const ProjectDetailsScreen = ({ match }) => {
 	const id = match.params.id;
 	const { t } = useTranslation();
 
+	// define states
 	const [comments, setComments] = useState('');
 	const [updatedAt, setUpdatedAt] = useState('');
 
+	// usedispatch
 	const dispatch = useDispatch();
 
+	// get projectdetails
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 

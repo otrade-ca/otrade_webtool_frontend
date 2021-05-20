@@ -42,11 +42,7 @@ const ProjectEditScreen = ({ match, history }) => {
 
 	//get projectUpdate from reducer
 	const projectUpdate = useSelector((state) => state.projectUpdate);
-	const {
-		success: successUpdate,
-		loading: loadingUpdate,
-		error: errorUpdate,
-	} = projectUpdate;
+	const { success: successUpdate } = projectUpdate;
 
 	//useEffect
 	useEffect(() => {
@@ -54,7 +50,7 @@ const ProjectEditScreen = ({ match, history }) => {
 			dispatch(listProjectDetails(projectId));
 			dispatch({ type: PROJECT_UPDATE_RESET });
 		} else {
-			if (!project && project._id !== projectId) {
+			if (!project.projectName || project._id !== projectId) {
 				dispatch(listProjectDetails(projectId));
 			} else {
 				setProjectName(project.projectName);
@@ -119,9 +115,6 @@ const ProjectEditScreen = ({ match, history }) => {
 
 	return (
 		<>
-			{loadingUpdate && <Loader />}
-			{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-			{successUpdate && <Message variant="success">Profile Updated</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

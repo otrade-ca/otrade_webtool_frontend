@@ -20,8 +20,6 @@ const CommitmentForm = ({ match }) => {
 	const commitmentDetails = useSelector((state) => state.commitmentDetails);
 	const { commitment, loading, error } = commitmentDetails;
 
-	console.log(commitment);
-
 	useEffect(() => {
 		if (!commitment || commitment.activity !== activityId) {
 			dispatch(getCommitment(activityId));
