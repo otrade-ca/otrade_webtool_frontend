@@ -56,8 +56,6 @@ export const addOrganization =
 				config
 			);
 
-			console.log(data);
-
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 			history.go(-1);
 			dispatch(setAlert('Organization successfully added', 'success'));

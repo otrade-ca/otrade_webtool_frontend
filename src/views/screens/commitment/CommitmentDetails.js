@@ -22,9 +22,9 @@ const CommitmentForm = ({ match }) => {
 			dispatch(getCommitment(activityId));
 		} else {
 			setComment(commitment.details);
-			setCompletionDate(commitment.completion_date);
+			setCompletionDate(commitment.completion_date.substring(0, 10));
 			setIsComplete(commitment.is_complete);
-			setUpdatedDate(commitment.updatedAt);
+			setUpdatedDate(commitment.updatedAt.substring(0, 10));
 		}
 	}, [dispatch, commitment, activityId]);
 
@@ -64,7 +64,7 @@ const CommitmentForm = ({ match }) => {
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											value={completionDate && completionDate.substring(0, 10)}
+											value={completionDate}
 											readOnly
 											disabled
 										></Form.Control>
@@ -83,7 +83,7 @@ const CommitmentForm = ({ match }) => {
 							<hr />
 							<Row>
 								<Col className="text-right">
-									<p>updated on: {updatedDate.substring(0, 10)}</p>
+									<p>updated on: {updatedDate}</p>
 								</Col>
 							</Row>
 						</Form>

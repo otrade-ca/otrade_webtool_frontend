@@ -55,11 +55,9 @@ export const addActivity =
 
 			if (compromise === 'Yes' || compromise === 'yes') {
 				history.push(`/commitments/register/activity/${_id}`);
+			} else {
+				history.go(-1);
 			}
-
-			// stakeholders.forEach((i) =>
-			// 	history.push(`/influences/register/stakeholder/${i}`)
-			// );
 		} catch (error) {
 			dispatch({
 				type: ACTIVITY_ADD_FAIL,

@@ -60,7 +60,7 @@ const ProjectEditScreen = ({ match, history }) => {
 				setProjectClient(project.projectClient);
 				setComment(project.comment);
 				setStatus(project.status);
-				setUpdatedDate(project.updatedAt);
+				setUpdatedDate(project.updatedAt.substring(0, 10));
 				setCountry(project.country);
 				setCountryCode(project.country_code);
 				setLanguage(project.language);
@@ -272,7 +272,7 @@ const ProjectEditScreen = ({ match, history }) => {
 								</Button>
 							</Col>
 							<Col className="text-right">
-								<p>updated on: {updatedDate.substring(0, 10)}</p>
+								<p>updated on: {updatedDate}</p>
 							</Col>
 						</Row>
 					</Form>
