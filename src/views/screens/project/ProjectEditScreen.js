@@ -20,6 +20,7 @@ const ProjectEditScreen = ({ match, history }) => {
 
 	const { t } = useTranslation();
 
+	// define states
 	const [projectName, setProjectName] = useState('');
 	const [projectClient, setProjectClient] = useState('');
 	const [country, setCountry] = useState('');
@@ -32,7 +33,7 @@ const ProjectEditScreen = ({ match, history }) => {
 	const [status, setStatus] = useState('');
 	const [updatedDate, setUpdatedDate] = useState('');
 
-	// get product details
+	// useDispatch
 	const dispatch = useDispatch();
 
 	//get projectDetails from reducer
@@ -60,7 +61,7 @@ const ProjectEditScreen = ({ match, history }) => {
 				setProjectClient(project.projectClient);
 				setComment(project.comment);
 				setStatus(project.status);
-				setUpdatedDate(project.updatedAt.substring(0, 10));
+				setUpdatedDate(project.updatedAt);
 				setCountry(project.country);
 				setCountryCode(project.country_code);
 				setLanguage(project.language);
@@ -272,7 +273,7 @@ const ProjectEditScreen = ({ match, history }) => {
 								</Button>
 							</Col>
 							<Col className="text-right">
-								<p>updated on: {updatedDate}</p>
+								<p>updated on: {updatedDate && updatedDate.substring(0, 10)}</p>
 							</Col>
 						</Row>
 					</Form>

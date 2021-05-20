@@ -7,24 +7,29 @@ import { Loader, Message } from '../../components/HelperComponents';
 const CommitmentForm = ({ match }) => {
 	const activityId = match.params.activityId;
 
-	// usedispatch
-	const dispatch = useDispatch();
-	const commitmentDetails = useSelector((state) => state.commitmentDetails);
-	const { commitment, loading, error } = commitmentDetails;
-
+	//define states
 	const [comment, setComment] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
 	const [isComplete, setIsComplete] = useState(false);
 	const [updatedDate, setUpdatedDate] = useState('');
 
+	// usedispatch
+	const dispatch = useDispatch();
+
+	// get commitmentdetails
+	const commitmentDetails = useSelector((state) => state.commitmentDetails);
+	const { commitment, loading, error } = commitmentDetails;
+
+	console.log(commitment);
+
 	useEffect(() => {
-		if (!commitment.activity || commitment.activity !== activityId) {
+		if (!commitment || commitment.activity !== activityId) {
 			dispatch(getCommitment(activityId));
 		} else {
 			setComment(commitment.details);
-			setCompletionDate(commitment.completion_date.substring(0, 10));
+			setCompletionDate(commitment.completion_date);
 			setIsComplete(commitment.is_complete);
-			setUpdatedDate(commitment.updatedAt.substring(0, 10));
+			setUpdatedDate(commitment.updatedAt);
 		}
 	}, [dispatch, commitment, activityId]);
 
@@ -64,7 +69,7 @@ const CommitmentForm = ({ match }) => {
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											value={completionDate}
+											value={completionDate && completionDate.substring(0, 10)}
 											readOnly
 											disabled
 										></Form.Control>
@@ -83,7 +88,9 @@ const CommitmentForm = ({ match }) => {
 							<hr />
 							<Row>
 								<Col className="text-right">
-									<p>updated on: {updatedDate}</p>
+									<p>
+										updated on: {updatedDate && updatedDate.substring(0, 10)}
+									</p>
 								</Col>
 							</Row>
 						</Form>
