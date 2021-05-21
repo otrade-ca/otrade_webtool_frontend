@@ -6,19 +6,19 @@ import Wrapper from './components/Layout/Wrapper/Wrapper';
 import Footer from './components/Layout/Footer';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import PrivateRoute from './components/Routing/PrivateRoute';
-import UserProfileScreen from './screens/user/UserProfileScreen';
 import AdminRoutes from './components/Routing/AdminRoutes';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
-import ActivityType from './screens/activity/ActivityType';
-import InfluenceForm from './screens/influence/InfluenceForm';
-import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
-import CommitmentForm from './screens/commitment/CommitmentForm';
+
 import StakeholderRoutes from './components/Routing/StakeholderRoutes';
+import UserRoutes from './components/Routing/UserRoutes';
 import ProjectRoutes from './components/Routing/ProjectRoutes';
 import LocationRoutes from './components/Routing/LocationRoutes';
+import OrganizationRoutes from './components/Routing/OrganizationRoutes';
+import ActivityRoutes from './components/Routing/ActivityRoutes';
+import InfluenceRoutes from './components/Routing/InfluenceRoutes';
+import CommitmentRoutes from './components/Routing/CommitmentRoutes';
 
 const Home = () => {
 	const { i18n } = useTranslation();
@@ -51,28 +51,18 @@ const Home = () => {
 					<Alert />
 					<Route exact path="/" component={HomeScreen} />
 					<Route exact path="/login" component={LoginScreen} />
-					<PrivateRoute path="/profile/:id" component={UserProfileScreen} />
 
+					{/**General Routes */}
+					<Route component={UserRoutes} />
 					<Route component={ProjectRoutes} />
 					<Route component={LocationRoutes} />
 					<Route component={StakeholderRoutes} />
+					<Route component={OrganizationRoutes} />
+					<Route component={ActivityRoutes} />
+					<Route component={InfluenceRoutes} />
+					<Route component={CommitmentRoutes} />
 
-					<PrivateRoute path="/activities/register" component={ActivityType} />
-					<PrivateRoute
-						path="/organizations/register"
-						component={AddOrganizationScreen}
-					/>
-
-					<PrivateRoute
-						path="/influences/register/stakeholder/:stakeholderId"
-						component={InfluenceForm}
-					/>
-
-					<PrivateRoute
-						path="/commitments/register/activity/:activityId"
-						component={CommitmentForm}
-					/>
-
+					{/**Admin Routes */}
 					<Route component={AdminRoutes} />
 				</Container>
 				<Footer />
