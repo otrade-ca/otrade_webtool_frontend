@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import { Switch } from 'react-router-dom';
+import AdminPrivateRoute from '../Routing/AdminPrivateRoute';
 const UserListScreen = lazy(() => import('../../screens/user/UserListScreen'));
 const ListProjectScreen = lazy(() =>
 	import('../../screens/project/ListProjectScreen')
@@ -14,7 +15,6 @@ const UserAddScreen = lazy(() => import('../../screens/user/UserAddScreen'));
 const ProjectAddScreen = lazy(() =>
 	import('../../screens/project/ProjectAddScreen')
 );
-const AdminPrivateRoute = lazy(() => import('../Routing/AdminPrivateRoute'));
 const Assignment = lazy(() => import('../Assignment'));
 
 const AdminRoutes = () => {

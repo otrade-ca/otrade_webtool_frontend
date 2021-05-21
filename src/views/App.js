@@ -6,19 +6,21 @@ import Wrapper from './components/Layout/Wrapper/Wrapper';
 import Footer from './components/Layout/Footer';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import AdminRoutes from './components/Routing/AdminRoutes';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
 
-import StakeholderRoutes from './components/Routing/StakeholderRoutes';
-import UserRoutes from './components/Routing/UserRoutes';
-import ProjectRoutes from './components/Routing/ProjectRoutes';
-import LocationRoutes from './components/Routing/LocationRoutes';
-import OrganizationRoutes from './components/Routing/OrganizationRoutes';
-import ActivityRoutes from './components/Routing/ActivityRoutes';
-import InfluenceRoutes from './components/Routing/InfluenceRoutes';
-import CommitmentRoutes from './components/Routing/CommitmentRoutes';
+import {
+	AdminRoutes,
+	UserRoutes,
+	ProjectRoutes,
+	LocationRoutes,
+	StakeholderRoutes,
+	OrganizationRoutes,
+	ActivityRoutes,
+	InfluenceRoutes,
+	CommitmentRoutes,
+} from './components/Routing/AccessRoutes';
 
 const Home = () => {
 	const { i18n } = useTranslation();
