@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../application/actions/userActions';
@@ -44,29 +43,6 @@ const UserAddScreen = ({ history }) => {
 			}
 		}
 	}, [dispatch, history, userInfo, success]);
-
-	// const uploadFileHandler = async (e) => {
-	// 	const file = e.target.files[0];
-	// 	const formData = new FormData();
-	// 	formData.append('image', file);
-	// 	setUploading(true);
-
-	// 	try {
-	// 		const config = {
-	// 			headers: {
-	// 				'Content-Type': 'multipart/form-data',
-	// 			},
-	// 		};
-
-	// 		const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-	// 		setImage(data);
-	// 		setUploading(false);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 		setUploading(false);
-	// 	}
-	// };
 
 	const submitHandler = (e) => {
 		e.preventDefault();
