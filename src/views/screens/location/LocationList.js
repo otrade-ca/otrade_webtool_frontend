@@ -53,14 +53,17 @@ const LocationList = ({ match }) => {
 					{locations && locations.length === 0 ? (
 						<Empty
 							itemLink={'register'}
-							url={url}
+							url={'communities/register'}
 							type={t('tables.location')}
 							group={'locations'}
 						/>
 					) : (
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.location')}</h4>
-							<Link to={`${url}/register`} className="btn btn-primary ml-2">
+							<Link
+								to={`communities/register`}
+								className="btn btn-primary ml-2"
+							>
 								<i className="fas fa-plus"></i> {t('action.register')}
 							</Link>
 						</Card.Header>
@@ -159,7 +162,7 @@ const LocationList = ({ match }) => {
 											<div className="d-flex justify-content-between">
 												<div>
 													<>
-														<Link to={`/location/${location._id}`}>
+														<Link to={`/community/${location._id}`}>
 															{location.location}
 														</Link>
 													</>

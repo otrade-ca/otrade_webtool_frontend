@@ -3,9 +3,7 @@ import ListStakeholderOrganizations from '../organization/ListStakeholderOrganiz
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
-import LandownershipList from '../landownership/LandownershipList';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
-import StepForm from '../landownership/StepForm';
 import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
 import CommitmentDetails from '../commitment/CommitmentDetails';
@@ -53,10 +51,6 @@ export const routes = [
 		path: '/profile/edit',
 		component: ({ match }) => <EditStakeholderScreen match={match} />,
 	},
-	// {
-	// 	path: '/photo',
-	// 	component: ({ match }) => <EditStakeholderPhoto match={match} />,
-	// },
 	{
 		path: '/organizations',
 		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
@@ -84,13 +78,5 @@ export const routes = [
 	{
 		path: '/activities/:activityId/commitment',
 		component: ({ match }) => <CommitmentDetails match={match} />,
-	},
-	{
-		path: '/landownerships',
-		component: ({ match }) => <LandownershipList match={match} />,
-	},
-	{
-		path: '/landownerships/register',
-		component: ({ match }) => <StepForm match={match} />,
 	},
 ];

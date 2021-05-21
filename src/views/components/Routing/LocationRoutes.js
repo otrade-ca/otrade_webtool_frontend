@@ -7,11 +7,8 @@ import LocationScreen from '../../screens/location/LocationScreen';
 const LocationRoutes = () => {
 	return (
 		<Switch>
-			<PrivateRoute
-				path="/project/:id/communities/register"
-				component={LocationForm}
-			/>
-			<PrivateRoute path="/location/:id" component={LocationScreen} />
+			<PrivateRoute path="/communities/register" component={LocationForm} />
+			<PrivateRoute path="/community/:id" component={LocationScreen} />
 		</Switch>
 	);
 };

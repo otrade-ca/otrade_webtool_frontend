@@ -2,7 +2,6 @@ import Dashboard from '../../components/Dashboard';
 import EditProjectPhoto from '../project/EditProjectPhoto';
 import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 import LocationList from '../location/LocationList';
-import LocationForm from '../location/LocationForm';
 import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 import ViewOrganization from '../organization/ViewOrganization';
@@ -18,14 +17,6 @@ export const btnlinks = [
 ];
 
 export const navbarlinks = [
-	// {
-	// 	link: '/dashboard',
-	// 	type: 'Dashboard',
-	// },
-	// {
-	// 	link: '/about',
-	// 	type: 'About',
-	// },
 	{
 		link: '/communities',
 		type: 'Communities',
@@ -62,19 +53,15 @@ export const routes = [
 		component: ({ match }) => <StakeholdersProjectList match={match} />,
 	},
 	{
-		path: '/stakeholders/register',
-		component: ({ match }) => <LocationForm match={match} />,
-	},
-	{
 		path: '/organizations',
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/profile',
+		path: '/organizations/:organizationId/view',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/profile/edit',
+		path: '/organizations/:organizationId/view/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{
