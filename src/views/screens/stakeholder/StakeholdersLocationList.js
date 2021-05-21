@@ -31,8 +31,6 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 	);
 	const { loading, error, filtered, stakeholders } = stakeholderLocationList;
 
-	console.log('filtered', filtered);
-
 	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
 	const { success } = stakeholderDelete;
 
@@ -54,6 +52,7 @@ const StakeholdersProjectList = memo(({ match, keyword = '' }) => {
 
 	return (
 		<Card className="my-card">
+			<h3>hello</h3>
 			{loading ? (
 				<Loader />
 			) : error ? (

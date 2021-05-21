@@ -1,14 +1,16 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import LocationForm from '../../screens/location/LocationForm';
-import LocationScreen from '../../screens/location/LocationScreen';
+import { FormAdd, LandingPage } from '../../screens/location/location';
 
 const LocationRoutes = () => {
 	return (
 		<Switch>
-			<PrivateRoute path="/communities/register" component={LocationForm} />
-			<PrivateRoute path="/community/:id" component={LocationScreen} />
+			<PrivateRoute
+				path="/communities/register/project/:id"
+				component={FormAdd}
+			/>
+			<PrivateRoute path="/community/:id" component={LandingPage} />
 		</Switch>
 	);
 };

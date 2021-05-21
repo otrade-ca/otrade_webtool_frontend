@@ -66,7 +66,10 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'Stakeholders'} />
-							<Link to={`${url}/register`} className="btn btn-primary ml-2">
+							<Link
+								to={`/stakeholders/register/community/${projectId}`}
+								className="btn btn-primary ml-2"
+							>
 								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
 							</Link>
 						</Card.Header>

@@ -1,7 +1,7 @@
 import Dashboard from '../../components/Dashboard';
 import EditProjectPhoto from '../project/EditProjectPhoto';
 import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
-import LocationList from '../location/LocationList';
+import ProjectLocations from '../location/ProjectLocations';
 import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 import ViewOrganization from '../organization/ViewOrganization';
@@ -46,7 +46,7 @@ export const routes = [
 	},
 	{
 		path: '/communities',
-		component: ({ match }) => <LocationList match={match} />,
+		component: ({ match }) => <ProjectLocations match={match} />,
 	},
 	{
 		path: '/stakeholders',

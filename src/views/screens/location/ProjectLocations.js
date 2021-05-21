@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as RiIcons from 'react-icons/ri';
 
-const LocationList = ({ match }) => {
+const ProjectLocations = ({ match }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
@@ -61,7 +61,7 @@ const LocationList = ({ match }) => {
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.location')}</h4>
 							<Link
-								to={`communities/register`}
+								to={`/communities/register/project/${projectId}`}
 								className="btn btn-primary ml-2"
 							>
 								<i className="fas fa-plus"></i> {t('action.register')}
@@ -196,4 +196,4 @@ const LocationList = ({ match }) => {
 	);
 };
 
-export default memo(LocationList);
+export default memo(ProjectLocations);

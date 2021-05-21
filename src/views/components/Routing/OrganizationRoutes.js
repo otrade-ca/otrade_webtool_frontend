@@ -8,7 +8,7 @@ const OrganizationRoutes = () => {
 		<Switch>
 			<PrivateRoute
 				exact
-				path="/organizations/register"
+				path="/organizations/register/community/:id"
 				component={AddOrganizationScreen}
 			/>
 		</Switch>

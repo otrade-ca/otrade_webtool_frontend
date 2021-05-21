@@ -1,65 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import React, { useState, useEffect, memo } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Form, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	getLocationDetails,
-	updateLocation,
-} from '../../../application/actions/locationActions';
+import { getLocationDetails } from '../../../application/actions/locationActions';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
-import { LOCATION_UPDATE_RESET } from '../../../application/constants/locationConstants';
 
-const EditLocation = ({ match }) => {
+const FormView = ({ match }) => {
 	const locationId = match.params.id;
 
+	const { url } = useRouteMatch();
 	const { t } = useTranslation();
+
+	// state
+	const [community, setCommunity] = useState('');
+	const [influence, setInfluence] = useState('');
+	const [orgType, setOrgType] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
+	const [scope, setScope] = useState('');
 
 	// dispatch
 	const dispatch = useDispatch();
 
 	// get locationDetails
 	const locationDetails = useSelector((state) => state.locationDetails);
-	const { loading, error, location: loc } = locationDetails;
-
-	// get locationUpdate
-	const locationUpdate = useSelector((state) => state.locationUpdate);
-	const { success: successUpdate } = locationUpdate;
-
-	//state
-	const [location, setLocation] = useState('');
-	const [influence, setInfluence] = useState('');
-	const [orgType, setOrgType] = useState('');
-	const [scope, setScope] = useState('');
+	const { loading, error, location } = locationDetails;
 
 	useEffect(() => {
-		if (successUpdate) {
+		if (location._id !== locationId) {
 			dispatch(getLocationDetails(locationId));
-			dispatch({ type: LOCATION_UPDATE_RESET });
 		} else {
-			if (!loc.location || loc._id !== locationId) {
-				dispatch(getLocationDetails(locationId));
-			} else {
-				setLocation(loc.location);
-				setInfluence(loc.area_influence);
-				setOrgType(loc.organization_type);
-				setScope(loc.scope);
-			}
+			setCommunity(location.location);
+			setInfluence(location.area_influence);
+			setOrgType(location.organization_type);
+			setUpdatedDate(location.updatedAt);
+			setScope(location.scope);
 		}
-	}, [dispatch, locationId, loc.location, loc._id, successUpdate, loc]);
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-		dispatch(
-			updateLocation(
-				{
-					location,
-					area_influence: influence,
-					organization_type: orgType,
-				},
-				locationId
-			)
-		);
-	};
+	}, [dispatch, locationId, location]);
 
 	return (
 		<>
@@ -71,17 +48,21 @@ const EditLocation = ({ match }) => {
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
 						<h4>{t('tables.location')}</h4>
+						<Link to={`${url}/edit`} className="btn btn-light ml-2">
+							<i className="fas fa-edit"></i> Edit
+						</Link>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler}>
+						<Form>
 							<Row>
 								<Col md={12}>
 									<Form.Group controlId="location">
 										<Form.Label>{t('location.location')}</Form.Label>
 										<Form.Control
 											type="text"
-											value={location}
-											onChange={(e) => setLocation(e.target.value)}
+											value={community}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -95,7 +76,8 @@ const EditLocation = ({ match }) => {
 										<Form.Control
 											as="select"
 											value={influence}
-											onChange={(e) => setInfluence(e.target.value)}
+											readOnly
+											disabled
 										>
 											<option value={t('action.select')}>
 												{t('action.select')}
@@ -122,11 +104,7 @@ const EditLocation = ({ match }) => {
 										<Form.Label>
 											{t('location.organization_Type.label')}
 										</Form.Label>
-										<Form.Control
-											as="select"
-											value={orgType}
-											onChange={(e) => setOrgType(e.target.value)}
-										>
+										<Form.Control as="select" value={orgType} readOnly disabled>
 											<option value={t('action.select')}>
 												{t('action.select')}
 											</option>
@@ -159,11 +137,7 @@ const EditLocation = ({ match }) => {
 								<Col md={6}>
 									<Form.Group controlId="scope">
 										<Form.Label>{t('location.scope.label')}</Form.Label>
-										<Form.Control
-											as="select"
-											value={scope}
-											onChange={(e) => setScope(e.target.value)}
-										>
+										<Form.Control as="select" value={scope} readOnly disabled>
 											<option value={t('action.select')}>
 												{t('action.select')}
 											</option>
@@ -176,9 +150,9 @@ const EditLocation = ({ match }) => {
 							<hr />
 							<Row className="mt-3">
 								<Col>
-									<Button type="submit" variant="primary" className="px-5 mt-3">
-										{t('action.update')}
-									</Button>
+									<Col className="text-right">
+										<p>updated on: {updatedDate.substring(0, 10)}</p>
+									</Col>
 								</Col>
 							</Row>
 						</Form>
@@ -189,4 +163,4 @@ const EditLocation = ({ match }) => {
 	);
 };
 
-export default EditLocation;
+export default memo(FormView);

@@ -1,15 +1,12 @@
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
-import AddOrganizationScreen from '../organization/AddOrganizationScreen';
 import ListOrganizations from '../organization/ListOrganizations';
 import OrganizationScreen from '../organization/OrganizationScreen';
 import StakeholdersList from '../stakeholder/StakeholdersList';
-import EditLocation from './EditLocation';
-import EditLocationPhoto from './EditLocationPhoto';
-import ViewLocation from './ViewLocation';
+import FormEdit from './FormEdit';
+import PhotoEdit from './PhotoEdit';
+import FormView from './FormView';
 import ViewOrganization from '../organization/ViewOrganization';
-import StakeholderContactInfo from '../stakeholder/StakeHolderContactInfo';
-import InfluenceForm from '../influence/InfluenceForm';
 
 export const btnlinks = [
 	// {
@@ -40,55 +37,43 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '/',
-		component: ({ match }) => <ViewLocation match={match} />,
+		component: ({ match }) => <FormView match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <EditLocation match={match} />,
+		component: ({ match }) => <FormEdit match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <EditLocation match={match} />,
+		component: ({ match }) => <FormEdit match={match} />,
 	},
 	{
 		path: '/profile',
-		component: ({ match }) => <ViewLocation match={match} />,
+		component: ({ match }) => <FormView match={match} />,
 	},
 	{
 		path: '/profile/edit',
-		component: ({ match }) => <EditLocation match={match} />,
+		component: ({ match }) => <FormEdit match={match} />,
 	},
 	{
 		path: '/photo',
-		component: ({ match }) => <EditLocationPhoto match={match} />,
+		component: ({ match }) => <PhotoEdit match={match} />,
 	},
 	{
 		path: '/organizations',
 		component: ({ match }) => <ListOrganizations match={match} />,
 	},
-	// {
-	// 	path: '/organizations/register',
-	// 	component: ({ match }) => <AddOrganizationScreen match={match} />,
-	// },
 	{
-		path: '/influences/register',
-		component: ({ match }) => <InfluenceForm match={match} />,
-	},
-	{
-		path: '/organizations/:organizationId/profile',
+		path: '/organizations/:organizationId/view',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/profile/edit',
+		path: '/organizations/:organizationId/view/edit',
 		component: ({ match }) => <OrganizationScreen match={match} />,
 	},
 	{
 		path: '/stakeholders',
 		component: ({ match }) => <StakeholdersList match={match} />,
-	},
-	{
-		path: '/stakeholders/register',
-		component: ({ match }) => <StakeholderContactInfo match={match} />,
 	},
 	{
 		path: '/landownerships',

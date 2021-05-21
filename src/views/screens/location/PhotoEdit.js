@@ -11,7 +11,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import BorderContainer from '../../components/BorderContainer';
 
-const EditLocationPhoto = ({ projectId, match }) => {
+const PhotoEdit = ({ projectId, match }) => {
 	const stakeholderId = match.params.id;
 
 	//define states
@@ -119,4 +119,4 @@ const EditLocationPhoto = ({ projectId, match }) => {
 	);
 };
 
-export default EditLocationPhoto;
+export default PhotoEdit;

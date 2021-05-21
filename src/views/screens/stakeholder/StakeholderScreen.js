@@ -11,7 +11,7 @@ import {
 import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
-import { btnlinks, navbarlinks, routes } from './StakeholderRoutes';
+import { btnlinks, navbarlinks, routes } from './utilities';
 import { getLocationId } from '../../../application/localStorage';
 
 const StakeholderScreen = ({ match }) => {

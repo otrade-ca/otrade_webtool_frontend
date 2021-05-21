@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
 import MemberDropdownProject from '../../components/MemberDropdownProject';
-import { getLocationId } from '../../../application/localStorage';
 import { useTranslation } from 'react-i18next';
 
-const AddOrganizationScreen = ({ keyword = '', history }) => {
-	const locationId = getLocationId();
+const AddOrganizationScreen = ({ history }) => {
+	const { id } = useParams();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
@@ -40,7 +39,7 @@ const AddOrganizationScreen = ({ keyword = '', history }) => {
 					email,
 					telephone,
 					website,
-					location: locationId,
+					location: id,
 					project: project._id,
 					stakeholders: members,
 				},

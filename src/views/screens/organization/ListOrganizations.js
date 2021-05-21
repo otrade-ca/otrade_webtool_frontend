@@ -64,7 +64,7 @@ const OrganizationsList = memo(({ match }) => {
 						<Card.Header className="my-card-header">
 							<FilterBox searchWord={'Organizations'} />
 							<Link
-								to={`/organizations/register`}
+								to={`/organizations/register/community/${locationId}`}
 								className="btn btn-primary ml-2"
 							>
 								<i className="fas fa-plus"></i> {t('tables.organization')}
@@ -181,7 +181,7 @@ const OrganizationsList = memo(({ match }) => {
 														<div>
 															<p>
 																<>
-																	<Link to={`${url}/${item._id}/profile`}>
+																	<Link to={`${url}/${item._id}/view`}>
 																		{item.name}
 																	</Link>
 																</>
