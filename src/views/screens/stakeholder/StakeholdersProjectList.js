@@ -211,7 +211,7 @@ const StakeholdersLocationList = ({ match, keyword = '' }) => {
 														</IconContext.Provider>
 													</div>
 													<div className="item-two">
-														<div>{item.location.location}</div>
+														<div>{item && item.location.location}</div>
 														<div className="item-category">Community</div>
 													</div>
 												</div>
