@@ -8,20 +8,17 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import PrivateRoute from './components/Routing/PrivateRoute';
 import UserProfileScreen from './screens/user/UserProfileScreen';
-import ProjectScreen from './screens/project/ProjectScreen';
-import StakeholderScreen from './screens/stakeholder/StakeholderScreen';
-import StakeholdersUserList from './screens/stakeholder/StakeholdersUserList';
 import AdminRoutes from './components/Routing/AdminRoutes';
-import LocationForm from './screens/location/LocationForm';
-import LocationScreen from './screens/location/LocationScreen';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
-import UserProjects from './screens/project/UserProjects';
 import ActivityType from './screens/activity/ActivityType';
 import InfluenceForm from './screens/influence/InfluenceForm';
 import AddOrganizationScreen from './screens/organization/AddOrganizationScreen';
 import CommitmentForm from './screens/commitment/CommitmentForm';
+import StakeholderRoutes from './components/Routing/StakeholderRoutes';
+import ProjectRoutes from './components/Routing/ProjectRoutes';
+import LocationRoutes from './components/Routing/LocationRoutes';
 
 const Home = () => {
 	const { i18n } = useTranslation();
@@ -56,24 +53,10 @@ const Home = () => {
 					<Route exact path="/login" component={LoginScreen} />
 					<PrivateRoute path="/profile/:id" component={UserProfileScreen} />
 
-					{/*project routes*/}
-					<PrivateRoute path="/projects/:id" component={UserProjects} />
-					<PrivateRoute path="/project/:id" component={ProjectScreen} />
-					<PrivateRoute
-						path="/project/:id/communities/register"
-						component={LocationForm}
-					/>
+					<Route component={ProjectRoutes} />
+					<Route component={LocationRoutes} />
+					<Route component={StakeholderRoutes} />
 
-					{/*location routes*/}
-					{/* <PrivateRoute path="/locations/:id" component={UserLocationsList} /> */}
-					<PrivateRoute path="/location/:id" component={LocationScreen} />
-
-					{/*stakeholder routes*/}
-					<PrivateRoute
-						path="/stakeholders/:id"
-						component={StakeholdersUserList}
-					/>
-					<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
 					<PrivateRoute path="/activities/register" component={ActivityType} />
 					<PrivateRoute
 						path="/organizations/register"
@@ -90,7 +73,6 @@ const Home = () => {
 						component={CommitmentForm}
 					/>
 
-					{/*influence route */}
 					<Route component={AdminRoutes} />
 				</Container>
 				<Footer />
