@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message.js';
-import Loader from '../components/Loader.js';
-import FormContainer from '../components/FormContainer.js';
-import { login } from '../../application/actions/userActions';
+import Message from '../../components/Message.js';
+import Loader from '../../components/Loader.js';
+import FormContainer from '../../components/FormContainer.js';
+import { login } from '../../../application/actions/userActions';
 
-const LoginScreen = ({ history }) => {
+const LoginPage = ({ history }) => {
 	//define states
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -65,4 +65,4 @@ const LoginScreen = ({ history }) => {
 	);
 };
 
-export default LoginScreen;
+export default LoginPage;

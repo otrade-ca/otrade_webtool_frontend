@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Wrapper from './components/Layout/Wrapper/Wrapper';
 import Footer from './components/Layout/Footer';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
+import { HomePage, LoginPage } from './screens/landing/landing';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
 import { useTranslation } from 'react-i18next';
@@ -51,8 +50,8 @@ const Home = () => {
 			<Wrapper>
 				<Container fluid="lg" className="content-container">
 					<Alert />
-					<Route exact path="/" component={HomeScreen} />
-					<Route exact path="/login" component={LoginScreen} />
+					<Route exact path="/" component={HomePage} />
+					<Route exact path="/login" component={LoginPage} />
 
 					{/**General Routes */}
 					<Route component={UserRoutes} />
