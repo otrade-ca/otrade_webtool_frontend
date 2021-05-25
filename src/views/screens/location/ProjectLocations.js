@@ -211,7 +211,9 @@ const ProjectLocations = ({ match }) => {
 													<i className="fas fa-plus" />
 													Add {t('tables.stakeholder')}
 												</Link>
-												<Link to={`/organizations/register`}>
+												<Link
+													to={`/organizations/register/community/${location._id}`}
+												>
 													<i className="fas fa-plus" />
 													Add {t('tables.organization')}
 												</Link>

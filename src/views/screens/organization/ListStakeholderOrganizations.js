@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Accordion, Button, Card } from 'react-bootstrap';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,9 +20,7 @@ import * as VscIcons from 'react-icons/vsc';
 
 const ListStakeholderOrganizations = ({ match }) => {
 	const stakeholderId = match.params.id;
-
 	const { url } = useRouteMatch();
-
 	const { t } = useTranslation();
 
 	//get organizations for stakeholder
@@ -37,18 +35,14 @@ const ListStakeholderOrganizations = ({ match }) => {
 	const organizationDelete = useSelector((state) => state.organizationDelete);
 	const { success } = organizationDelete;
 
-	//use state
-	const [message, setMessage] = useState(null);
-
 	useEffect(() => {
 		if (success) {
 			dispatch(listStakeholderOrganizations(stakeholderId));
-			setMessage('Organization has been successfully deleted.');
 			dispatch({ type: ORGANIZATION_DELETE_REQUEST });
 		} else {
 			dispatch(listStakeholderOrganizations(stakeholderId));
 		}
-	}, [dispatch, stakeholderId, success, message]);
+	}, [dispatch, stakeholderId, success]);
 
 	//delete user
 	const deleteHandler = (id) => {
@@ -59,7 +53,6 @@ const ListStakeholderOrganizations = ({ match }) => {
 
 	return (
 		<Card className="my-card">
-			{message && <Message>{message}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -68,7 +61,7 @@ const ListStakeholderOrganizations = ({ match }) => {
 				<>
 					{organizations && organizations.length === 0 ? (
 						<Empty
-							itemLink={'register'}
+							itemLink={`/organizations/register`}
 							url={'/organizations'}
 							type={t('tables.organization')}
 							group={'organizations'}

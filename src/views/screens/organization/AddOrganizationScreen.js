@@ -8,7 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { getLocationId } from '../../../application/localStorage';
 
 const AddOrganizationScreen = ({ match, history }) => {
-	const id = getLocationId();
+	// id is either match or from localStorage
+	const id = match.params.id ? match.params.id : getLocationId();
+
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
@@ -44,7 +46,7 @@ const AddOrganizationScreen = ({ match, history }) => {
 					email,
 					telephone,
 					website,
-					location: loc._id,
+					location: id || loc._id,
 					project: project._id,
 					stakeholders: members,
 				},
