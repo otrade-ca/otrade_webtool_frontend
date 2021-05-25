@@ -5,6 +5,7 @@ import {
 	COMMITMENT_DETAILS_REQUEST,
 	COMMITMENT_DETAILS_SUCCESS,
 	COMMITMENT_DETAILS_FAIL,
+	COMMITMENT_DETAILS_RESET,
 	COMMITMENT_UPDATE_REQUEST,
 	COMMITMENT_UPDATE_SUCCESS,
 	COMMITMENT_UPDATE_FAIL,
@@ -42,6 +43,8 @@ export const commitmentDetailsReducer = (
 			return { loading: false, success: true, commitment: action.payload };
 		case COMMITMENT_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case COMMITMENT_DETAILS_RESET:
+			return { commitment: {} };
 		default:
 			return state;
 	}

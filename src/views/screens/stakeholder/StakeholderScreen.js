@@ -32,7 +32,7 @@ const StakeholderScreen = ({ match }) => {
 
 	useEffect(() => {
 		dispatch(getStakeholderDetails(stakeholderId));
-		dispatch(listLocationStakeholders(locationId));
+		// dispatch(listLocationStakeholders(locationId));
 	}, [dispatch, stakeholderId, locationId]);
 
 	return (

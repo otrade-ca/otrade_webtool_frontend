@@ -24,7 +24,9 @@ import {
 	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 	ACTIVITY_SAVE_REQUEST,
 	ACTIVITY_SAVE_RESET,
+	ACTIVITY_DETAILS_RESET,
 } from '../constants/activityConstants';
+import { COMMITMENT_DETAILS_RESET } from '../constants/commitmentConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
@@ -177,6 +179,8 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 export const listActivities = (projectId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_LIST_REQUEST });
+		dispatch({ type: ACTIVITY_DETAILS_RESET });
+		dispatch({ type: COMMITMENT_DETAILS_RESET });
 
 		const {
 			userLogin: { userInfo },

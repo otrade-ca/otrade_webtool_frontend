@@ -26,6 +26,7 @@ import {
 	ACTIVITY_STAKEHOLDER_LIST_FAIL,
 	ACTIVITY_STAKEHOLDER_FILTER,
 	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
+	ACTIVITY_DETAILS_RESET,
 } from '../constants/activityConstants';
 
 // add activity reducer
@@ -53,6 +54,8 @@ export const activityDetailsReducer = (state = { activity: {} }, action) => {
 			return { loading: false, activity: action.payload };
 		case ACTIVITY_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case ACTIVITY_DETAILS_RESET:
+			return { activity: {} };
 		default:
 			return state;
 	}

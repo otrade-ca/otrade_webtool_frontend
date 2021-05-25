@@ -1,4 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as reduxForm } from 'redux-form';
@@ -231,6 +233,12 @@ const persistedState = {
 	stakeholderList: { stakeholders: stakeholderListInfoFromStorage },
 };
 
+const persistConfig = {
+	key: 'root',
+	storage,
+	whitelist: [],
+};
+
 const middleware = [thunk];
 
 // create store with reducer and persistedState
@@ -240,4 +248,7 @@ const store = createStore(
 	composeWithDevTools(applyMiddleware(...middleware))
 );
 
-export default store;
+// create persisted version of store
+const persistor = persistStore(store);
+
+export { store, persistor };

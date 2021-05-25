@@ -84,6 +84,8 @@ export const getCommitment = (id) => async (dispatch, getState) => {
 			config
 		);
 
+		console.log('data', data);
+
 		dispatch({ type: COMMITMENT_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({

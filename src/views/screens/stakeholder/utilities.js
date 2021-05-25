@@ -1,12 +1,14 @@
 import EditStakeholderScreen from './EditStakeholderScreen';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import ListStakeholderActivities from '../activity/ListStakeholderActivities';
+import Activities from '../activity/Activities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
 import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
 import CommitmentDetails from '../commitment/CommitmentDetails';
+import FormDetails from '../commitment/FormDetails';
 
 export const btnlinks = [
 	// {
@@ -65,7 +67,7 @@ export const routes = [
 	},
 	{
 		path: '/activities',
-		component: ({ match }) => <ListStakeholderActivities match={match} />,
+		component: ({ match }) => <Activities match={match} />,
 	},
 	{
 		path: '/activities/:activityId/view',
@@ -77,6 +79,6 @@ export const routes = [
 	},
 	{
 		path: '/activities/:activityId/commitment',
-		component: ({ match }) => <CommitmentDetails match={match} />,
+		component: ({ match }) => <FormDetails match={match} />,
 	},
 ];
