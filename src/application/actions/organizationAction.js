@@ -36,7 +36,7 @@ export const addOrganization =
 	(organization, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_ADD_REQUEST });
-
+			console.log('organization', organization);
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -55,7 +55,7 @@ export const addOrganization =
 				organization,
 				config
 			);
-
+			console.log('returning data', data);
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 			history.go(-1);
 			dispatch(setAlert('Organization successfully added', 'success'));
