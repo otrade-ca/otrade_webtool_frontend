@@ -10,7 +10,7 @@ const Empty = ({ itemLink, type, url, group = '' }) => {
 			<Card.Header className="my-card-header">
 				<h4>{type}</h4>
 				{itemLink && (
-					<Link to={`${url}/${itemLink}`} className="btn btn-primary">
+					<Link to={`${itemLink}`} className="btn btn-primary">
 						<IconContext.Provider value={{ color: '#fff', size: '1em' }}>
 							<IoIcons.IoMdAdd />
 						</IconContext.Provider>

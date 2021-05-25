@@ -52,8 +52,8 @@ const ProjectLocations = ({ match }) => {
 				<>
 					{locations && locations.length === 0 ? (
 						<Empty
-							itemLink={'register'}
-							url={'communities/register'}
+							itemLink={`/communities/register/project/${projectId}`}
+							url={`/communities/register/project/${projectId}`}
 							type={t('tables.location')}
 							group={'locations'}
 						/>
@@ -135,7 +135,9 @@ const ProjectLocations = ({ match }) => {
 													<i className="fas fa-plus" />{' '}
 													{t('tables.stakeholder')}
 												</Link>
-												<Link to={`/organizations/register`}>
+												<Link
+													to={`/organizations/register/community/${location._id}`}
+												>
 													<i className="fas fa-plus" />{' '}
 													{t('tables.organization')}
 												</Link>

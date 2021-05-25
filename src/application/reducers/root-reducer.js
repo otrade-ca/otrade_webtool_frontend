@@ -211,6 +211,7 @@ const persistConfig = {
 		'stakeholderLocationList',
 		'stakeholderProjectList',
 		'organizationList',
+		'locationDetails',
 	],
 };
 

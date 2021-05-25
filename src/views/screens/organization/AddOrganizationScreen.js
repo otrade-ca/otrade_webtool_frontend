@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withRouter, useParams } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
@@ -7,7 +7,7 @@ import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 import { getLocationId } from '../../../application/localStorage';
 
-const AddOrganizationScreen = ({ history }) => {
+const AddOrganizationScreen = ({ match, history }) => {
 	const id = getLocationId();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
@@ -15,6 +15,10 @@ const AddOrganizationScreen = ({ history }) => {
 	//get project details
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
+
+	//get location details
+	const locationDetails = useSelector((state) => state.locationDetails);
+	const { location: loc } = locationDetails;
 
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
@@ -40,7 +44,7 @@ const AddOrganizationScreen = ({ history }) => {
 					email,
 					telephone,
 					website,
-					location: id,
+					location: loc._id,
 					project: project._id,
 					stakeholders: members,
 				},

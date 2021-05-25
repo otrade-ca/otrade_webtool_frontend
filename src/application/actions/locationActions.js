@@ -29,7 +29,7 @@ export const addLocation =
 	(location, projectId, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: LOCATION_ADD_REQUEST });
-
+			console.log('adding location', location);
 			// get logged in user
 			const { userLogin } = getState();
 

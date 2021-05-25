@@ -108,7 +108,7 @@ const OrganizationsProjectList = ({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<>
-																<Link to={`${url}/${item._id}/profile`}>
+																<Link to={`${url}/${item._id}/view`}>
 																	{item.name}
 																</Link>
 															</>
@@ -174,7 +174,7 @@ const OrganizationsProjectList = ({ match }) => {
 													<div className="d-flex justify-content-between">
 														<div>
 															<>
-																<Link to={`${url}/${item._id}/profile`}>
+																<Link to={`${url}/${item._id}/view`}>
 																	{item.name}
 																</Link>
 															</>
