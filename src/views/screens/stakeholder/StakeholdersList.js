@@ -137,6 +137,18 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 															</Button>
 														</div>
 													</div>
+													<div className="location-add-btns">
+														<Link to={`/activities/register`}>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.activity')}
+														</Link>
+														<Link
+															to={`/influences/register/stakeholder/${item._id}`}
+														>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.influence')}
+														</Link>
+													</div>
 												</Card.Body>
 											</Accordion.Collapse>
 										</Card>
@@ -201,6 +213,18 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 																{t('action.delete')}
 															</Button>
 														</div>
+													</div>
+													<div className="location-add-btns">
+														<Link to={`/activities/register`}>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.activity')}
+														</Link>
+														<Link
+															to={`/influences/register/stakeholder/${item._id}`}
+														>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.influence')}
+														</Link>
 													</div>
 												</Card.Body>
 											</Accordion.Collapse>

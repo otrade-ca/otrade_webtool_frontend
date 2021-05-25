@@ -149,6 +149,16 @@ const StakeholdersLocationList = ({
 															</Button>
 														</div>
 													</div>
+													<hr />
+													<div className="location-add-btns">
+														<Link
+															to={`/activities/register`}
+															className="btn btn-primary"
+														>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.activity')}
+														</Link>
+													</div>
 												</Card.Body>
 											</Accordion.Collapse>
 										</Card>
@@ -232,6 +242,18 @@ const StakeholdersLocationList = ({
 																{t('action.delete')}
 															</Button>
 														</div>
+													</div>
+													<div className="location-add-btns">
+														<Link to={`/activities/register`}>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.activity')}
+														</Link>
+														<Link
+															to={`/influences/register/stakeholder/${item._id}`}
+														>
+															<i className="fas fa-plus" /> Add{' '}
+															{t('tables.influence')}
+														</Link>
 													</div>
 												</Card.Body>
 											</Accordion.Collapse>

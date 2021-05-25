@@ -127,6 +127,22 @@ const ProjectLocations = ({ match }) => {
 													</Button>
 												</div>
 											</div>
+
+											<div className="location-add-btns">
+												<Link
+													to={`/stakeholders/register/community/${location._id}`}
+												>
+													<i className="fas fa-plus" />{' '}
+													{t('tables.stakeholder')}
+												</Link>
+												<Link to={`/organizations/register`}>
+													<i className="fas fa-plus" />{' '}
+													{t('tables.organization')}
+												</Link>
+												<Link to={`/activities/register`}>
+													<i className="fas fa-plus" /> {t('tables.activity')}
+												</Link>
+											</div>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
@@ -185,6 +201,18 @@ const ProjectLocations = ({ match }) => {
 														<i className="fas fa-trash"></i> Delete
 													</Button>
 												</div>
+											</div>
+											<div className="location-add-btns">
+												<Link
+													to={`/stakeholders/register/community/${location._id}`}
+												>
+													<i className="fas fa-plus" />
+													Add {t('tables.stakeholder')}
+												</Link>
+												<Link to={`/organizations/register`}>
+													<i className="fas fa-plus" />
+													Add {t('tables.organization')}
+												</Link>
 											</div>
 										</Card.Body>
 									</Accordion.Collapse>

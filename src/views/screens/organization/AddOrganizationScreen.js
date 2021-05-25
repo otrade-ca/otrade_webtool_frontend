@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
 import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
+import { getLocationId } from '../../../application/localStorage';
 
 const AddOrganizationScreen = ({ history }) => {
-	const { id } = useParams();
+	const id = getLocationId();
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
