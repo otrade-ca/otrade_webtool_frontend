@@ -17,16 +17,19 @@ import {
 	STAKEHOLDER_LIST_REQUEST,
 	STAKEHOLDER_LIST_SUCCESS,
 	STAKEHOLDER_LIST_FAIL,
+	STAKEHOLDER_LIST_RESET,
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 	STAKEHOLDER_USER_LIST_REQUEST,
 	STAKEHOLDER_USER_LIST_SUCCESS,
 	STAKEHOLDER_USER_LIST_FAIL,
+	STAKEHOLDER_USER_LIST_RESET,
 	STAKEHOLDER_USER_FILTER,
 	STAKEHOLDER_USER_FILTER_CLEAR,
 	STAKEHOLDER_LOCATION_LIST_REQUEST,
 	STAKEHOLDER_LOCATION_LIST_SUCCESS,
 	STAKEHOLDER_LOCATION_LIST_FAIL,
+	STAKEHOLDER_LOCATION_LIST_RESET,
 	STAKEHOLDER_LOCATION_FILTER,
 	STAKEHOLDER_LOCATION_FILTER_CLEAR,
 	STAKEHOLDER_PROJECT_LIST_REQUEST,
@@ -34,6 +37,7 @@ import {
 	STAKEHOLDER_PROJECT_LIST_FAIL,
 	STAKEHOLDER_PROJECT_LIST_FILTER,
 	STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR,
+	STAKEHOLDER_PROJECT_LIST_RESET,
 	STAKEHOLDER_ASSIGN_REQUEST,
 	STAKEHOLDER_ASSIGN_SUCCESS,
 	STAKEHOLDER_ASSIGN_RESET,
@@ -136,6 +140,8 @@ export const stakeholderListReducer = (
 			};
 		case STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_LIST_RESET:
+			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}
@@ -168,6 +174,8 @@ export const stakeholderUserListReducer = (
 			};
 		case STAKEHOLDER_USER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_USER_LIST_RESET:
+			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}
@@ -200,6 +208,8 @@ export const stakeholderLocationListReducer = (
 			};
 		case STAKEHOLDER_LOCATION_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_LOCATION_LIST_RESET:
+			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}
@@ -232,6 +242,8 @@ export const stakeholderProjectListReducer = (
 			};
 		case STAKEHOLDER_PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_PROJECT_LIST_RESET:
+			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}

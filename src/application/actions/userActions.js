@@ -26,7 +26,12 @@ import {
 } from '../constants/userConstants';
 import { getURL } from '../api';
 import { PROJECT_LIST_RESET } from '../constants/projectConstants';
-import { STAKEHOLDER_LIST_RESET } from '../constants/stakeholderConstants';
+import {
+	STAKEHOLDER_LIST_RESET,
+	STAKEHOLDER_PROJECT_LIST_RESET,
+	STAKEHOLDER_LOCATION_LIST_RESET,
+	STAKEHOLDER_USER_LIST_RESET,
+} from '../constants/stakeholderConstants';
 import { ORGANIZATION_LIST_RESET } from '../constants/organizationConstants';
 import { ACTIVITY_LIST_RESET } from '../constants/activityConstants';
 import { setAlert } from '../actions/alertActions';
@@ -112,6 +117,9 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: USER_DETAILS_RESET });
 	dispatch({ type: PROJECT_LIST_RESET });
 	dispatch({ type: STAKEHOLDER_LIST_RESET });
+	dispatch({ type: STAKEHOLDER_USER_LIST_RESET });
+	dispatch({ type: STAKEHOLDER_LOCATION_LIST_RESET });
+	dispatch({ type: STAKEHOLDER_PROJECT_LIST_RESET });
 	dispatch({ type: ORGANIZATION_LIST_RESET });
 	dispatch({ type: ACTIVITY_LIST_RESET });
 };
