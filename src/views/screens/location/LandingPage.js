@@ -25,7 +25,7 @@ const LandingPage = ({ match, history }) => {
 	const { loading, error, location } = locationDetails;
 
 	useEffect(() => {
-		//dispatch(listStakeholders(locationId));
+		dispatch(listStakeholders(locationId));
 		dispatch(getLocationDetails(locationId));
 		dispatch(listOrganizations(locationId));
 	}, [dispatch, locationId]);

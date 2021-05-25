@@ -193,7 +193,7 @@ export const listProjectOrganizations =
 			);
 
 			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
-			localStorage.setItem('organizationsListInfo', JSON.stringify(data));
+			// localStorage.setItem('organizationsListInfo', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: ORGANIZATION_LIST_FAIL,

@@ -211,7 +211,7 @@ export const listStakeholders =
 
 			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
 
-			localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
+			// localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: STAKEHOLDER_LIST_FAIL,

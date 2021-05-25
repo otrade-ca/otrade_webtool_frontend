@@ -1,7 +1,7 @@
-import React, { memo, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import {
 	FilterBox,
 	Loader,
@@ -12,41 +12,35 @@ import {
 	listProjectStakeholders,
 	deleteStakeholder,
 } from '../../../application/actions/stakeholderActions';
-import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import PropTypes from 'prop-types';
 
-const StakeholdersLocationList = ({ match, keyword = '' }) => {
+const StakeholdersLocationList = ({
+	match,
+	listProjectStakeholders,
+	deleteStakeholder,
+	stakeholderDelete: { success },
+	stakeholderProjectList: { loading, error, filtered, stakeholders },
+}) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
-
 	const { t } = useTranslation();
-
-	//get stakeholders who belong to a particular location
-	const dispatch = useDispatch();
-	const stakeholderProjectList = useSelector(
-		(state) => state.stakeholderProjectList
-	);
-	const { loading, error, filtered, stakeholders } = stakeholderProjectList;
-
-	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
-	const { success } = stakeholderDelete;
 
 	useEffect(() => {
 		if (success) {
-			dispatch(listProjectStakeholders(projectId, keyword));
-			dispatch({ type: STAKEHOLDER_DELETE_RESET });
+			listProjectStakeholders(projectId);
 		} else {
-			dispatch(listProjectStakeholders(projectId, keyword));
+			listProjectStakeholders(projectId);
 		}
-	}, [dispatch, keyword, projectId, success]);
+	}, [listProjectStakeholders, projectId, success]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
-			dispatch(deleteStakeholder(id));
+			deleteStakeholder(id);
 		}
 	};
 
@@ -59,12 +53,7 @@ const StakeholdersLocationList = ({ match, keyword = '' }) => {
 			) : (
 				<>
 					{!filtered && stakeholders && stakeholders.length === 0 ? (
-						<Empty
-							// itemLink={'register'}
-							url={url}
-							type={'Stakeholder'}
-							group={'stakeholders'}
-						/>
+						<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
 					) : (
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.stakeholder')}</h4>
@@ -256,4 +245,17 @@ const StakeholdersLocationList = ({ match, keyword = '' }) => {
 	);
 };
 
-export default memo(StakeholdersLocationList);
+StakeholdersLocationList.propTypes = {
+	listProjectStakeholders: PropTypes.func.isRequired,
+	deleteStakeholder: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	stakeholderProjectList: state.stakeholderProjectList,
+	stakeholderDelete: state.stakeholderDelete,
+});
+
+export default connect(mapStateToProps, {
+	listProjectStakeholders,
+	deleteStakeholder,
+})(StakeholdersLocationList);
