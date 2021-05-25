@@ -209,6 +209,7 @@ const persistConfig = {
 		'userLogin',
 		'stakeholderList',
 		'stakeholderLocationList',
+		'stakeholderProjectList',
 		'organizationList',
 	],
 };
