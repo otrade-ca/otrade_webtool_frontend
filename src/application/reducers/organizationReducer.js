@@ -29,6 +29,7 @@ import {
 	ORGANIZATION_ASSIGNMENT_SUCCESS,
 	ORGANIZATION_ASSIGNMENT_FAIL,
 	ORGANIZATION_ASSIGNMENT_RESET,
+	ORGANIZATION_PROJECT_LIST_RESET,
 } from '../constants/organizationConstants';
 
 // add organization reducer
@@ -129,6 +130,8 @@ export const organizationListReducer = (
 				...state,
 				filtered: null,
 			};
+		case ORGANIZATION_PROJECT_LIST_RESET:
+			return { organizations: [], filtered: [] };
 		default:
 			return state;
 	}
@@ -166,20 +169,6 @@ export const organizationStakeholderListReducer = (
 			return state;
 	}
 };
-
-// assign organization
-// export const organizationAssignmentReducer = (state = { orgs: [] }, action) => {
-// 	switch (action.type) {
-// 		case ORGANIZAION_UPDATED_LIST_REQUEST:
-// 			return { loading: true, ...state };
-// 		case ORGANIZAION_UPDATED_LIST_SUCCESS:
-// 			return { loading: false, success: true, orgs: action.payload };
-// 		case ORGANIZAION_UPDATED_LIST_RESET:
-// 			return { orgs: [] };
-// 		default:
-// 			return state;
-// 	}
-// };
 
 // organization assignments
 export const organizationAssignmentReducer = (
