@@ -1,6 +1,5 @@
 import EditStakeholderScreen from './EditStakeholderScreen';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
-import ListStakeholderActivities from '../activity/ListStakeholderActivities';
 import Activities from '../activity/Activities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
@@ -9,6 +8,7 @@ import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
 import CommitmentDetails from '../commitment/CommitmentDetails';
 import FormDetails from '../commitment/FormDetails';
+import StakeholderInfluences from '../influence/StakeholderInfluences';
 
 export const btnlinks = [
 	// {
@@ -33,6 +33,10 @@ export const navbarlinks = [
 	{
 		link: '/activities',
 		type: 'Activities',
+	},
+	{
+		link: '/assessments',
+		type: 'Assessments',
 	},
 ];
 
@@ -80,5 +84,9 @@ export const routes = [
 	{
 		path: '/activities/:activityId/commitment',
 		component: ({ match }) => <FormDetails match={match} />,
+	},
+	{
+		path: '/assessments',
+		component: ({ match }) => <StakeholderInfluences match={match} />,
 	},
 ];
