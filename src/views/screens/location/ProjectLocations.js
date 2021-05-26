@@ -118,6 +118,21 @@ const ProjectLocations = ({ match }) => {
 													{': '} {location.scope}
 												</div>
 												<div className="d-flex align-items-center">
+													<Link
+														to={`/stakeholders/register/community/${location._id}`}
+													>
+														<i className="fas fa-plus" />{' '}
+														{t('tables.stakeholder')}
+													</Link>
+													<Link
+														to={`/organizations/register/community/${location._id}`}
+													>
+														<i className="fas fa-plus" />{' '}
+														{t('tables.organization')}
+													</Link>
+													<Link to={`/activities/register`}>
+														<i className="fas fa-plus" /> {t('tables.activity')}
+													</Link>
 													<Button
 														variant="danger"
 														className="btn-md ml-3"

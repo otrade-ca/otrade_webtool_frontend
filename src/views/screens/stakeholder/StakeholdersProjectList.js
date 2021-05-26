@@ -29,6 +29,8 @@ const StakeholdersLocationList = ({
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
+	console.log('stakeholders', stakeholders);
+
 	useEffect(() => {
 		if (success) {
 			listProjectStakeholders(projectId);
