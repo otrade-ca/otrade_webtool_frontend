@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, withRouter } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
@@ -28,6 +28,8 @@ const StakeholdersLocationList = ({
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
+
+	console.log('projectId', match);
 
 	console.log('stakeholders', stakeholders);
 
@@ -282,4 +284,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	listProjectStakeholders,
 	deleteStakeholder,
-})(StakeholdersLocationList);
+})(withRouter(StakeholdersLocationList));
