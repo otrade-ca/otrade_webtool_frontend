@@ -213,10 +213,10 @@ const StakeholdersLocationList = ({
 															<RiIcons.RiCommunityLine />
 														</IconContext.Provider>
 													</div>
-													<div className="item-two">
+													{/* <div className="item-two">
 														<div>{item && item.location.location}</div>
 														<div className="item-category">Community</div>
-													</div>
+													</div> */}
 												</div>
 											</Accordion.Toggle>
 											<Accordion.Collapse eventKey={index + 1}>
