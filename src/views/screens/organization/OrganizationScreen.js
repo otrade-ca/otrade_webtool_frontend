@@ -243,7 +243,7 @@ const OrganizationScreen = ({ match, history }) => {
 									{stakeholders &&
 										stakeholders.map((assignee, i) => (
 											<Row key={assignee._id}>
-												<Col md={7}>
+												<Col md={8}>
 													<Form.Control
 														as="select"
 														value={assignee}
@@ -262,7 +262,7 @@ const OrganizationScreen = ({ match, history }) => {
 															))}
 													</Form.Control>
 												</Col>
-												<Col md={5}>
+												<Col md={4}>
 													{stakeholders.length !== 1 && (
 														<Button
 															variant="danger"
@@ -277,8 +277,7 @@ const OrganizationScreen = ({ match, history }) => {
 															className="px-3"
 															onClick={() => addHandler(i)}
 														>
-															<i className="fas fa-plus"></i>{' '}
-															{t('tables.stakeholder')}
+															<i className="fas fa-plus"></i> Add
 														</Button>
 													)}
 												</Col>

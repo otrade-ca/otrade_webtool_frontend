@@ -25,6 +25,9 @@ const AddOrganizationScreen = ({ match, history }) => {
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
 
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
+
 	//define states
 	const [organization, setOrganization] = useState('');
 	const [division, setDivision] = useState('');
@@ -50,6 +53,7 @@ const AddOrganizationScreen = ({ match, history }) => {
 					project: project._id,
 					stakeholders: members,
 				},
+				routeInfo,
 				history
 			)
 		);

@@ -33,7 +33,7 @@ import { getURL } from '../api';
 
 // add an organization to a project
 export const addOrganization =
-	(organization, history) => async (dispatch, getState) => {
+	(organization, routeInfo, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_ADD_REQUEST });
 			console.log('organization', organization);
@@ -55,10 +55,18 @@ export const addOrganization =
 				organization,
 				config
 			);
-			console.log('returning data', data);
+
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
-			history.go(-1);
-			dispatch(setAlert('Organization successfully added', 'success'));
+
+			console.log(routeInfo);
+
+			// if assessment route exists
+			if (routeInfo.length !== 0) {
+				history.push(routeInfo[0].path);
+			} else {
+				history.go(-2);
+				dispatch(setAlert('Organization successfully added', 'success'));
+			}
 		} catch (error) {
 			dispatch({
 				type: ORGANIZATION_ADD_FAIL,
@@ -108,7 +116,7 @@ export const updateOrganization =
 	(org, orgId, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_UPDATE_REQUEST });
-
+			console.log('org to be updated', org);
 			//get logged in user
 			const {
 				userLogin: { userInfo },
@@ -125,7 +133,8 @@ export const updateOrganization =
 			await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
 
 			dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
-			history.go(-1);
+			console.log('success');
+			history.go(-2);
 			dispatch(setAlert('Organization successfully updated', 'success'));
 		} catch (error) {
 			dispatch({

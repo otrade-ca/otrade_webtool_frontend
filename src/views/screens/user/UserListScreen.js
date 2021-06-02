@@ -162,8 +162,8 @@ const UserListScreen = ({ history, match }) => {
 						<Paginate
 							pages={pages}
 							page={page}
-							urlOne={'/admin/projects/search/'}
-							urlTwo={'/admin/projects/page/'}
+							urlOne={'/admin/userlist/search/'}
+							urlTwo={'/admin/userlist/page/'}
 						/>
 					</Row>
 				</Card.Body>

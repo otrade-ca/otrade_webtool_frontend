@@ -106,7 +106,7 @@ const MemberDropdown = ({ label, history }) => {
 										)}
 										{members && members.length - 1 === i && (
 											<Button className="px-3" onClick={() => addHandler(i)}>
-												<i className="fas fa-plus"></i> Stakeholder
+												<i className="fas fa-plus"></i> Add
 											</Button>
 										)}
 									</Col>

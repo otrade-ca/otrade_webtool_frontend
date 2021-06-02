@@ -6,7 +6,6 @@ import ActivityEdit from '../activity/ActivityEdit';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
 import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
-import CommitmentDetails from '../commitment/CommitmentDetails';
 import FormDetails from '../commitment/FormDetails';
 import StakeholderInfluences from '../influence/StakeholderInfluences';
 

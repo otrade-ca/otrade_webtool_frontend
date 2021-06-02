@@ -96,6 +96,8 @@ import {
 	locationUserListReducer,
 } from './locationReducer';
 
+import { routeSaveReducer } from './routeReducer';
+
 import { alertReducer } from './alertReducer';
 import { geocodeFetchReducer } from './geocodeReducer';
 
@@ -191,6 +193,9 @@ const rootReducer = combineReducers({
 	locationDelete: locationDeleteReducer,
 	locationList: locationListReducer,
 	locationUserList: locationUserListReducer,
+
+	// route reducer
+	routeSave: routeSaveReducer,
 
 	// alert reducer
 	alertReducer,

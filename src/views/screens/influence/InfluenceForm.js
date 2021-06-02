@@ -13,6 +13,11 @@ const InfluenceForm = ({ history, match }) => {
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { stakeholder } = stakeholderDetails;
 
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
+
+	console.log(routeInfo && routeInfo.length);
+
 	//state
 	const [firstName, setFirstName] = useState('');
 	const [type, setType] = useState('');
@@ -40,6 +45,7 @@ const InfluenceForm = ({ history, match }) => {
 					projImpact: projImpact,
 				},
 				id,
+				routeInfo,
 				history
 			)
 		);
@@ -75,7 +81,7 @@ const InfluenceForm = ({ history, match }) => {
 					<Form.Group controlId="position">
 						<Row>
 							<Col md={8}>
-								<Form.Label>What is the {firstName}'s position?</Form.Label>
+								<Form.Label>What is {firstName}'s position?</Form.Label>
 							</Col>
 							<Col md={4}>
 								<Form.Control
@@ -103,7 +109,7 @@ const InfluenceForm = ({ history, match }) => {
 						<Row>
 							<Col md={8}>
 								<Form.Label>
-									What is the {firstName}'s level of influence on the project?
+									What is {firstName}'s level of influence on the project?
 								</Form.Label>
 							</Col>
 							<Col md={4}>
@@ -127,7 +133,7 @@ const InfluenceForm = ({ history, match }) => {
 						<Row>
 							<Col md={8}>
 								<Form.Label>
-									What is the {firstName}'s level of impact on the project?
+									What is {firstName}'s level of impact on the project?
 								</Form.Label>
 							</Col>
 							<Col md={4}>

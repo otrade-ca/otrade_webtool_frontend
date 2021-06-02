@@ -28,6 +28,7 @@ import {
 } from '../constants/activityConstants';
 import { COMMITMENT_DETAILS_RESET } from '../constants/commitmentConstants';
 import { setAlert } from '../actions/alertActions';
+import { saveRouteInfo } from '../actions/routeActions';
 import { getURL } from '../api';
 
 // add activity to a project
@@ -53,12 +54,21 @@ export const addActivity =
 
 			dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
-			const { _id, compromise } = data;
+			const { _id, stakeholders, compromise } = data;
+			const routes = [];
+			stakeholders.forEach((i) => {
+				routes.push({
+					route: 'assessment',
+					path: `/influences/register/stakeholder/${i}`,
+				});
+			});
+
+			dispatch(saveRouteInfo(routes));
 
 			if (compromise === 'Yes' || compromise === 'yes') {
 				history.push(`/commitments/register/activity/${_id}`);
 			} else {
-				history.go(-1);
+				history.push(routes[0].path);
 			}
 		} catch (error) {
 			dispatch({

@@ -21,6 +21,7 @@ const EditUserPhoto = ({ match }) => {
 
 	//define states
 	const [image, setImage] = useState('');
+	let [file, setFile] = useState(null);
 	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
@@ -43,26 +44,30 @@ const EditUserPhoto = ({ match }) => {
 	}, [dispatch, userId, user, successUpdate]);
 
 	const uploadFileHandler = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('image', file);
-		setUploading(true);
+		console.log('hello');
+		setFile = e.target.files[0];
 
-		try {
-			const config = {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			};
+		console.log(file);
 
-			const { data } = await axios.post('/api/v1/uploads', formData, config);
+		// const formData = new FormData();
+		// formData.append('image', file);
+		// setUploading(true);
 
-			setImage(data);
-			setUploading(false);
-		} catch (error) {
-			console.error(error);
-			setUploading(false);
-		}
+		// try {
+		// 	const config = {
+		// 		headers: {
+		// 			'Content-Type': 'multipart/form-data',
+		// 		},
+		// 	};
+
+		// 	const { data } = await axios.post('/api/v1/uploads', formData, config);
+
+		// 	setImage(data);
+		// 	setUploading(false);
+		// } catch (error) {
+		// 	console.error(error);
+		// 	setUploading(false);
+		// }
 	};
 
 	const submitHandler = (e) => {
@@ -72,6 +77,7 @@ const EditUserPhoto = ({ match }) => {
 			updateUserProfile({
 				id: user._id,
 				image,
+				file,
 			})
 		);
 	};
@@ -98,14 +104,20 @@ const EditUserPhoto = ({ match }) => {
 								</Row>
 								<Row>
 									<Col md={6}>
-										<Form.File
+										{/* <Form.File
 											id="image-file"
 											label="Choose File"
 											custom
+											accept="image/*"
 											onChange={uploadFileHandler}
 										>
 											{uploading && <Loader />}
-										</Form.File>
+										</Form.File> */}
+										<input
+											type="file"
+											accept="image/*"
+											onChange={uploadFileHandler}
+										/>
 									</Col>
 								</Row>
 							</Form.Group>

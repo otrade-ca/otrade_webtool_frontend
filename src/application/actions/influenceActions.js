@@ -15,12 +15,14 @@ import {
 	INFLUENCE_LIST_FILTER,
 	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
+import { removeRouteInfo } from '../actions/routeActions';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add influence
 export const addInfluence =
-	(influence, stakeholderId, history) => async (dispatch, getState) => {
+	(influence, stakeholderId, routeInfo, history) =>
+	async (dispatch, getState) => {
 		try {
 			dispatch({ type: INFLUENCE_ADD_REQUEST });
 
@@ -44,8 +46,18 @@ export const addInfluence =
 			);
 
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
-			history.go(-2);
-			dispatch(setAlert('Stakeholder Status successfully updated', 'success'));
+			console.log('success', routeInfo.length);
+			// is there more than one route to redirect?
+			if (routeInfo.length > 1) {
+				console.log('new success', routeInfo.length);
+				// get the next route
+				const route = routeInfo.pop();
+				history.push(route.path);
+			} else {
+				history.go(-3);
+				dispatch(removeRouteInfo());
+				dispatch(setAlert('Assessment successfully updated', 'success'));
+			}
 		} catch (error) {
 			dispatch({
 				type: INFLUENCE_ADD_FAIL,

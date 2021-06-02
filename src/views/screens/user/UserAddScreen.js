@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../application/actions/userActions';
+import { USER_REGISTER_RESET } from '../../../application/constants/userConstants';
 import { Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
@@ -36,9 +37,8 @@ const UserAddScreen = ({ history }) => {
 		if (!userInfo || userInfo.role !== 'admin') {
 			history.push('/login');
 		} else {
-			console.log(success);
 			if (success) {
-				console.log('success');
+				dispatch({ type: USER_REGISTER_RESET });
 				history.push('/admin/userlist');
 			}
 		}

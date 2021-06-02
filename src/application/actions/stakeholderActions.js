@@ -38,6 +38,7 @@ import {
 	STAKEHOLDER_PROJECT_FILTER,
 } from '../constants/stakeholderConstants';
 import { setAlert } from '../actions/alertActions';
+import { saveRouteInfo } from '../actions/routeActions';
 import { getURL } from '../api';
 
 // add stakeholder
@@ -67,10 +68,25 @@ export const addStakeholder =
 			);
 
 			dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
+			// destructure id, organization from data
+			const { _id, organization } = data;
 
-			const { _id } = data;
-			history.push(`/influences/register/stakeholder/${_id}`);
-			dispatch(setAlert('Stakeholder successfully added', 'success'));
+			// save route to take user to influence page
+			const routes = [];
+
+			routes.push({
+				route: 'assessment',
+				path: `/influences/register/stakeholder/${_id}`,
+			});
+
+			// save route
+			dispatch(saveRouteInfo(routes));
+			// if organization is yes
+			if (organization === 'yes' || organization === 'Yes') {
+				history.push(`/organizations/register/community/${locationId}`);
+			} else {
+				history.push(routes[0].path); // go to influence page
+			}
 		} catch (error) {
 			dispatch({
 				type: STAKEHOLDER_ADD_FAIL,
