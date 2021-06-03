@@ -16,8 +16,6 @@ const InfluenceForm = ({ history, match }) => {
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 
-	console.log(routeInfo && routeInfo.length);
-
 	//state
 	const [firstName, setFirstName] = useState('');
 	const [type, setType] = useState('');

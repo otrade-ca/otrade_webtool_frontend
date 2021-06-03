@@ -43,7 +43,8 @@ import { getURL } from '../api';
 
 // add stakeholder
 export const addStakeholder =
-	(stakeholder, locationId, history) => async (dispatch, getState) => {
+	(stakeholder, locationId, routeInfo, history) =>
+	async (dispatch, getState) => {
 		try {
 			dispatch({ type: STAKEHOLDER_ADD_REQUEST });
 
@@ -68,24 +69,24 @@ export const addStakeholder =
 			);
 
 			dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
-			// destructure id, organization from data
+
+			//destructure id, organization from data
 			const { _id, organization } = data;
 
-			// save route to take user to influence page
-			const routes = [];
-
-			routes.push({
+			let updatedRoutes = [...routeInfo];
+			updatedRoutes.push({
 				route: 'assessment',
 				path: `/influences/register/stakeholder/${_id}`,
 			});
 
 			// save route
-			dispatch(saveRouteInfo(routes));
+			dispatch(saveRouteInfo(updatedRoutes));
+
 			// if organization is yes
 			if (organization === 'yes' || organization === 'Yes') {
 				history.push(`/organizations/register/community/${locationId}`);
 			} else {
-				history.push(routes[0].path); // go to influence page
+				history.push(updatedRoutes[1].path); // go to influence page
 			}
 		} catch (error) {
 			dispatch({

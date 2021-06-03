@@ -17,10 +17,14 @@ const StakeholderContactInfo = ({ history }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
 
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
+
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [alias, setAlias] = useState('');
+	const [address, setAddress] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [gender, setGender] = useState('');
 	const [birthdate, setBirthdate] = useState(Date);
@@ -58,6 +62,7 @@ const StakeholderContactInfo = ({ history }) => {
 					firstName,
 					lastName,
 					alias,
+					address,
 					telephone,
 					gender,
 					birthdate,
@@ -69,6 +74,7 @@ const StakeholderContactInfo = ({ history }) => {
 					project: project._id,
 				},
 				id,
+				routeInfo,
 				history
 			)
 		);
@@ -159,6 +165,20 @@ const StakeholderContactInfo = ({ history }) => {
 						</Form.Group>
 					</Col>
 				</Row>
+				<hr className="mb-4" />
+				<Row>
+					<Col md={12}>
+						<Form.Group controlId="address">
+							<Form.Label>Address</Form.Label>
+							<Form.Control
+								type="address"
+								placeholder="address"
+								value={address}
+								onChange={(e) => setAddress(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
 				<Row>
 					<Col md={6}>
 						<Form.Group controlId="email">
@@ -181,6 +201,42 @@ const StakeholderContactInfo = ({ history }) => {
 								required
 								onChange={(e) => setTelephone(e.target.value)}
 							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row className="mb-3">
+					<Col md={9}>
+						<Form.Group controlId="media">
+							<Form.Label>{t('stakeholder.social_Media.label')}</Form.Label>
+							{media.map((site, i) => (
+								<Row key={i}>
+									<Col md={8}>
+										<Form.Control
+											className="mb-3"
+											placeholder={t('stakeholder.social_Media.placeholder')}
+											value={site.website}
+											required
+											onChange={(e) => handleInputChange(e, i)}
+										></Form.Control>
+									</Col>
+									<Col>
+										{media.length !== 1 && (
+											<Button
+												variant="danger"
+												className="btn-md mr-3"
+												onClick={() => removeHandler(i)}
+											>
+												<i className="fas fa-trash"></i> Delete
+											</Button>
+										)}
+										{media.length - 1 === i && (
+											<Button className="px-3" onClick={() => addHandler(i)}>
+												<i className="fas fa-plus"></i> Add
+											</Button>
+										)}
+									</Col>
+								</Row>
+							))}
 						</Form.Group>
 					</Col>
 				</Row>
@@ -220,43 +276,6 @@ const StakeholderContactInfo = ({ history }) => {
 						</Col>
 					</Row>
 				</Form.Group>
-				<hr />
-				<Row className="mb-3">
-					<Col md={9}>
-						<Form.Group controlId="media">
-							<Form.Label>{t('stakeholder.social_Media.label')}</Form.Label>
-							{media.map((site, i) => (
-								<Row key={i}>
-									<Col md={8}>
-										<Form.Control
-											className="mb-3"
-											placeholder={t('stakeholder.social_Media.placeholder')}
-											value={site.website}
-											required
-											onChange={(e) => handleInputChange(e, i)}
-										></Form.Control>
-									</Col>
-									<Col>
-										{media.length !== 1 && (
-											<Button
-												variant="danger"
-												className="btn-md mr-3"
-												onClick={() => removeHandler(i)}
-											>
-												<i className="fas fa-trash"></i> Delete
-											</Button>
-										)}
-										{media.length - 1 === i && (
-											<Button className="px-3" onClick={() => addHandler(i)}>
-												<i className="fas fa-plus"></i> Add
-											</Button>
-										)}
-									</Col>
-								</Row>
-							))}
-						</Form.Group>
-					</Col>
-				</Row>
 				<hr />
 				<Row className="mt-3">
 					<Col>

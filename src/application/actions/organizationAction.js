@@ -36,7 +36,7 @@ export const addOrganization =
 	(organization, routeInfo, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_ADD_REQUEST });
-			console.log('organization', organization);
+
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -58,13 +58,11 @@ export const addOrganization =
 
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 
-			console.log(routeInfo);
-
 			// if assessment route exists
-			if (routeInfo.length !== 0) {
-				history.push(routeInfo[0].path);
+			if (routeInfo.length > 1) {
+				history.push(routeInfo[1].path);
 			} else {
-				history.go(-2);
+				history.go(-1);
 				dispatch(setAlert('Organization successfully added', 'success'));
 			}
 		} catch (error) {
@@ -133,7 +131,6 @@ export const updateOrganization =
 			await axios.put(`${getURL()}/api/v1/organizations/${orgId}`, org, config);
 
 			dispatch({ type: ORGANIZATION_UPDATE_SUCCESS });
-			console.log('success');
 			history.go(-2);
 			dispatch(setAlert('Organization successfully updated', 'success'));
 		} catch (error) {

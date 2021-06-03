@@ -13,6 +13,9 @@ const ActivityType = ({ history }) => {
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
 
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
+
 	// define states
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
@@ -37,6 +40,7 @@ const ActivityType = ({ history }) => {
 					discussPoints: disPoints,
 					compromise,
 				},
+				routeInfo,
 				history
 			)
 		);

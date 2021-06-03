@@ -35,6 +35,7 @@ const EditStakeholderScreen = ({ match }) => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [alias, setAlias] = useState('');
+	const [address, setAddress] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [gender, setGender] = useState('');
 	const [birthdate, setBirthdate] = useState(Date);
@@ -59,6 +60,7 @@ const EditStakeholderScreen = ({ match }) => {
 			setMedia(stakeholder.media);
 			setOrganization(stakeholder.organization);
 			setAlias(stakeholder.alias);
+			setAddress(stakeholder.address);
 			setOrgPosition(stakeholder.org_Position);
 		}
 	}, [dispatch, stakeholder, stakeholderId, success, project]);
@@ -90,6 +92,7 @@ const EditStakeholderScreen = ({ match }) => {
 					firstName,
 					lastName,
 					alias,
+					address,
 					telephone,
 					gender,
 					birthdate,
@@ -195,6 +198,20 @@ const EditStakeholderScreen = ({ match }) => {
 								</Form.Group>
 							</Col>
 						</Row>
+						<hr className="mb-4" />
+						<Row>
+							<Col md={12}>
+								<Form.Group controlId="address">
+									<Form.Label>Address</Form.Label>
+									<Form.Control
+										type="address"
+										placeholder="Enter Address"
+										value={address}
+										onChange={(e) => setAddress(e.target.value)}
+									></Form.Control>
+								</Form.Group>
+							</Col>
+						</Row>
 						<Row>
 							<Col md={6}>
 								<Form.Group controlId="email">
@@ -219,45 +236,6 @@ const EditStakeholderScreen = ({ match }) => {
 								</Form.Group>
 							</Col>
 						</Row>
-						<hr className="mb-4" />
-						<Form.Group controlId="organization">
-							<Row>
-								<Col md={10}>
-									<Form.Label>{t('stakeholder.question')}</Form.Label>
-								</Col>
-								<Col md={2}>
-									<Form.Control
-										as="select"
-										value={organization}
-										required
-										onChange={(e) => setOrganization(e.target.value)}
-									>
-										<option value="">--Select--</option>
-										<option value="Yes">Yes</option>
-										<option value="No">No</option>
-									</Form.Control>
-								</Col>
-							</Row>
-						</Form.Group>
-						<Form.Group controlId="org_Position">
-							<Row>
-								<Col md={8}>
-									<Form.Label>
-										{t('stakeholder.orgPosition.question')}
-									</Form.Label>
-								</Col>
-								<Col md={4}>
-									<Form.Control
-										type="orgPosition"
-										placeholder={t('stakeholder.orgPosition.placeholder')}
-										value={orgPosition}
-										disabled={!organization || organization === 'No'}
-										onChange={(e) => setOrgPosition(e.target.value)}
-									></Form.Control>
-								</Col>
-							</Row>
-						</Form.Group>
-						<hr />
 						<Row className="mb-3">
 							<Col md={9}>
 								<Form.Group controlId="media">
@@ -299,6 +277,45 @@ const EditStakeholderScreen = ({ match }) => {
 								</Form.Group>
 							</Col>
 						</Row>
+						<hr className="mb-4" />
+						<Form.Group controlId="organization">
+							<Row>
+								<Col md={10}>
+									<Form.Label>{t('stakeholder.question')}</Form.Label>
+								</Col>
+								<Col md={2}>
+									<Form.Control
+										as="select"
+										value={organization}
+										required
+										onChange={(e) => setOrganization(e.target.value)}
+									>
+										<option value="">--Select--</option>
+										<option value="Yes">Yes</option>
+										<option value="No">No</option>
+									</Form.Control>
+								</Col>
+							</Row>
+						</Form.Group>
+						<Form.Group controlId="org_Position">
+							<Row>
+								<Col md={8}>
+									<Form.Label>
+										{t('stakeholder.orgPosition.question')}
+									</Form.Label>
+								</Col>
+								<Col md={4}>
+									<Form.Control
+										type="orgPosition"
+										placeholder={t('stakeholder.orgPosition.placeholder')}
+										value={orgPosition}
+										disabled={!organization || organization === 'No'}
+										onChange={(e) => setOrgPosition(e.target.value)}
+									></Form.Control>
+								</Col>
+							</Row>
+						</Form.Group>
+
 						<hr />
 						<Row className="mt-3">
 							<Col>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { addCommitment } from '../../../application/actions/commitmentActions';
 
@@ -12,6 +12,9 @@ const CommitmentDetails = ({ match, history }) => {
 	const [isComplete, setIsComplete] = useState(false);
 
 	const dispatch = useDispatch();
+
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
 
 	//handle submit form
 	const submitHandler = (e) => {
@@ -26,6 +29,7 @@ const CommitmentDetails = ({ match, history }) => {
 					is_complete: isComplete,
 				},
 				id,
+				routeInfo,
 				history
 			)
 		);

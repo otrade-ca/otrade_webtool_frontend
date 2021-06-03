@@ -33,7 +33,7 @@ import { getURL } from '../api';
 
 // add activity to a project
 export const addActivity =
-	(activity, history) => async (dispatch, getState) => {
+	(activity, routeInfo, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ACTIVITY_ADD_REQUEST });
 
@@ -54,21 +54,28 @@ export const addActivity =
 
 			dispatch({ type: ACTIVITY_ADD_SUCCESS, payload: data });
 
+			// determine if to push to collect org or assessment info
+			// get id, stakeholders, and comp value from returned data
 			const { _id, stakeholders, compromise } = data;
-			const routes = [];
-			stakeholders.forEach((i) => {
-				routes.push({
+			// create routes array
+			const updatedRoutes = [...routeInfo];
+			// loop through stakeholders array and push id values into routes
+			stakeholders.forEach((id) => {
+				updatedRoutes.push({
 					route: 'assessment',
-					path: `/influences/register/stakeholder/${i}`,
+					path: `/influences/register/stakeholder/${id}`,
 				});
 			});
+			//save assessment routes to redux
+			dispatch(saveRouteInfo(updatedRoutes));
+			console.log('updatedRoutes', updatedRoutes);
 
-			dispatch(saveRouteInfo(routes));
-
+			// if yes to comp, push to collect commitment info
 			if (compromise === 'Yes' || compromise === 'yes') {
 				history.push(`/commitments/register/activity/${_id}`);
 			} else {
-				history.push(routes[0].path);
+				// else push to collect assessement
+				history.push(updatedRoutes[1].path);
 			}
 		} catch (error) {
 			dispatch({

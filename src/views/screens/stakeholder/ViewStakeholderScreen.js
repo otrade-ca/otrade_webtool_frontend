@@ -23,6 +23,7 @@ const ViewStakeholderScreen = ({ match }) => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [alias, setAlias] = useState('');
+	const [address, setAddress] = useState('');
 	const [telephone, setTelephone] = useState('');
 	const [gender, setGender] = useState('');
 	const [birthdate, setBirthdate] = useState(Date);
@@ -48,6 +49,7 @@ const ViewStakeholderScreen = ({ match }) => {
 			setOrganization(stakeholder.organization);
 			setUpdatedDate(stakeholder.updatedAt);
 			setAlias(stakeholder.alias);
+			setAddress(stakeholder.address);
 			setOrgPosition(stakeholder.org_Position);
 		}
 	}, [dispatch, stakeholder, stakeholderId]);
@@ -144,6 +146,21 @@ const ViewStakeholderScreen = ({ match }) => {
 								</Form.Group>
 							</Col>
 						</Row>
+						<hr className="mb-4" />
+						<Row>
+							<Col md={12}>
+								<Form.Group controlId="address">
+									<Form.Label>Address</Form.Label>
+									<Form.Control
+										type="address"
+										placeholder="Enter Address"
+										value={address}
+										readOnly
+										disabled
+									></Form.Control>
+								</Form.Group>
+							</Col>
+						</Row>
 						<Row>
 							<Col md={6}>
 								<Form.Group controlId="email">
@@ -167,6 +184,29 @@ const ViewStakeholderScreen = ({ match }) => {
 										readOnly
 										disabled
 									></Form.Control>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row className="mb-3">
+							<Col md={9}>
+								<Form.Group controlId="media">
+									<Form.Label>{t('stakeholder.social_Media.label')}</Form.Label>
+									{media &&
+										media.map((site, i) => (
+											<Row key={i}>
+												<Col md={6}>
+													<Form.Control
+														className="mb-3"
+														placeholder={t(
+															'stakeholder.social_Media.placeholder'
+														)}
+														value={site}
+														readOnly
+														disabled
+													></Form.Control>
+												</Col>
+											</Row>
+										))}
 								</Form.Group>
 							</Col>
 						</Row>
@@ -208,30 +248,6 @@ const ViewStakeholderScreen = ({ match }) => {
 								</Col>
 							</Row>
 						</Form.Group>
-						<hr />
-						<Row className="mb-3">
-							<Col md={9}>
-								<Form.Group controlId="media">
-									<Form.Label>{t('stakeholder.social_Media.label')}</Form.Label>
-									{media &&
-										media.map((site, i) => (
-											<Row key={i}>
-												<Col md={6}>
-													<Form.Control
-														className="mb-3"
-														placeholder={t(
-															'stakeholder.social_Media.placeholder'
-														)}
-														value={site}
-														readOnly
-														disabled
-													></Form.Control>
-												</Col>
-											</Row>
-										))}
-								</Form.Group>
-							</Col>
-						</Row>
 						<hr />
 						<Row className="mt-3">
 							<Col className="text-right">

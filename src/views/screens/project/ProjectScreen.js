@@ -9,15 +9,22 @@ import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { btnlinks, navbarlinks, routes } from './utilities';
+import { saveRouteInfo } from '../../../application/actions/routeActions';
 
 const ProjectScreen = ({ match }) => {
 	const projectId = match.params.id;
-
 	const { url, path } = useRouteMatch();
 	const { t } = useTranslation();
 
 	// get userDispatch
 	const dispatch = useDispatch();
+
+	// get this route right off the bat
+	dispatch(
+		saveRouteInfo([
+			{ route: 'stakeholders', path: `${match.url}/stakeholders` },
+		])
+	);
 
 	//get project details
 	const projectDetails = useSelector((state) => state.projectDetails);

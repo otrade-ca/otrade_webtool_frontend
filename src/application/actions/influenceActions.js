@@ -46,17 +46,16 @@ export const addInfluence =
 			);
 
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
-			console.log('success', routeInfo.length);
-			// is there more than one route to redirect?
+
+			routeInfo.pop();
 			if (routeInfo.length > 1) {
-				console.log('new success', routeInfo.length);
-				// get the next route
 				const route = routeInfo.pop();
 				history.push(route.path);
 			} else {
-				history.go(-3);
+				const route = routeInfo.pop();
+				history.push(route.path);
 				dispatch(removeRouteInfo());
-				dispatch(setAlert('Assessment successfully updated', 'success'));
+				dispatch(setAlert('Assessment Successfully Updated', 'success'));
 			}
 		} catch (error) {
 			dispatch({

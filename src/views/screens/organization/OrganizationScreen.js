@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -301,4 +302,4 @@ const OrganizationScreen = ({ match, history }) => {
 	);
 };
 
-export default OrganizationScreen;
+export default withRouter(OrganizationScreen);

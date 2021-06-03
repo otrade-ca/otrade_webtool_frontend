@@ -21,7 +21,7 @@ import { setAlert } from '../actions/alertActions';
 
 // add commitment
 export const addCommitment =
-	(commitment, id, history) => async (dispatch, getState) => {
+	(commitment, id, routeInfo, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: COMMITMENT_ADD_REQUEST });
 
@@ -47,8 +47,8 @@ export const addCommitment =
 			);
 
 			dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
-			history.go(-2);
-			dispatch(setAlert('Commitment successfully added', 'success'));
+			console.log(routeInfo);
+			history.push(routeInfo[routeInfo.length - 1].path);
 		} catch (error) {
 			dispatch({
 				type: COMMITMENT_ADD_FAIL,
