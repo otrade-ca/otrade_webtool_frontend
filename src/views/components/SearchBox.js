@@ -22,17 +22,16 @@ const SearchBox = ({
 	};
 
 	return (
-		<Form onSubmit={submitHandler} inline style={{ width: '40rem' }}>
+		<Form onSubmit={submitHandler} style={{ width: '25rem', margin: 'auto' }}>
 			<Form.Control
 				type="text"
 				name="q"
 				onChange={(e) => setKeyword(e.target.value)}
 				placeholder={`${t('action.search')} ${searchWord}...`}
-				className="mr-md-2 ml-md-5 w-50"
 			></Form.Control>
-			<Button type="submit" variant="outline-primary" className="pl-3 pr-3">
+			{/* <Button type="submit" variant="outline-primary" className="pl-3 pr-3">
 				{t('action.search')}
-			</Button>
+			</Button> */}
 		</Form>
 	);
 };

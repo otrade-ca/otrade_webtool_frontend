@@ -72,8 +72,8 @@ td {
 }
 
 body {
-	/* background-color: #fdfdfd !important; */
-	background-color: rgba(124, 121, 121, 0.05) !important;
+	/* background-color: #e4fbff !important; */
+	background-color: rgba(219, 219, 219, 0.384) !important;
 }
 
 /*customize the primary color for buttons*/
@@ -159,7 +159,7 @@ hr {
 .profile-container,
 .btn,
 .form-control {
-	border-radius: 0px !important;
+	border-radius: 2px !important;
 	border: 2px solid transparent;
 }
 
@@ -454,7 +454,7 @@ hr {
 }
 
 .item-one {
-	margin-right: 1rem;
+	margin-right: 1.5rem;
 }
 
 .item-category {
@@ -475,4 +475,18 @@ hr {
 .location-add-btns a {
 	margin: 0.5rem 1rem 0 1rem !important;
 	font-size: 16px;
+}
+
+.pagination {
+	margin-bottom: 0 !important;
+}
+
+.action-btns {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.action-btns a {
+	margin-bottom: 0.5rem;
 }

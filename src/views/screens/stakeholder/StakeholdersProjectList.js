@@ -2,12 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
 import { Accordion, Card, Button, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import {
-	FilterBox,
-	Loader,
-	Message,
-	Empty,
-} from '../../components/HelperComponents';
+import { Loader, Message, Empty } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import {
 	listProjectStakeholders,
@@ -16,11 +11,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
-import * as RiIcons from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
 
-const StakeholdersLocationList = ({
+const StakeholderProjectList = ({
 	match,
 	listProjectStakeholders,
 	deleteStakeholder,
@@ -51,13 +45,10 @@ const StakeholdersLocationList = ({
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
-		if (window.confirm('Are you sure?')) {
+		if (window.confirm('Click ok to delete')) {
 			deleteStakeholder(id);
 		}
 	};
-
-	console.log(pages);
-	console.log(stakeholders);
 
 	return (
 		<Card className="my-card">
@@ -67,19 +58,17 @@ const StakeholdersLocationList = ({
 				<Message>{error}</Message>
 			) : (
 				<>
-					{!filtered && stakeholders && stakeholders.length === 0 ? (
+					{stakeholders && stakeholders.length === 0 ? (
 						<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
 					) : (
 						<Card.Header className="my-card-header">
-							{/* <h4>{t('tables.stakeholder')}</h4>
-							<FilterBox searchWord={'UserStakeholders'} /> */}
 							<Route
 								render={({ history }) => (
 									<SearchBox
 										history={history}
 										searchWord={'LastName'}
-										searchQueryPath={`${url}/search/`}
-										searchQueryEmpty={`${url}`}
+										searchQueryPath={`/project/${projectId}/stakeholders/search/`}
+										searchQueryEmpty={`/project/${projectId}/stakeholders`}
 									/>
 								)}
 							/>
@@ -119,19 +108,6 @@ const StakeholdersLocationList = ({
 													</div>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<RiIcons.RiCommunityLine />
-													</IconContext.Provider>
-												</div>
-												{/* <div className="item-two">
-														<div>{item && item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div> */}
-											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
@@ -144,13 +120,27 @@ const StakeholdersLocationList = ({
 																</Link>
 															</>
 															<br />
-															<>{item.email}</>
+															<>Email: {item.email ? item.email : 'N/A'}</>
 															<br />
-															<>{item.telephone}</>
+															<>
+																Telephone:{' '}
+																{item.telephone ? item.telephone : 'N/A'}
+															</>
 															<br />
+															<>
+																Updated on:{' '}
+																{item.updatedAt ? item.updatedAt : 'N/A'}
+															</>
 														</p>
 													</div>
-													<div className="d-flex align-items-center">
+													<div className="action-btns">
+														<Link
+															to={`/activities/register`}
+															className="btn btn-primary"
+														>
+															<i className="fas fa-plus" />{' '}
+															{t('tables.activity')}
+														</Link>
 														<Button
 															variant="danger"
 															className="btn-md ml-3"
@@ -161,30 +151,17 @@ const StakeholdersLocationList = ({
 														</Button>
 													</div>
 												</div>
-												<div className="location-add-btns">
-													<Link to={`/activities/register`}>
-														<i className="fas fa-plus" /> Add{' '}
-														{t('tables.activity')}
-													</Link>
-													<Link
-														to={`/influences/register/stakeholder/${item._id}`}
-													>
-														<i className="fas fa-plus" /> Add{' '}
-														{t('tables.influence')}
-													</Link>
-												</div>
 											</Card.Body>
 										</Accordion.Collapse>
 									</Card>
 								))}
 						</Accordion>
-						<h3>Page</h3>
-						<Row className="d-flex justify-content-center">
+						<Row className="d-flex justify-content-center mt-2">
 							<Paginate
 								pages={pages}
 								page={page}
-								urlOne={`${url}/search/`}
-								urlTwo={`${url}/page/`}
+								urlOne={`/project/${projectId}/stakeholders/search/`}
+								urlTwo={`/project/${projectId}/stakeholders/page/`}
 							/>
 						</Row>
 					</Card.Body>
@@ -194,7 +171,7 @@ const StakeholdersLocationList = ({
 	);
 };
 
-StakeholdersLocationList.propTypes = {
+StakeholderProjectList.propTypes = {
 	listProjectStakeholders: PropTypes.func.isRequired,
 	deleteStakeholder: PropTypes.func.isRequired,
 };
@@ -207,4 +184,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	listProjectStakeholders,
 	deleteStakeholder,
-})(withRouter(StakeholdersLocationList));
+})(withRouter(StakeholderProjectList));

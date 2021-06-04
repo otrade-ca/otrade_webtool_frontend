@@ -224,6 +224,8 @@ export const listStakeholders =
 				config
 			);
 
+			console.log('stakeholders2', data);
+
 			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
 
 			// localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
@@ -290,6 +292,8 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 			config
 		);
 
+		console.log('stakeholders1', data);
+
 		dispatch({ type: STAKEHOLDER_LOCATION_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -306,6 +310,7 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 export const listProjectStakeholders =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
+		console.log('inside projectStakeholders');
 		try {
 			dispatch({ type: STAKEHOLDER_PROJECT_LIST_REQUEST });
 
@@ -323,6 +328,8 @@ export const listProjectStakeholders =
 				`${getURL()}/api/v1/stakeholders/project/${id}?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
+
+			console.log('data', data);
 
 			dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
 		} catch (error) {
