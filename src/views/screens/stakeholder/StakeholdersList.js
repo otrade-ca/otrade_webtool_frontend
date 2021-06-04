@@ -190,6 +190,7 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 												<Card.Body>
 													<div className="d-flex justify-content-between">
 														<div>
+															<p>Sup</p>
 															<p>
 																<>
 																	<Link to={`/stakeholder/${item._id}`}>

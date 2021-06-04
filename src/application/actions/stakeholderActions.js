@@ -204,7 +204,7 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 
 // list all stakeholders in a project location
 export const listStakeholders =
-	(id, keyword = '') =>
+	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: STAKEHOLDER_LIST_REQUEST });
@@ -219,10 +219,8 @@ export const listStakeholders =
 				},
 			};
 
-			const {
-				data: { data },
-			} = await axios.get(
-				`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}`,
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
 
@@ -305,38 +303,38 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 };
 
 // list all stakeholders across a project
-export const listProjectStakeholders = (id) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: STAKEHOLDER_PROJECT_LIST_REQUEST });
+export const listProjectStakeholders =
+	(id, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_PROJECT_LIST_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/stakeholders/project/${id}`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/stakeholders/project/${id}?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: STAKEHOLDER_PROJECT_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_PROJECT_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // adds a stakeholder to a list of stakeholders for dropdown
 export const assignStakeholder = (data) => (dispatch) => {
