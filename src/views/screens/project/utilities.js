@@ -65,6 +65,18 @@ export const routes = [
 		component: ({ match }) => <StakeholdersProjectList match={match} />,
 	},
 	{
+		path: '/organizations/search/:keyword',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/page/:pageNumber',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
 		path: '/organizations',
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},

@@ -19,14 +19,7 @@ const StakeholderProjectList = ({
 	listProjectStakeholders,
 	deleteStakeholder,
 	stakeholderDelete: { success },
-	stakeholderProjectList: {
-		loading,
-		error,
-		filtered,
-		stakeholders,
-		pages,
-		page,
-	},
+	stakeholderProjectList: { loading, error, stakeholders, pages, page },
 }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();

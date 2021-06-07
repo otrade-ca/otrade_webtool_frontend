@@ -176,11 +176,12 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 
 // list all organizations for a project
 export const listProjectOrganizations =
-	(id, keyword = '') =>
+	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
+			console.log('inside listProjectOrganizations');
 			dispatch({ type: ORGANIZATION_LIST_REQUEST });
-
+			console.log('inside data');
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -191,15 +192,14 @@ export const listProjectOrganizations =
 				},
 			};
 
-			const {
-				data: { data },
-			} = await axios.get(
-				`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}`,
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
 
+			console.log('returning data', data);
+
 			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
-			// localStorage.setItem('organizationsListInfo', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: ORGANIZATION_LIST_FAIL,
@@ -213,7 +213,7 @@ export const listProjectOrganizations =
 
 // list all organizations for a location or community
 export const listOrganizations =
-	(id, keyword = '') =>
+	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_LIST_REQUEST });
@@ -228,12 +228,12 @@ export const listOrganizations =
 				},
 			};
 
-			const {
-				data: { data },
-			} = await axios.get(
-				`${getURL()}/api/v1/locations/${id}/organizations?keyword=${keyword}`,
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/locations/${id}/organizations?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
+
+			console.log('returning data', data);
 
 			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
 		} catch (error) {
