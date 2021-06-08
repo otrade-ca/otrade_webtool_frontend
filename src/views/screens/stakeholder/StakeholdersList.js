@@ -1,13 +1,9 @@
-import React, { memo, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
-import { Accordion, Card, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-	FilterBox,
-	Loader,
-	Message,
-	Empty,
-} from '../../components/HelperComponents';
+import React, { useEffect } from 'react';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
+import { Accordion, Card, Button, Row } from 'react-bootstrap';
+import { useDispatch, connect } from 'react-redux';
+import { Loader, Message, Empty } from '../../components/HelperComponents';
+import Paginate from '../../components/Paginate';
 import {
 	listStakeholders,
 	deleteStakeholder,
@@ -16,34 +12,38 @@ import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeho
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
-import * as RiIcons from 'react-icons/ri';
+import PropTypes from 'prop-types';
+import SearchBox from '../../components/SearchBox';
 
-const StakeholdersList = memo(({ match, keyword = '' }) => {
-	const projectId = match.params.id;
+const StakeholdersList = ({
+	match,
+	listStakeholders,
+	deleteStakeholder,
+	stakeholderDelete: { success },
+	stakeholderList: { loading, error, stakeholders, pages, page },
+}) => {
+	const communityId = match.params.id;
 	const { url } = useRouteMatch();
-
 	const { t } = useTranslation();
+
+	const keyword = match.params.keyword;
+	const pageNumber = match.params.pageNumber || 1;
 
 	//get stakeholders
 	const dispatch = useDispatch();
-	const stakeholderList = useSelector((state) => state.stakeholderList);
-	const { loading, error, filtered, stakeholders } = stakeholderList;
-
-	const stakeholderDelete = useSelector((state) => state.stakeholderDelete);
-	const { success } = stakeholderDelete;
 
 	useEffect(() => {
 		if (success) {
-			dispatch(listStakeholders(projectId, keyword));
+			listStakeholders(communityId, keyword, pageNumber);
 			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
-			dispatch(listStakeholders(projectId, keyword));
+			listStakeholders(communityId, keyword, pageNumber);
 		}
-	}, [dispatch, keyword, projectId, success]);
+	}, [dispatch, keyword, communityId, success, listStakeholders, pageNumber]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
-		if (window.confirm('Are you sure?')) {
+		if (window.confirm('Click ok to delete')) {
 			dispatch(deleteStakeholder(id));
 		}
 	};
@@ -56,18 +56,26 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 				<Message>{error}</Message>
 			) : (
 				<>
-					{!filtered && stakeholders && stakeholders.length === 0 ? (
+					{stakeholders && stakeholders.length === 0 ? (
 						<Empty
-							itemLink={'register'}
 							url={url}
 							type={t('tables.stakeholder')}
 							group={'stakeholders'}
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<FilterBox searchWord={'Stakeholders'} />
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'LastName'}
+										searchQueryPath={`/community/${communityId}/stakeholders/search/`}
+										searchQueryEmpty={`/community/${communityId}/stakeholders`}
+									/>
+								)}
+							/>
 							<Link
-								to={`/stakeholders/register/community/${projectId}`}
+								to={`/stakeholders/register/community/${communityId}`}
 								className="btn btn-primary ml-2"
 							>
 								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
@@ -76,167 +84,119 @@ const StakeholdersList = memo(({ match, keyword = '' }) => {
 					)}
 					<Card.Body>
 						<Accordion defaultActiveKey={1}>
-							{filtered
-								? filtered.map((item, index) => (
-										<Card className="table-card">
-											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="table-card-item">
-													<div className="item-one">
-														<IconContext.Provider
-															value={{ color: '#008cba', size: '2em' }}
-														>
-															<IoIcons.IoMdPerson />
-														</IconContext.Provider>
+							{stakeholders &&
+								stakeholders.map((item, index) => (
+									<Card className="table-card">
+										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+											<div className="table-card-item">
+												<div className="item-one">
+													<IconContext.Provider
+														value={{ color: '#008cba', size: '2em' }}
+													>
+														<IoIcons.IoMdPerson />
+													</IconContext.Provider>
+												</div>
+												<div className="item-two">
+													<div>
+														{item.firstName} {item.lastName}
 													</div>
-													<div className="item-two">
-														<div>
-															{item.firstName} {item.lastName}
-														</div>
-														<div className="item-category">Stakeholder</div>
+													<div className="item-category">
+														Stakeholder |{' '}
+														{item.status === 'active' ? (
+															<strong className="text-success">
+																{item.status.substring(0, 1).toUpperCase() +
+																	item.status.substring(1, item.status.length)}
+															</strong>
+														) : (
+															<em className="text-danger">
+																{item.status.substring(0, 1).toUpperCase() +
+																	item.status.substring(1, item.status.length)}
+															</em>
+														)}
 													</div>
 												</div>
-												<div className="table-card-item">
-													<div className="item-one">
-														<IconContext.Provider
-															value={{ color: '#008cba', size: '2em' }}
+											</div>
+										</Accordion.Toggle>
+										<Accordion.Collapse eventKey={index + 1}>
+											<Card.Body>
+												<div className="d-flex justify-content-between">
+													<div>
+														<p>
+															<>
+																<Link to={`/stakeholder/${item._id}`}>
+																	{item.firstName} {item.lastName}
+																</Link>
+															</>
+															<br />
+															<>
+																Email:{' '}
+																<em>{item.email ? item.email : 'N/A'}</em>
+															</>
+															<br />
+															<>
+																Telephone:{' '}
+																<em>
+																	{item.telephone ? item.telephone : 'N/A'}
+																</em>
+															</>
+															<br />
+															<>
+																Updated On:{' '}
+																<em>
+																	{item.updatedAt ? item.updatedAt : 'N/A'}
+																</em>
+															</>
+														</p>
+													</div>
+													<div className="action-btns">
+														<Link
+															to={`/activities/register`}
+															className="btn btn-primary"
 														>
-															<RiIcons.RiCommunityLine />
-														</IconContext.Provider>
-													</div>
-													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
-												</div>
-											</Accordion.Toggle>
-											<Accordion.Collapse eventKey={index + 1}>
-												<Card.Body>
-													<div className="d-flex justify-content-between">
-														<div>
-															<p>
-																<>
-																	<Link to={`/stakeholder/${item._id}`}>
-																		{item.firstName} {item.lastName}
-																	</Link>
-																</>
-																<br />
-																<>{item.email}</>
-																<br />
-																<>{item.telephone}</>
-																<br />
-															</p>
-														</div>
-														<div className="d-flex align-items-center">
-															<Button
-																variant="danger"
-																className="btn-md ml-3"
-																onClick={() => deleteHandler(item._id)}
-															>
-																<i className="fas fa-trash"></i>{' '}
-																{t('action.delete')}
-															</Button>
-														</div>
-													</div>
-													<div className="location-add-btns">
-														<Link to={`/activities/register`}>
-															<i className="fas fa-plus" /> Add{' '}
+															<i className="fas fa-plus" />
 															{t('tables.activity')}
 														</Link>
-														<Link
-															to={`/influences/register/stakeholder/${item._id}`}
+
+														<Button
+															variant="danger"
+															onClick={() => deleteHandler(item._id)}
 														>
-															<i className="fas fa-plus" /> Add{' '}
-															{t('tables.influence')}
-														</Link>
-													</div>
-												</Card.Body>
-											</Accordion.Collapse>
-										</Card>
-								  ))
-								: stakeholders &&
-								  stakeholders.map((item, index) => (
-										<Card className="table-card">
-											<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-												<div className="table-card-item">
-													<div className="item-one">
-														<IconContext.Provider
-															value={{ color: '#008cba', size: '2em' }}
-														>
-															<IoIcons.IoMdPerson />
-														</IconContext.Provider>
-													</div>
-													<div className="item-two">
-														<div>
-															{item.firstName} {item.lastName}
-														</div>
-														<div className="item-category">Stakeholder</div>
+															<i className="fas fa-trash"></i>{' '}
+															{t('action.delete')}
+														</Button>
 													</div>
 												</div>
-												<div className="table-card-item">
-													<div className="item-one">
-														<IconContext.Provider
-															value={{ color: '#008cba', size: '2em' }}
-														>
-															<RiIcons.RiCommunityLine />
-														</IconContext.Provider>
-													</div>
-													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
-												</div>
-											</Accordion.Toggle>
-											<Accordion.Collapse eventKey={index + 1}>
-												<Card.Body>
-													<div className="d-flex justify-content-between">
-														<div>
-															<p>Sup</p>
-															<p>
-																<>
-																	<Link to={`/stakeholder/${item._id}`}>
-																		{item.firstName} {item.lastName}
-																	</Link>
-																</>
-																<br />
-																<>{item.email}</>
-																<br />
-																<>{item.telephone}</>
-																<br />
-															</p>
-														</div>
-														<div className="d-flex align-items-center">
-															<Button
-																variant="danger"
-																className="btn-md ml-3"
-																onClick={() => deleteHandler(item._id)}
-															>
-																<i className="fas fa-trash"></i>{' '}
-																{t('action.delete')}
-															</Button>
-														</div>
-													</div>
-													<div className="location-add-btns">
-														<Link to={`/activities/register`}>
-															<i className="fas fa-plus" /> Add{' '}
-															{t('tables.activity')}
-														</Link>
-														<Link
-															to={`/influences/register/stakeholder/${item._id}`}
-														>
-															<i className="fas fa-plus" /> Add{' '}
-															{t('tables.influence')}
-														</Link>
-													</div>
-												</Card.Body>
-											</Accordion.Collapse>
-										</Card>
-								  ))}
+											</Card.Body>
+										</Accordion.Collapse>
+									</Card>
+								))}
 						</Accordion>
+						<Row className="d-flex justify-content-center mt-2">
+							<Paginate
+								pages={pages}
+								page={page}
+								urlOne={`/community/${communityId}/stakeholders/search/`}
+								urlTwo={`/community/${communityId}/stakeholders/page/`}
+							/>
+						</Row>
 					</Card.Body>
 				</>
 			)}
 		</Card>
 	);
+};
+
+StakeholdersList.propTypes = {
+	listStakeholders: PropTypes.func.isRequired,
+	deleteStakeholder: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	stakeholderList: state.stakeholderList,
+	stakeholderDelete: state.stakeholderDelete,
 });
 
-export default StakeholdersList;
+export default connect(mapStateToProps, {
+	listStakeholders,
+	deleteStakeholder,
+})(StakeholdersList);

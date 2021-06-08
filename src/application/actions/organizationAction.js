@@ -245,7 +245,7 @@ export const listOrganizations =
 
 // list all organizations for a stakeholder
 export const listStakeholderOrganizations =
-	(stakeholderId, keyword = '') =>
+	(stakeholderId, keyword = '', pageNumber) =>
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_REQUEST });
@@ -260,12 +260,12 @@ export const listStakeholderOrganizations =
 				},
 			};
 
-			const {
-				data: { data },
-			} = await axios.get(
-				`${getURL()}/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}`,
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/organizations?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
+
+			console.log('returning data', data);
 
 			dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_SUCCESS, payload: data });
 		} catch (error) {

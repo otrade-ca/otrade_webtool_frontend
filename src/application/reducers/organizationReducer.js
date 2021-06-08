@@ -153,7 +153,9 @@ export const organizationStakeholderListReducer = (
 		case ORGANIZATION_STAKEHOLDER_LIST_SUCCESS:
 			return {
 				loading: false,
-				organizations: action.payload,
+				organizations: action.payload.organizations,
+				pages: action.payload.pages,
+				page: action.payload.page,
 			};
 		case ORGANIZATION_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };

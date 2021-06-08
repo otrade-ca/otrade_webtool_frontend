@@ -122,7 +122,12 @@ export const stakeholderListReducer = (
 		case STAKEHOLDER_LIST_REQUEST:
 			return { loading: true, stakeholders: [] };
 		case STAKEHOLDER_LIST_SUCCESS:
-			return { loading: false, stakeholders: action.payload };
+			return {
+				loading: false,
+				stakeholders: action.payload.stakeholders,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
 		case STAKEHOLDER_PROJECT_FILTER:
 			return {
 				...state,

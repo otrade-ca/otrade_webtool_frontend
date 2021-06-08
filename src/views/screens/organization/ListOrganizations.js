@@ -23,7 +23,7 @@ const OrganizationsList = ({
 	match,
 	listOrganizations,
 	deleteOrganization,
-	orgnizationList: { loading, error, organizations, pages, page },
+	organizationList: { loading, error, organizations, pages, page },
 	organizationDelete: { success },
 }) => {
 	const locationId = match.params.id;
@@ -106,21 +106,6 @@ const OrganizationsList = ({
 													<div className="item-category">Organization</div>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<RiIcons.RiCommunityLine />
-													</IconContext.Provider>
-												</div>
-												{item.location ? (
-													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
-												) : null}
-											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
@@ -134,21 +119,26 @@ const OrganizationsList = ({
 														<br />
 														<>
 															{t('organization.address.label')} :{' '}
-															{item.address ? item.address : 'N/A'}
+															<em>{item.address ? item.address : 'N/A'}</em>
 														</>
 														<br />
-														<>Email: {item.email ? item.email : 'N/A'}</>
+														<>
+															Email: <em>{item.email ? item.email : 'N/A'}</em>
+														</>
 														<br />
 														<>
 															Telephone:{' '}
-															{item.telephone ? item.telephone : 'N/A'}
+															<em>{item.telephone ? item.telephone : 'N/A'}</em>
 														</>
 														<br />
+														<>
+															Updated On:{' '}
+															<em>{item.updatedAt ? item.updatedAt : 'N/A'}</em>
+														</>
 													</div>
-													<div className="d-flex align-items-center">
+													<div className="action-btns">
 														<Button
 															variant="danger"
-															className="btn-md ml-3"
 															onClick={() => deleteHandler(item._id)}
 														>
 															<i className="fas fa-trash"></i> Delete

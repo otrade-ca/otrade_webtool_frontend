@@ -224,6 +224,8 @@ export const listStakeholders =
 				config
 			);
 
+			console.log('returning data', data);
+
 			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
 
 			// localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));

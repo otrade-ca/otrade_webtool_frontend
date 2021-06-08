@@ -64,6 +64,18 @@ export const routes = [
 		component: ({ match }) => <ListOrganizations match={match} />,
 	},
 	{
+		path: '/organizations/search/:keyword',
+		component: ({ match }) => <ListOrganizations match={match} />,
+	},
+	{
+		path: '/organizations/page/:pageNumber',
+		component: ({ match }) => <ListOrganizations match={match} />,
+	},
+	{
+		path: '/organizations/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <ListOrganizations match={match} />,
+	},
+	{
 		path: '/organizations/:organizationId/view',
 		component: ({ match }) => <ViewOrganization match={match} />,
 	},
@@ -73,6 +85,18 @@ export const routes = [
 	},
 	{
 		path: '/stakeholders',
+		component: ({ match }) => <StakeholdersList match={match} />,
+	},
+	{
+		path: '/stakeholders/search/:keyword',
+		component: ({ match }) => <StakeholdersList match={match} />,
+	},
+	{
+		path: '/stakeholders/page/:pageNumber',
+		component: ({ match }) => <StakeholdersList match={match} />,
+	},
+	{
+		path: '/stakeholders/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <StakeholdersList match={match} />,
 	},
 	{
