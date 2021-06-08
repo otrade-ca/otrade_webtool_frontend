@@ -3,6 +3,7 @@ import {
 	INFLUENCE_ADD_REQUEST,
 	INFLUENCE_ADD_SUCCESS,
 	INFLUENCE_ADD_FAIL,
+	INFLUENCE_ADD_RESET,
 	INFLUENCE_DETAILS_REQUEST,
 	INFLUENCE_DETAILS_SUCCESS,
 	INFLUENCE_DETAILS_FAIL,
@@ -46,6 +47,9 @@ export const addInfluence =
 			);
 
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
+
+			// reset the page
+			dispatch({ type: INFLUENCE_ADD_RESET });
 
 			routeInfo.pop();
 			if (routeInfo.length > 1) {

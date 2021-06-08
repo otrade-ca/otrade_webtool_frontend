@@ -5,6 +5,7 @@ import {
 	COMMUNITY_DETAILS_REQUEST,
 	COMMUNITY_DETAILS_SUCCESS,
 	COMMUNITY_DETAILS_FAIL,
+	COMMUNITY_DETAILS_RESET,
 	COMMUNITY_UPDATE_REQUEST,
 	COMMUNITY_UPDATE_SUCCESS,
 	COMMUNITY_UPDATE_FAIL,
@@ -39,6 +40,8 @@ export const communityDetailsReducer = (state = {}, action) => {
 			return { loading: false };
 		case COMMUNITY_DETAILS_FAIL:
 			return { loading: false };
+		case COMMUNITY_DETAILS_RESET:
+			return {};
 		default:
 			return state;
 	}

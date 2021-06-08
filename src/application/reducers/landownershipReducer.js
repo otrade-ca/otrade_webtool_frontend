@@ -5,6 +5,7 @@ import {
 	LANDOWNERSHIP_DETAILS_REQUEST,
 	LANDOWNERSHIP_DETAILS_SUCCESS,
 	LANDOWNERSHIP_DETAILS_FAIL,
+	LANDOWNERSHIP_DETAILS_RESET,
 	LANDOWNERSHIP_UPDATE_REQUEST,
 	LANDOWNERSHIP_UPDATE_SUCCESS,
 	LANDOWNERSHIP_UPDATE_FAIL,
@@ -39,6 +40,8 @@ export const landownershipDetailsReducer = (state = {}, action) => {
 			return { loading: false };
 		case LANDOWNERSHIP_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case LANDOWNERSHIP_DETAILS_RESET:
+			return {};
 		default:
 			return state;
 	}

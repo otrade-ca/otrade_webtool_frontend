@@ -45,6 +45,8 @@ const StakeholderOrganizations = ({
 	// const organizationDelete = useSelector((state) => state.organizationDelete);
 	// const { success } = organizationDelete;
 
+	console.log(organizations);
+
 	useEffect(() => {
 		if (success) {
 			listStakeholderOrganizations(stakeholderId, keyword, pageNumber);

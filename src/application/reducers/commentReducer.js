@@ -6,6 +6,7 @@ import {
 	COMMENT_DETAILS_REQUEST,
 	COMMENT_DETAILS_SUCCESS,
 	COMMENT_DETAILS_FAIL,
+	COMMENT_DETAILS_RESET,
 	COMMENT_UPDATE_REQUEST,
 	COMMENT_UPDATE_SUCCESS,
 	COMMENT_UPDATE_FAIL,
@@ -42,6 +43,8 @@ export const commentDetailsReducer = (state = { comment: {} }, action) => {
 			return { loading: false, comment: action.payload };
 		case COMMENT_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case COMMENT_DETAILS_RESET:
+			return { comment: {} };
 		default:
 			return state;
 	}

@@ -1,3 +1,7 @@
+/**
+ * Form for adding organization
+ */
+
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';

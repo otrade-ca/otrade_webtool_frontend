@@ -89,10 +89,10 @@ const InfluenceForm = ({ history, match }) => {
 									onChange={(e) => setPosition(e.target.value)}
 								>
 									<option value="">--Select--</option>
-									<option value="contrario">contrario</option>
-									<option value="activo">activo</option>
-									<option value="contrario pasivo">contrario pasivo</option>
 									<option value="desconocido">desconocido</option>
+									<option value="contrario">contrario</option>
+									<option value="contrario pasivo">contrario pasivo</option>
+									<option value="activo">activo</option>
 									<option value="favorable activo">favorable activo</option>
 									<option value="favorable inactivo">favorable inactivo</option>
 									<option value="favorable con condiciones">
@@ -118,11 +118,11 @@ const InfluenceForm = ({ history, match }) => {
 									onChange={(e) => setInfluence(e.target.value)}
 								>
 									<option value="">--Select--</option>
-									<option value="alto">alto</option>
 									<option value="muy alto">muy alto</option>
+									<option value="alto">alto</option>
+									<option value="medio">medio</option>
 									<option value="bajo">bajo</option>
 									<option value="desconocido">desconocido</option>
-									<option value="medio">medio</option>
 								</Form.Control>
 							</Col>
 						</Row>

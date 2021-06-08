@@ -36,6 +36,7 @@ import {
 	STAKEHOLDER_ASSIGN_SUCCESS,
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_PROJECT_FILTER,
+	STAKEHOLDER_DETAILS_RESET,
 } from '../constants/stakeholderConstants';
 import { setAlert } from '../actions/alertActions';
 import { saveRouteInfo } from '../actions/routeActions';
@@ -102,6 +103,7 @@ export const addStakeholder =
 // get stakeholder details
 export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 	try {
+		dispatch({ type: STAKEHOLDER_DETAILS_RESET });
 		dispatch({ type: STAKEHOLDER_DETAILS_REQUEST });
 
 		//get logged in user

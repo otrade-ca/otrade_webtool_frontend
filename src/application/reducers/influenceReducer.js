@@ -6,6 +6,7 @@ import {
 	INFLUENCE_DETAILS_REQUEST,
 	INFLUENCE_DETAILS_SUCCESS,
 	INFLUENCE_DETAILS_FAIL,
+	INFLUENCE_DETAILS_RESET,
 	INFLUENCE_DELETE_REQUEST,
 	INFLUENCE_DELETE_SUCCESS,
 	INFLUENCE_DELETE_FAIL,
@@ -42,6 +43,8 @@ export const influenceDetailsReducer = (state = { influence: {} }, action) => {
 			return { loading: false, success: true, influence: action.payload };
 		case INFLUENCE_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case INFLUENCE_DETAILS_RESET:
+			return { influence: {} };
 		default:
 			return state;
 	}

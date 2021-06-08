@@ -43,6 +43,7 @@ import {
 	STAKEHOLDER_ASSIGN_RESET,
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_SAVE_RESET,
+	STAKEHOLDER_DETAILS_RESET,
 } from '../constants/stakeholderConstants';
 
 // add stakeholder
@@ -73,6 +74,8 @@ export const stakeholderDetailsReducer = (
 			return { loading: false, success: true, stakeholder: action.payload };
 		case STAKEHOLDER_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case STAKEHOLDER_DETAILS_RESET:
+			return { stakeholder: {} };
 		default:
 			return state;
 	}
