@@ -1,17 +1,15 @@
-import React, { useEffect, memo } from 'react';
-import { Accordion, Button, Card } from 'react-bootstrap';
-import { Link, useRouteMatch } from 'react-router-dom';
+/**
+ * List all organizations a stakeholder belongs to
+ */
+import React, { useEffect } from 'react';
+import { Accordion, Button, Card, Row } from 'react-bootstrap';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, connect } from 'react-redux';
 import {
 	listStakeholderOrganizations,
 	deleteOrganization,
 } from '../../../application/actions/organizationAction';
-import {
-	FilterBox,
-	Empty,
-	Message,
-	Loader,
-} from '../../components/HelperComponents';
+import { Empty, Message, Loader } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import { useTranslation } from 'react-i18next';
 import { ORGANIZATION_DELETE_REQUEST } from '../../../application/constants/organizationConstants';
@@ -21,11 +19,11 @@ import * as VscIcons from 'react-icons/vsc';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
 
-const ListStakeholderOrganizations = ({
+const StakeholderOrganizations = ({
 	match,
 	listStakeholderOrganizations,
 	deleteOrganization,
-	organizationStakerholderList: { loading, error, organizations, pages, page },
+	organizationStakeholderList: { loading, error, organizations, pages, page },
 	organizationDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
@@ -72,7 +70,7 @@ const ListStakeholderOrganizations = ({
 
 	return (
 		<Card className="my-card">
-			{/* {loading ? (
+			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
@@ -86,7 +84,16 @@ const ListStakeholderOrganizations = ({
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<FilterBox searchWord={'StakeholderOrganizations'} />
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'organization'}
+										searchQueryPath={`/stakeholder/${stakeholderId}/organizations/search/`}
+										searchQueryEmpty={`/stakeholder/${stakeholderId}/organizations`}
+									/>
+								)}
+							/>
 							<Link
 								to={`/organizations/register`}
 								className="btn btn-primary ml-2"
@@ -173,24 +180,32 @@ const ListStakeholderOrganizations = ({
 									</Card>
 								))}
 						</Accordion>
+						<Row className="d-flex justify-content-center mt-2">
+							<Paginate
+								pages={pages}
+								page={page}
+								urlOne={`/stakeholder/${stakeholderId}/organizations/search/`}
+								urlTwo={`/stakeholder/${stakeholderId}/organizations/page/`}
+							/>
+						</Row>
 					</Card.Body>
 				</>
-			)} */}
+			)}
 		</Card>
 	);
 };
 
-ListStakeholderOrganizations.propTypes = {
+StakeholderOrganizations.propTypes = {
 	listStakeholderOrganizations: PropTypes.func.isRequired,
 	deleteOrganization: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-	organizationStakerholderList: state.organizationStakerholderList,
+	organizationStakeholderList: state.organizationStakerholderList,
 	organizationDelete: state.organizationDelete,
 });
 
 export default connect(mapStateToProps, {
 	listStakeholderOrganizations,
 	deleteOrganization,
-})(ListStakeholderOrganizations);
+})(StakeholderOrganizations);

@@ -16,7 +16,6 @@ import { ORGANIZATION_DELETE_RESET } from '../../../application/constants/organi
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import PropTypes from 'prop-types';
-import * as RiIcons from 'react-icons/ri';
 import * as VscIcons from 'react-icons/vsc';
 
 const OrganizationsList = ({
