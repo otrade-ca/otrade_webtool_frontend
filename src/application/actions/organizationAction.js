@@ -114,7 +114,7 @@ export const updateOrganization =
 	(org, orgId, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_UPDATE_REQUEST });
-			console.log('org to be updated', org);
+
 			//get logged in user
 			const {
 				userLogin: { userInfo },
@@ -179,9 +179,7 @@ export const listProjectOrganizations =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
-			console.log('inside listProjectOrganizations');
 			dispatch({ type: ORGANIZATION_LIST_REQUEST });
-			console.log('inside data');
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -196,8 +194,6 @@ export const listProjectOrganizations =
 				`${getURL()}/api/v1/projects/${id}/organizations?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
-
-			console.log('returning data', data);
 
 			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
 		} catch (error) {
@@ -217,7 +213,7 @@ export const listOrganizations =
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_LIST_REQUEST });
-
+			console.log('id', id);
 			const {
 				userLogin: { userInfo },
 			} = getState();

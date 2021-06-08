@@ -1,3 +1,6 @@
+/**
+ * List of communities belonging to a project
+ */
 import React, { useEffect, memo } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
@@ -72,171 +75,87 @@ const ProjectLocations = ({ match }) => {
 			)}
 			<Card.Body>
 				<Accordion defaultActiveKey={1}>
-					{filtered
-						? filtered.map((location, index) => (
-								<Card className="table-card" key={index}>
-									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-										<div className="table-card-item">
-											<div className="item-one">
-												<IconContext.Provider
-													value={{ color: '#008cba', size: '2em' }}
-												>
-													<RiIcons.RiCommunityLine />
-												</IconContext.Provider>
-											</div>
-											<div className="item-two">
-												<div>{location.location}</div>
-												<div className="item-category">Community</div>
-											</div>
+					{locations &&
+						locations.map((location, index) => (
+							<Card className="table-card" key={index}>
+								<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+									<div className="table-card-item">
+										<div className="item-one">
+											<IconContext.Provider
+												value={{ color: '#008cba', size: '2em' }}
+											>
+												<RiIcons.RiCommunityLine />
+											</IconContext.Provider>
 										</div>
-										<div className="table-card-item">
-											<div className="item-two">
-												<div>
-													<>{location.createdAt.substring(0, 10)}</>{' '}
-												</div>
-												<div className="item-category">Updated Date</div>
-											</div>
+										<div className="item-two">
+											<div>{location.location}</div>
+											<div className="item-category">Community</div>
 										</div>
-									</Accordion.Toggle>
-									<Accordion.Collapse eventKey={index + 1}>
-										<Card.Body>
-											<div className="d-flex justify-content-between">
-												<div>
-													<>
-														<Link to={`/location/${location._id}`}>
-															{location.location}
-														</Link>
-													</>
-													<br />
-													<>{t('location.area_of_Influence.label')}</>
-													{': '} {location.area_influence}
-													<br />
-													<>{t('location.organization_Type.label')}</>
-													{': '} {location.organization_type}
-													<br />
-													<>{t('location.scope.label')}</>
-													{': '} {location.scope}
-												</div>
-												<div className="d-flex align-items-center">
-													<Link
-														to={`/stakeholders/register/community/${location._id}`}
-													>
-														<i className="fas fa-plus" />{' '}
-														{t('tables.stakeholder')}
+									</div>
+								</Accordion.Toggle>
+								<Accordion.Collapse eventKey={index + 1}>
+									<Card.Body>
+										<div className="d-flex justify-content-between">
+											<div>
+												<>
+													<Link to={`/community/${location._id}`}>
+														{location.location}
 													</Link>
-													<Link
-														to={`/organizations/register/community/${location._id}`}
-													>
-														<i className="fas fa-plus" />{' '}
-														{t('tables.organization')}
-													</Link>
-													<Link to={`/activities/register`}>
-														<i className="fas fa-plus" /> {t('tables.activity')}
-													</Link>
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(location._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</div>
+												</>
+												<br />
+												<>{t('location.area_of_Influence.label')}</>
+												{': '}{' '}
+												<em>
+													{location.area_influence
+														? location.area_influence
+														: 'N/A'}
+												</em>
+												<br />
+												<>{t('location.organization_Type.label')}</>
+												{': '}{' '}
+												<em>
+													{location.organization_type
+														? location.organization_type
+														: 'N/A'}
+												</em>
+												<br />
+												<>{t('location.scope.label')}</>
+												{': '}{' '}
+												<em>{location.scope ? location.scope : 'N/A'}</em>
+												<br />
+												<>Updated On</>
+												{': '}{' '}
+												<em>
+													{location.updatedAt ? location.updatedAt : 'N/A'}
+												</em>
 											</div>
-
-											<div className="location-add-btns">
+											<div className="action-btns">
 												<Link
 													to={`/stakeholders/register/community/${location._id}`}
+													className="btn btn-primary"
 												>
-													<i className="fas fa-plus" />{' '}
+													<i className="fas fa-plus" />
 													{t('tables.stakeholder')}
 												</Link>
 												<Link
 													to={`/organizations/register/community/${location._id}`}
+													className="btn btn-primary"
 												>
-													<i className="fas fa-plus" />{' '}
+													<i className="fas fa-plus" />
 													{t('tables.organization')}
 												</Link>
-												<Link to={`/activities/register`}>
-													<i className="fas fa-plus" /> {t('tables.activity')}
-												</Link>
-											</div>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-						  ))
-						: locations &&
-						  locations.map((location, index) => (
-								<Card className="table-card" key={index}>
-									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-										<div className="table-card-item">
-											<div className="item-one">
-												<IconContext.Provider
-													value={{ color: '#008cba', size: '2em' }}
+												<Button
+													variant="danger"
+													onClick={() => deleteHandler(location._id)}
 												>
-													<RiIcons.RiCommunityLine />
-												</IconContext.Provider>
-											</div>
-											<div className="item-two">
-												<div>{location.location}</div>
-												<div className="item-category">Community</div>
+													<i className="fas fa-trash"></i> Delete
+												</Button>
 											</div>
 										</div>
-										<div className="table-card-item">
-											<div className="item-two">
-												<div>
-													<>{location.createdAt.substring(0, 10)}</>{' '}
-												</div>
-												<div className="item-category">Updated Date</div>
-											</div>
-										</div>
-									</Accordion.Toggle>
-									<Accordion.Collapse eventKey={index + 1}>
-										<Card.Body>
-											<div className="d-flex justify-content-between">
-												<div>
-													<>
-														<Link to={`/community/${location._id}`}>
-															{location.location}
-														</Link>
-													</>
-													<br />
-													<>{t('location.area_of_Influence.label')}</>
-													{': '} {location.area_influence}
-													<br />
-													<>{t('location.organization_Type.label')}</>
-													{': '} {location.organization_type}
-													<br />
-													<>{t('location.scope.label')}</>
-													{': '} {location.scope}
-												</div>
-												<div className="d-flex align-items-center">
-													<Button
-														variant="danger"
-														className="btn-md ml-3"
-														onClick={() => deleteHandler(location._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</div>
-											</div>
-											<div className="location-add-btns">
-												<Link
-													to={`/stakeholders/register/community/${location._id}`}
-												>
-													<i className="fas fa-plus" />
-													Add {t('tables.stakeholder')}
-												</Link>
-												<Link
-													to={`/organizations/register/community/${location._id}`}
-												>
-													<i className="fas fa-plus" />
-													Add {t('tables.organization')}
-												</Link>
-											</div>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-						  ))}
+									</Card.Body>
+								</Accordion.Collapse>
+							</Card>
+						))}
 				</Accordion>
 			</Card.Body>
 		</Card>

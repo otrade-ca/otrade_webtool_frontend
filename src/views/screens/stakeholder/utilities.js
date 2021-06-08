@@ -57,6 +57,18 @@ export const routes = [
 		component: ({ match }) => <EditStakeholderScreen match={match} />,
 	},
 	{
+		path: '/organizations/search/:keyword',
+		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+	},
+	{
+		path: '/organizations/page/:pageNumber',
+		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+	},
+	{
+		path: '/organizations/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+	},
+	{
 		path: '/organizations',
 		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
 	},

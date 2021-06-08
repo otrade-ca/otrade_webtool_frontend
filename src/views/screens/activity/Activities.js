@@ -86,50 +86,50 @@ const Activities = ({
 													<div className="item-category">Activity Type</div>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-two">
-													<div>
-														<>{item.date.substring(0, 10)}</>{' '}
-													</div>
-													<div className="item-category">Updated Date</div>
-												</div>
-											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
-														<em>
+														<>
 															<Link to={`${url}/${item._id}/view`}>
 																View Details
 															</Link>
-														</em>
+														</>
 														<br />
 														Commitment:{' '}
-														{item.compromise === 'Yes' ? (
-															<Link to={`${url}/${item._id}/commitment`}>
-																{item.compromise}
-															</Link>
-														) : (
-															<>{item.compromise}</>
-														)}
+														<em>
+															{item.compromise === 'Yes' ? (
+																<Link to={`${url}/${item._id}/commitment`}>
+																	{item.compromise}
+																</Link>
+															) : (
+																<>{item.compromise}</>
+															)}
+														</em>
 														<br />
 														Other stakeholders:{' '}
-														{item.stakeholders &&
-														item.stakeholders.length < 2 ? (
-															'None'
-														) : (
-															<div className="activityStakeholders">
-																{item.stakeholders &&
-																	item.stakeholders.map((person) => (
-																		<>
-																			<br />
-																			{person.firstName} {person.lastName}
-																		</>
-																	))}
-															</div>
-														)}
+														<em>
+															{item.stakeholders &&
+															item.stakeholders.length < 2 ? (
+																'None'
+															) : (
+																<div className="activityStakeholders">
+																	{item.stakeholders &&
+																		item.stakeholders.map((person) => (
+																			<>
+																				<br />
+																				{person.firstName} {person.lastName}
+																			</>
+																		))}
+																</div>
+															)}
+														</em>
 														<br />
+														<>
+															Updated On:{' '}
+															<em>{item.updatedAt ? item.updatedAt : 'N/A'}</em>
+														</>
 													</div>
 													<div className="d-flex align-items-center">
 														<Button

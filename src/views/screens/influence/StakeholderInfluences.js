@@ -78,26 +78,24 @@ const StakeholderInfluences = ({ match }) => {
 													<div className="item-category">Asessment</div>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-two">
-													<div>
-														<>{item.createdAt.substring(0, 10)}</>{' '}
-													</div>
-													<div className="item-category">Updated Date</div>
-												</div>
-											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
-														<>Type:</> {item.type}
+														<>Type:</> {item.type ? item.type : 'N/A'}
 														<br />
-														<>Position:</> {item.position}
+														<>Position:</>{' '}
+														{item.position ? item.position : 'N/A'}
 														<br />
-														<>Influence: </> {item.influence}
+														<>Influence: </>{' '}
+														{item.influence ? item.influence : 'N/A'}
 														<br />
-														<>Impact to project: </> {item.projImpact}
+														<>Impact to project: </>{' '}
+														{item.projImpact ? item.projImpact : 'N/A'}
+														<br />
+														<>Updated On: </>
+														{item.updatedAt ? item.updatedAt : 'N/A'}
 													</div>
 													<div className="d-flex align-items-center">
 														<Button

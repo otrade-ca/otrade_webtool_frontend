@@ -1,3 +1,6 @@
+/**
+ * List of all organizations belonging to a project
+ */
 import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Button, Card, Row } from 'react-bootstrap';
@@ -28,7 +31,7 @@ const OrganizationsProjectList = ({
 
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
-	console.log('organizations returned', organizations);
+
 	//get organizations
 	const dispatch = useDispatch();
 
@@ -104,25 +107,36 @@ const OrganizationsProjectList = ({
 												<div className="d-flex justify-content-between">
 													<div>
 														<>
-															<Link to={`${url}/${item._id}/view`}>
+															<Link
+																to={`/project/${projectId}/organizations/${item._id}/view`}
+															>
 																{item.name}
 															</Link>
 														</>
 														<br />
-														<>Address: {item.address ? item.address : 'N/A'}</>
+														<>
+															{t('organization.address.label')} :{' '}
+															<em>{item.address ? item.address : 'N/A'}</em>
+														</>
 														<br />
-														<>Email: {item.email ? item.email : 'N/A'}</>
+														<>
+															Email: <em>{item.email ? item.email : 'N/A'}</em>
+														</>
 														<br />
 														<>
 															Telephone:{' '}
-															{item.telephone ? item.telephone : 'N/A'}
+															<em>{item.telephone ? item.telephone : 'N/A'}</em>
+														</>
+														<br />
+														<>
+															Updated On:{' '}
+															<em>{item.updatedAt ? item.updatedAt : 'N/A'}</em>
 														</>
 														<br />
 													</div>
 													<div className="d-flex align-items-center">
 														<Button
 															variant="danger"
-															className="btn-md ml-3"
 															onClick={() => deleteHandler(item._id)}
 														>
 															<i className="fas fa-trash"></i> Delete
@@ -151,7 +165,7 @@ const OrganizationsProjectList = ({
 
 OrganizationsProjectList.propTypes = {
 	listProjectOrganizations: PropTypes.func.isRequired,
-	deleteStakeholder: PropTypes.func.isRequired,
+	deleteOrganization: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

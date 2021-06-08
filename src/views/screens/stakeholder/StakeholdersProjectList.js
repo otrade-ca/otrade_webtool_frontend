@@ -1,3 +1,6 @@
+/**
+ * List of stakeholders belonging to a project
+ */
 import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
 import { Accordion, Card, Button, Row } from 'react-bootstrap';
@@ -113,16 +116,23 @@ const StakeholderProjectList = ({
 																</Link>
 															</>
 															<br />
-															<>Email: {item.email ? item.email : 'N/A'}</>
+															<>
+																Email:{' '}
+																<em>{item.email ? item.email : 'N/A'}</em>
+															</>
 															<br />
 															<>
 																Telephone:{' '}
-																{item.telephone ? item.telephone : 'N/A'}
+																<em>
+																	{item.telephone ? item.telephone : 'N/A'}
+																</em>
 															</>
 															<br />
 															<>
 																Updated on:{' '}
-																{item.updatedAt ? item.updatedAt : 'N/A'}
+																<em>
+																	{item.updatedAt ? item.updatedAt : 'N/A'}
+																</em>
 															</>
 														</p>
 													</div>
@@ -136,7 +146,6 @@ const StakeholderProjectList = ({
 														</Link>
 														<Button
 															variant="danger"
-															className="btn-md ml-3"
 															onClick={() => deleteHandler(item._id)}
 														>
 															<i className="fas fa-trash"></i>{' '}
