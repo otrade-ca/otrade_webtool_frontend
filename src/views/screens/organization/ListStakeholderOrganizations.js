@@ -18,12 +18,13 @@ import * as RiIcons from 'react-icons/ri';
 import * as VscIcons from 'react-icons/vsc';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
+import Moment from 'react-moment';
 
 const StakeholderOrganizations = ({
 	match,
 	listStakeholderOrganizations,
 	deleteOrganization,
-	organizationStakeholderList: { loading, error, organizations, pages, page },
+	organizationStakeholderList,
 	organizationDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
@@ -33,6 +34,7 @@ const StakeholderOrganizations = ({
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
+	console.log(organizationStakeholderList);
 	//get organizations for stakeholder
 	const dispatch = useDispatch();
 	// const organizationStakeholderList = useSelector(
@@ -45,7 +47,7 @@ const StakeholderOrganizations = ({
 	// const organizationDelete = useSelector((state) => state.organizationDelete);
 	// const { success } = organizationDelete;
 
-	console.log(organizations);
+	//console.log(organizations);
 
 	useEffect(() => {
 		if (success) {
@@ -72,7 +74,7 @@ const StakeholderOrganizations = ({
 
 	return (
 		<Card className="my-card">
-			{loading ? (
+			{/* {loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
@@ -166,6 +168,19 @@ const StakeholderOrganizations = ({
 																	{item.telephone ? item.telephone : 'N/A'}
 																</em>
 															</>
+															<br />
+															<>
+																Updated On:{' '}
+																<em>
+															{item.updatedAt ? (
+																<Moment format="MM-DD-YYYY">
+																	{item.updatedAt}
+																</Moment>
+															) : (
+																'N/A'
+															)}
+														</em>
+															</>
 														</p>
 													</div>
 													<div className="action-btns">
@@ -192,7 +207,7 @@ const StakeholderOrganizations = ({
 						</Row>
 					</Card.Body>
 				</>
-			)}
+			)} */}
 		</Card>
 	);
 };

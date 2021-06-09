@@ -14,6 +14,7 @@ import { LOCATION_DELETE_RESET } from '../../../application/constants/locationCo
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as RiIcons from 'react-icons/ri';
+import Moment from 'react-moment';
 
 const ProjectLocations = ({ match }) => {
 	const projectId = match.params.id;
@@ -126,7 +127,13 @@ const ProjectLocations = ({ match }) => {
 												<>Updated On</>
 												{': '}{' '}
 												<em>
-													{location.updatedAt ? location.updatedAt : 'N/A'}
+													{location.updatedAt ? (
+														<Moment format="MM-DD-YYYY">
+															{location.updatedAt}
+														</Moment>
+													) : (
+														'N/A'
+													)}
 												</em>
 											</div>
 											<div className="action-btns">

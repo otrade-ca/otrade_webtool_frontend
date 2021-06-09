@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import PropTypes from 'prop-types';
 import * as VscIcons from 'react-icons/vsc';
+import Moment from 'react-moment';
 
 const OrganizationsProjectList = ({
 	match,
@@ -130,7 +131,15 @@ const OrganizationsProjectList = ({
 														<br />
 														<>
 															Updated On:{' '}
-															<em>{item.updatedAt ? item.updatedAt : 'N/A'}</em>
+															<em>
+																{item.updatedAt ? (
+																	<Moment format="MM-DD-YYYY">
+																		{item.updatedAt}
+																	</Moment>
+																) : (
+																	'N/A'
+																)}
+															</em>
 														</>
 														<br />
 													</div>

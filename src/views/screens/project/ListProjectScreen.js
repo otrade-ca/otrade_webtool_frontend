@@ -13,6 +13,7 @@ import { Message, Loader } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as AiIcons from 'react-icons/ai';
+import Moment from 'react-moment';
 
 const ListProjectScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -107,14 +108,6 @@ const ListProjectScreen = ({ history, match }) => {
 													</div>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-two">
-													<div>
-														<>{project.createdAt.substring(0, 10)}</>{' '}
-													</div>
-													<div className="item-category">Updated Date</div>
-												</div>
-											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>
 											<Card.Body>
@@ -142,12 +135,24 @@ const ListProjectScreen = ({ history, match }) => {
 																	{t('project.coordinates.label')}
 																	{': '}
 																	<>{project.coordinates}</>
-																	<br />
 																</>
 															)}
+															<br />
+															Updated On:{' '}
+															{project.updatedAt ? (
+																<em>
+																	{project.updatedAt ? (
+																		<Moment format="MM-DD-YYYY">
+																			{project.updatedAt}
+																		</Moment>
+																	) : (
+																		'N/A'
+																	)}
+																</em>
+															) : null}
 														</p>
 													</div>
-													<div className="d-flex align-items-center">
+													<div className="action-btns">
 														<LinkContainer
 															to={`/admin/project/${project._id}/assign`}
 														>
@@ -180,7 +185,7 @@ const ListProjectScreen = ({ history, match }) => {
 								))}
 						</Accordion>
 					</Card.Text>
-					<Row className="d-flex justify-content-center">
+					<Row className="d-flex justify-content-center mt-2">
 						<Paginate
 							pages={pages}
 							page={page}

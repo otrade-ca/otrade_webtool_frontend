@@ -11,6 +11,7 @@ import Empty from '../../components/Empty';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
+import Moment from 'react-moment';
 
 const StakeholderInfluences = ({ match }) => {
 	const stakeholderId = match.params.id;
@@ -83,24 +84,31 @@ const StakeholderInfluences = ({ match }) => {
 											<Card.Body>
 												<div className="d-flex justify-content-between">
 													<div>
-														<>Type:</> {item.type ? item.type : 'N/A'}
+														<>Type:</> <em>{item.type ? item.type : 'N/A'}</em>
 														<br />
 														<>Position:</>{' '}
-														{item.position ? item.position : 'N/A'}
+														<em>{item.position ? item.position : 'N/A'}</em>
 														<br />
 														<>Influence: </>{' '}
-														{item.influence ? item.influence : 'N/A'}
+														<em>{item.influence ? item.influence : 'N/A'}</em>
 														<br />
 														<>Impact to project: </>{' '}
-														{item.projImpact ? item.projImpact : 'N/A'}
+														<em>{item.projImpact ? item.projImpact : 'N/A'}</em>
 														<br />
 														<>Updated On: </>
-														{item.updatedAt ? item.updatedAt : 'N/A'}
+														<em>
+															{item.updatedAt ? (
+																<Moment format="MM-DD-YYYY">
+																	{item.updatedAt}
+																</Moment>
+															) : (
+																'N/A'
+															)}
+														</em>
 													</div>
 													<div className="d-flex align-items-center">
 														<Button
 															variant="danger"
-															className="btn-md ml-3"
 															onClick={() => deleteHandler(item._id)}
 														>
 															<i className="fas fa-trash"></i> Delete

@@ -265,6 +265,8 @@ export const listStakeholderOrganizations =
 				config
 			);
 
+			console.log('returning data', data);
+
 			dispatch({ type: ORGANIZATION_STAKEHOLDER_LIST_SUCCESS, payload: data });
 		} catch (error) {
 			dispatch({

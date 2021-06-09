@@ -7,11 +7,11 @@ import {
 	deleteActivity,
 } from '../../../application/actions/activityActions';
 import { Message, Loader, Empty } from '../../components/HelperComponents';
-
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
+import Moment from 'react-moment';
 
 const Activities = ({
 	match,
@@ -128,7 +128,15 @@ const Activities = ({
 														<br />
 														<>
 															Updated On:{' '}
-															<em>{item.updatedAt ? item.updatedAt : 'N/A'}</em>
+															<em>
+																{item.updatedAt ? (
+																	<Moment format="MM-DD-YYYY">
+																		{item.updatedAt}
+																	</Moment>
+																) : (
+																	'N/A'
+																)}
+															</em>
 														</>
 													</div>
 													<div className="d-flex align-items-center">

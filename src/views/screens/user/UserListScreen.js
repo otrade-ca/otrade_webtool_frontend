@@ -15,6 +15,7 @@ import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
+import Moment from 'react-moment';
 
 const UserListScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -112,14 +113,6 @@ const UserListScreen = ({ history, match }) => {
 												</div>
 											</div>
 										</div>
-										<div className="table-card-item">
-											<div className="item-two">
-												<div>
-													<>{user.createdAt.substring(0, 10)}</>{' '}
-												</div>
-												<div className="item-category">Joined Otrade</div>
-											</div>
-										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
@@ -128,17 +121,26 @@ const UserListScreen = ({ history, match }) => {
 													<p>
 														{user.firstName} {user.lastName}
 														<br />
+														Email:{' '}
 														<em>
 															<a href={`mailto:${user.email}`}>{user.email}</a>
 														</em>
 														<br />
 														<>
-															<em>{user.telephone}</em>
+															Telephone: <em>{user.telephone}</em>
 														</>
 														<br />
+														<>
+															Updated On:{' '}
+															<em>
+																<Moment format="MM-DD-YYYY">
+																	{user.updatedAt}
+																</Moment>
+															</em>
+														</>
 													</p>
 												</div>
-												<div className="d-flex align-items-center">
+												<div className="action-btns">
 													<LinkContainer to={`/admin/user/${user._id}/edit`}>
 														<Button variant="light" className="btn-md ml-3 ">
 															<i className="fas fa-edit" /> {t('action.update')}
@@ -158,7 +160,7 @@ const UserListScreen = ({ history, match }) => {
 								</Card>
 							))}
 					</Accordion>
-					<Row className="d-flex justify-content-center">
+					<Row className="d-flex justify-content-center mt-2">
 						<Paginate
 							pages={pages}
 							page={page}

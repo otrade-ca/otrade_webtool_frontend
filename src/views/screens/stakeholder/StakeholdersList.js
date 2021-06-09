@@ -14,6 +14,7 @@ import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
+import Moment from 'react-moment';
 
 const StakeholdersList = ({
 	match,
@@ -143,7 +144,13 @@ const StakeholdersList = ({
 															<>
 																Updated On:{' '}
 																<em>
-																	{item.updatedAt ? item.updatedAt : 'N/A'}
+																	{item.updatedAt ? (
+																		<Moment format="MM-DD-YYYY">
+																			{item.updatedAt}
+																		</Moment>
+																	) : (
+																		'N/A'
+																	)}
 																</em>
 															</>
 														</p>
