@@ -24,7 +24,7 @@ const StakeholderOrganizations = ({
 	match,
 	listStakeholderOrganizations,
 	deleteOrganization,
-	organizationStakeholderList,
+	organizationStakeholderList: { loading, error, organizations, pages, page },
 	organizationDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
@@ -34,20 +34,8 @@ const StakeholderOrganizations = ({
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	console.log(organizationStakeholderList);
 	//get organizations for stakeholder
 	const dispatch = useDispatch();
-	// const organizationStakeholderList = useSelector(
-	// 	(state) => state.organizationStakeholderList
-	// );
-
-	// const { loading, error, organizations, filtered } =
-	// 	organizationStakeholderList;
-
-	// const organizationDelete = useSelector((state) => state.organizationDelete);
-	// const { success } = organizationDelete;
-
-	//console.log(organizations);
 
 	useEffect(() => {
 		if (success) {
@@ -74,7 +62,7 @@ const StakeholderOrganizations = ({
 
 	return (
 		<Card className="my-card">
-			{/* {loading ? (
+			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message>{error}</Message>
@@ -172,14 +160,14 @@ const StakeholderOrganizations = ({
 															<>
 																Updated On:{' '}
 																<em>
-															{item.updatedAt ? (
-																<Moment format="MM-DD-YYYY">
-																	{item.updatedAt}
-																</Moment>
-															) : (
-																'N/A'
-															)}
-														</em>
+																	{item.updatedAt ? (
+																		<Moment format="MM-DD-YYYY">
+																			{item.updatedAt}
+																		</Moment>
+																	) : (
+																		'N/A'
+																	)}
+																</em>
 															</>
 														</p>
 													</div>
@@ -207,7 +195,7 @@ const StakeholderOrganizations = ({
 						</Row>
 					</Card.Body>
 				</>
-			)} */}
+			)}
 		</Card>
 	);
 };
@@ -218,7 +206,7 @@ StakeholderOrganizations.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	organizationStakeholderList: state.organizationStakerholderList,
+	organizationStakeholderList: state.organizationStakeholderList,
 	organizationDelete: state.organizationDelete,
 });
 
