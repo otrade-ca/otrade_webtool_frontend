@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../../../application/actions/activityActions';
-import MemberDropdownProject from '../../components/MemberDropdownProject';
+import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 
-const ActivityType = ({ history }) => {
+const ActivityForm = ({ history }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const ActivityType = ({ history }) => {
 	const [disPoints, setDispoints] = useState();
 	const [compromise, setcompromise] = useState();
 
-	//handle submit form
+	// handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
 
@@ -169,4 +169,4 @@ const ActivityType = ({ history }) => {
 	);
 };
 
-export default ActivityType;
+export default ActivityForm;

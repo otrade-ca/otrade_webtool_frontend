@@ -6,6 +6,7 @@ import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 import ViewOrganization from '../organization/ViewOrganization';
 import OrganizationScreen from '../organization/OrganizationScreen';
+import ProjectNews from '../news/ProjectNews';
 
 export const btnlinks = [
 	// {
@@ -28,6 +29,10 @@ export const navbarlinks = [
 	{
 		link: '/organizations',
 		type: 'Organizations',
+	},
+	{
+		link: '/news',
+		type: 'News',
 	},
 ];
 
@@ -91,5 +96,9 @@ export const routes = [
 	{
 		path: '/photo',
 		component: ({ match }) => <EditProjectPhoto match={match} />,
+	},
+	{
+		path: '/news',
+		component: ({ match }) => <ProjectNews match={match} />,
 	},
 ];

@@ -5,22 +5,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import {
 	assignStakeholder,
-	listLocationStakeholders,
-} from '../../application/actions/stakeholderActions';
-import { setAlert } from '../../application/actions/alertActions';
-import { getLocationId } from '../../application/localStorage';
-import { Loader, Message } from '../components/HelperComponents';
+	listStakeholdersDropdown,
+} from '../../../application/actions/stakeholderActions';
+import { setAlert } from '../../../application/actions/alertActions';
+import { getProjectId } from '../../../application/localStorage';
+import { Loader, Message } from '../../components/HelperComponents';
 
-const MemberDropdown = ({ label, history }) => {
+const MemberDropdownProject = ({ label, history }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 
-	const locationId = getLocationId();
+	const projectId = getProjectId();
 
-	const stakeholderLocationList = useSelector(
-		(state) => state.stakeholderLocationList
+	const stakeholderListDropdown = useSelector(
+		(state) => state.stakeholderListDropdown
 	);
-	const { loading, stakeholders, error } = stakeholderLocationList;
+	const { loading, stakeholders, error } = stakeholderListDropdown;
 
 	// useState
 	const [members, setMembers] = useState([{ member: '' }]);
@@ -31,8 +31,8 @@ const MemberDropdown = ({ label, history }) => {
 	};
 
 	useEffect(() => {
-		dispatch(listLocationStakeholders(locationId));
-	}, [dispatch, locationId]);
+		dispatch(listStakeholdersDropdown(projectId));
+	}, [dispatch, projectId]);
 
 	// filter out element i and update members
 	const removeHandler = (i) => {
@@ -119,4 +119,4 @@ const MemberDropdown = ({ label, history }) => {
 	);
 };
 
-export default withRouter(MemberDropdown);
+export default withRouter(MemberDropdownProject);

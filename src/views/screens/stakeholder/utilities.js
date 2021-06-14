@@ -37,6 +37,10 @@ export const navbarlinks = [
 		link: '/assessments',
 		type: 'Assessments',
 	},
+	// {
+	// 	link: '/news',
+	// 	type: 'News',
+	// },
 ];
 
 export const routes = [

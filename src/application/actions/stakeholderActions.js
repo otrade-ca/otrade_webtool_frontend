@@ -37,6 +37,9 @@ import {
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_DETAILS_RESET,
+	STAKEHOLDER_DROPDOWN_REQUEST,
+	STAKEHOLDER_DROPDOWN_SUCCESS,
+	STAKEHOLDER_DROPDOWN_FAIL,
 } from '../constants/stakeholderConstants';
 import { setAlert } from '../actions/alertActions';
 import { saveRouteInfo } from '../actions/routeActions';
@@ -226,8 +229,6 @@ export const listStakeholders =
 				config
 			);
 
-			console.log('returning data', data);
-
 			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
 
 			// localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
@@ -294,8 +295,6 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 			config
 		);
 
-		console.log('stakeholders1', data);
-
 		dispatch({ type: STAKEHOLDER_LOCATION_LIST_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -312,7 +311,6 @@ export const listLocationStakeholders = (id) => async (dispatch, getState) => {
 export const listProjectStakeholders =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
-		console.log('inside projectStakeholders');
 		try {
 			dispatch({ type: STAKEHOLDER_PROJECT_LIST_REQUEST });
 
@@ -330,8 +328,6 @@ export const listProjectStakeholders =
 				`${getURL()}/api/v1/stakeholders/project/${id}?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
-
-			console.log('data', data);
 
 			dispatch({ type: STAKEHOLDER_PROJECT_LIST_SUCCESS, payload: data });
 		} catch (error) {
@@ -358,6 +354,38 @@ export const saveStakeholderInfo = (data) => (dispatch) => {
 		payload: data,
 	});
 	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
+};
+
+// list all stakeholders in a project location for dropdown
+export const listStakeholdersDropdown = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: STAKEHOLDER_DROPDOWN_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(
+			`${getURL()}/api/v1/stakeholders/dropdown/project/${id}`,
+			config
+		);
+
+		dispatch({ type: STAKEHOLDER_DROPDOWN_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: STAKEHOLDER_DROPDOWN_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
 };
 
 // remove stakeholder info from localstorage to use in processing form

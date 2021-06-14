@@ -12,7 +12,7 @@ import {
 	CardContainer,
 } from '../../components/HelperComponents';
 
-import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
+import { listStakeholdersDropdown } from '../../../application/actions/stakeholderActions';
 import { getLocationId } from '../../../application/localStorage';
 import { setAlert } from '../../../application/actions/alertActions';
 
@@ -53,7 +53,7 @@ const ActivityScreen = ({ match }) => {
 		} else {
 			if (!activity.activity || activity._id !== activityId) {
 				dispatch(getActivityDetails(activityId));
-				dispatch(listLocationStakeholders(locationId));
+				dispatch(listStakeholdersDropdown(locationId));
 			} else {
 				setActivityType(activity.activity);
 				setActHours(activity.hours);

@@ -18,17 +18,17 @@ const ViewOrganization = ({ match }) => {
 	// get locationId from localStorage
 	const locationId = getLocationId();
 
-	// get stakeholderList
 	const dispatch = useDispatch();
 
-	// get organization
+	// get organization details
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
-	const stakeholderProjectList = useSelector(
-		(state) => state.stakeholderProjectList
+	// get list of stakeholders from dropdown
+	const stakeholderListDropdown = useSelector(
+		(state) => state.stakeholderListDropdown
 	);
-	const { stakeholders: members } = stakeholderProjectList;
+	const { stakeholders: members } = stakeholderListDropdown;
 
 	// define states
 	const [organization, setOrganization] = useState('');

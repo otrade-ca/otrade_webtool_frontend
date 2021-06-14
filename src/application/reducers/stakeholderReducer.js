@@ -44,6 +44,10 @@ import {
 	STAKEHOLDER_SAVE_REQUEST,
 	STAKEHOLDER_SAVE_RESET,
 	STAKEHOLDER_DETAILS_RESET,
+	STAKEHOLDER_DROPDOWN_REQUEST,
+	STAKEHOLDER_DROPDOWN_SUCCESS,
+	STAKEHOLDER_DROPDOWN_FAIL,
+	STAKEHOLDER_DROPDOWN_RESET,
 } from '../constants/stakeholderConstants';
 
 // add stakeholder
@@ -290,6 +294,29 @@ export const stakeholderSaveReducer = (
 			return { ...state, stakeholderInfo: action.payload };
 		case STAKEHOLDER_SAVE_RESET:
 			return { stakeholderInfo: {} };
+		default:
+			return state;
+	}
+};
+
+// get all stakeholders for a project
+export const stakeholderListDropdownReducer = (
+	state = { stakeholders: [] },
+	action
+) => {
+	switch (action.type) {
+		case STAKEHOLDER_DROPDOWN_REQUEST:
+			return { loading: true, stakeholders: [] };
+		case STAKEHOLDER_DROPDOWN_SUCCESS:
+			console.log('returning data', action.payload.stakeholders);
+			return {
+				loading: false,
+				stakeholders: action.payload.stakeholders,
+			};
+		case STAKEHOLDER_DROPDOWN_FAIL:
+			return { loading: false, error: action.payload };
+		case STAKEHOLDER_DROPDOWN_RESET:
+			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}

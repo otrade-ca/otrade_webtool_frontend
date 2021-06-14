@@ -7,9 +7,9 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
-import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 import { getLocationId } from '../../../application/localStorage';
+import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 
 const AddOrganizationScreen = ({ match, history }) => {
 	// id is either match or from localStorage
@@ -22,10 +22,11 @@ const AddOrganizationScreen = ({ match, history }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
 
-	//get location details
+	// get location details
 	const locationDetails = useSelector((state) => state.locationDetails);
 	const { location: loc } = locationDetails;
 
+	// get list of members
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
 

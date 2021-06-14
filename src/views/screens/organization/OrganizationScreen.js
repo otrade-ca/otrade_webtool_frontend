@@ -29,10 +29,10 @@ const OrganizationScreen = ({ match, history }) => {
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
-	const stakeholderProjectList = useSelector(
-		(state) => state.stakeholderProjectList
+	const stakeholderListDropdown = useSelector(
+		(state) => state.stakeholderListDropdown
 	);
-	const { stakeholders: members } = stakeholderProjectList;
+	const { stakeholders: members } = stakeholderListDropdown;
 
 	// get success on update
 	const organizationUpdate = useSelector((state) => state.organizationUpdate);

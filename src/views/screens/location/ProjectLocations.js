@@ -2,7 +2,7 @@
  * List of communities belonging to a project
  */
 import React, { useEffect, memo } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty, Message, Loader } from '../../components/HelperComponents';
@@ -18,14 +18,13 @@ import Moment from 'react-moment';
 
 const ProjectLocations = ({ match }) => {
 	const projectId = match.params.id;
-	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
 
 	// get locations
 	const dispatch = useDispatch();
 	const locationList = useSelector((state) => state.locationList);
-	const { loading, error, filtered, locations } = locationList;
+	const { loading, error, locations } = locationList;
 
 	const locationDelete = useSelector((state) => state.locationDelete);
 	const { success } = locationDelete;
@@ -151,6 +150,13 @@ const ProjectLocations = ({ match }) => {
 													<i className="fas fa-plus" />
 													{t('tables.organization')}
 												</Link>
+												{/* <Link
+													to={`/organizations/register/community/${location._id}`}
+													className="btn btn-primary"
+												>
+													<i className="fas fa-plus" />
+													{t('tables.organization')}
+												</Link> */}
 												<Button
 													variant="danger"
 													onClick={() => deleteHandler(location._id)}

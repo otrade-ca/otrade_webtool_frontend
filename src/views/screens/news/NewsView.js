@@ -5,12 +5,12 @@ import MemberDropdownProject from '../../components/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-const NewsForm = () => {
-	return <div>News Source</div>;
+const NewsView = () => {
+	return <div>News View</div>;
 };
 
-NewsForm.propTypes = {};
+NewsView.propTypes = {};
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, {})(NewsForm);
+export default connect(mapStateToProps, {})(NewsView);

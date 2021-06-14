@@ -50,7 +50,7 @@ const CommunityDropDown = ({ label }) => {
 		) {
 			dispatch(
 				setAlert(
-					'Please make sure not to add the same stakeholder twice',
+					'Please make sure not to add the same community twice',
 					'danger'
 				)
 			);

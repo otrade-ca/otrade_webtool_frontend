@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { BorderContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
-import MemberDropdown from '../../components/MemberDropdown';
 
 const Ownership = ({ navigation }) => {
 	const { next } = navigation;
@@ -52,9 +51,9 @@ const Ownership = ({ navigation }) => {
 					</Row>
 				</Form.Group>
 				<hr />
-				<MemberDropdown label={'Parties Involved'} />
+
 				<hr />
-				<MemberDropdown label={'Parties Involved'} />
+
 				<hr />
 				<Row className="mt-2">
 					<Col>

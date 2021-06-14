@@ -4,12 +4,12 @@ import UserProjects from '../project/UserProjects';
 import ViewUser from './ViewUser';
 
 export const btnlinks = [
-	{
-		link: '/profile-photo',
-		class: 'btn btn-primary mr-3',
-		icon: 'fas fa-edit',
-		type: 'Photo',
-	},
+	// {
+	// 	link: '/profile-photo',
+	// 	class: 'btn btn-primary mr-3',
+	// 	icon: 'fas fa-edit',
+	// 	type: 'Photo',
+	// },
 	{
 		link: '/profile',
 		class: 'btn btn-primary',

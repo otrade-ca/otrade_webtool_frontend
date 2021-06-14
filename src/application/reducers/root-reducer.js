@@ -34,6 +34,7 @@ import {
 	stakeholderSaveReducer,
 	stakeholderAssignReducer,
 	stakeholderProjectListReducer,
+	stakeholderListDropdownReducer,
 } from './stakeholderReducer';
 import {
 	organizationAddReducer,
@@ -133,6 +134,7 @@ const rootReducer = combineReducers({
 	stakeholderProjectList: stakeholderProjectListReducer,
 	stakeholderSave: stakeholderSaveReducer,
 	stakeholderAssign: stakeholderAssignReducer,
+	stakeholderListDropdown: stakeholderListDropdownReducer,
 
 	// organization reducers
 	organizationAdd: organizationAddReducer,
@@ -210,14 +212,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: [
-		'userLogin',
-		'stakeholderList',
-		'stakeholderLocationList',
-		'stakeholderProjectList',
-		'organizationList',
-		'locationDetails',
-	],
+	whitelist: ['userLogin', 'stakeholderListDropdown'],
 };
 
 export default persistReducer(persistConfig, rootReducer);
