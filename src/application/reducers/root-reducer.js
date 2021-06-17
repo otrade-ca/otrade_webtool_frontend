@@ -44,6 +44,7 @@ import {
 	organizationListReducer,
 	organizationStakeholderListReducer,
 	organizationAssignmentReducer,
+	organizationDropdownReducer,
 } from './organizationReducer';
 import {
 	activityAddReducer,
@@ -75,13 +76,6 @@ import {
 	commitmentListReducer,
 } from './commitmentReducer';
 import {
-	communityAddReducer,
-	communityDetailsReducer,
-	communityUpdateReducer,
-	communityDeleteReducer,
-	communityListReducer,
-} from './communityReducer';
-import {
 	landownershipAddReducer,
 	landownershipDetailsReducer,
 	landownershipUpdateReducer,
@@ -95,6 +89,8 @@ import {
 	locationDeleteReducer,
 	locationListReducer,
 	locationUserListReducer,
+	locationListDropdownReducer,
+	locationAssignReducer,
 } from './locationReducer';
 
 import { routeSaveReducer } from './routeReducer';
@@ -144,6 +140,7 @@ const rootReducer = combineReducers({
 	organizationList: organizationListReducer,
 	organizationStakeholderList: organizationStakeholderListReducer,
 	organizationAssignment: organizationAssignmentReducer,
+	organizationDropdown: organizationDropdownReducer,
 
 	// activity reducers
 	activityAdd: activityAddReducer,
@@ -168,13 +165,6 @@ const rootReducer = combineReducers({
 	commitmentDelete: commitmentDeleteReducer,
 	commitmentList: commitmentListReducer,
 
-	// community reducers
-	communityAdd: communityAddReducer,
-	communityDetails: communityDetailsReducer,
-	communityUpdate: communityUpdateReducer,
-	communityDelete: communityDeleteReducer,
-	communityList: communityListReducer,
-
 	// influence reducers
 	influenceAdd: influenceAddReducer,
 	influenceDelete: influenceDeleteReducer,
@@ -195,6 +185,8 @@ const rootReducer = combineReducers({
 	locationDelete: locationDeleteReducer,
 	locationList: locationListReducer,
 	locationUserList: locationUserListReducer,
+	locationAssign: locationAssignReducer,
+	locationListDropdown: locationListDropdownReducer,
 
 	// route reducer
 	routeSave: routeSaveReducer,
@@ -212,7 +204,12 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: ['userLogin', 'stakeholderListDropdown'],
+	whitelist: [
+		'userLogin',
+		'stakeholderListDropdown',
+		'locationListDropdown',
+		'organizationDropdown',
+	],
 };
 
 export default persistReducer(persistConfig, rootReducer);

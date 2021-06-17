@@ -26,6 +26,13 @@ import {
 	LOCATION_USER_LIST_FILTER_CLEAR,
 	LOCATION_ID_REQUEST,
 	LOCATION_DETAILS_RESET,
+	LOCATION_DROPDOWN_REQUEST,
+	LOCATION_DROPDOWN_SUCCESS,
+	LOCATION_DROPDOWN_FAIL,
+	LOCATION_ASSIGN_REQUEST,
+	LOCATION_ASSIGN_SUCCESS,
+	LOCATION_ASSIGN_FAIL,
+	LOCATION_ASSIGN_RESET,
 } from '../constants/locationConstants';
 
 // add location
@@ -147,6 +154,43 @@ export const locationUserListReducer = (
 				...state,
 				filtered: null,
 			};
+		default:
+			return state;
+	}
+};
+
+// get all stakeholders for a project
+export const locationListDropdownReducer = (
+	state = { locations: [] },
+	action
+) => {
+	switch (action.type) {
+		case LOCATION_DROPDOWN_REQUEST:
+			return { loading: true, locations: [] };
+		case LOCATION_DROPDOWN_SUCCESS:
+			return {
+				loading: false,
+				locations: action.payload.locations,
+			};
+		case LOCATION_DROPDOWN_FAIL:
+			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
+// assign location
+export const locationAssignReducer = (state = { location: {} }, action) => {
+	switch (action.type) {
+		case LOCATION_ASSIGN_REQUEST:
+			return { loading: true, ...state };
+		case LOCATION_ASSIGN_SUCCESS:
+			return { loading: false, success: true, location: action.payload };
+		case LOCATION_ASSIGN_FAIL:
+			return { loading: false, error: action.payload };
+		case LOCATION_ASSIGN_RESET:
+			return { members: [] };
 		default:
 			return state;
 	}

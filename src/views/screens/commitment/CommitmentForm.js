@@ -12,7 +12,6 @@ const CommitmentDetails = ({ match, history }) => {
 	const [isComplete, setIsComplete] = useState(false);
 
 	const dispatch = useDispatch();
-
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 

@@ -7,6 +7,7 @@ import OrganizationRoutes from './OrganizationRoutes';
 import ActivityRoutes from './ActivityRoutes';
 import InfluenceRoutes from './InfluenceRoutes';
 import CommitmentRoutes from './CommitmentRoutes';
+import NewsRoutes from './NewsRoutes';
 
 export {
 	AdminRoutes,
@@ -18,4 +19,5 @@ export {
 	ActivityRoutes,
 	InfluenceRoutes,
 	CommitmentRoutes,
+	NewsRoutes,
 };

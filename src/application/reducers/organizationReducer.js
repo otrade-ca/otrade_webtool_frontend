@@ -199,3 +199,28 @@ export const organizationAssignmentReducer = (
 			return state;
 	}
 };
+
+// get organization list reducer
+export const organizationDropdownReducer = (
+	state = { organizations: [] },
+	action
+) => {
+	switch (action.type) {
+		case ORGANIZATION_LIST_REQUEST:
+			return { loading: true, organizations: [] };
+		case ORGANIZATION_LIST_SUCCESS:
+			return {
+				loading: false,
+				organizations: action.payload.organizations,
+			};
+		case ORGANIZATION_LIST_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case ORGANIZATION_PROJECT_LIST_RESET:
+			return { organizations: [] };
+		default:
+			return state;
+	}
+};

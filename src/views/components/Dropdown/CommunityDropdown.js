@@ -1,107 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import {
-	assignStakeholder,
-	listUserStakeholders,
-} from '../../application/actions/stakeholderActions';
-import { setAlert } from '../../application/actions/alertActions';
+import { Form, Row, Col } from 'react-bootstrap';
+import { listDropdownLocations } from '../../../application/actions/locationActions';
+import { assignLocation } from '../../../application/actions/locationActions';
 
-const CommunityDropDown = ({ label }) => {
+const CommunityDropDown = ({ label, id }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
-
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
-	const stakeholderUserList = useSelector((state) => state.stakeholderUserList);
-	const { stakeholders } = stakeholderUserList;
+	const locationListDropdown = useSelector(
+		(state) => state.locationListDropdown
+	);
+	const { locations } = locationListDropdown;
 
 	// useState
-	const [communities, setCommunities] = useState([{ member: '' }]);
-
-	//add select field
-	const addHandler = () => {
-		setCommunities([...communities, { member: '' }]);
-	};
+	const [community, setCommunity] = useState();
 
 	useEffect(() => {
-		dispatch(listUserStakeholders(userInfo._id));
-	}, [dispatch, userInfo]);
+		dispatch(listDropdownLocations(id));
+	}, [dispatch, id]);
 
-	// filter out element i and update communities
-	const removeHandler = (i) => {
-		const stakeholderToRemove = communities[i];
-		const list = communities.filter((i) => i !== stakeholderToRemove);
-		setCommunities(list);
-	};
-
-	// add element to array && provide validation
-	const handleInputChange = (e, i) => {
-		e.preventDefault();
-
-		// spread all communities into a list
-		const list = [...communities];
-
-		if (
-			list.includes(e.target.value) ||
-			list.some((item) => item._id === e.target.value)
-		) {
-			dispatch(
-				setAlert(
-					'Please make sure not to add the same community twice',
-					'danger'
-				)
-			);
-		} else {
-			list[i] = e.target.value;
-			dispatch(assignStakeholder(list)); // add to state
-			setCommunities(list); // add selected drop down to list
-		}
+	const handleInputChange = (target) => {
+		setCommunity(target);
+		dispatch(assignLocation(target));
 	};
 
 	return (
 		<Row className="mt-4">
 			<Col md={8}>
 				<Form.Label>{label}</Form.Label>
-				{communities &&
-					communities.map((assignee, i) => (
-						<Row key={i}>
-							<Col md={9}>
-								<Form.Control
-									as="select"
-									value={assignee._id}
-									onChange={(e) => handleInputChange(e, i)}
-									className="px-5 mb-2"
-								>
-									<option value="">--Select--</option>
-									{stakeholders &&
-										stakeholders.map((stakeholder) => (
-											<option key={stakeholder._id} value={stakeholder._id}>
-												{stakeholder.firstName} {stakeholder.lastName}
-											</option>
-										))}
-								</Form.Control>
-							</Col>
-							<Col md={3} className="mb-2">
-								{communities && communities.length !== 1 && (
-									<Button
-										variant="danger"
-										className="btn-md mr-3"
-										onClick={() => removeHandler(i)}
-									>
-										<i className="fas fa-trash"></i> Remove
-									</Button>
-								)}
-								{communities && communities.length - 1 === i && (
-									<Button className="px-3" onClick={() => addHandler(i)}>
-										<i className="fas fa-plus"></i> Stakeholder
-									</Button>
-								)}
-							</Col>
-						</Row>
-					))}
+				<Row>
+					<Col md={9}>
+						<Form.Control
+							as="select"
+							value={community}
+							onChange={(e) => handleInputChange(e.target.value)}
+							className="px-5 mb-2"
+						>
+							<option value="">--Select--</option>
+							{locations &&
+								locations.map((location) => (
+									<option key={location._id} value={location._id}>
+										{location.location}
+									</option>
+								))}
+						</Form.Control>
+					</Col>
+				</Row>
 			</Col>
 		</Row>
 	);

@@ -20,6 +20,11 @@ import {
 	LOCATION_USER_LIST_FAIL,
 	LOCATION_USER_LIST_FILTER,
 	LOCATION_USER_LIST_FILTER_CLEAR,
+	LOCATION_DROPDOWN_REQUEST,
+	LOCATION_DROPDOWN_SUCCESS,
+	LOCATION_DROPDOWN_FAIL,
+	LOCATION_ASSIGN_REQUEST,
+	LOCATION_ASSIGN_SUCCESS,
 } from '../constants/locationConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
@@ -232,6 +237,47 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 					: error.messsage,
 		});
 	}
+};
+
+// get list of locations
+export const listDropdownLocations =
+	(projectId) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: LOCATION_DROPDOWN_REQUEST });
+
+			// get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			// create config object
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects/${projectId}/dropdown/locations`,
+				config
+			);
+
+			dispatch({ type: LOCATION_DROPDOWN_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: LOCATION_DROPDOWN_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
+
+// adds a stakeholder to a list of stakeholders for dropdown
+export const assignLocation = (data) => (dispatch) => {
+	dispatch({ type: LOCATION_ASSIGN_REQUEST });
+	dispatch({ type: LOCATION_ASSIGN_SUCCESS, payload: data });
 };
 
 // filter user projects

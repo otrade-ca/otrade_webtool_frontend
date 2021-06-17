@@ -19,6 +19,7 @@ import {
 	ActivityRoutes,
 	InfluenceRoutes,
 	CommitmentRoutes,
+	NewsRoutes,
 } from './components/Routing/AccessRoutes';
 
 const Home = () => {
@@ -59,6 +60,7 @@ const Home = () => {
 					<Route component={LocationRoutes} />
 					<Route component={StakeholderRoutes} />
 					<Route component={OrganizationRoutes} />
+					<Route component={NewsRoutes} />
 					<Route component={ActivityRoutes} />
 					<Route component={InfluenceRoutes} />
 					<Route component={CommitmentRoutes} />
