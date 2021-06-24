@@ -4,13 +4,17 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { getStakeholderDetails } from '../../../application/actions/stakeholderActions';
 import { addInfluence } from '../../../application/actions/influenceActions';
+import { INFLUENCE_ADD_RESET } from '../../../application/constants/influenceConstants';
 
 const InfluenceForm = ({ history, match }) => {
 	const id = match.params.stakeholderId;
 
-	console.log('id is', id);
-
-	console.log(typeof id);
+	// state
+	const [firstName, setFirstName] = useState('');
+	const [type, setType] = useState('');
+	const [position, setPosition] = useState('');
+	const [influence, setInfluence] = useState('');
+	const [projImpact, setProjImpact] = useState('');
 
 	//get projectDetails
 	const dispatch = useDispatch();
@@ -26,22 +30,26 @@ const InfluenceForm = ({ history, match }) => {
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 
-	// state
-	const [firstName, setFirstName] = useState('');
-	const [type, setType] = useState('');
-	const [position, setPosition] = useState('');
-	const [influence, setInfluence] = useState('');
-	const [projImpact, setProjImpact] = useState('');
+	const influenceAdd = useSelector((state) => state.influenceAdd);
+	const { success } = influenceAdd;
+
+	console.log('incoming routeInfo', routeInfo);
+	console.log('success', success);
 
 	useEffect(() => {
-		if (!stakeholder.firstName || stakeholder._id !== id) {
-			dispatch(getStakeholderDetails(id));
+		if (success) {
+			// clear page
+			dispatch({ type: INFLUENCE_ADD_RESET });
 		} else {
-			setFirstName(stakeholder.firstName);
+			if (!stakeholder.firstName || stakeholder._id !== id) {
+				dispatch(getStakeholderDetails(id));
+			} else {
+				setFirstName(stakeholder.firstName);
+			}
 		}
-	}, []);
+	}, [dispatch, success]);
 
-	// dispatch, stakeholder, id
+	// dispatch, success, id, stakeholder
 
 	const submitHandler = (e) => {
 		e.preventDefault();

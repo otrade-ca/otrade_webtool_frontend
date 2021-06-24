@@ -3,10 +3,10 @@ import {
 	INFLUENCE_ADD_REQUEST,
 	INFLUENCE_ADD_SUCCESS,
 	INFLUENCE_ADD_FAIL,
-	INFLUENCE_ADD_RESET,
 	INFLUENCE_DETAILS_REQUEST,
 	INFLUENCE_DETAILS_SUCCESS,
 	INFLUENCE_DETAILS_FAIL,
+	INFLUENCE_DETAILS_RESET,
 	INFLUENCE_DELETE_REQUEST,
 	INFLUENCE_DELETE_SUCCESS,
 	INFLUENCE_DELETE_FAIL,
@@ -47,10 +47,6 @@ export const addInfluence =
 			);
 
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
-
-			// reset the page
-			console.log('reset page');
-			dispatch({ type: INFLUENCE_ADD_RESET });
 
 			console.log('routeInfo is', routeInfo, 'length', routeInfo.length);
 

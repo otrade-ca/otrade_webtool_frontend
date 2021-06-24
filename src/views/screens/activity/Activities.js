@@ -92,7 +92,9 @@ const Activities = ({
 												<div className="d-flex justify-content-between">
 													<div>
 														<>
-															<Link to={`${url}/${item._id}/view`}>
+															<Link
+																to={`/stakeholder/${stakeholderId}/activities/${item._id}/view`}
+															>
 																View Details
 															</Link>
 														</>

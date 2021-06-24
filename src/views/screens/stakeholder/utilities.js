@@ -8,6 +8,7 @@ import OrganizationScreen from '../organization/OrganizationScreen';
 import ViewOrganization from '../organization/ViewOrganization';
 import FormDetails from '../commitment/FormDetails';
 import StakeholderInfluences from '../influence/StakeholderInfluences';
+import Profile from './Profile';
 
 export const btnlinks = [
 	// {
@@ -54,8 +55,12 @@ export const routes = [
 	},
 	{
 		path: '/profile',
-		component: ({ match }) => <ViewStakeholderScreen match={match} />,
+		component: ({ match }) => <Profile match={match} />,
 	},
+	// {
+	// 	path: '/profile',
+	// 	component: ({ match }) => <ViewStakeholderScreen match={match} />,
+	// },
 	{
 		path: '/profile/edit',
 		component: ({ match }) => <EditStakeholderScreen match={match} />,

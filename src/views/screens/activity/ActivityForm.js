@@ -142,6 +142,7 @@ const ActivityForm = ({ history }) => {
 								<Form.Control
 									as="select"
 									value={compromise}
+									required
 									onChange={(e) => setcompromise(e.target.value)}
 								>
 									<option value="">{t('action.select')}</option>
