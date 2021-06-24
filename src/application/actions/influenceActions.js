@@ -16,7 +16,7 @@ import {
 	INFLUENCE_LIST_FILTER,
 	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
-import { removeRouteInfo } from '../actions/routeActions';
+import { removeRouteInfo, saveRouteInfo } from '../actions/routeActions';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
@@ -51,10 +51,15 @@ export const addInfluence =
 			// reset the page
 			dispatch({ type: INFLUENCE_ADD_RESET });
 
-			routeInfo.pop();
+			console.log('routeInfo is', routeInfo, 'length', routeInfo.length);
+
+			// routeinfo has at least 1 route, pos[0] is the origin
+			// if routeInfo has more than 1 route, navigate user through
 			if (routeInfo.length > 1) {
 				const route = routeInfo.pop();
+				dispatch(saveRouteInfo(routeInfo));
 				history.push(route.path);
+				// if there is only 1 route, push to origin
 			} else {
 				const route = routeInfo.pop();
 				history.push(route.path);

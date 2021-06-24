@@ -8,15 +8,24 @@ import { addInfluence } from '../../../application/actions/influenceActions';
 const InfluenceForm = ({ history, match }) => {
 	const id = match.params.stakeholderId;
 
+	console.log('id is', id);
+
+	console.log(typeof id);
+
 	//get projectDetails
 	const dispatch = useDispatch();
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { stakeholder } = stakeholderDetails;
 
+	console.log(stakeholder);
+
+	console.log(typeof stakeholder._id);
+
+	// pass route info
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 
-	//state
+	// state
 	const [firstName, setFirstName] = useState('');
 	const [type, setType] = useState('');
 	const [position, setPosition] = useState('');
@@ -29,7 +38,9 @@ const InfluenceForm = ({ history, match }) => {
 		} else {
 			setFirstName(stakeholder.firstName);
 		}
-	}, [dispatch, id, stakeholder]);
+	}, []);
+
+	// dispatch, stakeholder, id
 
 	const submitHandler = (e) => {
 		e.preventDefault();

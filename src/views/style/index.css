@@ -379,6 +379,7 @@ hr {
 .my-card-header h4,
 .item-two div {
 	color: black;
+	white-space: nowrap !important;
 }
 
 .card-header p {
@@ -446,7 +447,7 @@ hr {
 }
 
 .table-card-item {
-	width: 50%;
+	width: 100%;
 	float: left;
 	/* border: 1px solid black; */
 	display: flex;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -14,15 +13,14 @@ import {
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const EditUserPhoto = ({ match }) => {
+const EditUserPhoto = ({ match, history }) => {
 	const userId = match.params.id;
 
 	const { t } = useTranslation();
 
 	//define states
 	const [image, setImage] = useState('');
-	let [file, setFile] = useState(null);
-	const [uploading, setUploading] = useState(false);
+	const [file, setFile] = useState(null);
 
 	const dispatch = useDispatch();
 
@@ -44,42 +42,13 @@ const EditUserPhoto = ({ match }) => {
 	}, [dispatch, userId, user, successUpdate]);
 
 	const uploadFileHandler = async (e) => {
-		console.log('hello');
-		setFile = e.target.files[0];
-
-		console.log(file);
-
-		// const formData = new FormData();
-		// formData.append('image', file);
-		// setUploading(true);
-
-		// try {
-		// 	const config = {
-		// 		headers: {
-		// 			'Content-Type': 'multipart/form-data',
-		// 		},
-		// 	};
-
-		// 	const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-		// 	setImage(data);
-		// 	setUploading(false);
-		// } catch (error) {
-		// 	console.error(error);
-		// 	setUploading(false);
-		// }
+		setFile(e.target.files[0]);
 	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		//check password against confirmPassword
-		dispatch(
-			updateUserProfile({
-				id: user._id,
-				image,
-				file,
-			})
-		);
+		dispatch(updateUserProfile(user._id, file, history));
 	};
 
 	return (
@@ -116,6 +85,7 @@ const EditUserPhoto = ({ match }) => {
 										<input
 											type="file"
 											accept="image/*"
+											required
 											onChange={uploadFileHandler}
 										/>
 									</Col>
@@ -138,3 +108,23 @@ const EditUserPhoto = ({ match }) => {
 };
 
 export default EditUserPhoto;
+
+// const formData = new FormData();
+// formData.append('image', file);
+// setUploading(true);
+
+// try {
+// 	const config = {
+// 		headers: {
+// 			'Content-Type': 'multipart/form-data',
+// 		},
+// 	};
+
+// 	const { data } = await axios.post('/api/v1/uploads', formData, config);
+
+// 	setImage(data);
+// 	setUploading(false);
+// } catch (error) {
+// 	console.error(error);
+// 	setUploading(false);
+// }

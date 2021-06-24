@@ -74,23 +74,30 @@ export const addStakeholder =
 
 			dispatch({ type: STAKEHOLDER_ADD_SUCCESS, payload: data });
 
-			//destructure id, organization from data
+			// destructure id, organization from data
 			const { _id, organization } = data;
-
+			// get copy of updatedRoutes
 			let updatedRoutes = [...routeInfo];
+
 			updatedRoutes.push({
 				route: 'assessment',
 				path: `/influences/register/stakeholder/${_id}`,
 			});
 
-			// save route
+			// save routes
 			dispatch(saveRouteInfo(updatedRoutes));
 
-			// if organization is yes
+			// if a response for organization is yes
 			if (organization === 'yes' || organization === 'Yes') {
+				// navigate to and collect org info
 				history.push(`/organizations/register/community/${locationId}`);
 			} else {
-				history.push(updatedRoutes[1].path); // go to influence page
+				// else navigate to assessment
+				const navigateToRoute = updatedRoutes.pop();
+				// save route
+				dispatch(saveRouteInfo(updatedRoutes));
+				// go to influence page
+				history.push(navigateToRoute.path);
 			}
 		} catch (error) {
 			dispatch({
@@ -109,12 +116,12 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 		dispatch({ type: STAKEHOLDER_DETAILS_RESET });
 		dispatch({ type: STAKEHOLDER_DETAILS_REQUEST });
 
-		//get logged in user
+		// get logged in user
 		const {
 			userLogin: { userInfo },
 		} = getState();
 
-		//create config
+		// create config
 		const config = {
 			headers: {
 				Authorization: `Bearer ${userInfo.token}`,
@@ -163,6 +170,8 @@ export const updateStakeholder =
 				stakeholder,
 				config
 			);
+
+			console.log(data);
 
 			dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
 			dispatch(setAlert('Stakeholder successfully updated', 'success'));

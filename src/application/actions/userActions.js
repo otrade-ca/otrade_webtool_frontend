@@ -166,54 +166,67 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 };
 
 // update a user
-export const updateUserProfile = (user) => async (dispatch, getState) => {
-	try {
-		dispatch({
-			type: USER_PROFILE_UPDATE_REQUEST,
-		});
+export const updateUserProfile =
+	(id, file, history) => async (dispatch, getState) => {
+		try {
+			dispatch({
+				type: USER_PROFILE_UPDATE_REQUEST,
+			});
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			console.log(id);
+			console.log(file);
+			console.log(history); //currently undefined
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const { data } = await axios.put(
-			`${getURL()}/api/v1/users/profile`,
-			user,
-			config
-		);
-		dispatch(setAlert('User successfully updated', 'success'));
-		dispatch({
-			type: USER_PROFILE_UPDATE_SUCCESS,
-			payload: data,
-		});
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		dispatch({
-			type: USER_LOGIN_SUCCESS,
-			payload: data,
-		});
+			const {
+				data: { key, url },
+			} = await axios.get(`${getURL()}/api/v1/upload`, config);
 
-		localStorage.setItem('userInfo', JSON.stringify(data));
-	} catch (error) {
-		const message =
-			error.response && error.response.data.message
-				? error.response.data.message
-				: error.message;
-		if (message === 'Not authorized, token failed') {
-			dispatch(logout());
+			await axios.put(url, file, {
+				'Content-Type': file.type,
+			});
+
+			// const { data } = await axios.put(
+			// 	`${getURL()}/api/v1/users/profile`,
+			// 	user,
+			// 	config
+			// );
+			// dispatch(setAlert('User successfully updated', 'success'));
+			// dispatch({
+			// 	type: USER_PROFILE_UPDATE_SUCCESS,
+			// 	payload: data,
+			// });
+
+			// dispatch({
+			// 	type: USER_LOGIN_SUCCESS,
+			// 	payload: data,
+			// });
+
+			// localStorage.setItem('userInfo', JSON.stringify(data));
+		} catch (error) {
+			const message =
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message;
+			if (message === 'Not authorized, token failed') {
+				dispatch(logout());
+			}
+			dispatch({
+				type: USER_PROFILE_UPDATE_FAIL,
+				payload: message,
+			});
 		}
-		dispatch({
-			type: USER_PROFILE_UPDATE_FAIL,
-			payload: message,
-		});
-	}
-};
+	};
 
 // list all users
 export const listUsers =
