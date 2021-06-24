@@ -49,6 +49,7 @@ export const addInfluence =
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
 
 			// reset the page
+			console.log('reset page');
 			dispatch({ type: INFLUENCE_ADD_RESET });
 
 			console.log('routeInfo is', routeInfo, 'length', routeInfo.length);

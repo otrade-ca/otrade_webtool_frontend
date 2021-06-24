@@ -17,9 +17,10 @@ const InfluenceForm = ({ history, match }) => {
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { stakeholder } = stakeholderDetails;
 
-	console.log(stakeholder);
+	// console.log(stakeholder);
+	console.log('new form');
 
-	console.log(typeof stakeholder._id);
+	// console.log(typeof stakeholder._id);
 
 	// pass route info
 	const routeSave = useSelector((state) => state.routeSave);

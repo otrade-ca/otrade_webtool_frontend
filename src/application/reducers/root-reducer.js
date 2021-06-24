@@ -209,6 +209,7 @@ const persistConfig = {
 		'stakeholderListDropdown',
 		'locationListDropdown',
 		'organizationDropdown',
+		'routeSave',
 	],
 };
 

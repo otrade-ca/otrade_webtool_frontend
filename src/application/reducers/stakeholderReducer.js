@@ -308,7 +308,7 @@ export const stakeholderListDropdownReducer = (
 		case STAKEHOLDER_DROPDOWN_REQUEST:
 			return { loading: true, stakeholders: [] };
 		case STAKEHOLDER_DROPDOWN_SUCCESS:
-			console.log('returning data', action.payload.stakeholders);
+			//console.log('returning data', action.payload.stakeholders);
 			return {
 				loading: false,
 				stakeholders: action.payload.stakeholders,

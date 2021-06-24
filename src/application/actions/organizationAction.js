@@ -30,6 +30,7 @@ import {
 } from '../constants/organizationConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
+import { saveRouteInfo } from './routeActions';
 
 // add an organization to a project
 export const addOrganization =
@@ -58,15 +59,15 @@ export const addOrganization =
 
 			dispatch({ type: ORGANIZATION_ADD_SUCCESS, payload: data });
 
-			console.log(routeInfo);
-
 			// if assessment route exists
-			// if (routeInfo.length > 1) {
-			// 	history.push(routeInfo[1].path);
-			// } else {
-			// 	history.go(-1);
-			// 	dispatch(setAlert('Organization successfully added', 'success'));
-			// }
+			if (routeInfo.length > 1) {
+				const navigateToRoute = routeInfo.pop();
+				dispatch(saveRouteInfo(routeInfo));
+				history.push(navigateToRoute.path);
+			} else {
+				history.go(-1);
+				dispatch(setAlert('Organization successfully added', 'success'));
+			}
 		} catch (error) {
 			dispatch({
 				type: ORGANIZATION_ADD_FAIL,

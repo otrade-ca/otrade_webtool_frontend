@@ -59,6 +59,14 @@ export const addActivity =
 			const { _id, stakeholders, compromise } = data;
 			// create routes array
 			const updatedRoutes = [...routeInfo];
+
+			console.log(
+				'updatedRoutes before adding stakeholders',
+				updatedRoutes,
+				'length',
+				updatedRoutes.length
+			);
+
 			// loop through stakeholders array and push id values into routes
 			stakeholders.forEach((id) => {
 				updatedRoutes.push({
@@ -68,14 +76,21 @@ export const addActivity =
 			});
 			//save assessment routes to redux
 			dispatch(saveRouteInfo(updatedRoutes));
-			console.log('updatedRoutes', updatedRoutes);
+			console.log(
+				'updatedRoutes',
+				updatedRoutes,
+				'length',
+				updatedRoutes.length
+			);
 
 			// if yes to comp, push to collect commitment info
 			if (compromise === 'Yes' || compromise === 'yes') {
 				history.push(`/commitments/register/activity/${_id}`);
 			} else {
 				// else push to collect assessement
-				history.push(updatedRoutes[1].path);
+				const navigateToRoute = updatedRoutes.pop();
+				dispatch(saveRouteInfo(updatedRoutes));
+				history.push(navigateToRoute.path);
 			}
 		} catch (error) {
 			dispatch({
