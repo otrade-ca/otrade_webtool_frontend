@@ -108,7 +108,13 @@ export const locationListReducer = (
 		case LOCATION_LIST_REQUEST:
 			return { loading: true, locations: [] };
 		case LOCATION_LIST_SUCCESS:
-			return { loading: false, locations: action.payload };
+			return {
+				loading: false,
+				locations: action.payload.locations,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
+			};
 		case LOCATION_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case LOCATION_LIST_FILTER:
@@ -181,16 +187,14 @@ export const locationListDropdownReducer = (
 };
 
 // assign location
-export const locationAssignReducer = (state = { location: {} }, action) => {
+export const locationAssignReducer = (state = { locations: [] }, action) => {
 	switch (action.type) {
 		case LOCATION_ASSIGN_REQUEST:
 			return { loading: true, ...state };
 		case LOCATION_ASSIGN_SUCCESS:
-			return { loading: false, success: true, location: action.payload };
-		case LOCATION_ASSIGN_FAIL:
-			return { loading: false, error: action.payload };
+			return { loading: false, success: true, locations: action.payload };
 		case LOCATION_ASSIGN_RESET:
-			return { members: [] };
+			return { locations: [] };
 		default:
 			return state;
 	}

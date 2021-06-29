@@ -92,6 +92,15 @@ import {
 	locationListDropdownReducer,
 	locationAssignReducer,
 } from './locationReducer';
+import {
+	newsAddReducer,
+	newsDeleteReducer,
+	newsDetailsReducer,
+	newsListLocationReducer,
+	newsListOrganizationReducer,
+	newsListProjectReducer,
+	newsListStakeholderReducer,
+} from './newsReducer';
 
 import { routeSaveReducer } from './routeReducer';
 import { alertReducer } from './alertReducer';
@@ -186,6 +195,15 @@ const rootReducer = combineReducers({
 	locationUserList: locationUserListReducer,
 	locationAssign: locationAssignReducer,
 	locationListDropdown: locationListDropdownReducer,
+
+	// news reducers
+	newsAdd: newsAddReducer,
+	newsDelete: newsDeleteReducer,
+	newsDetails: newsDetailsReducer,
+	newsListLocation: newsListLocationReducer,
+	newsListOrganization: newsListOrganizationReducer,
+	newsListProject: newsListProjectReducer,
+	newsListStakeholder: newsListStakeholderReducer,
 
 	// route reducer
 	routeSave: routeSaveReducer,

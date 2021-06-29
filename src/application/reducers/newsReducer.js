@@ -15,10 +15,22 @@ import {
 	NEWS_UPDATE_SUCCESS,
 	NEWS_UPDATE_FAIL,
 	NEWS_UPDATE_RESET,
-	NEWS_LIST_REQUEST,
-	NEWS_LIST_SUCCESS,
-	NEWS_LIST_FAIL,
-	NEWS_LIST_RESET,
+	NEWS_LIST_PROJECT_REQUEST,
+	NEWS_LIST_PROJECT_SUCCESS,
+	NEWS_LIST_PROJECT_FAIL,
+	NEWS_LIST_PROJECT_RESET,
+	NEWS_LIST_LOCATION_REQUEST,
+	NEWS_LIST_LOCATION_SUCCESS,
+	NEWS_LIST_LOCATION_FAIL,
+	NEWS_LIST_LOCATION_RESET,
+	NEWS_LIST_STAKEHOLDER_REQUEST,
+	NEWS_LIST_STAKEHOLDER_SUCCESS,
+	NEWS_LIST_STAKEHOLDER_FAIL,
+	NEWS_LIST_STAKEHOLDER_RESET,
+	NEWS_LIST_ORGANIZATION_REQUEST,
+	NEWS_LIST_ORGANIZATION_SUCCESS,
+	NEWS_LIST_ORGANIZATION_FAIL,
+	NEWS_LIST_ORGANIZATION_RESET,
 } from '../constants/newsConstants';
 
 /**
@@ -106,20 +118,98 @@ export const newsDeleteReducer = (state = {}, action) => {
 };
 
 /**
- * news list reducer
+ * news list reducer for a project
  * @param {*} state
  * @param {*} action
  * @returns state
  */
-export const newsListReducer = (state = { news: [] }, action) => {
+export const newsListProjectReducer = (state = { news: [] }, action) => {
 	switch (action.type) {
-		case NEWS_DELETE_REQUEST:
+		case NEWS_LIST_PROJECT_REQUEST:
 			return { loading: true, news: [] };
-		case NEWS_DELETE_SUCCESS:
-			return { loading: false, news: action.payload };
-		case NEWS_DELETE_FAIL:
+		case NEWS_LIST_PROJECT_SUCCESS:
+			return {
+				loading: false,
+				news: action.payload.news,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
+		case NEWS_LIST_PROJECT_FAIL:
 			return { loading: false, error: action.payload };
-		case NEWS_DELETE_RESET:
+		case NEWS_LIST_PROJECT_RESET:
+			return { news: [] };
+		default:
+			return state;
+	}
+};
+
+/**
+ * news list reducer for a community
+ * @param {*} state
+ * @param {*} action
+ * @returns state
+ */
+export const newsListLocationReducer = (state = { news: [] }, action) => {
+	switch (action.type) {
+		case NEWS_LIST_LOCATION_REQUEST:
+			return { loading: true, news: [] };
+		case NEWS_LIST_LOCATION_SUCCESS:
+			return {
+				loading: false,
+				news: action.payload.news,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
+		case NEWS_LIST_LOCATION_FAIL:
+			return { loading: false, error: action.payload };
+		case NEWS_LIST_LOCATION_RESET:
+			return { news: [] };
+		default:
+			return state;
+	}
+};
+
+/**
+ * news list reducer for a stakeholder
+ * @param {*} state
+ * @param {*} action
+ * @returns state
+ */
+export const newsListStakeholderReducer = (state = { news: [] }, action) => {
+	switch (action.type) {
+		case NEWS_LIST_STAKEHOLDER_REQUEST:
+			return { loading: true, news: [] };
+		case NEWS_LIST_STAKEHOLDER_SUCCESS:
+			return {
+				loading: false,
+				news: action.payload.news,
+				pages: action.payload.pages,
+				page: action.payload.page,
+			};
+		case NEWS_LIST_STAKEHOLDER_FAIL:
+			return { loading: false, error: action.payload };
+		case NEWS_LIST_STAKEHOLDER_RESET:
+			return { news: [] };
+		default:
+			return state;
+	}
+};
+
+/**
+ * news list reducer for an organization
+ * @param {*} state
+ * @param {*} action
+ * @returns state
+ */
+export const newsListOrganizationReducer = (state = { news: [] }, action) => {
+	switch (action.type) {
+		case NEWS_LIST_ORGANIZATION_REQUEST:
+			return { loading: true, news: [] };
+		case NEWS_LIST_ORGANIZATION_SUCCESS:
+			return { loading: false, news: action.payload };
+		case NEWS_LIST_ORGANIZATION_FAIL:
+			return { loading: false, error: action.payload };
+		case NEWS_LIST_ORGANIZATION_RESET:
 			return { news: [] };
 		default:
 			return state;

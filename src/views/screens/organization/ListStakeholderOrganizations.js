@@ -14,7 +14,6 @@ import Paginate from '../../components/Paginate';
 import { useTranslation } from 'react-i18next';
 import { ORGANIZATION_DELETE_REQUEST } from '../../../application/constants/organizationConstants';
 import { IconContext } from 'react-icons';
-import * as RiIcons from 'react-icons/ri';
 import * as VscIcons from 'react-icons/vsc';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
@@ -112,21 +111,6 @@ const StakeholderOrganizations = ({
 													<div>{item.name}</div>
 													<div className="item-category">Organization</div>
 												</div>
-											</div>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<RiIcons.RiCommunityLine />
-													</IconContext.Provider>
-												</div>
-												{item.location ? (
-													<div className="item-two">
-														<div>{item.location.location}</div>
-														<div className="item-category">Community</div>
-													</div>
-												) : null}
 											</div>
 										</Accordion.Toggle>
 										<Accordion.Collapse eventKey={index + 1}>

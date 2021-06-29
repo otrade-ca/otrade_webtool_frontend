@@ -1,4 +1,6 @@
-/**Drop down select list for all of the members in a community */
+/**
+ * Dropdown displaying all members in a project
+ */
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,11 +14,10 @@ import { getProjectId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
 
 const MemberDropdownProject = ({ label, history }) => {
+	// get projectId from localstorage
+	const projectId = getProjectId();
 	// get list of stakeholders
 	const dispatch = useDispatch();
-
-	const projectId = getProjectId();
-
 	const stakeholderListDropdown = useSelector(
 		(state) => state.stakeholderListDropdown
 	);

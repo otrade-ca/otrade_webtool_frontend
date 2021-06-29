@@ -18,18 +18,18 @@ import * as FaIcons from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import {
 	deleteNews,
-	listProjectNews,
+	listStakeholderNews,
 } from '../../../application/actions/newsActions';
 import Moment from 'react-moment';
 
-const ProjectNews = ({
+const StakeholderNews = ({
 	match,
-	listProjectNews,
+	listStakeholderNews,
 	deleteNews,
-	newsListProject: { loading, error, news, pages, page },
+	newsListStakeholder: { loading, error, news, pages, page },
 	newsDelete: { success },
 }) => {
-	const projectId = match.params.id;
+	const locationId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -38,11 +38,11 @@ const ProjectNews = ({
 
 	useEffect(() => {
 		if (success) {
-			listProjectNews(projectId, keyword, pageNumber);
+			listStakeholderNews(locationId, keyword, pageNumber);
 		} else {
-			listProjectNews(projectId, keyword, pageNumber);
+			listStakeholderNews(locationId, keyword, pageNumber);
 		}
-	}, [listProjectNews, projectId, success, keyword, pageNumber]);
+	}, [listStakeholderNews, locationId, success, keyword, pageNumber]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
@@ -68,17 +68,11 @@ const ProjectNews = ({
 									<SearchBox
 										history={history}
 										searchWord={'title'}
-										searchQueryPath={`/project/${projectId}/news/search/`}
-										searchQueryEmpty={`/project/${projectId}/news`}
+										searchQueryPath={`/community/${locationId}/news/search/`}
+										searchQueryEmpty={`/community/${locationId}/news`}
 									/>
 								)}
 							/>
-							<Link
-								to={`/news/register/project/${projectId}`}
-								className="btn btn-primary ml-2"
-							>
-								<i className="fas fa-plus"></i> {t('action.register')}
-							</Link>
 						</Card.Header>
 					)}
 					<Card.Body>
@@ -175,8 +169,8 @@ const ProjectNews = ({
 							<Paginate
 								pages={pages}
 								page={page}
-								urlOne={`/project/${projectId}/news/search/`}
-								urlTwo={`/project/${projectId}/news/page/`}
+								urlOne={`/community/${locationId}/news/search/`}
+								urlTwo={`/community/${locationId}/news/page/`}
 							/>
 						</Row>
 					</Card.Body>
@@ -187,18 +181,18 @@ const ProjectNews = ({
 };
 
 // action creators
-ProjectNews.propTypes = {
-	listProjectNews: PropTypes.func.isRequired,
+StakeholderNews.propTypes = {
+	listStakeholderNews: PropTypes.func.isRequired,
 	deleteNews: PropTypes.func.isRequired,
 };
 
 // reducers
 const mapStateToProps = (state) => ({
-	newsListProject: state.newsListProject,
+	newsListStakeholder: state.newsListStakeholder,
 	newsDelete: state.newsDelete,
 });
 
 export default connect(mapStateToProps, {
-	listProjectNews,
+	listStakeholderNews,
 	deleteNews,
-})(withRouter(ProjectNews));
+})(withRouter(StakeholderNews));

@@ -180,11 +180,13 @@ const StakeholderProjectList = ({
 	);
 };
 
+// action creators
 StakeholderProjectList.propTypes = {
 	listProjectStakeholders: PropTypes.func.isRequired,
 	deleteStakeholder: PropTypes.func.isRequired,
 };
 
+// reducers
 const mapStateToProps = (state) => ({
 	stakeholderProjectList: state.stakeholderProjectList,
 	stakeholderDelete: state.stakeholderDelete,

@@ -7,6 +7,7 @@ import FormEdit from './FormEdit';
 import PhotoEdit from './PhotoEdit';
 import FormView from './FormView';
 import ViewOrganization from '../organization/ViewOrganization';
+import LocationNews from '../news/LocationNews';
 
 export const btnlinks = [
 	// {
@@ -31,6 +32,10 @@ export const navbarlinks = [
 	{
 		link: '/stakeholders',
 		type: 'Stakeholders',
+	},
+	{
+		link: '/news',
+		type: 'News',
 	},
 ];
 
@@ -106,5 +111,21 @@ export const routes = [
 	{
 		path: '/landownerships/register',
 		component: ({ match }) => <StepForm match={match} />,
+	},
+	{
+		path: '/news',
+		component: ({ match }) => <LocationNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword',
+		component: ({ match }) => <LocationNews match={match} />,
+	},
+	{
+		path: '/news/page/:pageNumber',
+		component: ({ match }) => <LocationNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <LocationNews match={match} />,
 	},
 ];

@@ -8,12 +8,10 @@ import { useTranslation } from 'react-i18next';
 
 const StakeholderContactInfo = ({ history }) => {
 	const { id } = useParams();
-
 	const { t } = useTranslation();
 
-	const dispatch = useDispatch();
-
 	//get projectDetails
+	const dispatch = useDispatch();
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { project } = projectDetails;
 
@@ -81,7 +79,7 @@ const StakeholderContactInfo = ({ history }) => {
 	};
 
 	return (
-		<CardContainer title={'Stakeholder Registrations'}>
+		<CardContainer title={'Stakeholder Information'}>
 			<Form onSubmit={submitHandler}>
 				<Row>
 					<Col md={6}>

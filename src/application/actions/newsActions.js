@@ -10,15 +10,27 @@ import {
 	NEWS_DETAILS_SUCCESS,
 	NEWS_DETAILS_FAIL,
 	NEWS_DETAILS_RESET,
-	NEWS_DELETE_RESET,
 	NEWS_UPDATE_REQUEST,
 	NEWS_UPDATE_SUCCESS,
 	NEWS_UPDATE_FAIL,
-	NEWS_UPDATE_RESET,
 	NEWS_DELETE_REQUEST,
 	NEWS_DELETE_SUCCESS,
 	NEWS_DELETE_FAIL,
+	NEWS_LIST_PROJECT_REQUEST,
+	NEWS_LIST_PROJECT_SUCCESS,
+	NEWS_LIST_PROJECT_FAIL,
+	NEWS_LIST_LOCATION_REQUEST,
+	NEWS_LIST_LOCATION_SUCCESS,
+	NEWS_LIST_LOCATION_FAIL,
+	NEWS_LIST_STAKEHOLDER_REQUEST,
+	NEWS_LIST_STAKEHOLDER_SUCCESS,
+	NEWS_LIST_STAKEHOLDER_FAIL,
+	NEWS_LIST_ORGANIZATION_REQUEST,
+	NEWS_LIST_ORGANIZATION_SUCCESS,
+	NEWS_LIST_ORGANIZATION_FAIL,
 } from '../constants/newsConstants';
+import { setAlert } from '../actions/alertActions';
+import { getURL } from '../api';
 
 /**
  * Add news
@@ -41,9 +53,11 @@ export const addNews = (news, history) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.post(``, news, config);
+		const { data } = await axios.post(`${getURL()}/api/v1/news`, news, config);
 
-		dispatch({ type: NEWS_ADD_SUCCESS });
+		dispatch({ type: NEWS_ADD_SUCCESS, payload: data });
+		history.go(-1);
+		dispatch(setAlert('News successfully added', 'success'));
 	} catch (error) {
 		dispatch({
 			type: NEWS_ADD_FAIL,
@@ -149,6 +163,155 @@ export const deleteNews = (id) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch({
 			type: NEWS_DELETE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.messsage,
+		});
+	}
+};
+
+/**
+ * get all news for a project
+ * @param {*} id
+ * @returns
+ */
+export const listProjectNews =
+	(projectId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: NEWS_LIST_PROJECT_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects/${projectId}/news?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
+
+			console.log(data);
+
+			dispatch({ type: NEWS_LIST_PROJECT_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: NEWS_LIST_PROJECT_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
+
+/**
+ * get all news for a location or community
+ * @param {*} id
+ * @returns
+ */
+export const listLocationNews =
+	(locationId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: NEWS_LIST_LOCATION_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/locations/${locationId}/news?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
+
+			dispatch({ type: NEWS_LIST_LOCATION_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: NEWS_LIST_LOCATION_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
+
+/**
+ * get all news for a stakeholder
+ * @param {*} id
+ * @returns
+ */
+export const listStakeholderNews =
+	(stakeholderId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: NEWS_LIST_STAKEHOLDER_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/news?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
+
+			dispatch({ type: NEWS_LIST_STAKEHOLDER_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: NEWS_LIST_STAKEHOLDER_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
+
+/**
+ * get all news for an organization
+ * @param {*} id
+ * @returns
+ */
+export const listOrganizationNews = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: NEWS_LIST_ORGANIZATION_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(``, config);
+
+		dispatch({ type: NEWS_LIST_ORGANIZATION_SUCCESS });
+	} catch (error) {
+		dispatch({
+			type: NEWS_LIST_ORGANIZATION_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

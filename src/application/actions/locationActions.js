@@ -171,40 +171,40 @@ export const deleteLocation = (id) => async (dispatch, getState) => {
 };
 
 // get list of locations
-export const listLocations = (projectId) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: LOCATION_LIST_REQUEST });
+export const listLocations =
+	(projectId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: LOCATION_LIST_REQUEST });
 
-		// get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			// get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		// create config object
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			// create config object
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/projects/${projectId}/locations`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects/${projectId}/locations?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: LOCATION_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: LOCATION_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: LOCATION_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: LOCATION_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
 // get list of locations
 export const listUserLocations = (userId) => async (dispatch, getState) => {

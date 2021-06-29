@@ -1,3 +1,7 @@
+/**
+ * Project Reducers
+ */
+
 // import constants
 import {
 	PROJECT_LIST_REQUEST,
@@ -30,7 +34,12 @@ import {
 	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 
-// add project
+/**
+ * Add a project
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case PROJECT_ADD_REQUEST:
@@ -44,7 +53,12 @@ export const projectAddReducer = (state = {}, action) => {
 	}
 };
 
-// project list
+/**
+ * Get project details
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectDetailsReducer = (state = { project: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_DETAILS_REQUEST:
@@ -64,7 +78,12 @@ export const projectDetailsReducer = (state = { project: {} }, action) => {
 	}
 };
 
-// projectUpdate
+/**
+ * Update a project
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectUpdateReducer = (state = { project: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_UPDATE_REQUEST:
@@ -80,7 +99,12 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
 	}
 };
 
-// projectDelete
+/**
+ * Delete a project
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case PROJECT_DELETE_REQUEST:
@@ -94,7 +118,12 @@ export const projectDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// user projects
+/**
+ * Get projects for a user
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectUserReducer = (
 	state = { projects: [], filtered: [] },
 	action
@@ -124,7 +153,12 @@ export const projectUserReducer = (
 	}
 };
 
-// project assignments
+/**
+ * Assign user to project
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectUserAssignmentReducer = (
 	state = { project: {} },
 	action
@@ -147,7 +181,12 @@ export const projectUserAssignmentReducer = (
 	}
 };
 
-// project list
+/**
+ * list projects
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectListReducer = (state = { projects: [] }, action) => {
 	switch (action.type) {
 		case PROJECT_LIST_REQUEST:
@@ -166,7 +205,12 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 	}
 };
 
-// save project to localstorage
+/**
+ * Save project to localstorage
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const projectSaveReducer = (state = { projectInfo: {} }, action) => {
 	switch (action.type) {
 		case PROJECT_SAVE_REQUEST:

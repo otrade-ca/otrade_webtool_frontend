@@ -9,6 +9,7 @@ import ViewOrganization from '../organization/ViewOrganization';
 import FormDetails from '../commitment/FormDetails';
 import StakeholderInfluences from '../influence/StakeholderInfluences';
 import Profile from './Profile';
+import StakeholderNews from '../news/StakeholderNews';
 
 export const btnlinks = [
 	// {
@@ -38,10 +39,10 @@ export const navbarlinks = [
 		link: '/assessments',
 		type: 'Assessments',
 	},
-	// {
-	// 	link: '/news',
-	// 	type: 'News',
-	// },
+	{
+		link: '/news',
+		type: 'News',
+	},
 ];
 
 export const routes = [
@@ -108,5 +109,21 @@ export const routes = [
 	{
 		path: '/assessments',
 		component: ({ match }) => <StakeholderInfluences match={match} />,
+	},
+	{
+		path: '/news',
+		component: ({ match }) => <StakeholderNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword',
+		component: ({ match }) => <StakeholderNews match={match} />,
+	},
+	{
+		path: '/news/page/:pageNumber',
+		component: ({ match }) => <StakeholderNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <StakeholderNews match={match} />,
 	},
 ];

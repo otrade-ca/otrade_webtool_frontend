@@ -1,9 +1,9 @@
 /**
  * List of communities belonging to a project
  */
-import React, { useEffect, memo } from 'react';
-import { Link } from 'react-router-dom';
-import { Accordion, Card, Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Link, Route, withRouter } from 'react-router-dom';
+import { Accordion, Card, Button, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty, Message, Loader } from '../../components/HelperComponents';
 import {
@@ -14,6 +14,8 @@ import { LOCATION_DELETE_RESET } from '../../../application/constants/locationCo
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as RiIcons from 'react-icons/ri';
+import SearchBox from '../../components/SearchBox';
+import Paginate from '../../components/Paginate';
 import Moment from 'react-moment';
 
 const ProjectLocations = ({ match }) => {
@@ -21,22 +23,25 @@ const ProjectLocations = ({ match }) => {
 
 	const { t } = useTranslation();
 
+	const keyword = match.params.keyword;
+	const pageNumber = match.params.pageNumber || 1;
+
 	// get locations
 	const dispatch = useDispatch();
 	const locationList = useSelector((state) => state.locationList);
-	const { loading, error, locations } = locationList;
+	const { loading, error, locations, pages, page, count } = locationList;
 
 	const locationDelete = useSelector((state) => state.locationDelete);
 	const { success } = locationDelete;
 
 	useEffect(() => {
 		if (success) {
-			dispatch(listLocations(projectId));
+			dispatch(listLocations(projectId, keyword, pageNumber));
 			dispatch({ type: LOCATION_DELETE_RESET });
 		} else {
-			dispatch(listLocations(projectId));
+			dispatch(listLocations(projectId, keyword, pageNumber));
 		}
-	}, [dispatch, projectId, success]);
+	}, [dispatch, projectId, keyword, pageNumber, success]);
 
 	//delete location
 	const deleteHandler = (id) => {
@@ -62,7 +67,16 @@ const ProjectLocations = ({ match }) => {
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<h4>{t('tables.location')}</h4>
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'Location'}
+										searchQueryPath={`/project/${projectId}/communities/search/`}
+										searchQueryEmpty={`/project/${projectId}/communities`}
+									/>
+								)}
+							/>
 							<Link
 								to={`/communities/register/project/${projectId}`}
 								className="btn btn-primary ml-2"
@@ -150,13 +164,13 @@ const ProjectLocations = ({ match }) => {
 													<i className="fas fa-plus" />
 													{t('tables.organization')}
 												</Link>
-												{/* <Link
-													to={`/organizations/register/community/${location._id}`}
-													className="btn btn-primary"
+												<Link
+													to={`/news/register/community/${location._id}`}
+													className="btn btn-secondary"
 												>
 													<i className="fas fa-plus" />
-													{t('tables.organization')}
-												</Link> */}
+													{'News'}
+												</Link>
 												<Button
 													variant="danger"
 													onClick={() => deleteHandler(location._id)}
@@ -170,9 +184,17 @@ const ProjectLocations = ({ match }) => {
 							</Card>
 						))}
 				</Accordion>
+				<Row className="d-flex justify-content-center mt-2">
+					<Paginate
+						pages={pages}
+						page={page}
+						urlOne={`/project/${projectId}/communities/search/`}
+						urlTwo={`/project/${projectId}/communities/page/`}
+					/>
+				</Row>
 			</Card.Body>
 		</Card>
 	);
 };
 
-export default memo(ProjectLocations);
+export default withRouter(ProjectLocations);

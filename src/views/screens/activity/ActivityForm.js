@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../../../application/actions/activityActions';
 import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
+import { CardContainer } from '../../components/HelperComponents';
 
 const ActivityForm = ({ history }) => {
 	const { t } = useTranslation();
@@ -47,126 +48,119 @@ const ActivityForm = ({ history }) => {
 	};
 
 	return (
-		<Card className="my-card">
-			<Card.Header className="my-card-header">
-				<h4>{t('tables.activity')}</h4>
-			</Card.Header>
-			<Card.Body>
-				<Form onSubmit={submitHandler} className="mb-3">
-					<Row>
-						<Col md={6}>
-							<Form.Group controlId="activity">
-								<Form.Label>{t('activity.activity.label')}</Form.Label>
-								<Form.Control
-									as="select"
-									value={activityType}
-									onChange={(e) => setActivityType(e.target.value)}
-								>
-									<option value={t('action.select')}>
-										{t('action.select')}
-									</option>
-									<option value="informal consultation">
-										{t('activity.activity.informalConsultation')}
-									</option>
-									<option value="formal meeting">
-										{t('activity.activity.formalMeeting')}
-									</option>
-									<option value="informal community assembly">
-										{t('activity.activity.informalCommunity')}
-									</option>
-									<option value="formal community assembly">
-										{t('activity.activity.formalCommunity')}
-									</option>
-									<option value="geology support">
-										{t('activity.activity.geologySupport')}
-									</option>
-								</Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={2}>
-							<Form.Group controlId="hours">
-								<Form.Label>{t('activity.hours.label')}</Form.Label>
-								<Form.Control
-									type="number"
-									placeholder={t('activity.hours.placeholder')}
-									value={actHours}
-									onChange={(e) => setActHours(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-						<Col md={4}>
-							<Form.Group controlId="date">
-								<Form.Label>{t('activity.date.label')}</Form.Label>
-								<Form.Control
-									type="date"
-									value={date}
-									onChange={(e) => setDate(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={12}>
-							<Form.Group controlId="location">
-								<Form.Label>{t('activity.location.label')}</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder={t('activity.location.placeholder')}
-									value={location}
-									onChange={(e) => setLocation(e.target.value)}
-								></Form.Control>
-							</Form.Group>
-						</Col>
-					</Row>
-					<hr />
-					<MemberDropdownProject label={'Stakeholders'} />
-					<hr />
-					<Form.Group controlId="discussion">
-						<Form.Label>{t('activity.discussion.label')}</Form.Label>
-						<Form.Group controlId="dispoints">
+		<CardContainer title={'Activity Information'}>
+			<Form onSubmit={submitHandler} className="mb-3">
+				<Row>
+					<Col md={6}>
+						<Form.Group controlId="activity">
+							<Form.Label>{t('activity.activity.label')}</Form.Label>
 							<Form.Control
-								as="textarea"
-								rows="6"
-								value={disPoints}
-								onChange={(e) => setDispoints(e.target.value)}
+								as="select"
+								value={activityType}
+								onChange={(e) => setActivityType(e.target.value)}
+							>
+								<option value={t('action.select')}>{t('action.select')}</option>
+								<option value="informal consultation">
+									{t('activity.activity.informalConsultation')}
+								</option>
+								<option value="formal meeting">
+									{t('activity.activity.formalMeeting')}
+								</option>
+								<option value="informal community assembly">
+									{t('activity.activity.informalCommunity')}
+								</option>
+								<option value="formal community assembly">
+									{t('activity.activity.formalCommunity')}
+								</option>
+								<option value="geology support">
+									{t('activity.activity.geologySupport')}
+								</option>
+							</Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md={2}>
+						<Form.Group controlId="hours">
+							<Form.Label>{t('activity.hours.label')}</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder={t('activity.hours.placeholder')}
+								value={actHours}
+								onChange={(e) => setActHours(e.target.value)}
 							></Form.Control>
 						</Form.Group>
+					</Col>
+					<Col md={4}>
+						<Form.Group controlId="date">
+							<Form.Label>{t('activity.date.label')}</Form.Label>
+							<Form.Control
+								type="date"
+								value={date}
+								onChange={(e) => setDate(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row>
+					<Col md={12}>
+						<Form.Group controlId="location">
+							<Form.Label>{t('activity.location.label')}</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder={t('activity.location.placeholder')}
+								value={location}
+								onChange={(e) => setLocation(e.target.value)}
+							></Form.Control>
+						</Form.Group>
+					</Col>
+				</Row>
+				<hr />
+				<MemberDropdownProject label={'Stakeholders'} />
+				<hr />
+				<Form.Group controlId="discussion">
+					<Form.Label>{t('activity.discussion.label')}</Form.Label>
+					<Form.Group controlId="dispoints">
+						<Form.Control
+							as="textarea"
+							rows="6"
+							value={disPoints}
+							onChange={(e) => setDispoints(e.target.value)}
+						></Form.Control>
 					</Form.Group>
-					<hr />
-					<Form.Group controlId="compromise" className="mb-3">
-						<Row>
-							<Col md={10}>
-								<Form.Label>{t('activity.commitment.label')}</Form.Label>
-							</Col>
-							<Col md={2}>
-								<Form.Control
-									as="select"
-									value={compromise}
-									required
-									onChange={(e) => setcompromise(e.target.value)}
-								>
-									<option value="">{t('action.select')}</option>
-									<option value={t('activity.commitment.yes')}>
-										{t('activity.commitment.yes')}
-									</option>
-									<option value={t('activity.commitment.no')}>
-										{t('activity.commitment.no')}
-									</option>
-								</Form.Control>
-							</Col>
-						</Row>
-					</Form.Group>
-					<hr />
+				</Form.Group>
+				<hr />
+				<Form.Group controlId="compromise" className="mb-3">
 					<Row>
-						<Col>
-							<Button type="submit" variant="primary" className="px-5 mt-3">
-								{t('action.continue')}
-							</Button>
+						<Col md={10}>
+							<Form.Label>{t('activity.commitment.label')}</Form.Label>
+						</Col>
+						<Col md={2}>
+							<Form.Control
+								as="select"
+								value={compromise}
+								required
+								onChange={(e) => setcompromise(e.target.value)}
+							>
+								<option value="">{t('action.select')}</option>
+								<option value={t('activity.commitment.yes')}>
+									{t('activity.commitment.yes')}
+								</option>
+								<option value={t('activity.commitment.no')}>
+									{t('activity.commitment.no')}
+								</option>
+							</Form.Control>
 						</Col>
 					</Row>
-				</Form>
-			</Card.Body>
-		</Card>
+				</Form.Group>
+				<hr />
+				<Row>
+					<Col>
+						<Button type="submit" variant="primary" className="px-5 mt-3">
+							{t('action.continue')}
+						</Button>
+					</Col>
+				</Row>
+			</Form>
+		</CardContainer>
 	);
 };
 

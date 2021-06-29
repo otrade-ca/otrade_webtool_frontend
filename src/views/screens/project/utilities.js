@@ -54,6 +54,18 @@ export const routes = [
 		component: ({ match }) => <ProjectLocations match={match} />,
 	},
 	{
+		path: '/communities/search/:keyword',
+		component: ({ match }) => <ProjectLocations match={match} />,
+	},
+	{
+		path: '/communities/page/:pageNumber',
+		component: ({ match }) => <ProjectLocations match={match} />,
+	},
+	{
+		path: '/communities/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <ProjectLocations match={match} />,
+	},
+	{
 		path: '/stakeholders',
 		component: ({ match }) => <StakeholdersProjectList match={match} />,
 	},
@@ -99,6 +111,18 @@ export const routes = [
 	},
 	{
 		path: '/news',
+		component: ({ match }) => <ProjectNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword',
+		component: ({ match }) => <ProjectNews match={match} />,
+	},
+	{
+		path: '/news/page/:pageNumber',
+		component: ({ match }) => <ProjectNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <ProjectNews match={match} />,
 	},
 ];

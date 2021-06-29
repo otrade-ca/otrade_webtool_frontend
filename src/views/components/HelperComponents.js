@@ -6,6 +6,7 @@ import CardContainer from './CardContainer/CardContainer';
 import TableHelper from './TableHelper';
 import FilterBox from './FilterBox';
 import Empty from './Empty';
+import SearchBox from './SearchBox';
 
 export {
 	Message,
@@ -16,4 +17,5 @@ export {
 	TableHelper,
 	FilterBox,
 	Empty,
+	SearchBox,
 };
