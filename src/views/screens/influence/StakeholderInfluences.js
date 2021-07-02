@@ -57,7 +57,7 @@ const StakeholderInfluences = ({ match }) => {
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<h4>{t('tables.influence')}</h4>
+							<h4>Assessments</h4>
 						</Card.Header>
 					)}
 					<Card.Body>

@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
 import Placeholder from '../../img/placeholder.png';
 import { listUserProjects } from '../../../application/actions/projectActions';
+import { getBucketInfo } from '../../../application/api';
 
 const Sidebar = () => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
+
+	const { prependURL } = getBucketInfo('user');
 
 	const dispatch = useDispatch();
 	const projectUser = useSelector((state) => state.projectUser);
@@ -24,7 +27,7 @@ const Sidebar = () => {
 					<div className="sidebar-image-container">
 						{userInfo && userInfo.image ? (
 							<img
-								src={userInfo.image}
+								src={`${prependURL}${userInfo.image}`}
 								alt="profile"
 								className="profile-image sidebar-image"
 							/>

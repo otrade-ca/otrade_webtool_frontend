@@ -15,24 +15,30 @@ import {
 	ORGANIZATION_DELETE_SUCCESS,
 	ORGANIZATION_DELETE_FAIL,
 	ORGANIZATION_DELETE_RESET,
-	ORGANIZATION_LIST_REQUEST,
-	ORGANIZATION_LIST_SUCCESS,
-	ORGANIZATION_LIST_FAIL,
+	ORGANIZATION_PROJECT_LIST_REQUEST,
+	ORGANIZATION_PROJECT_LIST_SUCCESS,
+	ORGANIZATION_PROJECT_LIST_FAIL,
+	ORGANIZATION_LOCATION_LIST_REQUEST,
+	ORGANIZATION_LOCATION_LIST_SUCCESS,
+	ORGANIZATION_LOCATION_LIST_FAIL,
 	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
 	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
 	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
-	ORGANIZATION_PROJECT_FILTER,
-	ORGANIZATION_PROJECT_FILTER_CLEAR,
-	ORGANIZATION_STAKEHOLDER_FILTER,
-	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 	ORGANIZATION_ASSIGNMENT_REQUEST,
 	ORGANIZATION_ASSIGNMENT_SUCCESS,
 	ORGANIZATION_ASSIGNMENT_FAIL,
 	ORGANIZATION_ASSIGNMENT_RESET,
-	ORGANIZATION_PROJECT_LIST_RESET,
+	ORGANIZATION_DROPDOWN_REQUEST,
+	ORGANIZATION_DROPDOWN_SUCCESS,
+	ORGANIZATION_DROPDOWN_FAIL,
 } from '../constants/organizationConstants';
 
-// add organization reducer
+/**
+ * add organization reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ORGANIZATION_ADD_REQUEST:
@@ -48,7 +54,12 @@ export const organizationAddReducer = (state = {}, action) => {
 	}
 };
 
-// get organization details reducer
+/**
+ * get organization details reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationDetailsReducer = (
 	state = { organization: {} },
 	action
@@ -67,7 +78,12 @@ export const organizationDetailsReducer = (
 	}
 };
 
-// update organization reducer
+/**
+ * update organization reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationUpdateReducer = (
 	state = { organization: {} },
 	action
@@ -86,7 +102,12 @@ export const organizationUpdateReducer = (
 	}
 };
 
-// delete organization reducer
+/**
+ * delete organization reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ORGANIZATION_DELETE_REQUEST:
@@ -102,49 +123,76 @@ export const organizationDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// get organization list reducer
-export const organizationListReducer = (
-	state = { organizations: [], filtered: [] },
+/**
+ * get project organizations reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const organizationProjectListReducer = (
+	state = { organizations: [] },
 	action
 ) => {
 	switch (action.type) {
-		case ORGANIZATION_LIST_REQUEST:
+		case ORGANIZATION_PROJECT_LIST_REQUEST:
 			return { loading: true, organizations: [] };
-		case ORGANIZATION_LIST_SUCCESS:
+		case ORGANIZATION_PROJECT_LIST_SUCCESS:
 			return {
 				loading: false,
 				organizations: action.payload.organizations,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
-		case ORGANIZATION_LIST_FAIL:
+		case ORGANIZATION_PROJECT_LIST_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
 			};
-		case ORGANIZATION_PROJECT_FILTER:
-			return {
-				...state,
-				filtered: state.organizations.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.name.match(regex);
-				}),
-			};
-		case ORGANIZATION_PROJECT_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
-		case ORGANIZATION_PROJECT_LIST_RESET:
-			return { organizations: [], filtered: [] };
 		default:
 			return state;
 	}
 };
 
-// get organization list reducer
+/**
+ * get location organizations reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const organizationLocationListReducer = (
+	state = { organizations: [] },
+	action
+) => {
+	switch (action.type) {
+		case ORGANIZATION_LOCATION_LIST_REQUEST:
+			return { loading: true, organizations: [] };
+		case ORGANIZATION_LOCATION_LIST_SUCCESS:
+			return {
+				loading: false,
+				organizations: action.payload.organizations,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
+			};
+		case ORGANIZATION_LOCATION_LIST_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+/**
+ * get stakeholder organizations reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationStakeholderListReducer = (
-	state = { organizations: [], filtered: [] },
+	state = { organizations: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -156,28 +204,21 @@ export const organizationStakeholderListReducer = (
 				organizations: action.payload.organizations,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case ORGANIZATION_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case ORGANIZATION_STAKEHOLDER_FILTER:
-			return {
-				...state,
-				filtered: state.organizations.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.name.match(regex);
-				}),
-			};
-		case ORGANIZATION_STAKEHOLDER_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		default:
 			return state;
 	}
 };
 
-// organization assignments
+/**
+ * assign organization reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationAssignmentReducer = (
 	state = { organizations: [] },
 	action
@@ -200,26 +241,30 @@ export const organizationAssignmentReducer = (
 	}
 };
 
-// get organization list reducer
+/**
+ * organization dropdown reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const organizationDropdownReducer = (
 	state = { organizations: [] },
 	action
 ) => {
 	switch (action.type) {
-		case ORGANIZATION_LIST_REQUEST:
+		case ORGANIZATION_DROPDOWN_REQUEST:
 			return { loading: true, organizations: [] };
-		case ORGANIZATION_LIST_SUCCESS:
+		case ORGANIZATION_DROPDOWN_SUCCESS:
 			return {
 				loading: false,
 				organizations: action.payload.organizations,
 			};
-		case ORGANIZATION_LIST_FAIL:
+		case ORGANIZATION_DROPDOWN_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
 			};
-		case ORGANIZATION_PROJECT_LIST_RESET:
-			return { organizations: [] };
+
 		default:
 			return state;
 	}

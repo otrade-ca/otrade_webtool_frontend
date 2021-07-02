@@ -29,7 +29,7 @@ const StakeholderNews = ({
 	newsListStakeholder: { loading, error, news, pages, page },
 	newsDelete: { success },
 }) => {
-	const locationId = match.params.id;
+	const stakeholderId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -38,11 +38,11 @@ const StakeholderNews = ({
 
 	useEffect(() => {
 		if (success) {
-			listStakeholderNews(locationId, keyword, pageNumber);
+			listStakeholderNews(stakeholderId, keyword, pageNumber);
 		} else {
-			listStakeholderNews(locationId, keyword, pageNumber);
+			listStakeholderNews(stakeholderId, keyword, pageNumber);
 		}
-	}, [listStakeholderNews, locationId, success, keyword, pageNumber]);
+	}, [listStakeholderNews, stakeholderId, success, keyword, pageNumber]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
@@ -68,8 +68,8 @@ const StakeholderNews = ({
 									<SearchBox
 										history={history}
 										searchWord={'title'}
-										searchQueryPath={`/community/${locationId}/news/search/`}
-										searchQueryEmpty={`/community/${locationId}/news`}
+										searchQueryPath={`/stakeholder/${stakeholderId}/news/search/`}
+										searchQueryEmpty={`/stakeholder/${stakeholderId}/news`}
 									/>
 								)}
 							/>
@@ -116,7 +116,9 @@ const StakeholderNews = ({
 													<div>
 														<p>
 															<>
-																<Link to={`/stakeholder/${item._id}`}>
+																<Link
+																	to={`/stakeholder/${stakeholderId}/news/${item._id}/view`}
+																>
 																	{item.title}
 																</Link>
 															</>
@@ -133,7 +135,15 @@ const StakeholderNews = ({
 															<br />
 															<>
 																Source:{' '}
-																<em>{item.source ? item.source : 'N/A'}</em>
+																<em>
+																	{item.source ? (
+																		<a href={`${item.source}`} target="blank">
+																			View Source
+																		</a>
+																	) : (
+																		'N/A'
+																	)}
+																</em>
 															</>
 															<br />
 															<>
@@ -169,8 +179,8 @@ const StakeholderNews = ({
 							<Paginate
 								pages={pages}
 								page={page}
-								urlOne={`/community/${locationId}/news/search/`}
-								urlTwo={`/community/${locationId}/news/page/`}
+								urlOne={`/stakeholder/${stakeholderId}/news/search/`}
+								urlTwo={`/stakeholder/${stakeholderId}/news/page/`}
 							/>
 						</Row>
 					</Card.Body>

@@ -491,3 +491,9 @@ hr {
 .action-btns a {
 	margin-bottom: 0.5rem;
 }
+
+.user-stakeholder-image {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+}

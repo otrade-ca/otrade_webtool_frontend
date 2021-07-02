@@ -10,7 +10,7 @@ import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { getLocationDetails } from '../../../application/actions/locationActions';
 import { listStakeholders } from '../../../application/actions/stakeholderActions';
-import { listOrganizations } from '../../../application/actions/organizationAction';
+import { listLocationOrganizations } from '../../../application/actions/organizationAction';
 
 const LandingPage = ({ match, history }) => {
 	const locationId = match.params.id;
@@ -27,7 +27,7 @@ const LandingPage = ({ match, history }) => {
 	useEffect(() => {
 		dispatch(listStakeholders(locationId));
 		dispatch(getLocationDetails(locationId));
-		dispatch(listOrganizations(locationId));
+		dispatch(listLocationOrganizations(locationId));
 	}, [dispatch, locationId]);
 
 	return (

@@ -3,16 +3,23 @@ import { Row, Col } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
+import { getBucketInfo } from '../../application/api';
 
 const ProfileTop = ({ profile, btnlinks, navbarlinks, url }) => {
 	const { t } = useTranslation();
+
+	const { prependURL } = getBucketInfo('user');
 
 	return (
 		<div className="profile-container">
 			<Row>
 				<Col md={2} className="image-container">
 					{profile && profile.image ? (
-						<img src={profile.image} alt="profile" className="profile-image" />
+						<img
+							src={`${prependURL}${profile.image}`}
+							alt="profile"
+							className="profile-image"
+						/>
 					) : (
 						<img src={Placeholder} alt="profile" className="profile-image" />
 					)}

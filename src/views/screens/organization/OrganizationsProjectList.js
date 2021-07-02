@@ -24,7 +24,7 @@ const OrganizationsProjectList = ({
 	listProjectOrganizations,
 	deleteOrganization,
 	organizationDelete: { success },
-	organizationList: { loading, error, organizations, pages, page },
+	organizationProjectList: { loading, error, organizations, pages, page },
 }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
@@ -108,9 +108,7 @@ const OrganizationsProjectList = ({
 												<div className="d-flex justify-content-between">
 													<div>
 														<>
-															<Link
-																to={`/project/${projectId}/organizations/${item._id}/view`}
-															>
+															<Link to={`/organization/${item._id}`}>
 																{item.name}
 															</Link>
 														</>

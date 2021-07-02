@@ -9,7 +9,6 @@ import {
 	NEWS_DETAILS_REQUEST,
 	NEWS_DETAILS_SUCCESS,
 	NEWS_DETAILS_FAIL,
-	NEWS_DETAILS_RESET,
 	NEWS_UPDATE_REQUEST,
 	NEWS_UPDATE_SUCCESS,
 	NEWS_UPDATE_FAIL,
@@ -76,7 +75,7 @@ export const addNews = (news, history) => async (dispatch, getState) => {
  */
 export const getNewsDetails = (id) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: NEWS_DETAILS_RESET });
+		//dispatch({ type: NEWS_DETAILS_RESET });
 		dispatch({ type: NEWS_DETAILS_REQUEST });
 
 		const {
@@ -89,9 +88,8 @@ export const getNewsDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(``, config);
-
-		dispatch({ type: NEWS_DETAILS_SUCCESS });
+		const { data } = await axios.get(`${getURL()}/api/v1/news/${id}`, config);
+		dispatch({ type: NEWS_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
 			type: NEWS_DETAILS_FAIL,
@@ -196,8 +194,6 @@ export const listProjectNews =
 				`${getURL()}/api/v1/projects/${projectId}/news?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
-
-			console.log(data);
 
 			dispatch({ type: NEWS_LIST_PROJECT_SUCCESS, payload: data });
 		} catch (error) {

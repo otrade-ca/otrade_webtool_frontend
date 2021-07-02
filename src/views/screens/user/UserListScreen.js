@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
+import Placeholder from '../../img/placeholder.png';
 
 const UserListScreen = ({ history, match }) => {
 	const keyword = match.params.keyword;
@@ -81,15 +82,23 @@ const UserListScreen = ({ history, match }) => {
 					<Accordion defaultActiveKey={1}>
 						{users &&
 							users.map((user, index) => (
-								<Card className="table-card">
+								<Card className="table-card" key={user._id}>
 									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 										<div className="table-card-item">
 											<div className="item-one">
-												<IconContext.Provider
-													value={{ color: '#008cba', size: '2em' }}
-												>
-													<IoIcons.IoMdPerson />
-												</IconContext.Provider>
+												{user.image ? (
+													<img
+														src={`https://users-bucket-00-dev.s3.us-east-2.amazonaws.com/${user.image}`}
+														alt="profile"
+														className="user-stakeholder-image"
+													/>
+												) : (
+													<img
+														src={Placeholder}
+														alt="profile"
+														className="user-stakeholder-image"
+													/>
+												)}
 											</div>
 											<div className="item-two">
 												<div>

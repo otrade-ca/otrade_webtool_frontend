@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNews } from '../../../application/actions/newsActions';
 import { useTranslation } from 'react-i18next';
@@ -8,9 +8,10 @@ import {
 	MemberDropdownProject,
 } from '../../components/Dropdown/helper';
 import { CardContainer } from '../../components/HelperComponents';
+import { getProjectId } from '../../../application/localStorage';
 
 const NewsForm = ({ match, history }) => {
-	const projectId = match.params.id;
+	const projectId = getProjectId();
 	const { t } = useTranslation();
 
 	const dispatch = useDispatch();
@@ -142,6 +143,7 @@ const NewsForm = ({ match, history }) => {
 				</Row>
 				<hr />
 				<CommunityDropdown label={'Community'} id={projectId} />
+				<hr />
 				<MemberDropdownProject label={'Members'} />
 				<hr />
 				<Row>

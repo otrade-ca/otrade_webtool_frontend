@@ -13,9 +13,9 @@ import { Loader, Message } from '../../components/HelperComponents';
 import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 
-const OrganizationScreen = ({ match, history }) => {
+const FormEdit = ({ match, history }) => {
 	const projectId = match.params.projectId;
-	const organizationId = match.params.organizationId;
+	const organizationId = match.params.id;
 
 	const { t } = useTranslation();
 
@@ -302,4 +302,4 @@ const OrganizationScreen = ({ match, history }) => {
 	);
 };
 
-export default withRouter(OrganizationScreen);
+export default withRouter(FormEdit);

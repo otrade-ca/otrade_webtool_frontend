@@ -6,7 +6,7 @@ import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Button, Card, Row } from 'react-bootstrap';
 import { useDispatch, connect } from 'react-redux';
 import {
-	listOrganizations,
+	listLocationOrganizations,
 	deleteOrganization,
 } from '../../../application/actions/organizationAction';
 import { Loader, Message, Empty } from '../../components/HelperComponents';
@@ -21,7 +21,7 @@ import Moment from 'react-moment';
 
 const OrganizationsList = ({
 	match,
-	listOrganizations,
+	listLocationOrganizations,
 	deleteOrganization,
 	organizationList: { loading, error, organizations, pages, page },
 	organizationDelete: { success },
@@ -38,12 +38,19 @@ const OrganizationsList = ({
 
 	useEffect(() => {
 		if (success) {
-			listOrganizations(locationId, keyword, pageNumber);
+			listLocationOrganizations(locationId, keyword, pageNumber);
 			dispatch({ type: ORGANIZATION_DELETE_RESET });
 		} else {
-			listOrganizations(locationId, keyword, pageNumber);
+			listLocationOrganizations(locationId, keyword, pageNumber);
 		}
-	}, [dispatch, locationId, success, listOrganizations, keyword, pageNumber]);
+	}, [
+		dispatch,
+		locationId,
+		success,
+		listLocationOrganizations,
+		keyword,
+		pageNumber,
+	]);
 
 	//delete user
 	const deleteHandler = (id) => {
@@ -174,7 +181,7 @@ const OrganizationsList = ({
 };
 
 OrganizationsList.propTypes = {
-	listOrganizations: PropTypes.func.isRequired,
+	listLocationOrganizations: PropTypes.func.isRequired,
 	deleteOrganization: PropTypes.func.isRequired,
 };
 
@@ -184,6 +191,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-	listOrganizations,
+	listLocationOrganizations,
 	deleteOrganization,
 })(OrganizationsList);

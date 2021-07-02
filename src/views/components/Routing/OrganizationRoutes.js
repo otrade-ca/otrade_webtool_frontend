@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
 import AddOrganizationScreen from '../../screens/organization/AddOrganizationScreen';
+import Landing from '../../screens/organization/Landing';
 
 const OrganizationRoutes = () => {
 	return (
@@ -16,6 +17,7 @@ const OrganizationRoutes = () => {
 				path="/organizations/register/community/:id"
 				component={AddOrganizationScreen}
 			/>
+			<PrivateRoute path="/organization/:id" component={Landing} />
 		</Switch>
 	);
 };

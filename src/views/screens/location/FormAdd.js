@@ -138,7 +138,7 @@ const FormAdd = ({ history }) => {
 					<Row>
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
-								{t('action.continue')}
+								{t('action.submit')}
 							</Button>
 						</Col>
 					</Row>

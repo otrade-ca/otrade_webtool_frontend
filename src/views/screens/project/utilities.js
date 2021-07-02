@@ -4,17 +4,17 @@ import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 import ProjectLocations from '../location/ProjectLocations';
 import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
-import ViewOrganization from '../organization/ViewOrganization';
-import OrganizationScreen from '../organization/OrganizationScreen';
+// import OrganizationScreen from '../organization/OrganizationScreen';
 import ProjectNews from '../news/ProjectNews';
+import NewsView from '../news/NewsView';
 
 export const btnlinks = [
-	// {
-	// 	link: '/photo',
-	// 	class: 'btn btn-primary',
-	// 	icon: 'fas fa-edit',
-	// 	type: 'Photo',
-	// },
+	{
+		link: '/photo',
+		class: 'btn btn-primary',
+		icon: 'fas fa-edit',
+		type: 'Photo',
+	},
 ];
 
 export const navbarlinks = [
@@ -82,6 +82,10 @@ export const routes = [
 		component: ({ match }) => <StakeholdersProjectList match={match} />,
 	},
 	{
+		path: '/organizations',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
 		path: '/organizations/search/:keyword',
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},
@@ -93,18 +97,14 @@ export const routes = [
 		path: '/organizations/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},
-	{
-		path: '/organizations',
-		component: ({ match }) => <OrganizationsProjectList match={match} />,
-	},
-	{
-		path: '/organizations/:organizationId/view',
-		component: ({ match }) => <ViewOrganization match={match} />,
-	},
-	{
-		path: '/organizations/:organizationId/view/edit',
-		component: ({ match }) => <OrganizationScreen match={match} />,
-	},
+	// {
+	// 	path: '/organizations/:organizationId/view',
+	// 	component: ({ match }) => <ViewOrganization match={match} />,
+	// },
+	// {
+	// 	path: '/organizations/:organizationId/view/edit',
+	// 	component: ({ match }) => <OrganizationScreen match={match} />,
+	// },
 	{
 		path: '/photo',
 		component: ({ match }) => <EditProjectPhoto match={match} />,
@@ -125,4 +125,12 @@ export const routes = [
 		path: '/news/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <ProjectNews match={match} />,
 	},
+	{
+		path: '/news/:newsId/view',
+		component: ({ match }) => <NewsView match={match} />,
+	},
+	// {
+	// 	path: '/news/:newsId/view/edit',
+	// 	component: ({ match }) => <OrganizationScreen match={match} />,
+	// },
 ];

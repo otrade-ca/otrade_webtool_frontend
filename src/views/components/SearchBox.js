@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 const SearchBox = ({
@@ -22,7 +22,10 @@ const SearchBox = ({
 	};
 
 	return (
-		<Form onSubmit={submitHandler} style={{ width: '25rem', margin: 'auto' }}>
+		<Form
+			onSubmit={submitHandler}
+			style={{ width: '25rem', marginRight: 'auto' }}
+		>
 			<Form.Control
 				type="text"
 				name="q"

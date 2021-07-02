@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetails, updateUserProfile } from '../../application/actions/userActions';
+import {
+	getUserDetails,
+	updateUserProfile,
+} from '../../application/actions/userActions';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 
-const ProfileScreen = ({ location, history }) => {
+const ProfileScreen = () => {
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');

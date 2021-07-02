@@ -26,9 +26,13 @@ import {
 	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 import { setAlert } from '../actions/alertActions';
-import { getURL } from '../api';
+import { getURL, getBucketInfo } from '../api';
 
-// add project
+/**
+ * adds a project
+ * @param {*} project
+ * @returns
+ */
 export const addProject = (project) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_ADD_REQUEST });
@@ -62,7 +66,11 @@ export const addProject = (project) => async (dispatch, getState) => {
 	}
 };
 
-// get the details of a project
+/**
+ * gets a projects details
+ * @param {*} id
+ * @returns
+ */
 export const listProjectDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_DETAILS_REQUEST });
@@ -85,6 +93,8 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 		);
 
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
+
+		// everytime project details are gathered, store the projectId in localstorage
 		localStorage.setItem('projectId', JSON.stringify(data._id));
 	} catch (error) {
 		dispatch({
@@ -97,7 +107,12 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-// update project
+/**
+ * updates a project
+ * @param {*} project
+ * @param {*} history
+ * @returns
+ */
 export const updateProject =
 	(project, history) => async (dispatch, getState) => {
 		try {
@@ -135,7 +150,71 @@ export const updateProject =
 		}
 	};
 
-// delete a project
+/**
+ * updates a project profile picture
+ * @param {*} project
+ * @param {*} file
+ * @param {*} history
+ * @returns
+ */
+export const updateProjectProfilePhoto =
+	(project, file, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: PROJECT_UPDATE_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const instructions = getBucketInfo('project');
+			instructions.id = project.id;
+			instructions.contentType = file.type;
+
+			//get presigned url
+			const {
+				data: { key, url },
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
+
+			// upload to AWS
+			await axios.put(url, file, {
+				'Content-Type': file.type,
+			});
+
+			project.image = key;
+
+			//pass id, project, and config file to api
+			const { data } = await axios.put(
+				`${getURL()}/api/v1/projects/${project.id}/profilePhoto`,
+				project,
+				config
+			);
+
+			dispatch({ type: PROJECT_UPDATE_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Project successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: PROJECT_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
+
+/**
+ * deletes a project
+ * @param {*} id
+ * @returns
+ */
 export const deleteProject = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_DELETE_REQUEST });

@@ -24,18 +24,21 @@ import {
 	LOCATION_LIST_FILTER_CLEAR,
 	LOCATION_USER_LIST_FILTER,
 	LOCATION_USER_LIST_FILTER_CLEAR,
-	LOCATION_ID_REQUEST,
 	LOCATION_DETAILS_RESET,
 	LOCATION_DROPDOWN_REQUEST,
 	LOCATION_DROPDOWN_SUCCESS,
 	LOCATION_DROPDOWN_FAIL,
 	LOCATION_ASSIGN_REQUEST,
 	LOCATION_ASSIGN_SUCCESS,
-	LOCATION_ASSIGN_FAIL,
 	LOCATION_ASSIGN_RESET,
 } from '../constants/locationConstants';
 
-// add location
+/**
+ * Add location reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case LOCATION_ADD_REQUEST:
@@ -51,7 +54,12 @@ export const locationAddReducer = (state = {}, action) => {
 	}
 };
 
-// get location details
+/**
+ * get location details reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationDetailsReducer = (state = { location: {} }, action) => {
 	switch (action.type) {
 		case LOCATION_DETAILS_REQUEST:
@@ -67,7 +75,12 @@ export const locationDetailsReducer = (state = { location: {} }, action) => {
 	}
 };
 
-// update location
+/**
+ * updates location reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationUpdateReducer = (state = {}, action) => {
 	switch (action.type) {
 		case LOCATION_UPDATE_REQUEST:
@@ -83,7 +96,12 @@ export const locationUpdateReducer = (state = {}, action) => {
 	}
 };
 
-// delete location
+/**
+ * deletes location reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case LOCATION_DELETE_REQUEST:
@@ -99,7 +117,7 @@ export const locationDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// get list of locations
+// get list of project locations reducer
 export const locationListReducer = (
 	state = { locations: [], filtered: [] },
 	action
@@ -135,7 +153,12 @@ export const locationListReducer = (
 	}
 };
 
-// get list of locations
+/**
+ * get list of user locations reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationUserListReducer = (
 	state = { locations: [], filtered: [] },
 	action
@@ -165,7 +188,12 @@ export const locationUserListReducer = (
 	}
 };
 
-// get all stakeholders for a project
+/**
+ * get list of locations for dropdown
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationListDropdownReducer = (
 	state = { locations: [] },
 	action
@@ -186,7 +214,12 @@ export const locationListDropdownReducer = (
 	}
 };
 
-// assign location
+/**
+ * assigns location to a project reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const locationAssignReducer = (state = { locations: [] }, action) => {
 	switch (action.type) {
 		case LOCATION_ASSIGN_REQUEST:

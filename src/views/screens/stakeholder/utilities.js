@@ -4,12 +4,11 @@ import Activities from '../activity/Activities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
 import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
-import OrganizationScreen from '../organization/OrganizationScreen';
-import ViewOrganization from '../organization/ViewOrganization';
 import FormDetails from '../commitment/FormDetails';
 import StakeholderInfluences from '../influence/StakeholderInfluences';
 import Profile from './Profile';
 import StakeholderNews from '../news/StakeholderNews';
+import NewsView from '../news/NewsView';
 
 export const btnlinks = [
 	// {
@@ -83,14 +82,6 @@ export const routes = [
 		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/view',
-		component: ({ match }) => <ViewOrganization match={match} />,
-	},
-	{
-		path: '/organizations/:organizationId/view/edit',
-		component: ({ match }) => <OrganizationScreen match={match} />,
-	},
-	{
 		path: '/activities',
 		component: ({ match }) => <Activities match={match} />,
 	},
@@ -126,4 +117,12 @@ export const routes = [
 		path: '/news/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <StakeholderNews match={match} />,
 	},
+	{
+		path: '/news/:newsId/view',
+		component: ({ match }) => <NewsView match={match} />,
+	},
+	// {
+	// 	path: '/news/:newsId/view/edit',
+	// 	component: ({ match }) => <OrganizationScreen match={match} />,
+	// },
 ];

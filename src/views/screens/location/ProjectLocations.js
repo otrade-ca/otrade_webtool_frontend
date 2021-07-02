@@ -67,28 +67,29 @@ const ProjectLocations = ({ match }) => {
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'Location'}
-										searchQueryPath={`/project/${projectId}/communities/search/`}
-										searchQueryEmpty={`/project/${projectId}/communities`}
-									/>
-								)}
-							/>
+							<h4>Communities {`(${count})`}</h4>
 							<Link
 								to={`/communities/register/project/${projectId}`}
 								className="btn btn-primary ml-2"
 							>
-								<i className="fas fa-plus"></i> {t('action.register')}
+								<i className="fas fa-plus"></i> Create Community
 							</Link>
 						</Card.Header>
 					)}
 				</>
 			)}
 			<Card.Body>
-				<Accordion defaultActiveKey={1}>
+				<Route
+					render={({ history }) => (
+						<SearchBox
+							history={history}
+							searchWord={'Location'}
+							searchQueryPath={`/project/${projectId}/communities/search/`}
+							searchQueryEmpty={`/project/${projectId}/communities`}
+						/>
+					)}
+				/>
+				<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 					{locations &&
 						locations.map((location, index) => (
 							<Card className="table-card" key={index}>

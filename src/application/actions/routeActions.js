@@ -5,7 +5,6 @@ import {
 
 // save stakeholder info to localstorage to use in processing form
 export const saveRouteInfo = (data) => (dispatch) => {
-	console.log('saving route');
 	dispatch({
 		type: ROUTE_SAVE_REQUEST,
 		payload: data,

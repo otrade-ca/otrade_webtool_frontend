@@ -12,9 +12,12 @@ import {
 	ORGANIZATION_DELETE_REQUEST,
 	ORGANIZATION_DELETE_SUCCESS,
 	ORGANIZATION_DELETE_FAIL,
-	ORGANIZATION_LIST_REQUEST,
-	ORGANIZATION_LIST_SUCCESS,
-	ORGANIZATION_LIST_FAIL,
+	ORGANIZATION_PROJECT_LIST_REQUEST,
+	ORGANIZATION_PROJECT_LIST_SUCCESS,
+	ORGANIZATION_PROJECT_LIST_FAIL,
+	ORGANIZATION_LOCATION_LIST_REQUEST,
+	ORGANIZATION_LOCATION_LIST_SUCCESS,
+	ORGANIZATION_LOCATION_LIST_FAIL,
 	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
 	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
 	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
@@ -27,6 +30,9 @@ import {
 	ORGANIZATION_ASSIGNMENT_FAIL,
 	ORGANIZAION_UPDATED_LIST_REQUEST,
 	ORGANIZAION_UPDATED_LIST_SUCCESS,
+	ORGANIZATION_DROPDOWN_REQUEST,
+	ORGANIZATION_DROPDOWN_SUCCESS,
+	ORGANIZATION_DROPDOWN_FAIL,
 } from '../constants/organizationConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
@@ -182,7 +188,7 @@ export const listProjectOrganizations =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
-			dispatch({ type: ORGANIZATION_LIST_REQUEST });
+			dispatch({ type: ORGANIZATION_PROJECT_LIST_REQUEST });
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -198,10 +204,10 @@ export const listProjectOrganizations =
 				config
 			);
 
-			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+			dispatch({ type: ORGANIZATION_PROJECT_LIST_SUCCESS, payload: data });
 		} catch (error) {
 			dispatch({
-				type: ORGANIZATION_LIST_FAIL,
+				type: ORGANIZATION_PROJECT_LIST_FAIL,
 				payload:
 					error.response && error.response.data.message
 						? error.response.data.message
@@ -211,11 +217,11 @@ export const listProjectOrganizations =
 	};
 
 // list all organizations for a location or community
-export const listOrganizations =
+export const listLocationOrganizations =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
-			dispatch({ type: ORGANIZATION_LIST_REQUEST });
+			dispatch({ type: ORGANIZATION_LOCATION_LIST_REQUEST });
 			console.log('id', id);
 			const {
 				userLogin: { userInfo },
@@ -232,12 +238,10 @@ export const listOrganizations =
 				config
 			);
 
-			console.log('returning data', data);
-
-			dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+			dispatch({ type: ORGANIZATION_LOCATION_LIST_SUCCESS, payload: data });
 		} catch (error) {
 			dispatch({
-				type: ORGANIZATION_LIST_FAIL,
+				type: ORGANIZATION_LOCATION_LIST_FAIL,
 				payload:
 					error.response && error.response.data.message
 						? error.response.data.message
@@ -323,7 +327,7 @@ export const assignStakeholder =
 // list all organizations for a location or community
 export const listDropdownOrganizations = (id) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: ORGANIZATION_LIST_REQUEST });
+		dispatch({ type: ORGANIZATION_DROPDOWN_REQUEST });
 
 		const {
 			userLogin: { userInfo },
@@ -342,10 +346,10 @@ export const listDropdownOrganizations = (id) => async (dispatch, getState) => {
 
 		console.log('returning data', data);
 
-		dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data });
+		dispatch({ type: ORGANIZATION_DROPDOWN_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
-			type: ORGANIZATION_LIST_FAIL,
+			type: ORGANIZATION_DROPDOWN_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	updateUserProfile,
+	updateUserProfilePhoto,
 	getUserDetails,
 } from '../../../application/actions/userActions';
 import { USER_PROFILE_UPDATE_RESET } from '../../../application/constants/userConstants';
@@ -48,7 +49,15 @@ const EditUserPhoto = ({ match, history }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		//check password against confirmPassword
-		dispatch(updateUserProfile(user._id, file, history));
+		dispatch(
+			updateUserProfilePhoto(
+				{
+					id: user._id,
+				},
+				file,
+				history
+			)
+		);
 	};
 
 	return (
@@ -73,15 +82,6 @@ const EditUserPhoto = ({ match, history }) => {
 								</Row>
 								<Row>
 									<Col md={6}>
-										{/* <Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											accept="image/*"
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File> */}
 										<input
 											type="file"
 											accept="image/*"
@@ -107,24 +107,4 @@ const EditUserPhoto = ({ match, history }) => {
 	);
 };
 
-export default EditUserPhoto;
-
-// const formData = new FormData();
-// formData.append('image', file);
-// setUploading(true);
-
-// try {
-// 	const config = {
-// 		headers: {
-// 			'Content-Type': 'multipart/form-data',
-// 		},
-// 	};
-
-// 	const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-// 	setImage(data);
-// 	setUploading(false);
-// } catch (error) {
-// 	console.error(error);
-// 	setUploading(false);
-// }
+export default withRouter(EditUserPhoto);

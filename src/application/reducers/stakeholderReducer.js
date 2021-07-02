@@ -246,6 +246,7 @@ export const stakeholderProjectListReducer = (
 				stakeholders: action.payload.stakeholders,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case STAKEHOLDER_PROJECT_LIST_FILTER:
 			return {

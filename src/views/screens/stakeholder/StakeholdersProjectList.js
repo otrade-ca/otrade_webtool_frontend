@@ -23,7 +23,7 @@ const StakeholderProjectList = ({
 	listProjectStakeholders,
 	deleteStakeholder,
 	stakeholderDelete: { success },
-	stakeholderProjectList: { loading, error, stakeholders, pages, page },
+	stakeholderProjectList: { loading, error, stakeholders, pages, page, count },
 }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
@@ -59,20 +59,21 @@ const StakeholderProjectList = ({
 						<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
 					) : (
 						<Card.Header className="my-card-header">
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'LastName'}
-										searchQueryPath={`/project/${projectId}/stakeholders/search/`}
-										searchQueryEmpty={`/project/${projectId}/stakeholders`}
-									/>
-								)}
-							/>
+							<h4>Stakeholders {`(${count})`}</h4>
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'LastName'}
+									searchQueryPath={`/project/${projectId}/stakeholders/search/`}
+									searchQueryEmpty={`/project/${projectId}/stakeholders`}
+								/>
+							)}
+						/>
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholders &&
 								stakeholders.map((item, index) => (
 									<Card className="table-card" key={index}>
@@ -140,6 +141,10 @@ const StakeholderProjectList = ({
 																		'N/A'
 																	)}
 																</em>
+															</>
+															<br />
+															<>
+																Community: <em>{item.location.location}</em>
 															</>
 														</p>
 													</div>

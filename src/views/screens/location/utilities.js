@@ -1,13 +1,12 @@
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
 import ListOrganizations from '../organization/ListOrganizations';
-import OrganizationScreen from '../organization/OrganizationScreen';
 import StakeholdersList from '../stakeholder/StakeholdersList';
 import FormEdit from './FormEdit';
 import PhotoEdit from './PhotoEdit';
 import FormView from './FormView';
-import ViewOrganization from '../organization/ViewOrganization';
 import LocationNews from '../news/LocationNews';
+import NewsView from '../news/NewsView';
 
 export const btnlinks = [
 	// {
@@ -81,14 +80,6 @@ export const routes = [
 		component: ({ match }) => <ListOrganizations match={match} />,
 	},
 	{
-		path: '/organizations/:organizationId/view',
-		component: ({ match }) => <ViewOrganization match={match} />,
-	},
-	{
-		path: '/organizations/:organizationId/view/edit',
-		component: ({ match }) => <OrganizationScreen match={match} />,
-	},
-	{
 		path: '/stakeholders',
 		component: ({ match }) => <StakeholdersList match={match} />,
 	},
@@ -128,4 +119,12 @@ export const routes = [
 		path: '/news/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <LocationNews match={match} />,
 	},
+	{
+		path: '/news/:newsId/view',
+		component: ({ match }) => <NewsView match={match} />,
+	},
+	// {
+	// 	path: '/news/:newsId/view/edit',
+	// 	component: ({ match }) => <OrganizationScreen match={match} />,
+	// },
 ];

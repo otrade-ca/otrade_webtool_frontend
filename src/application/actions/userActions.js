@@ -24,7 +24,7 @@ import {
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants';
-import { getURL } from '../api';
+import { getURL, getBucketInfo } from '../api';
 import { PROJECT_LIST_RESET } from '../constants/projectConstants';
 import {
 	STAKEHOLDER_LIST_RESET,
@@ -59,7 +59,6 @@ export const login = (email, password) => async (dispatch) => {
 			type: USER_LOGIN_SUCCESS,
 			payload: data,
 		});
-		// localStorage.setItem('userInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: USER_LOGIN_FAIL,
@@ -166,16 +165,62 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 };
 
 // update a user
-export const updateUserProfile =
-	(id, file, history) => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: USER_PROFILE_UPDATE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(
+			`${getURL()}/api/v1/users/profile`,
+			user,
+			config
+		);
+
+		dispatch({
+			type: USER_PROFILE_UPDATE_SUCCESS,
+			payload: data,
+		});
+
+		dispatch({
+			type: USER_LOGIN_SUCCESS,
+			payload: data,
+		});
+
+		dispatch(setAlert('User successfully updated', 'success'));
+	} catch (error) {
+		const message =
+			error.response && error.response.data.message
+				? error.response.data.message
+				: error.message;
+		if (message === 'Not authorized, token failed') {
+			dispatch(logout());
+		}
+		dispatch({
+			type: USER_PROFILE_UPDATE_FAIL,
+			payload: message,
+		});
+	}
+};
+
+// update a user
+export const updateUserProfilePhoto =
+	(user, file, history) => async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: USER_PROFILE_UPDATE_REQUEST,
 			});
-
-			console.log(id);
-			console.log(file);
-			console.log(history); //currently undefined
 
 			const {
 				userLogin: { userInfo },
@@ -188,31 +233,40 @@ export const updateUserProfile =
 				},
 			};
 
+			const instructions = getBucketInfo('user');
+			instructions.id = user.id;
+			instructions.contentType = file.type;
+
+			// get presigned url
 			const {
 				data: { key, url },
-			} = await axios.get(`${getURL()}/api/v1/upload`, config);
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
 
+			// upload to AWS
 			await axios.put(url, file, {
 				'Content-Type': file.type,
 			});
 
-			// const { data } = await axios.put(
-			// 	`${getURL()}/api/v1/users/profile`,
-			// 	user,
-			// 	config
-			// );
-			// dispatch(setAlert('User successfully updated', 'success'));
-			// dispatch({
-			// 	type: USER_PROFILE_UPDATE_SUCCESS,
-			// 	payload: data,
-			// });
+			user.image = key;
 
-			// dispatch({
-			// 	type: USER_LOGIN_SUCCESS,
-			// 	payload: data,
-			// });
+			const { data } = await axios.put(
+				`${getURL()}/api/v1/users/profilePhoto`,
+				user,
+				config
+			);
 
-			// localStorage.setItem('userInfo', JSON.stringify(data));
+			dispatch({
+				type: USER_PROFILE_UPDATE_SUCCESS,
+				payload: data,
+			});
+
+			dispatch({
+				type: USER_LOGIN_SUCCESS,
+				payload: data,
+			});
+
+			history.go(-1);
+			dispatch(setAlert('User successfully updated', 'success'));
 		} catch (error) {
 			const message =
 				error.response && error.response.data.message

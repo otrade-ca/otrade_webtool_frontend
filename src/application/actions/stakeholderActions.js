@@ -132,8 +132,6 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/stakeholders/${id}`, config);
 
-		console.log(data);
-
 		dispatch({ type: STAKEHOLDER_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -172,8 +170,6 @@ export const updateStakeholder =
 				stakeholder,
 				config
 			);
-
-			console.log(data);
 
 			dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
 			dispatch(setAlert('Stakeholder successfully updated', 'success'));

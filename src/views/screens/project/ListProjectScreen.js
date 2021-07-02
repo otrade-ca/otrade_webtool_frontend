@@ -73,7 +73,7 @@ const ListProjectScreen = ({ history, match }) => {
 						<Accordion defaultActiveKey={1}>
 							{projects &&
 								projects.map((project, index) => (
-									<Card className="table-card">
+									<Card className="table-card" key={project._id}>
 										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 											<div className="table-card-item">
 												<div className="item-one">

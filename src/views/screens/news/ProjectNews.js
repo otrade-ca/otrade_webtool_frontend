@@ -73,10 +73,7 @@ const ProjectNews = ({
 									/>
 								)}
 							/>
-							<Link
-								to={`/news/register/project/${projectId}`}
-								className="btn btn-primary ml-2"
-							>
+							<Link to={`/news/register`} className="btn btn-primary ml-2">
 								<i className="fas fa-plus"></i> {t('action.register')}
 							</Link>
 						</Card.Header>
@@ -122,7 +119,9 @@ const ProjectNews = ({
 													<div>
 														<p>
 															<>
-																<Link to={`/stakeholder/${item._id}`}>
+																<Link
+																	to={`/project/${projectId}/news/${item._id}/view`}
+																>
 																	{item.title}
 																</Link>
 															</>
@@ -139,7 +138,15 @@ const ProjectNews = ({
 															<br />
 															<>
 																Source:{' '}
-																<em>{item.source ? item.source : 'N/A'}</em>
+																<em>
+																	{item.source ? (
+																		<a href={`${item.source}`} target="blank">
+																			View Source
+																		</a>
+																	) : (
+																		'N/A'
+																	)}
+																</em>
 															</>
 															<br />
 															<>

@@ -17,7 +17,6 @@ import {
 	COMMITMENT_LIST_FAIL,
 } from '../constants/commitmentConstants';
 import { getURL } from '../api';
-import { setAlert } from '../actions/alertActions';
 
 // add commitment
 export const addCommitment =

@@ -71,7 +71,7 @@ const InfluenceForm = ({ history, match }) => {
 	};
 
 	return (
-		<CardContainer>
+		<CardContainer title={'Stakeholder Assessment'}>
 			<Form onSubmit={submitHandler} className="mb-3">
 				<Form.Group controlId="position">
 					<Row>

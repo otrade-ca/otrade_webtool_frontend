@@ -119,7 +119,7 @@ const StakeholderOrganizations = ({
 													<div>
 														<p>
 															<>
-																<Link to={`${url}/${item._id}/view`}>
+																<Link to={`/organization/${item._id}`}>
 																	{item.name}
 																</Link>
 															</>

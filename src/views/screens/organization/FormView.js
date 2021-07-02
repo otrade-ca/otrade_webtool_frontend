@@ -8,8 +8,9 @@ import { getLocationId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const ViewOrganization = ({ match }) => {
-	const organizationId = match.params.organizationId;
+const FormView = ({ match }) => {
+	console.log(match);
+	const organizationId = match.params.id;
 
 	const { url } = useRouteMatch();
 
@@ -185,7 +186,7 @@ const ViewOrganization = ({ match }) => {
 							<Row>
 								<Col md={9}>
 									{stakeholders &&
-										stakeholders.map((assignee, i) => (
+										stakeholders.map((assignee) => (
 											<Row key={assignee._id}>
 												<Col md={7}>
 													<Form.Control
@@ -225,4 +226,4 @@ const ViewOrganization = ({ match }) => {
 	);
 };
 
-export default ViewOrganization;
+export default FormView;

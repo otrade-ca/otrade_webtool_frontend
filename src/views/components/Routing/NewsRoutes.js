@@ -6,7 +6,7 @@ import NewsForm from '../../screens/news/NewsForm';
 const NewsRoutes = () => {
 	return (
 		<Switch>
-			<PrivateRoute path="/news/register/project/:id" component={NewsForm} />
+			<PrivateRoute path="/news/register" component={NewsForm} />
 		</Switch>
 	);
 };

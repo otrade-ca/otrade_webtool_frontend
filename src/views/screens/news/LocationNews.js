@@ -116,7 +116,9 @@ const LocationNews = ({
 													<div>
 														<p>
 															<>
-																<Link to={`/stakeholder/${item._id}`}>
+																<Link
+																	to={`/community/${locationId}/news/${item._id}/view`}
+																>
 																	{item.title}
 																</Link>
 															</>
@@ -133,7 +135,15 @@ const LocationNews = ({
 															<br />
 															<>
 																Source:{' '}
-																<em>{item.source ? item.source : 'N/A'}</em>
+																<em>
+																	{item.source ? (
+																		<a href={`${item.source}`} target="blank">
+																			View Source
+																		</a>
+																	) : (
+																		'N/A'
+																	)}
+																</em>
 															</>
 															<br />
 															<>
