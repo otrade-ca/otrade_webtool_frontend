@@ -21,15 +21,8 @@ import {
 	ORGANIZATION_STAKEHOLDER_LIST_REQUEST,
 	ORGANIZATION_STAKEHOLDER_LIST_SUCCESS,
 	ORGANIZATION_STAKEHOLDER_LIST_FAIL,
-	ORGANIZATION_PROJECT_FILTER,
-	ORGANIZATION_PROJECT_FILTER_CLEAR,
-	ORGANIZATION_STAKEHOLDER_FILTER,
-	ORGANIZATION_STAKEHOLDER_FILTER_CLEAR,
 	ORGANIZATION_ASSIGNMENT_REQUEST,
 	ORGANIZATION_ASSIGNMENT_SUCCESS,
-	ORGANIZATION_ASSIGNMENT_FAIL,
-	ORGANIZAION_UPDATED_LIST_REQUEST,
-	ORGANIZAION_UPDATED_LIST_SUCCESS,
 	ORGANIZATION_DROPDOWN_REQUEST,
 	ORGANIZATION_DROPDOWN_SUCCESS,
 	ORGANIZATION_DROPDOWN_FAIL,
@@ -38,7 +31,13 @@ import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 import { saveRouteInfo } from './routeActions';
 
-// add an organization to a project
+/**
+ * add an organization to a project
+ * @param {*} organization
+ * @param {*} routeInfo
+ * @param {*} history
+ * @returns
+ */
 export const addOrganization =
 	(organization, routeInfo, history) => async (dispatch, getState) => {
 		try {
@@ -85,7 +84,11 @@ export const addOrganization =
 		}
 	};
 
-// get organization details
+/**
+ * get organization details
+ * @param {*} orgId
+ * @returns
+ */
 export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_DETAILS_REQUEST });
@@ -118,7 +121,13 @@ export const getOrganizationDetails = (orgId) => async (dispatch, getState) => {
 	}
 };
 
-// update organization
+/**
+ * update organization
+ * @param {*} org
+ * @param {*} orgId
+ * @param {*} history
+ * @returns
+ */
 export const updateOrganization =
 	(org, orgId, history) => async (dispatch, getState) => {
 		try {
@@ -153,7 +162,11 @@ export const updateOrganization =
 		}
 	};
 
-// delete organization
+/**
+ * delete organization
+ * @param {*} orgId
+ * @returns
+ */
 export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_DELETE_REQUEST });
@@ -183,7 +196,13 @@ export const deleteOrganization = (orgId) => async (dispatch, getState) => {
 	}
 };
 
-// list all organizations for a project
+/**
+ * list all organizations for a project
+ * @param {*} id
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listProjectOrganizations =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
@@ -216,7 +235,13 @@ export const listProjectOrganizations =
 		}
 	};
 
-// list all organizations for a location or community
+/**
+ * list all organizations for a location or community
+ * @param {*} id
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listLocationOrganizations =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
@@ -250,7 +275,13 @@ export const listLocationOrganizations =
 		}
 	};
 
-// list all organizations for a stakeholder
+/**
+ * list all organizations for a stakeholder
+ * @param {*} stakeholderId
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listStakeholderOrganizations =
 	(stakeholderId, keyword = '', pageNumber) =>
 	async (dispatch, getState) => {
@@ -284,47 +315,56 @@ export const listStakeholderOrganizations =
 		}
 	};
 
-// assign stakeholder to organization
-export const assignStakeholder =
-	(organizationId, assignments) => async (dispatch, getState) => {
-		try {
-			dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
+// /**
+//  * assign stakeholder to organization
+//  * @param {*} organizationId
+//  * @param {*} assignments
+//  * @returns
+//  */
+// export const assignStakeholder =
+// 	(organizationId, assignments) => async (dispatch, getState) => {
+// 		try {
+// 			dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
 
-			const {
-				userLogin: { userInfo },
-			} = getState();
+// 			const {
+// 				userLogin: { userInfo },
+// 			} = getState();
 
-			const config = {
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${userInfo.token}`,
-				},
-			};
+// 			const config = {
+// 				headers: {
+// 					'Content-Type': 'application/json',
+// 					Authorization: `Bearer ${userInfo.token}`,
+// 				},
+// 			};
 
-			//pass id, project, and config file to api
-			const {
-				data: { data },
-			} = await axios.put(
-				`${getURL()}/api/v1/organizations/${organizationId}/assign`,
-				assignments,
-				config
-			);
+// 			//pass id, project, and config file to api
+// 			const {
+// 				data: { data },
+// 			} = await axios.put(
+// 				`${getURL()}/api/v1/organizations/${organizationId}/assign`,
+// 				assignments,
+// 				config
+// 			);
 
-			dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
-		} catch (error) {
-			const message =
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message;
+// 			dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
+// 		} catch (error) {
+// 			const message =
+// 				error.response && error.response.data.message
+// 					? error.response.data.message
+// 					: error.message;
 
-			dispatch({
-				type: ORGANIZATION_ASSIGNMENT_FAIL,
-				payload: message,
-			});
-		}
-	};
+// 			dispatch({
+// 				type: ORGANIZATION_ASSIGNMENT_FAIL,
+// 				payload: message,
+// 			});
+// 		}
+// 	};
 
-// list all organizations for a location or community
+/**
+ * list all organizations for a location or community
+ * @param {*} id
+ * @returns
+ */
 export const listDropdownOrganizations = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ORGANIZATION_DROPDOWN_REQUEST });
@@ -340,11 +380,9 @@ export const listDropdownOrganizations = (id) => async (dispatch, getState) => {
 		};
 
 		const { data } = await axios.get(
-			`${getURL()}/api/v1/locations/${id}/dropdown/organizations`,
+			`${getURL()}/api/v1/projects/${id}/dropdown/organizations`,
 			config
 		);
-
-		console.log('returning data', data);
 
 		dispatch({ type: ORGANIZATION_DROPDOWN_SUCCESS, payload: data });
 	} catch (error) {
@@ -358,28 +396,12 @@ export const listDropdownOrganizations = (id) => async (dispatch, getState) => {
 	}
 };
 
-// organization assignment
+/**
+ * organization assignment
+ * @param {*} data
+ * @returns
+ */
 export const assignOrganization = (data) => (dispatch) => {
-	dispatch({ type: ORGANIZAION_UPDATED_LIST_REQUEST });
-	dispatch({ type: ORGANIZAION_UPDATED_LIST_SUCCESS, payload: data });
-};
-
-// filter project Organizations
-export const filterProjectOrganizations = (text) => (dispatch) => {
-	dispatch({ type: ORGANIZATION_PROJECT_FILTER, payload: text });
-};
-
-// clear project Organizations
-export const clearProjectOrganizationsFilter = () => (dispatch) => {
-	dispatch({ type: ORGANIZATION_PROJECT_FILTER_CLEAR });
-};
-
-// filter stakeholder Organizations
-export const filterStakeholderOrganizations = (text) => (dispatch) => {
-	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER, payload: text });
-};
-
-// clear stakeholder Organizations filter
-export const clearStakeholderOrganizationsFilter = () => (dispatch) => {
-	dispatch({ type: ORGANIZATION_STAKEHOLDER_FILTER_CLEAR });
+	dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
+	dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
 };

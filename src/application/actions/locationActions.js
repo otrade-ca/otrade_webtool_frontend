@@ -18,8 +18,6 @@ import {
 	LOCATION_USER_LIST_REQUEST,
 	LOCATION_USER_LIST_SUCCESS,
 	LOCATION_USER_LIST_FAIL,
-	LOCATION_USER_LIST_FILTER,
-	LOCATION_USER_LIST_FILTER_CLEAR,
 	LOCATION_DROPDOWN_REQUEST,
 	LOCATION_DROPDOWN_SUCCESS,
 	LOCATION_DROPDOWN_FAIL,
@@ -278,14 +276,4 @@ export const listDropdownLocations =
 export const assignLocation = (data) => (dispatch) => {
 	dispatch({ type: LOCATION_ASSIGN_REQUEST });
 	dispatch({ type: LOCATION_ASSIGN_SUCCESS, payload: data });
-};
-
-// filter user projects
-export const filterUserLocations = (text) => (dispatch) => {
-	dispatch({ type: LOCATION_USER_LIST_FILTER, payload: text });
-};
-
-// clear user projects filter
-export const clearUserLocationsFilter = () => (dispatch) => {
-	dispatch({ type: LOCATION_USER_LIST_FILTER_CLEAR });
 };

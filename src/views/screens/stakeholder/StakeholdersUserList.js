@@ -2,12 +2,7 @@ import React, { memo, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	FilterBox,
-	Loader,
-	Message,
-	Empty,
-} from '../../components/HelperComponents';
+import { Loader, Message, Empty } from '../../components/HelperComponents';
 import {
 	listUserStakeholders,
 	deleteStakeholder,
@@ -63,7 +58,6 @@ const StakeholdersUserList = memo(({ match, keyword = '' }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<h4>Stakeholders</h4>
-							<FilterBox searchWord={'UserStakeholders'} />
 						</Card.Header>
 					)}
 					<Card.Body>

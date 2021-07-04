@@ -30,8 +30,6 @@ import {
 	PROJECT_ADD_FAIL,
 	PROJECT_SAVE_REQUEST,
 	PROJECT_SAVE_RESET,
-	PROJECT_USER_FILTER,
-	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 
 /**
@@ -135,19 +133,6 @@ export const projectUserReducer = (
 			return { loading: false, projects: action.payload };
 		case PROJECT_USER_FAIL:
 			return { loading: false, error: action.payload };
-		case PROJECT_USER_FILTER:
-			return {
-				...state,
-				filtered: state.projects.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.projectName.match(regex);
-				}),
-			};
-		case PROJECT_USER_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		default:
 			return state;
 	}
@@ -197,6 +182,7 @@ export const projectListReducer = (state = { projects: [] }, action) => {
 				projects: action.payload.projects,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };

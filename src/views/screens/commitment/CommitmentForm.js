@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addCommitment } from '../../../application/actions/commitmentActions';
 import { CardContainer } from '../../components/HelperComponents';
 

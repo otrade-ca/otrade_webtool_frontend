@@ -56,11 +56,8 @@ const CommunityDropDown = ({ label, id }) => {
 				)
 			);
 		} else {
-			// add e.target.value to list
 			list[i] = e.target.value;
-			// assign list
 			dispatch(assignLocation(list));
-			// update communities list
 			setCommunities(list);
 		}
 	};

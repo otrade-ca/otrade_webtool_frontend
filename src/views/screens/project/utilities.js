@@ -4,9 +4,9 @@ import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 import ProjectLocations from '../location/ProjectLocations';
 import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
-// import OrganizationScreen from '../organization/OrganizationScreen';
 import ProjectNews from '../news/ProjectNews';
 import NewsView from '../news/NewsView';
+import NewsEdit from '../news/NewsEdit';
 
 export const btnlinks = [
 	{
@@ -97,14 +97,6 @@ export const routes = [
 		path: '/organizations/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <OrganizationsProjectList match={match} />,
 	},
-	// {
-	// 	path: '/organizations/:organizationId/view',
-	// 	component: ({ match }) => <ViewOrganization match={match} />,
-	// },
-	// {
-	// 	path: '/organizations/:organizationId/view/edit',
-	// 	component: ({ match }) => <OrganizationScreen match={match} />,
-	// },
 	{
 		path: '/photo',
 		component: ({ match }) => <EditProjectPhoto match={match} />,
@@ -129,8 +121,8 @@ export const routes = [
 		path: '/news/:newsId/view',
 		component: ({ match }) => <NewsView match={match} />,
 	},
-	// {
-	// 	path: '/news/:newsId/view/edit',
-	// 	component: ({ match }) => <OrganizationScreen match={match} />,
-	// },
+	{
+		path: '/news/:newsId/view/edit',
+		component: ({ match }) => <NewsEdit match={match} />,
+	},
 ];

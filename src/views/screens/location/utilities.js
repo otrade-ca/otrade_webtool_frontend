@@ -7,14 +7,15 @@ import PhotoEdit from './PhotoEdit';
 import FormView from './FormView';
 import LocationNews from '../news/LocationNews';
 import NewsView from '../news/NewsView';
+import NewsEdit from '../news/NewsEdit';
 
 export const btnlinks = [
-	// {
-	// 	link: '/photo',
-	// 	class: 'btn btn-primary mr-3',
-	// 	icon: 'fas fa-edit',
-	// 	type: 'Photo',
-	// },
+	{
+		link: '/photo',
+		class: 'btn btn-primary mr-3',
+		icon: 'fas fa-edit',
+		type: 'Photo',
+	},
 	{
 		link: '/profile',
 		class: 'btn btn-primary',
@@ -123,8 +124,8 @@ export const routes = [
 		path: '/news/:newsId/view',
 		component: ({ match }) => <NewsView match={match} />,
 	},
-	// {
-	// 	path: '/news/:newsId/view/edit',
-	// 	component: ({ match }) => <OrganizationScreen match={match} />,
-	// },
+	{
+		path: '/news/:newsId/view/edit',
+		component: ({ match }) => <NewsEdit match={match} />,
+	},
 ];

@@ -16,7 +16,6 @@ import {
 	LANDOWNERSHIP_LIST_SUCCESS,
 	LANDOWNERSHIP_LIST_FAIL,
 } from '../constants/landownershipConstants';
-import { getURL } from '../api';
 
 // add Landownership
 export const addLandownership = () => async (dispatch, getState) => {

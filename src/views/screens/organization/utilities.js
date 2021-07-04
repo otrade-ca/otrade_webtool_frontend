@@ -1,6 +1,7 @@
 import FormView from './FormView';
 import FormEdit from './FormEdit';
 import UploadPhoto from './UploadPhoto';
+import OrganizationNews from '../news/OrganizationNews';
 
 export const btnlinks = [
 	{
@@ -45,38 +46,22 @@ export const routes = [
 		path: '/photo',
 		component: ({ match }) => <UploadPhoto match={match} />,
 	},
-	// {
-	// 	path: '/stakeholders',
-	// 	component: ({ match }) => <StakeholdersList match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/search/:keyword',
-	// 	component: ({ match }) => <StakeholdersList match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/page/:pageNumber',
-	// 	component: ({ match }) => <StakeholdersList match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/search/:keyword/page/:pageNumber',
-	// 	component: ({ match }) => <StakeholdersList match={match} />,
-	// },
-	// {
-	// 	path: '/news',
-	// 	component: ({ match }) => <LocationNews match={match} />,
-	// },
-	// {
-	// 	path: '/news/search/:keyword',
-	// 	component: ({ match }) => <LocationNews match={match} />,
-	// },
-	// {
-	// 	path: '/news/page/:pageNumber',
-	// 	component: ({ match }) => <LocationNews match={match} />,
-	// },
-	// {
-	// 	path: '/news/search/:keyword/page/:pageNumber',
-	// 	component: ({ match }) => <LocationNews match={match} />,
-	// },
+	{
+		path: '/news',
+		component: ({ match }) => <OrganizationNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword',
+		component: ({ match }) => <OrganizationNews match={match} />,
+	},
+	{
+		path: '/news/page/:pageNumber',
+		component: ({ match }) => <OrganizationNews match={match} />,
+	},
+	{
+		path: '/news/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <OrganizationNews match={match} />,
+	},
 	// {
 	// 	path: '/news/:newsId/view',
 	// 	component: ({ match }) => <NewsView match={match} />,

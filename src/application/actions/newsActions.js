@@ -107,7 +107,7 @@ export const getNewsDetails = (id) => async (dispatch, getState) => {
  * @param {*} history
  * @returns null
  */
-export const updateNews = (news, history) => async (dispatch, getState) => {
+export const updateNews = (id, news, history) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: NEWS_UPDATE_REQUEST });
 
@@ -122,9 +122,9 @@ export const updateNews = (news, history) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.put(``, news, config);
+		const { data } = await axios.put(`api/v1/news/${id}`, news, config);
 
-		dispatch({ type: NEWS_UPDATE_SUCCESS });
+		dispatch({ type: NEWS_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
 			type: NEWS_UPDATE_FAIL,
@@ -155,7 +155,7 @@ export const deleteNews = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.delete(``, config);
+		await axios.delete(`/api/news/${id}`, config);
 
 		dispatch({ type: NEWS_DELETE_SUCCESS });
 	} catch (error) {
@@ -288,30 +288,37 @@ export const listStakeholderNews =
  * @param {*} id
  * @returns
  */
-export const listOrganizationNews = (id) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: NEWS_LIST_ORGANIZATION_REQUEST });
+export const listOrganizationNews =
+	(organizationId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: NEWS_LIST_ORGANIZATION_REQUEST });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const { data } = await axios.get(``, config);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/organizations/${organizationId}/news?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: NEWS_LIST_ORGANIZATION_SUCCESS });
-	} catch (error) {
-		dispatch({
-			type: NEWS_LIST_ORGANIZATION_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			console.log(data);
+
+			dispatch({ type: NEWS_LIST_ORGANIZATION_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: NEWS_LIST_ORGANIZATION_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};

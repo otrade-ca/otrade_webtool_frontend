@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 const SearchBox = ({
@@ -24,17 +24,25 @@ const SearchBox = ({
 	return (
 		<Form
 			onSubmit={submitHandler}
-			style={{ width: '25rem', marginRight: 'auto' }}
+			style={{
+				width: '100%',
+				display: 'inline-flex',
+			}}
 		>
 			<Form.Control
 				type="text"
 				name="q"
 				onChange={(e) => setKeyword(e.target.value)}
 				placeholder={`${t('action.search')} ${searchWord}...`}
+				style={{ maxWidth: '30rem' }}
 			></Form.Control>
-			{/* <Button type="submit" variant="outline-primary" className="pl-3 pr-3">
+			<Button
+				type="submit"
+				variant="outline-primary"
+				className="pl-3 pr-3 ml-1"
+			>
 				{t('action.search')}
-			</Button> */}
+			</Button>
 		</Form>
 	);
 };

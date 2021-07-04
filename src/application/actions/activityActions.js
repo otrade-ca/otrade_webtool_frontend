@@ -15,23 +15,25 @@ import {
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
-	ACTIVITY_LIST_FILTER,
-	ACTIVITY_LIST_FILTER_CLEAR,
 	ACTIVITY_STAKEHOLDER_LIST_REQUEST,
 	ACTIVITY_STAKEHOLDER_LIST_SUCCESS,
 	ACTIVITY_STAKEHOLDER_LIST_FAIL,
-	ACTIVITY_STAKEHOLDER_FILTER,
-	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 	ACTIVITY_SAVE_REQUEST,
 	ACTIVITY_SAVE_RESET,
 	ACTIVITY_DETAILS_RESET,
 } from '../constants/activityConstants';
-import { COMMITMENT_DETAILS_RESET } from '../constants/commitmentConstants';
+//import { COMMITMENT_DETAILS_RESET } from '../constants/commitmentConstants';
 import { setAlert } from '../actions/alertActions';
 import { saveRouteInfo } from '../actions/routeActions';
 import { getURL } from '../api';
 
-// add activity to a project
+/**
+ * adss an activity
+ * @param {*} activity
+ * @param {*} routeInfo
+ * @param {*} history
+ * @returns
+ */
 export const addActivity =
 	(activity, routeInfo, history) => async (dispatch, getState) => {
 		try {
@@ -103,7 +105,11 @@ export const addActivity =
 		}
 	};
 
-// get activity details
+/**
+ * get activity details
+ * @param {*} id
+ * @returns
+ */
 export const getActivityDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_DETAILS_REQUEST });
@@ -136,7 +142,12 @@ export const getActivityDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-// update activity
+/**
+ * updates an activity
+ * @param {*} activity
+ * @param {*} id
+ * @returns
+ */
 export const updateActivity = (activity, id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_UPDATE_REQUEST });
@@ -175,7 +186,11 @@ export const updateActivity = (activity, id) => async (dispatch, getState) => {
 	}
 };
 
-// delete activity
+/**
+ * deletes an activity
+ * @param {*} id
+ * @returns
+ */
 export const deleteActivity = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ACTIVITY_DELETE_REQUEST });
@@ -207,45 +222,57 @@ export const deleteActivity = (id) => async (dispatch, getState) => {
 	}
 };
 
-// get all activities belonging to a project
-export const listActivities = (projectId) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: ACTIVITY_LIST_REQUEST });
-		dispatch({ type: ACTIVITY_DETAILS_RESET });
-		dispatch({ type: COMMITMENT_DETAILS_RESET });
+/**
+ * get all project activities
+ * @param {*} projectId
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
+export const listActivities =
+	(projectId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: ACTIVITY_LIST_REQUEST });
+			dispatch({ type: ACTIVITY_DETAILS_RESET });
+			//dispatch({ type: COMMITMENT_DETAILS_RESET });
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/projects/${projectId}/activities`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/projects/${projectId}/activities?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: ACTIVITY_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: ACTIVITY_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: ACTIVITY_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: ACTIVITY_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
-// get all activities belonging to a stakeholder
+/**
+ * get all stakeholder activities
+ * @param {*} stakeholderId
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listStakeholderActivities =
-	(stakeholderId, keyword = '') =>
+	(stakeholderId, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: ACTIVITY_STAKEHOLDER_LIST_REQUEST });
@@ -262,10 +289,8 @@ export const listStakeholderActivities =
 				},
 			};
 
-			const {
-				data: { data },
-			} = await axios.get(
-				`${getURL()}/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}`,
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/activities?keywords=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
 
@@ -294,24 +319,4 @@ export const saveActivityInfo = (data) => (dispatch) => {
 export const removeActivityInfo = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_SAVE_RESET });
 	localStorage.removeItem('activityInfo');
-};
-
-// filter project activities
-export const filterProjectActivities = (text) => (dispatch) => {
-	dispatch({ type: ACTIVITY_LIST_FILTER, payload: text });
-};
-
-// clear project activities
-export const clearProjectActivitiesFilter = () => (dispatch) => {
-	dispatch({ type: ACTIVITY_LIST_FILTER_CLEAR });
-};
-
-// filter stakeholder activities
-export const filterStakeholderActivities = (text) => (dispatch) => {
-	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER, payload: text });
-};
-
-// clear stakeholder activities filter
-export const clearStakeholderActivitiesFilter = () => (dispatch) => {
-	dispatch({ type: ACTIVITY_STAKEHOLDER_FILTER_CLEAR });
 };

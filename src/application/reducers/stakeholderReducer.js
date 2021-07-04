@@ -14,29 +14,17 @@ import {
 	STAKEHOLDER_DELETE_SUCCESS,
 	STAKEHOLDER_DELETE_FAIL,
 	STAKEHOLDER_DELETE_RESET,
-	STAKEHOLDER_LIST_REQUEST,
-	STAKEHOLDER_LIST_SUCCESS,
-	STAKEHOLDER_LIST_FAIL,
-	STAKEHOLDER_LIST_RESET,
-	STAKEHOLDER_PROJECT_FILTER,
-	STAKEHOLDER_PROJECT_FILTER_CLEAR,
 	STAKEHOLDER_USER_LIST_REQUEST,
 	STAKEHOLDER_USER_LIST_SUCCESS,
 	STAKEHOLDER_USER_LIST_FAIL,
 	STAKEHOLDER_USER_LIST_RESET,
-	STAKEHOLDER_USER_FILTER,
-	STAKEHOLDER_USER_FILTER_CLEAR,
 	STAKEHOLDER_LOCATION_LIST_REQUEST,
 	STAKEHOLDER_LOCATION_LIST_SUCCESS,
 	STAKEHOLDER_LOCATION_LIST_FAIL,
 	STAKEHOLDER_LOCATION_LIST_RESET,
-	STAKEHOLDER_LOCATION_FILTER,
-	STAKEHOLDER_LOCATION_FILTER_CLEAR,
 	STAKEHOLDER_PROJECT_LIST_REQUEST,
 	STAKEHOLDER_PROJECT_LIST_SUCCESS,
 	STAKEHOLDER_PROJECT_LIST_FAIL,
-	STAKEHOLDER_PROJECT_LIST_FILTER,
-	STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR,
 	STAKEHOLDER_PROJECT_LIST_RESET,
 	STAKEHOLDER_ASSIGN_REQUEST,
 	STAKEHOLDER_ASSIGN_SUCCESS,
@@ -50,7 +38,12 @@ import {
 	STAKEHOLDER_DROPDOWN_RESET,
 } from '../constants/stakeholderConstants';
 
-// add stakeholder
+/**
+ * adds stakeholder
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_ADD_REQUEST:
@@ -66,7 +59,12 @@ export const stakeholderAddReducer = (state = {}, action) => {
 	}
 };
 
-// get stakeholder details
+/**
+ * gets stakeholder details
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderDetailsReducer = (
 	state = { stakeholder: {} },
 	action
@@ -85,7 +83,12 @@ export const stakeholderDetailsReducer = (
 	}
 };
 
-// update stakeholder details
+/**
+ * updates a stakeholder
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderUpdateReducer = (
 	state = { stakeholder: {} },
 	action
@@ -104,7 +107,12 @@ export const stakeholderUpdateReducer = (
 	}
 };
 
-// delete stakeholder
+/**
+ * deletes a stakeholder
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_DELETE_REQUEST:
@@ -120,48 +128,14 @@ export const stakeholderDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// get all stakeholders for a project
-export const stakeholderListReducer = (
-	state = { stakeholders: [], filtered: [] },
-	action
-) => {
-	switch (action.type) {
-		case STAKEHOLDER_LIST_REQUEST:
-			return { loading: true, stakeholders: [] };
-		case STAKEHOLDER_LIST_SUCCESS:
-			return {
-				loading: false,
-				stakeholders: action.payload.stakeholders,
-				pages: action.payload.pages,
-				page: action.payload.page,
-			};
-		case STAKEHOLDER_PROJECT_FILTER:
-			return {
-				...state,
-				filtered: state.stakeholders.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return (
-						contact.firstName.match(regex) || contact.lastName.match(regex)
-					);
-				}),
-			};
-		case STAKEHOLDER_PROJECT_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
-		case STAKEHOLDER_LIST_FAIL:
-			return { loading: false, error: action.payload };
-		case STAKEHOLDER_LIST_RESET:
-			return { stakeholders: [], filtered: [] };
-		default:
-			return state;
-	}
-};
-
-// get all stakeholders across all projects for a user
+/**
+ * manages list of stakeholders a user created
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderUserListReducer = (
-	state = { stakeholders: [], filtered: [] },
+	state = { stakeholders: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -169,33 +143,23 @@ export const stakeholderUserListReducer = (
 			return { loading: true, stakeholders: [] };
 		case STAKEHOLDER_USER_LIST_SUCCESS:
 			return { loading: false, stakeholders: action.payload };
-		case STAKEHOLDER_USER_FILTER:
-			return {
-				...state,
-				filtered: state.stakeholders.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return (
-						contact.firstName.match(regex) || contact.lastName.match(regex)
-					);
-				}),
-			};
-		case STAKEHOLDER_USER_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		case STAKEHOLDER_USER_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case STAKEHOLDER_USER_LIST_RESET:
-			return { stakeholders: [], filtered: [] };
+			return { stakeholders: [] };
 		default:
 			return state;
 	}
 };
 
-// get all stakeholders for a location
+/**
+ * manages list of stakeholders belonging to a location
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderLocationListReducer = (
-	state = { stakeholders: [], filtered: [] },
+	state = { stakeholders: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -207,34 +171,25 @@ export const stakeholderLocationListReducer = (
 				stakeholders: action.payload.stakeholders,
 				pages: action.payload.pages,
 				page: action.payload.page,
-			};
-		case STAKEHOLDER_LOCATION_FILTER:
-			return {
-				...state,
-				filtered: state.stakeholders.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return (
-						contact.firstName.match(regex) || contact.lastName.match(regex)
-					);
-				}),
-			};
-		case STAKEHOLDER_LOCATION_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
+				count: action.payload.count,
 			};
 		case STAKEHOLDER_LOCATION_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case STAKEHOLDER_LOCATION_LIST_RESET:
-			return { stakeholders: [], filtered: [] };
+			return { stakeholders: [] };
 		default:
 			return state;
 	}
 };
 
-// get all stakeholders for a project
+/**
+ * manages list of stakeholders belonging to a project
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderProjectListReducer = (
-	state = { stakeholders: [], filtered: [] },
+	state = { stakeholders: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -248,30 +203,48 @@ export const stakeholderProjectListReducer = (
 				page: action.payload.page,
 				count: action.payload.count,
 			};
-		case STAKEHOLDER_PROJECT_LIST_FILTER:
-			return {
-				...state,
-				filtered: state.stakeholders.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return (
-						contact.firstName.match(regex) || contact.lastName.match(regex)
-					);
-				}),
-			};
-		case STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		case STAKEHOLDER_PROJECT_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case STAKEHOLDER_PROJECT_LIST_RESET:
+			return { stakeholders: [] };
+		default:
+			return state;
+	}
+};
+
+/**
+ * stakeholder dropdown reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const stakeholderListDropdownReducer = (
+	state = { stakeholders: [] },
+	action
+) => {
+	switch (action.type) {
+		case STAKEHOLDER_DROPDOWN_REQUEST:
+			return { loading: true, stakeholders: [] };
+		case STAKEHOLDER_DROPDOWN_SUCCESS:
+			return {
+				loading: false,
+				stakeholders: action.payload.stakeholders,
+			};
+		case STAKEHOLDER_DROPDOWN_FAIL:
+			return { loading: false, error: action.payload };
+		case STAKEHOLDER_DROPDOWN_RESET:
 			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}
 };
 
+/**
+ * manages list of stakeholders to append
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderAssignReducer = (state = { members: [] }, action) => {
 	switch (action.type) {
 		case STAKEHOLDER_ASSIGN_REQUEST:
@@ -285,7 +258,12 @@ export const stakeholderAssignReducer = (state = { members: [] }, action) => {
 	}
 };
 
-// save stakeholder to localStorage
+/**
+ *
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const stakeholderSaveReducer = (
 	state = { stakeholderInfo: {} },
 	action
@@ -295,29 +273,6 @@ export const stakeholderSaveReducer = (
 			return { ...state, stakeholderInfo: action.payload };
 		case STAKEHOLDER_SAVE_RESET:
 			return { stakeholderInfo: {} };
-		default:
-			return state;
-	}
-};
-
-// get all stakeholders for a project
-export const stakeholderListDropdownReducer = (
-	state = { stakeholders: [] },
-	action
-) => {
-	switch (action.type) {
-		case STAKEHOLDER_DROPDOWN_REQUEST:
-			return { loading: true, stakeholders: [] };
-		case STAKEHOLDER_DROPDOWN_SUCCESS:
-			//console.log('returning data', action.payload.stakeholders);
-			return {
-				loading: false,
-				stakeholders: action.payload.stakeholders,
-			};
-		case STAKEHOLDER_DROPDOWN_FAIL:
-			return { loading: false, error: action.payload };
-		case STAKEHOLDER_DROPDOWN_RESET:
-			return { stakeholders: [], filtered: [] };
 		default:
 			return state;
 	}

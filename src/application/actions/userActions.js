@@ -36,7 +36,12 @@ import { ORGANIZATION_PROJECT_LIST_RESET } from '../constants/organizationConsta
 import { ACTIVITY_LIST_RESET } from '../constants/activityConstants';
 import { setAlert } from '../actions/alertActions';
 
-//logs in the user
+/**
+ * logins a user
+ * @param {*} email
+ * @param {*} password
+ * @returns	null
+ */
 export const login = (email, password) => async (dispatch) => {
 	try {
 		dispatch({
@@ -70,7 +75,11 @@ export const login = (email, password) => async (dispatch) => {
 	}
 };
 
-// register a user
+/**
+ * registers a user
+ * @param {*} user
+ * @returns null
+ */
 export const registerUser = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_REGISTER_REQUEST });
@@ -102,7 +111,10 @@ export const registerUser = (user) => async (dispatch, getState) => {
 	}
 };
 
-// logs out the user
+/**
+ * logs out a user
+ * @returns null
+ */
 export const logout = () => (dispatch) => {
 	// remove the user from localstorage
 	localStorage.removeItem('userInfo');
@@ -123,7 +135,11 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: ACTIVITY_LIST_RESET });
 };
 
-// gets the user details
+/**
+ * gets user details
+ * @param {*} id
+ * @returns	null
+ */
 export const getUserDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -164,7 +180,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-// update a user
+/**
+ * updates a user profile
+ * @param {*} user
+ * @returns	null
+ */
 export const updateUserProfile = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -214,7 +234,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 	}
 };
 
-// update a user
+/**
+ * updates user profile photo
+ * @param {*} user
+ * @param {*} file
+ * @param {*} history
+ * @returns null
+ */
 export const updateUserProfilePhoto =
 	(user, file, history) => async (dispatch, getState) => {
 		try {
@@ -282,7 +308,12 @@ export const updateUserProfilePhoto =
 		}
 	};
 
-// list all users
+/**
+ * list users
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns null
+ */
 export const listUsers =
 	(keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
@@ -316,7 +347,11 @@ export const listUsers =
 		}
 	};
 
-// delete a user
+/**
+ * deletes user
+ * @param {*} id
+ * @returns null
+ */
 export const deleteUser = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -353,7 +388,11 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 	}
 };
 
-// update user
+/**
+ * updates user
+ * @param {*} user
+ * @returns
+ */
 export const updateUser = (user) => async (dispatch, getState) => {
 	try {
 		dispatch({

@@ -4,7 +4,6 @@ import BorderContainer from './BorderContainer';
 import ProfileContainer from './ProfileContainer';
 import CardContainer from './CardContainer/CardContainer';
 import TableHelper from './TableHelper';
-import FilterBox from './FilterBox';
 import Empty from './Empty';
 import SearchBox from './SearchBox';
 
@@ -15,7 +14,6 @@ export {
 	ProfileContainer,
 	CardContainer,
 	TableHelper,
-	FilterBox,
 	Empty,
 	SearchBox,
 };

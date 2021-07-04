@@ -5,8 +5,8 @@ import { useDispatch, connect } from 'react-redux';
 import { Loader, Message, Empty } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import {
-	listStakeholders,
 	deleteStakeholder,
+	listLocationStakeholders,
 } from '../../../application/actions/stakeholderActions';
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
@@ -18,10 +18,10 @@ import Moment from 'react-moment';
 
 const StakeholdersList = ({
 	match,
-	listStakeholders,
+	listLocationStakeholders,
 	deleteStakeholder,
 	stakeholderDelete: { success },
-	stakeholderList: { loading, error, stakeholders, pages, page },
+	stakeholderLocationList: { loading, error, stakeholders, pages, page, count },
 }) => {
 	const communityId = match.params.id;
 	const { url } = useRouteMatch();
@@ -35,12 +35,19 @@ const StakeholdersList = ({
 
 	useEffect(() => {
 		if (success) {
-			listStakeholders(communityId, keyword, pageNumber);
+			listLocationStakeholders(communityId, keyword, pageNumber);
 			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
-			listStakeholders(communityId, keyword, pageNumber);
+			listLocationStakeholders(communityId, keyword, pageNumber);
 		}
-	}, [dispatch, keyword, communityId, success, listStakeholders, pageNumber]);
+	}, [
+		dispatch,
+		keyword,
+		communityId,
+		success,
+		listLocationStakeholders,
+		pageNumber,
+	]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
@@ -65,6 +72,17 @@ const StakeholdersList = ({
 						/>
 					) : (
 						<Card.Header className="my-card-header">
+							<h4>{`Stakeholders (${count})`}</h4>
+							<Link
+								to={`/stakeholders/register/community/${communityId}`}
+								className="btn btn-primary ml-2"
+							>
+								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
+							</Link>
+						</Card.Header>
+					)}
+					<Card.Body>
+						{stakeholders && stakeholders.length === 0 ? null : (
 							<Route
 								render={({ history }) => (
 									<SearchBox
@@ -75,16 +93,8 @@ const StakeholdersList = ({
 									/>
 								)}
 							/>
-							<Link
-								to={`/stakeholders/register/community/${communityId}`}
-								className="btn btn-primary ml-2"
-							>
-								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
-							</Link>
-						</Card.Header>
-					)}
-					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						)}
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholders &&
 								stakeholders.map((item, index) => (
 									<Card className="table-card">
@@ -194,16 +204,16 @@ const StakeholdersList = ({
 };
 
 StakeholdersList.propTypes = {
-	listStakeholders: PropTypes.func.isRequired,
+	listLocationStakeholders: PropTypes.func.isRequired,
 	deleteStakeholder: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-	stakeholderList: state.stakeholderList,
+	stakeholderLocationList: state.stakeholderLocationList,
 	stakeholderDelete: state.stakeholderDelete,
 });
 
 export default connect(mapStateToProps, {
-	listStakeholders,
+	listLocationStakeholders,
 	deleteStakeholder,
 })(StakeholdersList);

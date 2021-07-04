@@ -2,12 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	Empty,
-	Message,
-	Loader,
-	FilterBox,
-} from '../../components/HelperComponents';
+import { Empty, Message, Loader } from '../../components/HelperComponents';
 import {
 	deleteLocation,
 	listUserLocations,
@@ -66,7 +61,6 @@ const UserLocationsList = ({ match }) => {
 					) : (
 						<Card.Header className="my-card-header">
 							<h4>{t('tables.location')}</h4>
-							<FilterBox searchWord={'Communities'} />
 						</Card.Header>
 					)}
 				</>

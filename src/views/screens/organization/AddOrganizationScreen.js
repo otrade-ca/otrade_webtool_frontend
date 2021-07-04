@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
 import { useTranslation } from 'react-i18next';

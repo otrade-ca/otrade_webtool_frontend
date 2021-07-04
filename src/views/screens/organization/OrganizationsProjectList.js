@@ -24,7 +24,14 @@ const OrganizationsProjectList = ({
 	listProjectOrganizations,
 	deleteOrganization,
 	organizationDelete: { success },
-	organizationProjectList: { loading, error, organizations, pages, page },
+	organizationProjectList: {
+		loading,
+		error,
+		organizations,
+		pages,
+		page,
+		count,
+	},
 }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
@@ -71,20 +78,21 @@ const OrganizationsProjectList = ({
 						<Empty url={url} type={'Organization'} group={'organizations'} />
 					) : (
 						<Card.Header className="my-card-header">
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'organization'}
-										searchQueryPath={`/project/${projectId}/organizations/search/`}
-										searchQueryEmpty={`/project/${projectId}/organizations`}
-									/>
-								)}
-							/>
+							<h4>Organizations {`(${count})`}</h4>
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'organization'}
+									searchQueryPath={`/project/${projectId}/organizations/search/`}
+									searchQueryEmpty={`/project/${projectId}/organizations`}
+								/>
+							)}
+						/>
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (
 									<Card className="table-card" key={index}>
@@ -176,7 +184,7 @@ OrganizationsProjectList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	organizationList: state.organizationList,
+	organizationProjectList: state.organizationProjectList,
 	organizationDelete: state.organizationDelete,
 });
 

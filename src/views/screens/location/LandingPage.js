@@ -9,7 +9,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { getLocationDetails } from '../../../application/actions/locationActions';
-import { listStakeholders } from '../../../application/actions/stakeholderActions';
+import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
 import { listLocationOrganizations } from '../../../application/actions/organizationAction';
 
 const LandingPage = ({ match, history }) => {
@@ -25,7 +25,7 @@ const LandingPage = ({ match, history }) => {
 	const { loading, error, location } = locationDetails;
 
 	useEffect(() => {
-		dispatch(listStakeholders(locationId));
+		dispatch(listLocationStakeholders(locationId));
 		dispatch(getLocationDetails(locationId));
 		dispatch(listLocationOrganizations(locationId));
 	}, [dispatch, locationId]);
@@ -58,11 +58,8 @@ const LandingPage = ({ match, history }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<>
-											<>{location.location}</>
-										</>
+										<>{location.location}</>
 									</h1>
-
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">
 											<>{location.area_influence}</>

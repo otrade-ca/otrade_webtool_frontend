@@ -13,8 +13,6 @@ import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
-import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
 import Placeholder from '../../img/placeholder.png';
 
@@ -31,7 +29,7 @@ const UserListScreen = ({ history, match }) => {
 
 	//get list of users
 	const userList = useSelector((state) => state.userList);
-	const { loading, error, users, page, pages } = userList;
+	const { loading, error, users, page, pages, count } = userList;
 
 	//get success from userDelete reducer
 	const userDelete = useSelector((state) => state.userDelete);
@@ -58,17 +56,7 @@ const UserListScreen = ({ history, match }) => {
 	return (
 		<Card className="my-card">
 			<Card.Header className="my-card-header">
-				<h4>Users</h4>
-				<Route
-					render={({ history }) => (
-						<SearchBox
-							history={history}
-							searchWord={'LastName'}
-							searchQueryPath={'/admin/userList/search/'}
-							searchQueryEmpty={'/admin/userList'}
-						/>
-					)}
-				/>
+				<h4>{`Users (${count})`}</h4>
 				<Link to="/admin/userList/add" className="btn btn-primary">
 					<i className="fas fa-plus"></i> User
 				</Link>
@@ -79,7 +67,17 @@ const UserListScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Card.Body>
-					<Accordion defaultActiveKey={1}>
+					<Route
+						render={({ history }) => (
+							<SearchBox
+								history={history}
+								searchWord={'LastName'}
+								searchQueryPath={'/admin/userList/search/'}
+								searchQueryEmpty={'/admin/userList'}
+							/>
+						)}
+					/>
+					<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 						{users &&
 							users.map((user, index) => (
 								<Card className="table-card" key={user._id}>

@@ -26,7 +26,7 @@ const StakeholderNews = ({
 	match,
 	listStakeholderNews,
 	deleteNews,
-	newsListStakeholder: { loading, error, news, pages, page },
+	newsListStakeholder: { loading, error, news, pages, page, count },
 	newsDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
@@ -63,6 +63,11 @@ const StakeholderNews = ({
 						<Empty url={url} type={'News'} group={'news'} />
 					) : (
 						<Card.Header className="my-card-header">
+							<h4>{`News (${count})`}</h4>
+						</Card.Header>
+					)}
+					<Card.Body>
+						{news && news.length === 0 ? null : (
 							<Route
 								render={({ history }) => (
 									<SearchBox
@@ -73,10 +78,8 @@ const StakeholderNews = ({
 									/>
 								)}
 							/>
-						</Card.Header>
-					)}
-					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						)}
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{news &&
 								news.map((item, index) => (
 									<Card className="table-card" key={index}>

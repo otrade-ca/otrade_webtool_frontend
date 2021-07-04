@@ -133,6 +133,7 @@ export const newsListProjectReducer = (state = { news: [] }, action) => {
 				news: action.payload.news,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case NEWS_LIST_PROJECT_FAIL:
 			return { loading: false, error: action.payload };
@@ -159,6 +160,7 @@ export const newsListLocationReducer = (state = { news: [] }, action) => {
 				news: action.payload.news,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case NEWS_LIST_LOCATION_FAIL:
 			return { loading: false, error: action.payload };
@@ -185,6 +187,7 @@ export const newsListStakeholderReducer = (state = { news: [] }, action) => {
 				news: action.payload.news,
 				pages: action.payload.pages,
 				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case NEWS_LIST_STAKEHOLDER_FAIL:
 			return { loading: false, error: action.payload };
@@ -206,7 +209,13 @@ export const newsListOrganizationReducer = (state = { news: [] }, action) => {
 		case NEWS_LIST_ORGANIZATION_REQUEST:
 			return { loading: true, news: [] };
 		case NEWS_LIST_ORGANIZATION_SUCCESS:
-			return { loading: false, news: action.payload };
+			return {
+				loading: false,
+				news: action.payload.news,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
+			};
 		case NEWS_LIST_ORGANIZATION_FAIL:
 			return { loading: false, error: action.payload };
 		case NEWS_LIST_ORGANIZATION_RESET:

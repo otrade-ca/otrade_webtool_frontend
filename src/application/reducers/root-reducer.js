@@ -28,7 +28,6 @@ import {
 	stakeholderDetailsReducer,
 	stakeholderUpdateReducer,
 	stakeholderDeleteReducer,
-	stakeholderListReducer,
 	stakeholderUserListReducer,
 	stakeholderLocationListReducer,
 	stakeholderSaveReducer,
@@ -97,11 +96,22 @@ import {
 	newsAddReducer,
 	newsDeleteReducer,
 	newsDetailsReducer,
+	newsUpdateReducer,
 	newsListLocationReducer,
 	newsListOrganizationReducer,
 	newsListProjectReducer,
 	newsListStakeholderReducer,
 } from './newsReducer';
+import {
+	documentAddReducer,
+	documentDetailsReducer,
+	documentDeleteReducer,
+	documentUpdateReducer,
+	documentListProjectReducer,
+	documentListLocationReducer,
+	documentListOrganizationReducer,
+	documentListStakeholderReducer,
+} from './documentReducer';
 
 import { routeSaveReducer } from './routeReducer';
 import { alertReducer } from './alertReducer';
@@ -133,7 +143,6 @@ const rootReducer = combineReducers({
 	stakeholderDetails: stakeholderDetailsReducer,
 	stakeholderUpdate: stakeholderUpdateReducer,
 	stakeholderDelete: stakeholderDeleteReducer,
-	stakeholderList: stakeholderListReducer,
 	stakeholderUserList: stakeholderUserListReducer,
 	stakeholderLocationList: stakeholderLocationListReducer,
 	stakeholderProjectList: stakeholderProjectListReducer,
@@ -202,10 +211,21 @@ const rootReducer = combineReducers({
 	newsAdd: newsAddReducer,
 	newsDelete: newsDeleteReducer,
 	newsDetails: newsDetailsReducer,
+	newsUpdate: newsUpdateReducer,
 	newsListLocation: newsListLocationReducer,
 	newsListOrganization: newsListOrganizationReducer,
 	newsListProject: newsListProjectReducer,
 	newsListStakeholder: newsListStakeholderReducer,
+
+	// document reducers
+	documentAdd: documentAddReducer,
+	documentDetails: documentDetailsReducer,
+	documentDelete: documentDeleteReducer,
+	documentUpdate: documentUpdateReducer,
+	documentListProject: documentListProjectReducer,
+	documentListLocation: documentListLocationReducer,
+	documentListOrganization: documentListOrganizationReducer,
+	documentListStakeholder: documentListStakeholderReducer,
 
 	// route reducer
 	routeSave: routeSaveReducer,

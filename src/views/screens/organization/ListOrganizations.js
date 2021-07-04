@@ -23,7 +23,14 @@ const OrganizationsList = ({
 	match,
 	listLocationOrganizations,
 	deleteOrganization,
-	organizationList: { loading, error, organizations, pages, page },
+	organizationLocationList: {
+		loading,
+		error,
+		organizations,
+		pages,
+		page,
+		count,
+	},
 	organizationDelete: { success },
 }) => {
 	const locationId = match.params.id;
@@ -76,16 +83,7 @@ const OrganizationsList = ({
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'organization'}
-										searchQueryPath={`/community/${locationId}/organizations/search/`}
-										searchQueryEmpty={`/community/${locationId}/organizations`}
-									/>
-								)}
-							/>
+							<h4>{`Organizations (${count})`}</h4>
 							<Link
 								to={`/organizations/register/community/${locationId}`}
 								className="btn btn-primary ml-2"
@@ -95,7 +93,17 @@ const OrganizationsList = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'organization'}
+									searchQueryPath={`/community/${locationId}/organizations/search/`}
+									searchQueryEmpty={`/community/${locationId}/organizations`}
+								/>
+							)}
+						/>
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (
 									<Card className="table-card">
@@ -119,7 +127,7 @@ const OrganizationsList = ({
 												<div className="d-flex justify-content-between">
 													<div>
 														<>
-															<Link to={`${url}/${item._id}/view`}>
+															<Link to={`/organization/${item._id}`}>
 																{item.name}
 															</Link>
 														</>
@@ -186,7 +194,7 @@ OrganizationsList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	organizationList: state.organizationList,
+	organizationLocationList: state.organizationLocationList,
 	organizationDelete: state.organizationDelete,
 });
 

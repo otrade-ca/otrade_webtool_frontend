@@ -6,12 +6,14 @@ import { useTranslation } from 'react-i18next';
 import {
 	CommunityDropdown,
 	MemberDropdownProject,
+	OrganizationDropdown,
 } from '../../components/Dropdown/helper';
 import { CardContainer } from '../../components/HelperComponents';
 import { getProjectId } from '../../../application/localStorage';
 
-const NewsForm = ({ match, history }) => {
+const NewsForm = ({ history }) => {
 	const projectId = getProjectId();
+
 	const { t } = useTranslation();
 
 	const dispatch = useDispatch();
@@ -20,6 +22,13 @@ const NewsForm = ({ match, history }) => {
 
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
+
+	const organizationAssignment = useSelector(
+		(state) => state.organizationAssignment
+	);
+	const { organizations } = organizationAssignment;
+
+	console.log(organizations);
 
 	// define states
 	const [title, setTitle] = useState();
@@ -44,6 +53,7 @@ const NewsForm = ({ match, history }) => {
 					comment,
 					project: projectId,
 					locations,
+					organizations,
 					stakeholders: members,
 				},
 				history
@@ -145,6 +155,8 @@ const NewsForm = ({ match, history }) => {
 				<CommunityDropdown label={'Community'} id={projectId} />
 				<hr />
 				<MemberDropdownProject label={'Members'} />
+				<hr />
+				<OrganizationDropdown label={'Organizations'} projectId={projectId} />
 				<hr />
 				<Row>
 					<Col>

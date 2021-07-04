@@ -214,34 +214,6 @@ export const organizationStakeholderListReducer = (
 };
 
 /**
- * assign organization reducer
- * @param {*} state
- * @param {*} action
- * @returns
- */
-export const organizationAssignmentReducer = (
-	state = { organizations: [] },
-	action
-) => {
-	switch (action.type) {
-		case ORGANIZATION_ASSIGNMENT_REQUEST:
-			return { loading: true, ...state };
-		case ORGANIZATION_ASSIGNMENT_SUCCESS:
-			return {
-				loading: false,
-				success: true,
-				organizations: action.payload,
-			};
-		case ORGANIZATION_ASSIGNMENT_FAIL:
-			return { loading: false, error: action.payload };
-		case ORGANIZATION_ASSIGNMENT_RESET:
-			return { organizations: [] };
-		default:
-			return state;
-	}
-};
-
-/**
  * organization dropdown reducer
  * @param {*} state
  * @param {*} action
@@ -265,6 +237,34 @@ export const organizationDropdownReducer = (
 				error: action.payload,
 			};
 
+		default:
+			return state;
+	}
+};
+
+/**
+ * manages list of organizations to append
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const organizationAssignmentReducer = (
+	state = { organizations: [] },
+	action
+) => {
+	switch (action.type) {
+		case ORGANIZATION_ASSIGNMENT_REQUEST:
+			return { loading: true, ...state };
+		case ORGANIZATION_ASSIGNMENT_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				organizations: action.payload,
+			};
+		case ORGANIZATION_ASSIGNMENT_FAIL:
+			return { loading: false, error: action.payload };
+		case ORGANIZATION_ASSIGNMENT_RESET:
+			return { organizations: [] };
 		default:
 			return state;
 	}

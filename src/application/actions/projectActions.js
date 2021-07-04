@@ -22,8 +22,6 @@ import {
 	PROJECT_ASSIGNMENT_SUCCESS,
 	PROJECT_ASSIGNMENT_FAIL,
 	PROJECT_SAVE_REQUEST,
-	PROJECT_USER_FILTER,
-	PROJECT_USER_FILTER_CLEAR,
 } from '../constants/projectConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL, getBucketInfo } from '../api';
@@ -361,14 +359,4 @@ export const saveProjectInfo = (data) => (dispatch) => {
 		payload: data,
 	});
 	localStorage.setItem('projectInfo', JSON.stringify(data));
-};
-
-// filter user projects
-export const filterProjects = (text) => (dispatch) => {
-	dispatch({ type: PROJECT_USER_FILTER, payload: text });
-};
-
-// clear user projects filter
-export const clearProjectsFilter = () => (dispatch) => {
-	dispatch({ type: PROJECT_USER_FILTER_CLEAR });
 };

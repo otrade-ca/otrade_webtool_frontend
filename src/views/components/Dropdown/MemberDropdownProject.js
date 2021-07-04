@@ -26,14 +26,14 @@ const MemberDropdownProject = ({ label, history }) => {
 	// useState
 	const [members, setMembers] = useState([{ member: '' }]);
 
+	useEffect(() => {
+		dispatch(listStakeholdersDropdown(projectId));
+	}, [dispatch, projectId]);
+
 	//add select field
 	const addHandler = () => {
 		setMembers([...members, { member: '' }]);
 	};
-
-	useEffect(() => {
-		dispatch(listStakeholdersDropdown(projectId));
-	}, [dispatch, projectId]);
 
 	// filter out element i and update members
 	const removeHandler = (i) => {

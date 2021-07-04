@@ -23,7 +23,14 @@ const StakeholderOrganizations = ({
 	match,
 	listStakeholderOrganizations,
 	deleteOrganization,
-	organizationStakeholderList: { loading, error, organizations, pages, page },
+	organizationStakeholderList: {
+		loading,
+		error,
+		organizations,
+		pages,
+		page,
+		count,
+	},
 	organizationDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
@@ -75,16 +82,7 @@ const StakeholderOrganizations = ({
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<Route
-								render={({ history }) => (
-									<SearchBox
-										history={history}
-										searchWord={'organization'}
-										searchQueryPath={`/stakeholder/${stakeholderId}/organizations/search/`}
-										searchQueryEmpty={`/stakeholder/${stakeholderId}/organizations`}
-									/>
-								)}
-							/>
+							<h4>{`Organizations (${count})`}</h4>
 							<Link
 								to={`/organizations/register`}
 								className="btn btn-primary ml-2"
@@ -94,7 +92,17 @@ const StakeholderOrganizations = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'organization'}
+									searchQueryPath={`/stakeholder/${stakeholderId}/organizations/search/`}
+									searchQueryEmpty={`/stakeholder/${stakeholderId}/organizations`}
+								/>
+							)}
+						/>
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (
 									<Card className="table-card" key={index}>

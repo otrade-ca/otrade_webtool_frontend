@@ -12,11 +12,6 @@ import {
 	STAKEHOLDER_DELETE_REQUEST,
 	STAKEHOLDER_DELETE_SUCCESS,
 	STAKEHOLDER_DELETE_FAIL,
-	STAKEHOLDER_LIST_REQUEST,
-	STAKEHOLDER_LIST_SUCCESS,
-	STAKEHOLDER_LIST_FAIL,
-	STAKEHOLDER_PROJECT_FILTER_CLEAR,
-	STAKEHOLDER_SAVE_RESET,
 	STAKEHOLDER_USER_LIST_REQUEST,
 	STAKEHOLDER_USER_LIST_SUCCESS,
 	STAKEHOLDER_USER_LIST_FAIL,
@@ -26,16 +21,8 @@ import {
 	STAKEHOLDER_PROJECT_LIST_REQUEST,
 	STAKEHOLDER_PROJECT_LIST_SUCCESS,
 	STAKEHOLDER_PROJECT_LIST_FAIL,
-	STAKEHOLDER_PROJECT_LIST_FILTER,
-	STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR,
-	STAKEHOLDER_USER_FILTER,
-	STAKEHOLDER_USER_FILTER_CLEAR,
-	STAKEHOLDER_LOCATION_FILTER,
-	STAKEHOLDER_LOCATION_FILTER_CLEAR,
 	STAKEHOLDER_ASSIGN_REQUEST,
 	STAKEHOLDER_ASSIGN_SUCCESS,
-	STAKEHOLDER_SAVE_REQUEST,
-	STAKEHOLDER_PROJECT_FILTER,
 	STAKEHOLDER_DETAILS_RESET,
 	STAKEHOLDER_DROPDOWN_REQUEST,
 	STAKEHOLDER_DROPDOWN_SUCCESS,
@@ -45,7 +32,14 @@ import { setAlert } from '../actions/alertActions';
 import { saveRouteInfo } from '../actions/routeActions';
 import { getURL } from '../api';
 
-// add stakeholder
+/**
+ * adds a stakeholder
+ * @param {*} stakeholder
+ * @param {*} locationId
+ * @param {*} routeInfo
+ * @param {*} history
+ * @returns
+ */
 export const addStakeholder =
 	(stakeholder, locationId, routeInfo, history) =>
 	async (dispatch, getState) => {
@@ -110,7 +104,11 @@ export const addStakeholder =
 		}
 	};
 
-// get stakeholder details
+/**
+ * gets stakeholder details
+ * @param {*} id
+ * @returns
+ */
 export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_DETAILS_RESET });
@@ -144,7 +142,12 @@ export const getStakeholderDetails = (id) => async (dispatch, getState) => {
 	}
 };
 
-// update stakeholder
+/**
+ * updates stakeholder
+ * @param {*} stakeholder
+ * @param {*} id
+ * @returns
+ */
 export const updateStakeholder =
 	(stakeholder, id) => async (dispatch, getState) => {
 		try {
@@ -184,7 +187,11 @@ export const updateStakeholder =
 		}
 	};
 
-// delete stakeholder
+/**
+ * deletes stakeholders
+ * @param {*} id
+ * @returns
+ */
 export const deleteStakeholder = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_DELETE_REQUEST });
@@ -214,43 +221,11 @@ export const deleteStakeholder = (id) => async (dispatch, getState) => {
 	}
 };
 
-// list all stakeholders in a project location
-export const listStakeholders =
-	(id, keyword = '', pageNumber = '') =>
-	async (dispatch, getState) => {
-		try {
-			dispatch({ type: STAKEHOLDER_LIST_REQUEST });
-
-			const {
-				userLogin: { userInfo },
-			} = getState();
-
-			const config = {
-				headers: {
-					Authorization: `Bearer ${userInfo.token}`,
-				},
-			};
-
-			const { data } = await axios.get(
-				`${getURL()}/api/v1/locations/${id}/stakeholders?keyword=${keyword}&pageNumber=${pageNumber}`,
-				config
-			);
-
-			dispatch({ type: STAKEHOLDER_LIST_SUCCESS, payload: data });
-
-			// localStorage.setItem('stakeholdersListInfo', JSON.stringify(data));
-		} catch (error) {
-			dispatch({
-				type: STAKEHOLDER_LIST_FAIL,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.messsage,
-			});
-		}
-	};
-
-// list all stakeholders across all projects for a user
+/**
+ * list all stakeholders across all projects for a user
+ * @param {*} id
+ * @returns
+ */
 export const listUserStakeholders = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_USER_LIST_REQUEST });
@@ -281,40 +256,50 @@ export const listUserStakeholders = (id) => async (dispatch, getState) => {
 	}
 };
 
-// list all stakeholders across a location
-export const listLocationStakeholders = (id) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: STAKEHOLDER_LOCATION_LIST_REQUEST });
-		const {
-			userLogin: { userInfo },
-		} = getState();
+/**
+ * list all stakeholders across a location
+ * @param {*} id
+ * @returns
+ */
+export const listLocationStakeholders =
+	(locationId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_LOCATION_LIST_REQUEST });
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/locations/${id}/stakeholders`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/locations/${locationId}/stakeholders?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: STAKEHOLDER_LOCATION_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: STAKEHOLDER_LOCATION_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.messsage,
-		});
-	}
-};
+			dispatch({ type: STAKEHOLDER_LOCATION_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_LOCATION_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
 
-// list all stakeholders across a project
+/**
+ * list all stakeholders across a project
+ * @param {*} id
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listProjectStakeholders =
 	(id, keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
@@ -348,22 +333,11 @@ export const listProjectStakeholders =
 		}
 	};
 
-// adds a stakeholder to a list of stakeholders for dropdown
-export const assignStakeholder = (data) => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST });
-	dispatch({ type: STAKEHOLDER_ASSIGN_SUCCESS, payload: data });
-};
-
-// save stakeholder info to localstorage to use in processing form
-export const saveStakeholderInfo = (data) => (dispatch) => {
-	dispatch({
-		type: STAKEHOLDER_SAVE_REQUEST,
-		payload: data,
-	});
-	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
-};
-
-// list all stakeholders in a project location for dropdown
+/**
+ * list all stakeholders in a project location for dropdown
+ * @param {*} id
+ * @returns
+ */
 export const listStakeholdersDropdown = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: STAKEHOLDER_DROPDOWN_REQUEST });
@@ -395,48 +369,27 @@ export const listStakeholdersDropdown = (id) => async (dispatch, getState) => {
 	}
 };
 
-// remove stakeholder info from localstorage to use in processing form
-export const removeStakeholderInfo = () => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_SAVE_RESET });
-	localStorage.removeItem('stakeholdersInfo');
+/**
+ * saves member dropdown information
+ * @param {*} data
+ * @returns
+ */
+export const assignStakeholder = (data) => (dispatch) => {
+	dispatch({ type: STAKEHOLDER_ASSIGN_REQUEST });
+	dispatch({ type: STAKEHOLDER_ASSIGN_SUCCESS, payload: data });
 };
 
-// filter user projects
-export const filterProjectStakeholders = (text) => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_PROJECT_FILTER, payload: text });
-};
+// // save stakeholder info to localstorage to use in processing form
+// export const saveStakeholderInfo = (data) => (dispatch) => {
+// 	dispatch({
+// 		type: STAKEHOLDER_SAVE_REQUEST,
+// 		payload: data,
+// 	});
+// 	localStorage.setItem('stakeholdersInfo', JSON.stringify(data));
+// };
 
-// clear user projects filter
-export const clearProjectStakeholdersFilter = () => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_PROJECT_FILTER_CLEAR });
-};
-
-// filter user projects
-export const filterUserStakeholders = (text) => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_USER_FILTER, payload: text });
-};
-
-// clear user projects filter
-export const clearUserStakeholdersFilter = () => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_USER_FILTER_CLEAR });
-};
-
-// filter location stakeholders
-export const filterLocationStakeholders = (text) => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_LOCATION_FILTER, payload: text });
-};
-
-// clear Location projects filter
-export const clearLocationStakeholdersFilter = () => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_LOCATION_FILTER_CLEAR });
-};
-
-// filter location stakeholders
-export const filterProjectListStakeholders = (text) => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_PROJECT_LIST_FILTER, payload: text });
-};
-
-// clear Location projects filter
-export const clearProjectListStakeholdersFilter = () => (dispatch) => {
-	dispatch({ type: STAKEHOLDER_PROJECT_LIST_FILTER_CLEAR });
-};
+// // remove stakeholder info from localstorage to use in processing form
+// export const removeStakeholderInfo = () => (dispatch) => {
+// 	dispatch({ type: STAKEHOLDER_SAVE_RESET });
+// 	localStorage.removeItem('stakeholdersInfo');
+// };

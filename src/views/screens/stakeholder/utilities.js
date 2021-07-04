@@ -9,6 +9,7 @@ import StakeholderInfluences from '../influence/StakeholderInfluences';
 import Profile from './Profile';
 import StakeholderNews from '../news/StakeholderNews';
 import NewsView from '../news/NewsView';
+import NewsEdit from '../news/NewsEdit';
 
 export const btnlinks = [
 	// {
@@ -57,10 +58,6 @@ export const routes = [
 		path: '/profile',
 		component: ({ match }) => <Profile match={match} />,
 	},
-	// {
-	// 	path: '/profile',
-	// 	component: ({ match }) => <ViewStakeholderScreen match={match} />,
-	// },
 	{
 		path: '/profile/edit',
 		component: ({ match }) => <EditStakeholderScreen match={match} />,
@@ -86,6 +83,18 @@ export const routes = [
 		component: ({ match }) => <Activities match={match} />,
 	},
 	{
+		path: '/activities/search/:keyword',
+		component: ({ match }) => <Activities match={match} />,
+	},
+	{
+		path: '/activities/page/:pageNumber',
+		component: ({ match }) => <Activities match={match} />,
+	},
+	{
+		path: '/activities/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <Activities match={match} />,
+	},
+	{
 		path: '/activities/:activityId/view',
 		component: ({ match }) => <ActivityView match={match} />,
 	},
@@ -99,6 +108,18 @@ export const routes = [
 	},
 	{
 		path: '/assessments',
+		component: ({ match }) => <StakeholderInfluences match={match} />,
+	},
+	{
+		path: '/assessments/search/:keyword',
+		component: ({ match }) => <StakeholderInfluences match={match} />,
+	},
+	{
+		path: '/assessments/page/:pageNumber',
+		component: ({ match }) => <StakeholderInfluences match={match} />,
+	},
+	{
+		path: '/assessments/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <StakeholderInfluences match={match} />,
 	},
 	{
@@ -121,8 +142,8 @@ export const routes = [
 		path: '/news/:newsId/view',
 		component: ({ match }) => <NewsView match={match} />,
 	},
-	// {
-	// 	path: '/news/:newsId/view/edit',
-	// 	component: ({ match }) => <OrganizationScreen match={match} />,
-	// },
+	{
+		path: '/news/:newsId/view/edit',
+		component: ({ match }) => <NewsEdit match={match} />,
+	},
 ];

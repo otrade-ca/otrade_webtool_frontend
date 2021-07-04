@@ -20,10 +20,6 @@ import {
 	LOCATION_USER_LIST_REQUEST,
 	LOCATION_USER_LIST_SUCCESS,
 	LOCATION_USER_LIST_FAIL,
-	LOCATION_LIST_FILTER,
-	LOCATION_LIST_FILTER_CLEAR,
-	LOCATION_USER_LIST_FILTER,
-	LOCATION_USER_LIST_FILTER_CLEAR,
 	LOCATION_DETAILS_RESET,
 	LOCATION_DROPDOWN_REQUEST,
 	LOCATION_DROPDOWN_SUCCESS,
@@ -135,19 +131,7 @@ export const locationListReducer = (
 			};
 		case LOCATION_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case LOCATION_LIST_FILTER:
-			return {
-				...state,
-				filtered: state.locations.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.location.match(regex);
-				}),
-			};
-		case LOCATION_LIST_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
+
 		default:
 			return state;
 	}
@@ -170,19 +154,7 @@ export const locationUserListReducer = (
 			return { loading: false, locations: action.payload };
 		case LOCATION_USER_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case LOCATION_USER_LIST_FILTER:
-			return {
-				...state,
-				filtered: state.locations.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.location.match(regex);
-				}),
-			};
-		case LOCATION_USER_LIST_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
+
 		default:
 			return state;
 	}

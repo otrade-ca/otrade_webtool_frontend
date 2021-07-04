@@ -14,8 +14,6 @@ import {
 	INFLUENCE_LIST_REQUEST,
 	INFLUENCE_LIST_SUCCESS,
 	INFLUENCE_LIST_FAIL,
-	INFLUENCE_LIST_FILTER,
-	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
 
 // add influence reducer
@@ -75,22 +73,15 @@ export const influenceListReducer = (
 		case INFLUENCE_LIST_REQUEST:
 			return { loading: true, influences: [] };
 		case INFLUENCE_LIST_SUCCESS:
-			return { loading: false, influences: action.payload };
+			return {
+				loading: false,
+				influences: action.payload.influences,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
+			};
 		case INFLUENCE_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case INFLUENCE_LIST_FILTER:
-			return {
-				...state,
-				filtered: state.influences.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.influences.match(regex);
-				}),
-			};
-		case INFLUENCE_LIST_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		default:
 			return state;
 	}

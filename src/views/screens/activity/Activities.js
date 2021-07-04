@@ -1,12 +1,16 @@
+/**
+ * List all activities belonging to a stakeholder
+ */
 import React, { useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Card, Button, Accordion } from 'react-bootstrap';
+import { Card, Button, Accordion, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
 	listStakeholderActivities,
 	deleteActivity,
 } from '../../../application/actions/activityActions';
 import { Message, Loader, Empty } from '../../components/HelperComponents';
+import Paginate from '../../components/Paginate';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
@@ -17,20 +21,30 @@ const Activities = ({
 	match,
 	listStakeholderActivities,
 	deleteActivity,
-	activityStakeholderList: { stakeholderactivities, loading, error, filtered },
+	activityStakeholderList: {
+		stakeholderactivities,
+		loading,
+		error,
+		pages,
+		page,
+		count,
+	},
 	activityDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
+	const keyword = match.params.keyword;
+	const pageNumber = match.params.pageNumber || 1;
+
 	useEffect(() => {
 		if (success) {
-			listStakeholderActivities(stakeholderId);
+			listStakeholderActivities(stakeholderId, keyword, pageNumber);
 		} else {
-			listStakeholderActivities(stakeholderId);
+			listStakeholderActivities(stakeholderId, keyword, pageNumber);
 		}
-	}, [stakeholderId, success, listStakeholderActivities]);
+	}, [stakeholderId, success, listStakeholderActivities, keyword, pageNumber]);
 
 	//delete activity
 	const deleteHandler = (id) => {
@@ -47,7 +61,7 @@ const Activities = ({
 				<Message>{error}</Message>
 			) : (
 				<>
-					{!filtered && stakeholderactivities.length === 0 ? (
+					{stakeholderactivities && stakeholderactivities.length === 0 ? (
 						<Empty
 							itemLink={`/activities/register`}
 							url={'/activities'}
@@ -56,7 +70,9 @@ const Activities = ({
 						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<h4>{t('tables.activity')}</h4>
+							<h4>
+								{t('tables.activity')} {`(${count})`}
+							</h4>
 							<Link
 								to={`/activities/register`}
 								className="btn btn-primary btn-sm ml-2"
@@ -66,7 +82,17 @@ const Activities = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Accordion defaultActiveKey={1}>
+						{/* <Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'activity'}
+									searchQueryPath={`/stakeholder/${stakeholderId}/activities/search/`}
+									searchQueryEmpty={`/stakeholder/${stakeholderId}/activities`}
+								/>
+							)}
+						/> */}
+						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholderactivities &&
 								stakeholderactivities.map((item, index) => (
 									<Card className="table-card" key={index}>
@@ -156,6 +182,14 @@ const Activities = ({
 									</Card>
 								))}
 						</Accordion>
+						<Row className="d-flex justify-content-center mt-2">
+							<Paginate
+								pages={pages}
+								page={page}
+								urlOne={`/stakeholder/${stakeholderId}/activities/search/`}
+								urlTwo={`/stakeholder/${stakeholderId}/activities/page/`}
+							/>
+						</Row>
 					</Card.Body>
 				</>
 			)}

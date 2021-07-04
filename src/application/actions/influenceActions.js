@@ -12,8 +12,6 @@ import {
 	INFLUENCE_LIST_REQUEST,
 	INFLUENCE_LIST_SUCCESS,
 	INFLUENCE_LIST_FAIL,
-	INFLUENCE_LIST_FILTER,
-	INFLUENCE_LIST_FILTER_CLEAR,
 } from '../constants/influenceConstants';
 import { removeRouteInfo, saveRouteInfo } from '../actions/routeActions';
 import { setAlert } from '../actions/alertActions';
@@ -139,47 +137,37 @@ export const deleteInfluence = (id) => async (dispatch, getState) => {
 };
 
 // get stakeholderInfluences
-export const listInfluences = (stakeholderId) => async (dispatch, getState) => {
-	try {
-		dispatch({ type: INFLUENCE_LIST_REQUEST });
+export const listInfluences =
+	(stakeholderId, keyword = '', pageNumber = '') =>
+	async (dispatch, getState) => {
+		try {
+			dispatch({ type: INFLUENCE_LIST_REQUEST });
 
-		//get logged in user
-		const {
-			userLogin: { userInfo },
-		} = getState();
+			//get logged in user
+			const {
+				userLogin: { userInfo },
+			} = getState();
 
-		//create config
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+			//create config
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
 
-		const {
-			data: { data },
-		} = await axios.get(
-			`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences`,
-			config
-		);
+			const { data } = await axios.get(
+				`${getURL()}/api/v1/stakeholders/${stakeholderId}/influences?keyword=${keyword}&pageNumber=${pageNumber}`,
+				config
+			);
 
-		dispatch({ type: INFLUENCE_LIST_SUCCESS, payload: data });
-	} catch (error) {
-		dispatch({
-			type: INFLUENCE_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
-
-// filter influences
-export const filterInfluences = (text) => (dispatch) => {
-	dispatch({ type: INFLUENCE_LIST_FILTER, payload: text });
-};
-
-// clear influences
-export const clearInfluencesFilter = (text) => (dispatch) => {
-	dispatch({ type: INFLUENCE_LIST_FILTER_CLEAR });
-};
+			dispatch({ type: INFLUENCE_LIST_SUCCESS, payload: data });
+		} catch (error) {
+			dispatch({
+				type: INFLUENCE_LIST_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};

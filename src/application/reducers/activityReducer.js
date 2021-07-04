@@ -18,15 +18,11 @@ import {
 	ACTIVITY_LIST_REQUEST,
 	ACTIVITY_LIST_SUCCESS,
 	ACTIVITY_LIST_FAIL,
-	ACTIVITY_LIST_FILTER,
-	ACTIVITY_LIST_FILTER_CLEAR,
 	ACTIVITY_SAVE_REQUEST,
 	ACTIVITY_SAVE_RESET,
 	ACTIVITY_STAKEHOLDER_LIST_REQUEST,
 	ACTIVITY_STAKEHOLDER_LIST_SUCCESS,
 	ACTIVITY_STAKEHOLDER_LIST_FAIL,
-	ACTIVITY_STAKEHOLDER_FILTER,
-	ACTIVITY_STAKEHOLDER_FILTER_CLEAR,
 } from '../constants/activityConstants';
 
 // add activity reducer
@@ -102,22 +98,15 @@ export const activityListReducer = (
 		case ACTIVITY_LIST_REQUEST:
 			return { loading: true, activities: [] };
 		case ACTIVITY_LIST_SUCCESS:
-			return { loading: false, activities: action.payload };
+			return {
+				loading: false,
+				activities: action.payload.activities,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
+			};
 		case ACTIVITY_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case ACTIVITY_LIST_FILTER:
-			return {
-				...state,
-				filtered: state.activities.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.activity.match(regex);
-				}),
-			};
-		case ACTIVITY_LIST_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		default:
 			return state;
 	}
@@ -134,23 +123,13 @@ export const activityStakeholderListReducer = (
 		case ACTIVITY_STAKEHOLDER_LIST_SUCCESS:
 			return {
 				loading: false,
-				stakeholderactivities: action.payload,
+				stakeholderactivities: action.payload.activities,
+				pages: action.payload.pages,
+				page: action.payload.page,
+				count: action.payload.count,
 			};
 		case ACTIVITY_STAKEHOLDER_LIST_FAIL:
 			return { loading: false, error: action.payload };
-		case ACTIVITY_STAKEHOLDER_FILTER:
-			return {
-				...state,
-				filtered: state.stakeholderactivities.filter((contact) => {
-					const regex = new RegExp(`${action.payload}`, 'gi');
-					return contact.activity.match(regex);
-				}),
-			};
-		case ACTIVITY_STAKEHOLDER_FILTER_CLEAR:
-			return {
-				...state,
-				filtered: null,
-			};
 		default:
 			return state;
 	}
