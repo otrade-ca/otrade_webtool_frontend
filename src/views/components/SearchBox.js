@@ -22,27 +22,26 @@ const SearchBox = ({
 	};
 
 	return (
-		<Form
-			onSubmit={submitHandler}
-			style={{
-				width: '100%',
-				display: 'inline-flex',
-			}}
-		>
-			<Form.Control
-				type="text"
-				name="q"
-				onChange={(e) => setKeyword(e.target.value)}
-				placeholder={`${t('action.search')} ${searchWord}...`}
-				style={{ maxWidth: '30rem' }}
-			></Form.Control>
-			<Button
-				type="submit"
-				variant="outline-primary"
-				className="pl-3 pr-3 ml-1"
+		<Form onSubmit={submitHandler}>
+			<div
+				className="searchBox"
+				style={{ width: '100%', display: 'inline-flex' }}
 			>
-				{t('action.search')}
-			</Button>
+				<Form.Control
+					type="text"
+					name="q"
+					onChange={(e) => setKeyword(e.target.value)}
+					placeholder={`${t('action.search')} ${searchWord}...`}
+					style={{ maxWidth: '25rem' }}
+				></Form.Control>
+				<Button
+					type="submit"
+					variant="outline-primary"
+					className="pl-3 pr-3 ml-1"
+				>
+					{t('action.search')}
+				</Button>
+			</div>
 		</Form>
 	);
 };

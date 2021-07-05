@@ -2,7 +2,7 @@
  * List all activities belonging to a stakeholder
  */
 import React, { useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, Button, Accordion, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
@@ -32,7 +32,6 @@ const Activities = ({
 	activityDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
-	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;
@@ -63,7 +62,7 @@ const Activities = ({
 				<>
 					{stakeholderactivities && stakeholderactivities.length === 0 ? (
 						<Empty
-							itemLink={`/activities/register`}
+							itemLink={`register`}
 							url={'/activities'}
 							type={t('tables.activity')}
 							group={'activities'}
@@ -74,7 +73,7 @@ const Activities = ({
 								{t('tables.activity')} {`(${count})`}
 							</h4>
 							<Link
-								to={`/activities/register`}
+								to={`/activities/register/stakeholder/${stakeholderId}`}
 								className="btn btn-primary btn-sm ml-2"
 							>
 								<i className="fas fa-plus"></i> {t('tables.activity')}
@@ -128,7 +127,9 @@ const Activities = ({
 														Commitment:{' '}
 														<em>
 															{item.compromise === 'Yes' ? (
-																<Link to={`${url}/${item._id}/commitment`}>
+																<Link
+																	to={`/stakeholder/${stakeholderId}/activities/${item._id}/commitment`}
+																>
 																	{item.compromise}
 																</Link>
 															) : (

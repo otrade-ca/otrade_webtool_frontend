@@ -2,7 +2,7 @@ import Dashboard from '../../components/Dashboard';
 import EditProjectPhoto from '../project/EditProjectPhoto';
 import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
 import ProjectLocations from '../location/ProjectLocations';
-import StakeholdersProjectList from '../stakeholder/StakeholdersProjectList';
+import ProjectStakeholders from '../stakeholder/ProjectStakeholders';
 import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 import ProjectNews from '../news/ProjectNews';
 import NewsView from '../news/NewsView';
@@ -67,19 +67,19 @@ export const routes = [
 	},
 	{
 		path: '/stakeholders',
-		component: ({ match }) => <StakeholdersProjectList match={match} />,
+		component: ({ match }) => <ProjectStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/search/:keyword',
-		component: ({ match }) => <StakeholdersProjectList match={match} />,
+		component: ({ match }) => <ProjectStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/page/:pageNumber',
-		component: ({ match }) => <StakeholdersProjectList match={match} />,
+		component: ({ match }) => <ProjectStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <StakeholdersProjectList match={match} />,
+		component: ({ match }) => <ProjectStakeholders match={match} />,
 	},
 	{
 		path: '/organizations',

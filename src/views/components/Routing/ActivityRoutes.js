@@ -6,7 +6,16 @@ import ActivityForm from '../../screens/activity/ActivityForm';
 const ActivityRoutes = () => {
 	return (
 		<Switch>
-			<PrivateRoute path="/activities/register" component={ActivityForm} />
+			{/* <PrivateRoute
+				exact
+				path="/activities/register"
+				component={ActivityForm}
+			/> */}
+			<PrivateRoute
+				exact
+				path="/activities/register/stakeholder/:id"
+				component={ActivityForm}
+			/>
 		</Switch>
 	);
 };

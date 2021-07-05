@@ -30,7 +30,7 @@ import {
 } from '../constants/stakeholderConstants';
 import { setAlert } from '../actions/alertActions';
 import { saveRouteInfo } from '../actions/routeActions';
-import { getURL } from '../api';
+import { getURL, getBucketInfo } from '../api';
 
 /**
  * adds a stakeholder
@@ -175,6 +175,67 @@ export const updateStakeholder =
 			);
 
 			dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
+			dispatch(setAlert('Stakeholder successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: STAKEHOLDER_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
+
+/**
+ * updates a stakeholder photo
+ * @param {*} stakeholder
+ * @param {*} file
+ * @param {*} history
+ * @returns
+ */
+export const updateStakeholderPhoto =
+	(stakeholder, file, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: STAKEHOLDER_UPDATE_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const instructions = getBucketInfo('stakeholder');
+			instructions.id = stakeholder.id;
+			instructions.contentType = file.type;
+
+			//get presigned url
+			const {
+				data: { key, url },
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
+
+			// upload to AWS
+			await axios.put(url, file, {
+				'Content-Type': file.type,
+			});
+
+			stakeholder.image = key;
+
+			const {
+				data: { data },
+			} = await axios.put(
+				`${getURL()}/api/v1/stakeholders/${stakeholder.id}/profilePhoto`,
+				stakeholder,
+				config
+			);
+
+			dispatch({ type: STAKEHOLDER_UPDATE_SUCCESS, payload: data });
+			history.go(-1);
 			dispatch(setAlert('Stakeholder successfully updated', 'success'));
 		} catch (error) {
 			dispatch({

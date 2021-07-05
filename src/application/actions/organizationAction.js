@@ -28,7 +28,7 @@ import {
 	ORGANIZATION_DROPDOWN_FAIL,
 } from '../constants/organizationConstants';
 import { setAlert } from '../actions/alertActions';
-import { getURL } from '../api';
+import { getURL, getBucketInfo } from '../api';
 import { saveRouteInfo } from './routeActions';
 
 /**
@@ -163,6 +163,71 @@ export const updateOrganization =
 	};
 
 /**
+ * updates an organization photo
+ * @param {*} organization
+ * @param {*} file
+ * @param {*} history
+ * @returns
+ */
+export const updateOrganiaztionPhoto =
+	(organization, file, history) => async (dispatch, getState) => {
+		try {
+			dispatch({
+				type: ORGANIZATION_UPDATE_REQUEST,
+			});
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const instructions = getBucketInfo('organization');
+			instructions.id = organization.id;
+			instructions.contentType = file.type;
+
+			// get presigned url
+			const {
+				data: { key, url },
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
+
+			//upload to AWS
+			await axios.put(url, file, {
+				'Content-Type': file.type,
+			});
+
+			organization.image = key;
+
+			const { data } = await axios.put(
+				`${getURL()}/api/v1/organizations/${organization.id}/profilePhoto`,
+				organization,
+				config
+			);
+
+			dispatch({
+				type: ORGANIZATION_UPDATE_SUCCESS,
+				payload: data,
+			});
+
+			history.go(-1);
+			dispatch(setAlert('User successfully updated', 'success'));
+		} catch (error) {
+			dispatch({
+				type: ORGANIZATION_UPDATE_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
+
+/**
  * delete organization
  * @param {*} orgId
  * @returns
@@ -247,7 +312,7 @@ export const listLocationOrganizations =
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: ORGANIZATION_LOCATION_LIST_REQUEST });
-			console.log('id', id);
+
 			const {
 				userLogin: { userInfo },
 			} = getState();
@@ -314,51 +379,6 @@ export const listStakeholderOrganizations =
 			});
 		}
 	};
-
-// /**
-//  * assign stakeholder to organization
-//  * @param {*} organizationId
-//  * @param {*} assignments
-//  * @returns
-//  */
-// export const assignStakeholder =
-// 	(organizationId, assignments) => async (dispatch, getState) => {
-// 		try {
-// 			dispatch({ type: ORGANIZATION_ASSIGNMENT_REQUEST });
-
-// 			const {
-// 				userLogin: { userInfo },
-// 			} = getState();
-
-// 			const config = {
-// 				headers: {
-// 					'Content-Type': 'application/json',
-// 					Authorization: `Bearer ${userInfo.token}`,
-// 				},
-// 			};
-
-// 			//pass id, project, and config file to api
-// 			const {
-// 				data: { data },
-// 			} = await axios.put(
-// 				`${getURL()}/api/v1/organizations/${organizationId}/assign`,
-// 				assignments,
-// 				config
-// 			);
-
-// 			dispatch({ type: ORGANIZATION_ASSIGNMENT_SUCCESS, payload: data });
-// 		} catch (error) {
-// 			const message =
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message;
-
-// 			dispatch({
-// 				type: ORGANIZATION_ASSIGNMENT_FAIL,
-// 				payload: message,
-// 			});
-// 		}
-// 	};
 
 /**
  * list all organizations for a location or community

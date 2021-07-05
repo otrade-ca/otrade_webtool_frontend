@@ -76,6 +76,7 @@ const StakeholderOrganizations = ({
 				<>
 					{organizations && organizations.length === 0 ? (
 						<Empty
+							itemLink={`/organizations/register/stakeholder/${stakeholderId}`}
 							url={'/organizations'}
 							type={t('tables.organization')}
 							group={'organizations'}
@@ -84,7 +85,7 @@ const StakeholderOrganizations = ({
 						<Card.Header className="my-card-header">
 							<h4>{`Organizations (${count})`}</h4>
 							<Link
-								to={`/organizations/register`}
+								to={`/organizations/register/stakeholder/${stakeholderId}`}
 								className="btn btn-primary ml-2"
 							>
 								<i className="fas fa-plus"></i> Organization
@@ -92,16 +93,18 @@ const StakeholderOrganizations = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Route
-							render={({ history }) => (
-								<SearchBox
-									history={history}
-									searchWord={'organization'}
-									searchQueryPath={`/stakeholder/${stakeholderId}/organizations/search/`}
-									searchQueryEmpty={`/stakeholder/${stakeholderId}/organizations`}
-								/>
-							)}
-						/>
+						{organizations && organizations.length === 0 ? null : (
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'organization'}
+										searchQueryPath={`/stakeholder/${stakeholderId}/organizations/search/`}
+										searchQueryEmpty={`/stakeholder/${stakeholderId}/organizations`}
+									/>
+								)}
+							/>
+						)}
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (

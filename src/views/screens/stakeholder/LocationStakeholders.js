@@ -1,16 +1,14 @@
-/**
- * List of stakeholders belonging to a project
- */
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
+import { Route, Link, useRouteMatch } from 'react-router-dom';
 import { Accordion, Card, Button, Row } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { Loader, Message, Empty } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import {
-	listProjectStakeholders,
 	deleteStakeholder,
+	listLocationStakeholders,
 } from '../../../application/actions/stakeholderActions';
+import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
@@ -18,32 +16,43 @@ import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
 import Moment from 'react-moment';
 
-const StakeholderProjectList = ({
+const LocationStakeholders = ({
 	match,
-	listProjectStakeholders,
+	listLocationStakeholders,
 	deleteStakeholder,
 	stakeholderDelete: { success },
-	stakeholderProjectList: { loading, error, stakeholders, pages, page, count },
+	stakeholderLocationList: { loading, error, stakeholders, pages, page, count },
 }) => {
-	const projectId = match.params.id;
+	const communityId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
+	//get stakeholders
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		if (success) {
-			listProjectStakeholders(projectId, keyword, pageNumber);
+			listLocationStakeholders(communityId, keyword, pageNumber);
+			dispatch({ type: STAKEHOLDER_DELETE_RESET });
 		} else {
-			listProjectStakeholders(projectId, keyword, pageNumber);
+			listLocationStakeholders(communityId, keyword, pageNumber);
 		}
-	}, [listProjectStakeholders, projectId, keyword, pageNumber, success]);
+	}, [
+		dispatch,
+		keyword,
+		communityId,
+		success,
+		listLocationStakeholders,
+		pageNumber,
+	]);
 
 	//delete stakeholder
 	const deleteHandler = (id) => {
 		if (window.confirm('Click ok to delete')) {
-			deleteStakeholder(id);
+			dispatch(deleteStakeholder(id));
 		}
 	};
 
@@ -56,27 +65,40 @@ const StakeholderProjectList = ({
 			) : (
 				<>
 					{stakeholders && stakeholders.length === 0 ? (
-						<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
+						<Empty
+							itemLink={`/stakeholders/register/community/${communityId}`}
+							url={`/stakeholders`}
+							type={t('tables.stakeholder')}
+							group={'stakeholders'}
+						/>
 					) : (
 						<Card.Header className="my-card-header">
-							<h4>Stakeholders {`(${count})`}</h4>
+							<h4>{`Stakeholders (${count})`}</h4>
+							<Link
+								to={`/stakeholders/register/community/${communityId}`}
+								className="btn btn-primary ml-2"
+							>
+								<i className="fas fa-plus"></i> {t('tables.stakeholder')}
+							</Link>
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Route
-							render={({ history }) => (
-								<SearchBox
-									history={history}
-									searchWord={'LastName'}
-									searchQueryPath={`/project/${projectId}/stakeholders/search/`}
-									searchQueryEmpty={`/project/${projectId}/stakeholders`}
-								/>
-							)}
-						/>
+						{stakeholders && stakeholders.length === 0 ? null : (
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'LastName'}
+										searchQueryPath={`/community/${communityId}/stakeholders/search/`}
+										searchQueryEmpty={`/community/${communityId}/stakeholders`}
+									/>
+								)}
+							/>
+						)}
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholders &&
 								stakeholders.map((item, index) => (
-									<Card className="table-card" key={index}>
+									<Card className="table-card">
 										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 											<div className="table-card-item">
 												<div className="item-one">
@@ -131,7 +153,7 @@ const StakeholderProjectList = ({
 															</>
 															<br />
 															<>
-																Updated on:{' '}
+																Updated On:{' '}
 																<em>
 																	{item.updatedAt ? (
 																		<Moment format="MM-DD-YYYY">
@@ -142,10 +164,6 @@ const StakeholderProjectList = ({
 																	)}
 																</em>
 															</>
-															<br />
-															<>
-																Community: <em>{item.location.location}</em>
-															</>
 														</p>
 													</div>
 													<div className="action-btns">
@@ -153,9 +171,10 @@ const StakeholderProjectList = ({
 															to={`/activities/register`}
 															className="btn btn-primary"
 														>
-															<i className="fas fa-plus" />{' '}
+															<i className="fas fa-plus" />
 															{t('tables.activity')}
 														</Link>
+
 														<Button
 															variant="danger"
 															onClick={() => deleteHandler(item._id)}
@@ -174,8 +193,8 @@ const StakeholderProjectList = ({
 							<Paginate
 								pages={pages}
 								page={page}
-								urlOne={`/project/${projectId}/stakeholders/search/`}
-								urlTwo={`/project/${projectId}/stakeholders/page/`}
+								urlOne={`/community/${communityId}/stakeholders/search/`}
+								urlTwo={`/community/${communityId}/stakeholders/page/`}
 							/>
 						</Row>
 					</Card.Body>
@@ -185,19 +204,17 @@ const StakeholderProjectList = ({
 	);
 };
 
-// action creators
-StakeholderProjectList.propTypes = {
-	listProjectStakeholders: PropTypes.func.isRequired,
+LocationStakeholders.propTypes = {
+	listLocationStakeholders: PropTypes.func.isRequired,
 	deleteStakeholder: PropTypes.func.isRequired,
 };
 
-// reducers
 const mapStateToProps = (state) => ({
-	stakeholderProjectList: state.stakeholderProjectList,
+	stakeholderLocationList: state.stakeholderLocationList,
 	stakeholderDelete: state.stakeholderDelete,
 });
 
 export default connect(mapStateToProps, {
-	listProjectStakeholders,
+	listLocationStakeholders,
 	deleteStakeholder,
-})(withRouter(StakeholderProjectList));
+})(LocationStakeholders);

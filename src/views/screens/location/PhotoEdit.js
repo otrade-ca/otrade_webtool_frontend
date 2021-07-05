@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	getStakeholderDetails,
-	updateStakeholder,
-} from '../../../application/actions/stakeholderActions';
-import { STAKEHOLDER_UPDATE_RESET } from '../../../application/constants/stakeholderConstants';
-import Message from '../../components/Message';
-import Loader from '../../components/Loader';
-import BorderContainer from '../../components/BorderContainer';
+	getLocationDetails,
+	updateLocationPhoto,
+} from '../../../application/actions/locationActions';
+import { LOCATION_UPDATE_RESET } from '../../../application/constants/locationConstants';
+import {
+	Loader,
+	Message,
+	CardContainer,
+} from '../../components/HelperComponents';
+import { useTranslation } from 'react-i18next';
 
-const PhotoEdit = ({ projectId, match }) => {
-	const stakeholderId = match.params.id;
+const PhotoEdit = ({ match, history }) => {
+	const locationId = match.params.id;
+
+	const { t } = useTranslation();
 
 	//define states
 	const [image, setImage] = useState('');
-	const [uploading, setUploading] = useState(false);
+	const [file, setFile] = useState(false);
 
 	const dispatch = useDispatch();
 
 	//get the stakeholder
-	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
-	const { loading, error, stakeholder } = stakeholderDetails;
+	const locationDetails = useSelector((state) => state.locationDetails);
+	const { loading, error, location } = locationDetails;
 
 	//get success
 	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
@@ -30,93 +35,76 @@ const PhotoEdit = ({ projectId, match }) => {
 
 	useEffect(() => {
 		if (success) {
-			dispatch(getStakeholderDetails(stakeholderId));
-			dispatch({ type: STAKEHOLDER_UPDATE_RESET });
+			dispatch(getLocationDetails(locationId));
+			dispatch({ type: LOCATION_UPDATE_RESET });
 		} else {
-			setImage();
+			setImage(location.image);
 		}
-	}, [dispatch, stakeholder, stakeholderId, success]);
+	}, [dispatch, location, locationId, success]);
 
 	const uploadFileHandler = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('image', file);
-		setUploading(true);
-
-		try {
-			const config = {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			};
-
-			const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-			setImage(data);
-			setUploading(false);
-		} catch (error) {
-			setUploading(false);
-		}
+		setFile(e.target.files[0]);
 	};
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		console.log('hello');
 		dispatch(
-			updateStakeholder(
+			updateLocationPhoto(
 				{
-					image,
+					id: locationId,
 				},
-				stakeholderId
+				file,
+				history
 			)
 		);
 	};
 
 	return (
-		<BorderContainer>
-			{loading ? (
-				<Loader />
-			) : error ? (
-				<Message>{error}</Message>
-			) : (
-				<>
-					<Form onSubmit={submitHandler} className="mt-4 mb-3">
-						<Row>
-							<Col>
-								<Form.Group controlId="image">
-									<Form.Label>Image</Form.Label>
-									<Row className="mb-3">
-										<Col md={6}>
-											<Form.Control
-												type="text"
-												placeholder="Enter image url"
-												value={image}
-												onChange={(e) => setImage(e.target.value)}
-											></Form.Control>
-										</Col>
-									</Row>
-									<Row>
-										<Col md={6}>
-											<Form.File
-												id="image-file"
-												label="Choose File"
-												custom
-												onChange={uploadFileHandler}
-											>
-												{uploading && <Loader />}
-											</Form.File>
-										</Col>
-									</Row>
-								</Form.Group>
-							</Col>
-						</Row>
-						<Button type="submit" variant="primary" className="mt-3 px-5">
-							Update
-						</Button>
-					</Form>
-				</>
-			)}
-		</BorderContainer>
+		<>
+			{error && <Message variant="danger">{error}</Message>}
+			{loading && <Loader />}
+			<CardContainer title={'Upload Photo'}>
+				<Form onSubmit={submitHandler}>
+					<Row>
+						<Col>
+							<Form.Group controlId="image">
+								<Form.Label>Image</Form.Label>
+								<Row className="mb-3">
+									<Col md={6}>
+										<Form.Control
+											type="text"
+											placeholder="Enter image url"
+											value={image}
+											onChange={(e) => setImage(e.target.value)}
+										></Form.Control>
+									</Col>
+								</Row>
+								<Row>
+									<Col md={6}>
+										<input
+											type="file"
+											accept="image/*"
+											required
+											onChange={uploadFileHandler}
+										/>
+									</Col>
+								</Row>
+							</Form.Group>
+						</Col>
+					</Row>
+					<hr />
+					<Row className="mt-3">
+						<Col>
+							<Button type="submit" variant="primary" className="px-5 mt-3">
+								{t('action.submit')}
+							</Button>
+						</Col>
+					</Row>
+				</Form>
+			</CardContainer>
+		</>
 	);
 };
 
-export default PhotoEdit;
+export default withRouter(PhotoEdit);

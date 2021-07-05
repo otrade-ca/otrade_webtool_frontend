@@ -1,11 +1,11 @@
 import React from 'react';
 import ListOrganizations from '../organization/ListOrganizations';
-import StakeholdersList from '../stakeholder/StakeholdersList';
+import LocationStakeholders from '../stakeholder/LocationStakeholders';
 
 const Dashboard = ({ match }) => {
 	return (
 		<div>
-			<StakeholdersList match={match} />
+			<LocationStakeholders match={match} />
 			<ListOrganizations match={match} />
 		</div>
 	);

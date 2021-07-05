@@ -16,7 +16,12 @@ import {
 	INFLUENCE_LIST_FAIL,
 } from '../constants/influenceConstants';
 
-// add influence reducer
+/**
+ * add influence reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const influenceAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case INFLUENCE_ADD_REQUEST:
@@ -32,7 +37,12 @@ export const influenceAddReducer = (state = {}, action) => {
 	}
 };
 
-// get influence details reducer
+/**
+ * get influence details reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const influenceDetailsReducer = (state = { influence: {} }, action) => {
 	switch (action.type) {
 		case INFLUENCE_DETAILS_REQUEST:
@@ -48,7 +58,12 @@ export const influenceDetailsReducer = (state = { influence: {} }, action) => {
 	}
 };
 
-// delete influence reducer
+/**
+ * delete influence reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const influenceDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case INFLUENCE_DELETE_REQUEST:
@@ -64,7 +79,12 @@ export const influenceDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// get influence list reducer
+/**
+ * get influence list reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const influenceListReducer = (
 	state = { influences: [], filtered: [] },
 	action

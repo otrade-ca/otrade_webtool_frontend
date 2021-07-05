@@ -8,6 +8,7 @@ import { btnlinks, navbarlinks, routes } from './utilities';
 import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
+import { getBucketInfo } from '../../../application/api';
 import { getLocationDetails } from '../../../application/actions/locationActions';
 import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
 import { listLocationOrganizations } from '../../../application/actions/organizationAction';
@@ -15,6 +16,8 @@ import { listLocationOrganizations } from '../../../application/actions/organiza
 const LandingPage = ({ match, history }) => {
 	const locationId = match.params.id;
 	const { url, path } = useRouteMatch();
+
+	const { prependURL } = getBucketInfo('location');
 	const { t } = useTranslation();
 
 	// get userDispatch
@@ -44,7 +47,7 @@ const LandingPage = ({ match, history }) => {
 								<Col md={2} className="image-container">
 									{location.image ? (
 										<img
-											src={location.image}
+											src={`${prependURL}${location.image}`}
 											alt="profile"
 											className="profile-image"
 										/>

@@ -1,5 +1,11 @@
 import { SET_ALERT, REMOVE_ALERT } from '../constants/alertConstants';
 
+/**
+ * alert reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const alertReducer = (state = { alerts: [] }, action) => {
 	switch (action.type) {
 		case SET_ALERT:

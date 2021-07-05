@@ -76,7 +76,7 @@ const OrganizationsList = ({
 				<>
 					{organizations && organizations.length === 0 ? (
 						<Empty
-							itemLink={'register'}
+							itemLink={`/organizations/register/community/${locationId}`}
 							url={'/organizations'}
 							type={t('tables.organization')}
 							group={'organizations'}
@@ -93,16 +93,18 @@ const OrganizationsList = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Route
-							render={({ history }) => (
-								<SearchBox
-									history={history}
-									searchWord={'organization'}
-									searchQueryPath={`/community/${locationId}/organizations/search/`}
-									searchQueryEmpty={`/community/${locationId}/organizations`}
-								/>
-							)}
-						/>
+						{organizations && organizations.length === 0 ? null : (
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'organization'}
+										searchQueryPath={`/community/${locationId}/organizations/search/`}
+										searchQueryEmpty={`/community/${locationId}/organizations`}
+									/>
+								)}
+							/>
+						)}
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (

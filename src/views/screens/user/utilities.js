@@ -5,7 +5,7 @@ import ViewUser from './ViewUser';
 
 export const btnlinks = [
 	{
-		link: '/profile-photo',
+		link: '/photo',
 		class: 'btn btn-primary mr-3',
 		icon: 'fas fa-edit',
 		type: 'Photo',
@@ -55,7 +55,7 @@ export const routes = [
 		component: ({ match }) => <EditUser match={match} />,
 	},
 	{
-		path: '/profile-photo',
+		path: '/photo',
 		component: ({ match }) => <EditUserPhoto match={match} />,
 	},
 ];

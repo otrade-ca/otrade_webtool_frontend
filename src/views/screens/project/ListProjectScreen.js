@@ -59,16 +59,18 @@ const ListProjectScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Card.Body>
-					<Route
-						render={({ history }) => (
-							<SearchBox
-								history={history}
-								searchWord={t('tables.project')}
-								searchQueryPath={'/admin/projects/search/'}
-								searchQueryEmpty={'/admin/projects'}
-							/>
-						)}
-					/>
+					{projects && projects.length === 0 ? null : (
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={t('tables.project')}
+									searchQueryPath={'/admin/projects/search/'}
+									searchQueryEmpty={'/admin/projects'}
+								/>
+							)}
+						/>
+					)}
 					<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 						{projects &&
 							projects.map((project, index) => (

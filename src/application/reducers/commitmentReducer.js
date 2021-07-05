@@ -17,7 +17,12 @@ import {
 	COMMITMENT_LIST_FAIL,
 } from '../constants/commitmentConstants';
 
-// add commitment
+/**
+ * add commitment
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commitmentAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case COMMITMENT_ADD_REQUEST:
@@ -31,7 +36,12 @@ export const commitmentAddReducer = (state = {}, action) => {
 	}
 };
 
-// get commitment details
+/**
+ * get commitment details
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commitmentDetailsReducer = (
 	state = { commitment: {} },
 	action
@@ -50,7 +60,12 @@ export const commitmentDetailsReducer = (
 	}
 };
 
-// update commitment
+/**
+ * update commitment
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commitmentUpdateReducer = (state = { commitment: {} }, action) => {
 	switch (action.type) {
 		case COMMITMENT_UPDATE_REQUEST:
@@ -64,7 +79,12 @@ export const commitmentUpdateReducer = (state = { commitment: {} }, action) => {
 	}
 };
 
-// delete commitment
+/**
+ * delete commitment
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commitmentDeleteReducer = (state = { commitment: {} }, action) => {
 	switch (action.type) {
 		case COMMITMENT_DELETE_REQUEST:
@@ -78,7 +98,12 @@ export const commitmentDeleteReducer = (state = { commitment: {} }, action) => {
 	}
 };
 
-// list commitment
+/**
+ * list commitment
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commitmentListReducer = (state = { commitments: [] }, action) => {
 	switch (action.type) {
 		case COMMITMENT_LIST_REQUEST:

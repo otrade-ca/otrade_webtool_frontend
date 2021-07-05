@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	updateUserProfilePhoto,
-	getUserDetails,
-} from '../../../application/actions/userActions';
-import { USER_PROFILE_UPDATE_RESET } from '../../../application/constants/userConstants';
+	getOrganizationDetails,
+	updateOrganiaztionPhoto,
+} from '../../../application/actions/organizationAction';
+import { ORGANIZATION_UPDATE_RESET } from '../../../application/constants/organizationConstants';
 import {
 	Loader,
 	Message,
@@ -15,7 +15,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 const UploadPhoto = ({ match, history }) => {
-	const userId = match.params.id;
+	const organizationId = match.params.id;
 
 	const { t } = useTranslation();
 
@@ -26,8 +26,8 @@ const UploadPhoto = ({ match, history }) => {
 	const dispatch = useDispatch();
 
 	//get the user
-	const userDetails = useSelector((state) => state.userDetails);
-	const { loading, error, user } = userDetails;
+	const organizationDetails = useSelector((state) => state.organizationDetails);
+	const { loading, error, organization } = organizationDetails;
 
 	//get success from user update
 	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
@@ -35,12 +35,12 @@ const UploadPhoto = ({ match, history }) => {
 
 	useEffect(() => {
 		if (successUpdate) {
-			dispatch(getUserDetails(userId));
-			dispatch({ type: USER_PROFILE_UPDATE_RESET });
+			dispatch(getOrganizationDetails(organizationId));
+			dispatch({ type: ORGANIZATION_UPDATE_RESET });
 		} else {
-			setImage(user.image);
+			setImage(organization.image);
 		}
-	}, [dispatch, userId, user, successUpdate]);
+	}, [dispatch, organizationId, organization, successUpdate]);
 
 	const uploadFileHandler = async (e) => {
 		setFile(e.target.files[0]);
@@ -50,9 +50,9 @@ const UploadPhoto = ({ match, history }) => {
 		e.preventDefault();
 		//check password against confirmPassword
 		dispatch(
-			updateUserProfilePhoto(
+			updateOrganiaztionPhoto(
 				{
-					id: user._id,
+					id: organizationId,
 				},
 				file,
 				history

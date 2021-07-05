@@ -82,16 +82,18 @@ const OrganizationsProjectList = ({
 						</Card.Header>
 					)}
 					<Card.Body>
-						<Route
-							render={({ history }) => (
-								<SearchBox
-									history={history}
-									searchWord={'organization'}
-									searchQueryPath={`/project/${projectId}/organizations/search/`}
-									searchQueryEmpty={`/project/${projectId}/organizations`}
-								/>
-							)}
-						/>
+						{organizations && organizations.length === 0 ? null : (
+							<Route
+								render={({ history }) => (
+									<SearchBox
+										history={history}
+										searchWord={'organization'}
+										searchQueryPath={`/project/${projectId}/organizations/search/`}
+										searchQueryEmpty={`/project/${projectId}/organizations`}
+									/>
+								)}
+							/>
+						)}
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (

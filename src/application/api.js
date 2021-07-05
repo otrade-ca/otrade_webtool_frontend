@@ -32,7 +32,7 @@ export const getBucketInfo = (type) => {
 							'https://projects-bucket-00-prd.s3.us-east-2.amazonaws.com/',
 						bucket: 'projects-bucket-00-prd',
 				  };
-		case 'community':
+		case 'location':
 			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
@@ -69,6 +69,6 @@ export const getBucketInfo = (type) => {
 						bucket: 'stakeholders-bucket-00-prd',
 				  };
 		default:
-			return;
+			return 'NO RESOURCE FOUND';
 	}
 };

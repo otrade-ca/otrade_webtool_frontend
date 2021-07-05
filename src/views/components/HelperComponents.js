@@ -3,7 +3,7 @@ import Loader from './Loader';
 import BorderContainer from './BorderContainer';
 import ProfileContainer from './ProfileContainer';
 import CardContainer from './CardContainer/CardContainer';
-import TableHelper from './TableHelper';
+
 import Empty from './Empty';
 import SearchBox from './SearchBox';
 
@@ -13,7 +13,6 @@ export {
 	BorderContainer,
 	ProfileContainer,
 	CardContainer,
-	TableHelper,
 	Empty,
 	SearchBox,
 };

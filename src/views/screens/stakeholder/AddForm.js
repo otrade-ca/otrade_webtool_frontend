@@ -6,7 +6,7 @@ import { addStakeholder } from '../../../application/actions/stakeholderActions'
 import { CardContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const StakeholderContactInfo = ({ history }) => {
+const AddForm = ({ history }) => {
 	const { id } = useParams();
 	const { t } = useTranslation();
 
@@ -287,4 +287,4 @@ const StakeholderContactInfo = ({ history }) => {
 	);
 };
 
-export default withRouter(StakeholderContactInfo);
+export default withRouter(AddForm);

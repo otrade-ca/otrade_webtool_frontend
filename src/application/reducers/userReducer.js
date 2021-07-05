@@ -28,7 +28,12 @@ import {
 	USER_DETAILS_RESET,
 } from '../constants/userConstants';
 
-// logs in a user
+/**
+ * logs in a user
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userLoginReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_LOGIN_REQUEST:
@@ -44,7 +49,12 @@ export const userLoginReducer = (state = {}, action) => {
 	}
 };
 
-// registers a user
+/**
+ * registers a user
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userRegisterReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_REGISTER_REQUEST:
@@ -58,7 +68,12 @@ export const userRegisterReducer = (state = {}, action) => {
 	}
 };
 
-// update my profile
+/**
+ * update my profile
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_PROFILE_UPDATE_REQUEST:
@@ -74,7 +89,12 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) => {
 	}
 };
 
-// return a list of users
+/**
+ * return a list of users
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userListReducer = (state = { users: [] }, action) => {
 	switch (action.type) {
 		case USER_LIST_REQUEST:
@@ -96,7 +116,12 @@ export const userListReducer = (state = { users: [] }, action) => {
 	}
 };
 
-// return a users profile information
+/**
+ * return a users profile information
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userDetailsReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_DETAILS_REQUEST:
@@ -112,7 +137,12 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
 	}
 };
 
-// update a user profile
+/**
+ * update a user profile
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userUpdateReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case USER_UPDATE_REQUEST:
@@ -128,7 +158,12 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
 	}
 };
 
-// delete a user
+/**
+ * delete a user
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const userDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case USER_DELETE_REQUEST:

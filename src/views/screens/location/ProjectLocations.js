@@ -72,23 +72,25 @@ const ProjectLocations = ({ match }) => {
 								to={`/communities/register/project/${projectId}`}
 								className="btn btn-primary ml-2"
 							>
-								<i className="fas fa-plus"></i> Create Community
+								<i className="fas fa-plus"></i> Register
 							</Link>
 						</Card.Header>
 					)}
 				</>
 			)}
 			<Card.Body>
-				<Route
-					render={({ history }) => (
-						<SearchBox
-							history={history}
-							searchWord={'Location'}
-							searchQueryPath={`/project/${projectId}/communities/search/`}
-							searchQueryEmpty={`/project/${projectId}/communities`}
-						/>
-					)}
-				/>
+				{locations && locations.length === 0 ? null : (
+					<Route
+						render={({ history }) => (
+							<SearchBox
+								history={history}
+								searchWord={'Location'}
+								searchQueryPath={`/project/${projectId}/communities/search/`}
+								searchQueryEmpty={`/project/${projectId}/communities`}
+							/>
+						)}
+					/>
+				)}
 				<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 					{locations &&
 						locations.map((location, index) => (

@@ -3,7 +3,11 @@ import {
 	ROUTE_SAVE_RESET,
 } from '../constants/routeConstants';
 
-// save stakeholder info to localstorage to use in processing form
+/**
+ * saves routeInfo
+ * @param {*} data
+ * @returns
+ */
 export const saveRouteInfo = (data) => (dispatch) => {
 	dispatch({
 		type: ROUTE_SAVE_REQUEST,
@@ -11,7 +15,10 @@ export const saveRouteInfo = (data) => (dispatch) => {
 	});
 };
 
-// remove stakeholder info from localstorage to use in processing form
+/**
+ * removes routeInfo
+ * @returns
+ */
 export const removeRouteInfo = () => (dispatch) => {
 	dispatch({ type: ROUTE_SAVE_RESET });
 };

@@ -243,7 +243,12 @@ export const deleteProject = (id) => async (dispatch, getState) => {
 	}
 };
 
-// get all projects
+/**
+ * list all projects
+ * @param {*} keyword
+ * @param {*} pageNumber
+ * @returns
+ */
 export const listProjects =
 	(keyword = '', pageNumber = '') =>
 	async (dispatch, getState) => {
@@ -278,7 +283,11 @@ export const listProjects =
 		}
 	};
 
-// list all projects for a user
+/**
+ * gets list of projects for user
+ * @param {*} id
+ * @returns
+ */
 export const listUserProjects = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: PROJECT_USER_REQUEST });
@@ -310,7 +319,13 @@ export const listUserProjects = (id) => async (dispatch, getState) => {
 	}
 };
 
-//assign user to project
+/**
+ * assigns user to project
+ * @param {*} projectId
+ * @param {*} assignments
+ * @param {*} history
+ * @returns
+ */
 export const assignProjectUser =
 	(projectId, assignments, history) => async (dispatch, getState) => {
 		try {
@@ -352,7 +367,11 @@ export const assignProjectUser =
 		}
 	};
 
-// save projectInfo
+/**
+ * Saves projectInfo
+ * @param {*} data
+ * @returns
+ */
 export const saveProjectInfo = (data) => (dispatch) => {
 	dispatch({
 		type: PROJECT_SAVE_REQUEST,

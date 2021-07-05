@@ -17,6 +17,11 @@ const OrganizationRoutes = () => {
 				path="/organizations/register/community/:id"
 				component={AddOrganizationScreen}
 			/>
+			<PrivateRoute
+				exact
+				path="/organizations/register/stakeholder/:id"
+				component={AddOrganizationScreen}
+			/>
 			<PrivateRoute path="/organization/:id" component={Landing} />
 		</Switch>
 	);

@@ -13,12 +13,14 @@ import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { btnlinks, navbarlinks, routes } from './utilities';
 import { getLocationId } from '../../../application/localStorage';
+import { getBucketInfo } from '../../../application/api';
 
 const StakeholderScreen = ({ match }) => {
 	//get the stakeholderId passed in
 	let stakeholderId = match.params.id;
 	const locationId = getLocationId();
 
+	const { prependURL } = getBucketInfo('stakeholder');
 	const { t } = useTranslation();
 
 	//get path and url
@@ -49,7 +51,7 @@ const StakeholderScreen = ({ match }) => {
 								<Col md={2} className="image-container">
 									{stakeholder.image ? (
 										<img
-											src={stakeholder.image}
+											src={`${prependURL}${stakeholder.image}`}
 											alt="profile"
 											className="profile-image"
 										/>

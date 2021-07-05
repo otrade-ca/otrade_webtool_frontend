@@ -9,7 +9,7 @@ import {
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const ViewStakeholderScreen = ({ match }) => {
+const ViewForm = ({ match }) => {
 	const stakeholderId = match.params.id;
 
 	const { t } = useTranslation();
@@ -261,4 +261,4 @@ const ViewStakeholderScreen = ({ match }) => {
 	);
 };
 
-export default ViewStakeholderScreen;
+export default ViewForm;

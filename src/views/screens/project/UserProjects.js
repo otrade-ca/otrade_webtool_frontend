@@ -34,206 +34,106 @@ const UserProjects = memo(({ match }) => {
 			) : (
 				<CardContainer title={t('tables.project')} searchWord={'Projects'}>
 					<Accordion defaultActiveKey={1}>
-						{filtered
-							? filtered.map((project, index) => (
-									<Card className="table-card">
-										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<AiIcons.AiOutlineProject />
-													</IconContext.Provider>
+						{projects &&
+							projects.map((project, index) => (
+								<Card className="table-card">
+									<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+										<div className="table-card-item">
+											<div className="item-one">
+												<IconContext.Provider
+													value={{ color: '#008cba', size: '2em' }}
+												>
+													<AiIcons.AiOutlineProject />
+												</IconContext.Provider>
+											</div>
+											<div className="item-two">
+												<div>{project.projectName}</div>
+												<div className="item-category">
+													Project |{' '}
+													{project.status === 'active' ||
+													project.status === 'open' ? (
+														<strong className="text-success">
+															{project.status.substring(0, 1).toUpperCase() +
+																project.status.substring(
+																	1,
+																	project.status.length
+																)}
+														</strong>
+													) : (
+														<em className="text-danger">
+															{project.status.substring(0, 1).toUpperCase() +
+																project.status.substring(
+																	1,
+																	project.status.length
+																)}
+														</em>
+													)}
 												</div>
-												<div className="item-two">
-													<div>{project.projectName}</div>
-													<div className="item-category">
-														Project |{' '}
-														{project.status === 'active' ||
-														project.status === 'open' ? (
-															<strong className="text-success">
-																{project.status.substring(0, 1).toUpperCase() +
-																	project.status.substring(
-																		1,
-																		project.status.length
-																	)}
-															</strong>
-														) : (
-															<em className="text-danger">
-																{project.status.substring(0, 1).toUpperCase() +
-																	project.status.substring(
-																		1,
-																		project.status.length
-																	)}
-															</em>
+											</div>
+										</div>
+										<div className="table-card-item">
+											<div className="item-two">
+												<div>
+													<>{project.createdAt.substring(0, 10)}</>{' '}
+												</div>
+												<div className="item-category">Registered</div>
+											</div>
+										</div>
+									</Accordion.Toggle>
+									<Accordion.Collapse eventKey={index + 1}>
+										<Card.Body>
+											<div className="d-flex justify-content-between">
+												<div>
+													<p>
+														{t('tables.project')}:{' '}
+														<>
+															<Link to={`/project/${project._id}`}>
+																{project.projectName}
+															</Link>
+														</>
+														<br />
+														{t('project.client.label')}:{' '}
+														<>{project.projectClient}</>
+														<br />
+														{t('project.country.label')}
+														{': '}
+														<>
+															{project.country_code}, {project.country}
+														</>
+														<br />
+														{project.coordinates && (
+															<>
+																{t('project.coordinates.label')}
+																{': '}
+																<>{project.coordinates}</>
+																<br />
+															</>
 														)}
-													</div>
+													</p>
 												</div>
-											</div>
-											<div className="table-card-item">
-												<div className="item-two">
-													<div>
-														<>{project.createdAt.substring(0, 10)}</>{' '}
-													</div>
-													<div className="item-category">Registered Date</div>
-												</div>
-											</div>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey={index + 1}>
-											<Card.Body>
-												<div className="d-flex justify-content-between">
-													<div>
-														<p>
-															{t('tables.project')}:{' '}
+												<div className="d-flex align-items-start mr-5">
+													<p>
+														<>{t('utility.status')}: </>
+														{project.status === 'open' ? (
 															<>
-																<Link to={`/project/${project._id}`}>
-																	{project.projectName}
-																</Link>
+																<em className="text-success">
+																	{project.status}
+																</em>
 															</>
-															<br />
-															{t('project.client.label')}:{' '}
-															<>{project.projectClient}</>
-															<br />
-															{t('project.country.label')}
-															{': '}
-															<>
-																{project.country_code}, {project.country}
-															</>
-															<br />
-															{project.coordinates && (
-																<>
-																	{t('project.coordinates.label')}
-																	{': '}
-																	<>{project.coordinates}</>
-																	<br />
-																</>
-															)}
-														</p>
-													</div>
-													<div className="d-flex align-projects-start mr-5">
-														<p>
-															<>Status: </>
-															{project.status === 'open' ? (
-																<>
-																	<em className="text-success">
-																		{project.status}
-																	</em>
-																</>
-															) : (
-																<>
-																	<em className="text-danger">
-																		{project.status}
-																	</em>
-																</>
-															)}
-														</p>
-													</div>
-												</div>
-											</Card.Body>
-										</Accordion.Collapse>
-									</Card>
-							  ))
-							: projects &&
-							  projects.map((project, index) => (
-									<Card className="table-card">
-										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<AiIcons.AiOutlineProject />
-													</IconContext.Provider>
-												</div>
-												<div className="item-two">
-													<div>{project.projectName}</div>
-													<div className="item-category">
-														Project |{' '}
-														{project.status === 'active' ||
-														project.status === 'open' ? (
-															<strong className="text-success">
-																{project.status.substring(0, 1).toUpperCase() +
-																	project.status.substring(
-																		1,
-																		project.status.length
-																	)}
-															</strong>
 														) : (
-															<em className="text-danger">
-																{project.status.substring(0, 1).toUpperCase() +
-																	project.status.substring(
-																		1,
-																		project.status.length
-																	)}
-															</em>
+															<>
+																<em className="text-danger">
+																	{project.status}
+																</em>
+															</>
 														)}
-													</div>
+													</p>
 												</div>
 											</div>
-											<div className="table-card-item">
-												<div className="item-two">
-													<div>
-														<>{project.createdAt.substring(0, 10)}</>{' '}
-													</div>
-													<div className="item-category">Registered Date</div>
-												</div>
-											</div>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey={index + 1}>
-											<Card.Body>
-												<div className="d-flex justify-content-between">
-													<div>
-														<p>
-															{t('tables.project')}:{' '}
-															<>
-																<Link to={`/project/${project._id}`}>
-																	{project.projectName}
-																</Link>
-															</>
-															<br />
-															{t('project.client.label')}:{' '}
-															<>{project.projectClient}</>
-															<br />
-															{t('project.country.label')}
-															{': '}
-															<>
-																{project.country_code}, {project.country}
-															</>
-															<br />
-															{project.coordinates && (
-																<>
-																	{t('project.coordinates.label')}
-																	{': '}
-																	<>{project.coordinates}</>
-																	<br />
-																</>
-															)}
-														</p>
-													</div>
-													<div className="d-flex align-items-start mr-5">
-														<p>
-															<>{t('utility.status')}: </>
-															{project.status === 'open' ? (
-																<>
-																	<em className="text-success">
-																		{project.status}
-																	</em>
-																</>
-															) : (
-																<>
-																	<em className="text-danger">
-																		{project.status}
-																	</em>
-																</>
-															)}
-														</p>
-													</div>
-												</div>
-											</Card.Body>
-										</Accordion.Collapse>
-									</Card>
-							  ))}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							))}
 					</Accordion>
 				</CardContainer>
 			)}

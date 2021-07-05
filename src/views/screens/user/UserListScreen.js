@@ -15,8 +15,11 @@ import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 import Moment from 'react-moment';
 import Placeholder from '../../img/placeholder.png';
+import { getBucketInfo } from '../../../application/api';
 
 const UserListScreen = ({ history, match }) => {
+	const { prependURL } = getBucketInfo('user');
+
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
@@ -67,16 +70,18 @@ const UserListScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Card.Body>
-					<Route
-						render={({ history }) => (
-							<SearchBox
-								history={history}
-								searchWord={'LastName'}
-								searchQueryPath={'/admin/userList/search/'}
-								searchQueryEmpty={'/admin/userList'}
-							/>
-						)}
-					/>
+					{users && users.length === 0 ? null : (
+						<Route
+							render={({ history }) => (
+								<SearchBox
+									history={history}
+									searchWord={'LastName'}
+									searchQueryPath={'/admin/userList/search/'}
+									searchQueryEmpty={'/admin/userList'}
+								/>
+							)}
+						/>
+					)}
 					<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 						{users &&
 							users.map((user, index) => (
@@ -86,7 +91,7 @@ const UserListScreen = ({ history, match }) => {
 											<div className="item-one">
 												{user.image ? (
 													<img
-														src={`https://users-bucket-00-dev.s3.us-east-2.amazonaws.com/${user.image}`}
+														src={`${prependURL}${user.image}`}
 														alt="profile"
 														className="user-stakeholder-image"
 													/>

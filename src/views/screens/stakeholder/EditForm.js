@@ -13,7 +13,7 @@ import {
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const EditStakeholderScreen = ({ match }) => {
+const EditForm = ({ match }) => {
 	const stakeholderId = match.params.id;
 
 	const { t } = useTranslation();
@@ -331,4 +331,4 @@ const EditStakeholderScreen = ({ match }) => {
 	);
 };
 
-export default EditStakeholderScreen;
+export default EditForm;

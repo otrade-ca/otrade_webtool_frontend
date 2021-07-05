@@ -3,7 +3,12 @@ import {
 	ROUTE_SAVE_REQUEST,
 } from '../constants/routeConstants';
 
-// load one or more routes that have to be visited
+/**
+ * load one or more routes that have to be visited
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const routeSaveReducer = (state = { routeInfo: [] }, action) => {
 	switch (action.type) {
 		case ROUTE_SAVE_REQUEST:

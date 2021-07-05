@@ -1,23 +1,24 @@
-import EditStakeholderScreen from './EditStakeholderScreen';
+import EditForm from './EditForm';
 import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
 import Activities from '../activity/Activities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
-import ViewStakeholderScreen from '../stakeholder/ViewStakeholderScreen';
+import ViewForm from '../stakeholder/ViewForm';
 import FormDetails from '../commitment/FormDetails';
 import StakeholderInfluences from '../influence/StakeholderInfluences';
 import Profile from './Profile';
 import StakeholderNews from '../news/StakeholderNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
+import UploadPhoto from './PhotoUpload';
 
 export const btnlinks = [
-	// {
-	// 	link: '/photo',
-	// 	class: 'btn btn-primary mr-3',
-	// 	icon: 'fas fa-edit',
-	// 	type: 'Photo',
-	// },
+	{
+		link: '/photo',
+		class: 'btn btn-primary mr-3',
+		icon: 'fas fa-edit',
+		type: 'Photo',
+	},
 	{
 		link: '/profile',
 		class: 'btn btn-primary',
@@ -48,11 +49,15 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '/',
-		component: ({ match }) => <ViewStakeholderScreen match={match} />,
+		component: ({ match }) => <ViewForm match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <EditStakeholderScreen match={match} />,
+		component: ({ match }) => <EditForm match={match} />,
+	},
+	{
+		path: '/photo',
+		component: ({ match }) => <UploadPhoto match={match} />,
 	},
 	{
 		path: '/profile',
@@ -60,7 +65,7 @@ export const routes = [
 	},
 	{
 		path: '/profile/edit',
-		component: ({ match }) => <EditStakeholderScreen match={match} />,
+		component: ({ match }) => <EditForm match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword',

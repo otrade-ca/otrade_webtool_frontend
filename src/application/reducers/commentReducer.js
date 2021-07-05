@@ -18,7 +18,12 @@ import {
 	COMMENT_LIST_FAIL,
 } from '../constants/commentConstants';
 
-// add comment reducer
+/**
+ * add comment reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commentAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case COMMENT_ADD_REQUEST:
@@ -34,7 +39,12 @@ export const commentAddReducer = (state = {}, action) => {
 	}
 };
 
-// get comment details reducer
+/**
+ * get comment details reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commentDetailsReducer = (state = { comment: {} }, action) => {
 	switch (action.type) {
 		case COMMENT_DETAILS_REQUEST:
@@ -50,7 +60,12 @@ export const commentDetailsReducer = (state = { comment: {} }, action) => {
 	}
 };
 
-// update comment reducer
+/**
+ * update comment reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commentUpdateReducer = (state = { comment: {} }, action) => {
 	switch (action.type) {
 		case COMMENT_UPDATE_REQUEST:
@@ -64,7 +79,12 @@ export const commentUpdateReducer = (state = { comment: {} }, action) => {
 	}
 };
 
-// delete comment reducer
+/**
+ * delete comment reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commentDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case COMMENT_DELETE_REQUEST:
@@ -78,7 +98,12 @@ export const commentDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// list comment reducer
+/**
+ * list comment reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const commentListReducer = (state = { comments: [] }, action) => {
 	switch (action.type) {
 		case COMMENT_LIST_REQUEST:

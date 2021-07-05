@@ -1,7 +1,7 @@
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
 import ListOrganizations from '../organization/ListOrganizations';
-import StakeholdersList from '../stakeholder/StakeholdersList';
+import LocationStakeholders from '../stakeholder/LocationStakeholders';
 import FormEdit from './FormEdit';
 import PhotoEdit from './PhotoEdit';
 import FormView from './FormView';
@@ -82,19 +82,19 @@ export const routes = [
 	},
 	{
 		path: '/stakeholders',
-		component: ({ match }) => <StakeholdersList match={match} />,
+		component: ({ match }) => <LocationStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/search/:keyword',
-		component: ({ match }) => <StakeholdersList match={match} />,
+		component: ({ match }) => <LocationStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/page/:pageNumber',
-		component: ({ match }) => <StakeholdersList match={match} />,
+		component: ({ match }) => <LocationStakeholders match={match} />,
 	},
 	{
 		path: '/stakeholders/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <StakeholdersList match={match} />,
+		component: ({ match }) => <LocationStakeholders match={match} />,
 	},
 	{
 		path: '/landownerships',

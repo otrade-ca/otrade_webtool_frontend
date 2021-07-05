@@ -42,8 +42,6 @@ h1 {
 }
 
 p {
-	/* padding-top: 0.5rem; */
-	/* padding-left: 1rem; */
 	line-height: 24px;
 	margin-bottom: 0 !important;
 }
@@ -72,7 +70,6 @@ td {
 }
 
 body {
-	/* background-color: #e4fbff !important; */
 	background-color: rgba(219, 219, 219, 0.384) !important;
 }
 
@@ -389,7 +386,6 @@ hr {
 }
 
 .card-body {
-	/* background-color: rgba(124, 121, 121, 0.05); */
 	padding: 1rem 1rem !important;
 }
 
@@ -398,9 +394,7 @@ hr {
 }
 
 .content-container {
-	/* position: relative; */
 	padding-top: 6rem;
-	/* height: 100vh !important; */
 }
 
 /*Stakeholder, Project, Community, Organization, Activity List*/
@@ -449,7 +443,6 @@ hr {
 .table-card-item {
 	width: 100%;
 	float: left;
-	/* border: 1px solid black; */
 	display: flex;
 	align-items: center;
 }
@@ -469,8 +462,6 @@ hr {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	/* border-top: 1px solid rgba(0, 0, 0, 0.125);
-	margin-top: 0.25rem; */
 }
 
 .location-add-btns a {

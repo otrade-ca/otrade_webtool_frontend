@@ -9,10 +9,14 @@ import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { getOrganizationDetails } from '../../../application/actions/organizationAction';
+import { getBucketInfo } from '../../../application/api';
 
 const Landing = ({ match, history }) => {
 	const id = match.params.id;
 	const { url, path } = useRouteMatch();
+
+	const { prependURL } = getBucketInfo('organization');
+
 	const { t } = useTranslation();
 
 	const dispatch = useDispatch();
@@ -25,7 +29,11 @@ const Landing = ({ match, history }) => {
 
 	const renderImage = () => {
 		return organization.image ? (
-			<img src={organization.image} alt="profile" className="profile-image" />
+			<img
+				src={`${prependURL}${organization.image}`}
+				alt="profile"
+				className="profile-image"
+			/>
 		) : (
 			<img src={Placeholder} alt="profile" className="profile-image" />
 		);

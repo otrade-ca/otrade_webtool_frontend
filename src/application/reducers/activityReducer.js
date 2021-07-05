@@ -25,7 +25,12 @@ import {
 	ACTIVITY_STAKEHOLDER_LIST_FAIL,
 } from '../constants/activityConstants';
 
-// add activity reducer
+/**
+ * add activity reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ACTIVITY_ADD_REQUEST:
@@ -41,7 +46,12 @@ export const activityAddReducer = (state = {}, action) => {
 	}
 };
 
-// get activity details reducer
+/**
+ * get activity details reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityDetailsReducer = (state = { activity: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_DETAILS_REQUEST:
@@ -57,7 +67,12 @@ export const activityDetailsReducer = (state = { activity: {} }, action) => {
 	}
 };
 
-// update activity reducer
+/**
+ * update activity reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityUpdateReducer = (state = { activity: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_UPDATE_REQUEST:
@@ -73,7 +88,12 @@ export const activityUpdateReducer = (state = { activity: {} }, action) => {
 	}
 };
 
-// delete activity reducer
+/**
+ * delete activity reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityDeleteReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ACTIVITY_DELETE_REQUEST:
@@ -89,7 +109,12 @@ export const activityDeleteReducer = (state = {}, action) => {
 	}
 };
 
-// get activity list reducer
+/**
+ * get activity list reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityListReducer = (
 	state = { activities: [], filtered: [] },
 	action
@@ -112,7 +137,12 @@ export const activityListReducer = (
 	}
 };
 
-// get stakeholder activities
+/**
+ * get stakeholder activities
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activityStakeholderListReducer = (
 	state = { stakeholderactivities: [], filtered: [] },
 	action
@@ -135,7 +165,12 @@ export const activityStakeholderListReducer = (
 	}
 };
 
-// save activity to localstorage
+/**
+ * save activity to localstorage
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
 export const activitySaveReducer = (state = { activityInfo: {} }, action) => {
 	switch (action.type) {
 		case ACTIVITY_SAVE_REQUEST:

@@ -10,9 +10,13 @@ import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { btnlinks, navbarlinks, routes } from './utilities';
 import { saveRouteInfo } from '../../../application/actions/routeActions';
+import { getBucketInfo } from '../../../application/api';
 
 const ProjectScreen = ({ match }) => {
 	const projectId = match.params.id;
+
+	const { prependURL } = getBucketInfo('project');
+
 	const { url, path } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -50,7 +54,7 @@ const ProjectScreen = ({ match }) => {
 								<Col md={2} className="image-container">
 									{project && project.image ? (
 										<img
-											src={project.image}
+											src={`${prependURL}${project.image}`}
 											alt="profile"
 											className="profile-image"
 										/>

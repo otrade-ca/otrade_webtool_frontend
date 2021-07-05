@@ -2,6 +2,8 @@ import FormView from './FormView';
 import FormEdit from './FormEdit';
 import UploadPhoto from './UploadPhoto';
 import OrganizationNews from '../news/OrganizationNews';
+import NewsEdit from '../news/NewsEdit';
+import NewsView from '../news/NewsView';
 
 export const btnlinks = [
 	{
@@ -62,12 +64,12 @@ export const routes = [
 		path: '/news/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <OrganizationNews match={match} />,
 	},
-	// {
-	// 	path: '/news/:newsId/view',
-	// 	component: ({ match }) => <NewsView match={match} />,
-	// },
-	// {
-	// 	path: '/news/:newsId/view/edit',
-	// 	component: ({ match }) => <OrganizationScreen match={match} />,
-	// },
+	{
+		path: '/news/:newsId/view',
+		component: ({ match }) => <NewsView match={match} />,
+	},
+	{
+		path: '/news/:newsId/view/edit',
+		component: ({ match }) => <NewsEdit match={match} />,
+	},
 ];

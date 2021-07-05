@@ -10,7 +10,7 @@ import {
 import { STAKEHOLDER_DELETE_RESET } from '../../../application/constants/stakeholderConstants';
 import { useTranslation } from 'react-i18next';
 
-const StakeholdersUserList = memo(({ match, keyword = '' }) => {
+const UserStakeholders = memo(({ match, keyword = '' }) => {
 	const projectId = match.params.id;
 	const { url } = useRouteMatch();
 
@@ -172,4 +172,4 @@ const StakeholdersUserList = memo(({ match, keyword = '' }) => {
 	);
 });
 
-export default StakeholdersUserList;
+export default UserStakeholders;

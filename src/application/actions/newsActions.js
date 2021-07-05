@@ -309,8 +309,6 @@ export const listOrganizationNews =
 				config
 			);
 
-			console.log(data);
-
 			dispatch({ type: NEWS_LIST_ORGANIZATION_SUCCESS, payload: data });
 		} catch (error) {
 			dispatch({
