@@ -152,35 +152,35 @@ const ProjectLocations = ({ match }) => {
 													)}
 												</em>
 											</div>
-											<div className="action-btns">
-												<Link
-													to={`/stakeholders/register/community/${location._id}`}
-													className="btn btn-primary"
-												>
-													<i className="fas fa-plus" />
-													{t('tables.stakeholder')}
-												</Link>
-												<Link
-													to={`/organizations/register/community/${location._id}`}
-													className="btn btn-primary"
-												>
-													<i className="fas fa-plus" />
-													{t('tables.organization')}
-												</Link>
-												<Link
-													to={`/news/register/community/${location._id}`}
-													className="btn btn-secondary"
-												>
-													<i className="fas fa-plus" />
-													{'News'}
-												</Link>
-												<Button
-													variant="danger"
-													onClick={() => deleteHandler(location._id)}
-												>
-													<i className="fas fa-trash"></i> Delete
-												</Button>
-											</div>
+										</div>
+										<div className="action-btns">
+											<Link
+												to={`/stakeholders/register/community/${location._id}`}
+												className="btn btn-primary"
+											>
+												<i className="fas fa-plus" />
+												{t('tables.stakeholder')}
+											</Link>
+											<Link
+												to={`/organizations/register/community/${location._id}`}
+												className="btn btn-primary"
+											>
+												<i className="fas fa-plus" />
+												{t('tables.organization')}
+											</Link>
+											<Link
+												to={`/news/register/community/${location._id}`}
+												className="btn btn-secondary"
+											>
+												<i className="fas fa-plus" />
+												{'News'}
+											</Link>
+											{/* <Button
+												variant="danger"
+												onClick={() => deleteHandler(location._id)}
+											>
+												<i className="fas fa-trash"></i> Delete
+											</Button> */}
 										</div>
 									</Card.Body>
 								</Accordion.Collapse>

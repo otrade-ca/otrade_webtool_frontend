@@ -166,7 +166,8 @@ const ProjectNews = ({
 															</>
 														</p>
 													</div>
-													<div className="action-btns">
+												</div>
+												{/* <div className="action-btns">
 														<Button
 															variant="danger"
 															onClick={() => deleteHandler(item._id)}
@@ -174,8 +175,7 @@ const ProjectNews = ({
 															<i className="fas fa-trash"></i>{' '}
 															{t('action.delete')}
 														</Button>
-													</div>
-												</div>
+													</div> */}
 											</Card.Body>
 										</Accordion.Collapse>
 									</Card>

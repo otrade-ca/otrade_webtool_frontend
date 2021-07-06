@@ -249,7 +249,7 @@ const FormEdit = ({ match, history }) => {
 														as="select"
 														value={assignee}
 														onChange={(e) => handleInputChange(e, i)}
-														className="px-5 mb-3"
+														className="px-5 mb-2"
 													>
 														<option value="">{t('action.select')}</option>
 														{members &&
@@ -263,7 +263,7 @@ const FormEdit = ({ match, history }) => {
 															))}
 													</Form.Control>
 												</Col>
-												<Col md={5}>
+												<Col md={5} className="mb-2">
 													{stakeholders.length !== 1 && (
 														<Button
 															variant="danger"

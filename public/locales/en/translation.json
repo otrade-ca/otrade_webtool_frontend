@@ -80,7 +80,7 @@
             "settlement": "Settlement"
         },
         "organization_Type": {
-            "label": "Geo Political Organization",
+            "label": "Geo. Pol. Org",
             "community": "Community",
             "settlement": "Settlement",
             "town": "Town",

@@ -165,15 +165,15 @@ const StakeholderOrganizations = ({
 															</>
 														</p>
 													</div>
-													<div className="action-btns">
-														<Button
-															variant="danger"
-															onClick={() => deleteHandler(item._id)}
-														>
-															<i className="fas fa-trash"></i> Delete
-														</Button>
-													</div>
 												</div>
+												{/* <div className="action-btns">
+													<Button
+														variant="danger"
+														onClick={() => deleteHandler(item._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</div> */}
 											</Card.Body>
 										</Accordion.Collapse>
 									</Card>

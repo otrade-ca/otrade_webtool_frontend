@@ -165,23 +165,23 @@ const LocationStakeholders = ({
 															</>
 														</p>
 													</div>
-													<div className="action-btns">
-														<Link
-															to={`/activities/register`}
-															className="btn btn-primary"
-														>
-															<i className="fas fa-plus" />
-															{t('tables.activity')}
-														</Link>
+												</div>
+												<div className="action-btns">
+													<Link
+														to={`/activities/register`}
+														className="btn btn-primary"
+													>
+														<i className="fas fa-plus" />
+														Add {t('tables.activity')}
+													</Link>
 
-														<Button
-															variant="danger"
-															onClick={() => deleteHandler(item._id)}
-														>
-															<i className="fas fa-trash"></i>{' '}
-															{t('action.delete')}
-														</Button>
-													</div>
+													{/* <Button
+														variant="danger"
+														onClick={() => deleteHandler(item._id)}
+													>
+														<i className="fas fa-trash"></i>{' '}
+														{t('action.delete')}
+													</Button> */}
 												</div>
 											</Card.Body>
 										</Accordion.Collapse>

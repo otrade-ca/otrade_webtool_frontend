@@ -475,12 +475,13 @@ hr {
 
 .action-btns {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: start;
+	overflow-x: auto;
 }
 
 .action-btns a {
-	margin-bottom: 0.5rem;
+	margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
 .user-stakeholder-image {

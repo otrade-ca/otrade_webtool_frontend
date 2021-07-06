@@ -168,16 +168,16 @@ const Activities = ({
 															</em>
 														</>
 													</div>
-													<div className="d-flex align-items-center">
-														<Button
-															variant="danger"
-															className=" ml-3"
-															onClick={() => deleteHandler(item._id)}
-														>
-															<i className="fas fa-trash"></i> Delete
-														</Button>
-													</div>
 												</div>
+												{/* <div className="d-flex align-items-center">
+													<Button
+														variant="danger"
+														className=" ml-3"
+														onClick={() => deleteHandler(item._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button>
+												</div> */}
 											</Card.Body>
 										</Accordion.Collapse>
 									</Card>
