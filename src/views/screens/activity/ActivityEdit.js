@@ -28,10 +28,10 @@ const ActivityScreen = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
-	const stakeholderProjectList = useSelector(
-		(state) => state.stakeholderProjectList
+	const stakeholderListDropdown = useSelector(
+		(state) => state.stakeholderListDropdown
 	);
-	const { stakeholders } = stakeholderProjectList;
+	const { stakeholders: members } = stakeholderListDropdown;
 
 	// get success on update
 	const activityUpdate = useSelector((state) => state.activityUpdate);
@@ -40,7 +40,7 @@ const ActivityScreen = ({ match }) => {
 	// define state
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
-	const [members, setMembers] = useState([{ member: '' }]);
+	const [stakeholders, setStakeholders] = useState([{ member: '' }]);
 	const [actHours, setActHours] = useState();
 	const [location, setLocation] = useState();
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
@@ -53,13 +53,12 @@ const ActivityScreen = ({ match }) => {
 		} else {
 			if (!activity.activity || activity._id !== activityId) {
 				dispatch(getActivityDetails(activityId));
-				dispatch(listStakeholdersDropdown(locationId));
 			} else {
 				setActivityType(activity.activity);
 				setActHours(activity.hours);
 				setDate(activity.date.substring(0, 10));
 				setLocation(activity.location);
-				setMembers(activity.stakeholders);
+				setStakeholders(activity.stakeholders);
 				setcompromise(activity.compromise);
 				setDispoints(activity.discussPoints);
 			}
@@ -68,14 +67,14 @@ const ActivityScreen = ({ match }) => {
 
 	//add select field
 	const addHandler = () => {
-		setMembers([...members, { member: '' }]);
+		setStakeholders([...members, { member: '' }]);
 	};
 
 	//filter out element i
 	const removeHandler = (i) => {
 		const stakeholderToRemove = members[i];
 		const list = members.filter((i) => i !== stakeholderToRemove);
-		setMembers(list);
+		setStakeholders(list);
 	};
 
 	//add element to array && provide validation
@@ -92,7 +91,7 @@ const ActivityScreen = ({ match }) => {
 			setAlert('Please make sure the same stakeholder is not added twice.');
 		} else {
 			list[i] = e.target.value;
-			setMembers(list);
+			setStakeholders(list);
 		}
 	};
 
@@ -224,10 +223,10 @@ const ActivityScreen = ({ match }) => {
 						</Row>
 						<hr className="mb-3" />
 						<Row className="mt-3 mb-5">
-							<Col md={8}>
+							<Col md={6}>
 								<Form.Label>Parties Involved</Form.Label>
-								{members &&
-									members.map((assignee, i) => (
+								{stakeholders &&
+									stakeholders.map((assignee, i) => (
 										<Row key={assignee._id}>
 											<Col md={7}>
 												<Form.Control
@@ -237,8 +236,8 @@ const ActivityScreen = ({ match }) => {
 													className="px-5 mb-3"
 												>
 													<option value="">--Select--</option>
-													{stakeholders &&
-														stakeholders.map((stakeholder) => (
+													{members &&
+														members.map((stakeholder) => (
 															<option
 																key={stakeholder._id}
 																value={stakeholder._id}

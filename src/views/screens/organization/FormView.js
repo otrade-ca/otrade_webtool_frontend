@@ -211,7 +211,7 @@ const FormView = ({ match }) => {
 								</Form.Label>
 							</Row>
 							<Row>
-								<Col md={9}>{renderStakeholders()}</Col>
+								<Col md={6}>{renderStakeholders()}</Col>
 							</Row>
 							<hr />
 							<Row className="mt-3">

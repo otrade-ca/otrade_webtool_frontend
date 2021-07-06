@@ -174,7 +174,7 @@ const ActivityView = ({ match }) => {
 							</Row>
 							<hr className="mb-3" />
 							<Row className="mt-3">
-								<Col md={8}>
+								<Col md={6}>
 									<Form.Label>Parties Involved</Form.Label>
 									{members &&
 										members.map((assignee) => (

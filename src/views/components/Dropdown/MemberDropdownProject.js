@@ -74,12 +74,12 @@ const MemberDropdownProject = ({ label }) => {
 				<Message>{error.message}</Message>
 			) : (
 				<Row className="mt-4">
-					<Col md={8}>
+					<Col md={6}>
 						<Form.Label>{label}</Form.Label>
 						{members &&
 							members.map((assignee, i) => (
 								<Row key={i}>
-									<Col md={9}>
+									<Col md={7}>
 										<Form.Control
 											as="select"
 											value={assignee._id}
@@ -95,7 +95,7 @@ const MemberDropdownProject = ({ label }) => {
 												))}
 										</Form.Control>
 									</Col>
-									<Col md={3} className="mb-2">
+									<Col md={5} className="mb-2">
 										{members && members.length !== 1 && (
 											<Button
 												variant="danger"

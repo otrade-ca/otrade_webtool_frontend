@@ -240,11 +240,11 @@ const FormEdit = ({ match, history }) => {
 								</Form.Label>
 							</Row>
 							<Row>
-								<Col md={9}>
+								<Col md={6}>
 									{stakeholders &&
 										stakeholders.map((assignee, i) => (
 											<Row key={assignee._id}>
-												<Col md={8}>
+												<Col md={7}>
 													<Form.Control
 														as="select"
 														value={assignee}
@@ -263,7 +263,7 @@ const FormEdit = ({ match, history }) => {
 															))}
 													</Form.Control>
 												</Col>
-												<Col md={4}>
+												<Col md={5}>
 													{stakeholders.length !== 1 && (
 														<Button
 															variant="danger"
