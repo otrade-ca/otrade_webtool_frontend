@@ -62,7 +62,7 @@ const Activities = ({
 				<>
 					{stakeholderactivities && stakeholderactivities.length === 0 ? (
 						<Empty
-							itemLink={`register`}
+							itemLink={`/activities/register/stakeholder/${stakeholderId}`}
 							url={'/activities'}
 							type={t('tables.activity')}
 							group={'activities'}

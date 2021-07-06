@@ -22,9 +22,16 @@
 	margin-top: 6rem;
 }
 
+.sidebar-headings {
+	font-size: 16px !important;
+	padding-left: 1.5rem !important;
+}
+
 .sidebar-info {
 	margin-top: 0.25rem;
-	font-size: 16px;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 2rem;
 }
 
 .sidebar-image-container {
@@ -81,7 +88,11 @@
 .list-group-item {
 	border: none !important;
 	padding-top: 0.5rem !important;
-	padding-bottom: 0.5rem !important;
-	padding-left: 1rem !important;
+	padding-bottom: 0 !important;
+	padding-left: 2rem !important;
+}
+
+.list-group-item span {
+	font-size: 12px !important;
 	font-weight: 400;
 }

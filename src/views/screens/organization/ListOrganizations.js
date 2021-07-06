@@ -2,7 +2,7 @@
  * List of all the organizations belonging to a community
  */
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { Accordion, Button, Card, Row } from 'react-bootstrap';
 import { useDispatch, connect } from 'react-redux';
 import {
@@ -34,7 +34,6 @@ const OrganizationsList = ({
 	organizationDelete: { success },
 }) => {
 	const locationId = match.params.id;
-	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;

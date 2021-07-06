@@ -9,9 +9,7 @@ import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
 const FormView = ({ match }) => {
-	console.log(match);
 	const organizationId = match.params.id;
-
 	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
@@ -56,6 +54,35 @@ const FormView = ({ match }) => {
 			setUpdatedAt(orgDetails.updatedAt);
 		}
 	}, [dispatch, orgDetails, organizationId, locationId]);
+
+	const renderStakeholders = () => {
+		return (
+			<>
+				{stakeholders &&
+					stakeholders.map((assignee) => (
+						<Row key={assignee._id}>
+							<Col md={7}>
+								<Form.Control
+									as="select"
+									value={assignee}
+									className="px-5 mb-3"
+									readOnly
+									disabled
+								>
+									<option value="">{t('action.select')}</option>
+									{members &&
+										members.map((stakeholder) => (
+											<option key={stakeholder._id} value={stakeholder._id}>
+												{stakeholder.firstName} {stakeholder.lastName}
+											</option>
+										))}
+								</Form.Control>
+							</Col>
+						</Row>
+					))}
+			</>
+		);
+	};
 
 	return (
 		<>
@@ -184,33 +211,7 @@ const FormView = ({ match }) => {
 								</Form.Label>
 							</Row>
 							<Row>
-								<Col md={9}>
-									{stakeholders &&
-										stakeholders.map((assignee) => (
-											<Row key={assignee._id}>
-												<Col md={7}>
-													<Form.Control
-														as="select"
-														value={assignee}
-														className="px-5 mb-3"
-														readOnly
-														disabled
-													>
-														<option value="">{t('action.select')}</option>
-														{members &&
-															members.map((stakeholder) => (
-																<option
-																	key={stakeholder._id}
-																	value={stakeholder._id}
-																>
-																	{stakeholder.firstName} {stakeholder.lastName}
-																</option>
-															))}
-													</Form.Control>
-												</Col>
-											</Row>
-										))}
-								</Col>
+								<Col md={9}>{renderStakeholders()}</Col>
 							</Row>
 							<hr />
 							<Row className="mt-3">

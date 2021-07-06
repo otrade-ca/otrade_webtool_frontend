@@ -5,15 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addStakeholder } from '../../../application/actions/stakeholderActions';
 import { CardContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
+import { getProjectId } from '../../../application/localStorage';
 
 const AddForm = ({ history }) => {
 	const { id } = useParams();
+
+	const projectId = getProjectId();
 	const { t } = useTranslation();
 
 	//get projectDetails
 	const dispatch = useDispatch();
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
 
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
@@ -69,7 +70,7 @@ const AddForm = ({ history }) => {
 					organization,
 					media,
 					org_Position: orgPosition,
-					project: project._id,
+					project: projectId,
 				},
 				id,
 				routeInfo,

@@ -41,18 +41,18 @@ const InfluenceForm = ({ history, match }) => {
 	console.log('incoming routeInfo', routeInfo);
 	console.log('success', success);
 
-	useEffect(() => {
-		if (success) {
-			// clear page
-			dispatch({ type: INFLUENCE_ADD_RESET });
-		} else {
-			if (!stakeholder.firstName || stakeholder._id !== id) {
-				dispatch(getStakeholderDetails(id));
-			} else {
-				setFirstName(stakeholder.firstName);
-			}
-		}
-	}, [dispatch, success]);
+	// useEffect(() => {
+	// 	if (success) {
+	// 		// clear page
+	// 		dispatch({ type: INFLUENCE_ADD_RESET });
+	// 	} else {
+	// 		if (!stakeholder.firstName || stakeholder._id !== id) {
+	// 			dispatch(getStakeholderDetails(id));
+	// 		} else {
+	// 			setFirstName(stakeholder.firstName);
+	// 		}
+	// 	}
+	// }, [dispatch, success]);
 
 	// dispatch, success, id, stakeholder
 
@@ -106,7 +106,7 @@ const InfluenceForm = ({ history, match }) => {
 						<Form.Group controlId="position">
 							<Row>
 								<Col md={8}>
-									<Form.Label>What is {firstName}'s position?</Form.Label>
+									<Form.Label>What is the stakeholder's position?</Form.Label>
 								</Col>
 								<Col md={4}>
 									<Form.Control
@@ -136,7 +136,7 @@ const InfluenceForm = ({ history, match }) => {
 							<Row>
 								<Col md={8}>
 									<Form.Label>
-										What is {firstName}'s level of influence on the project?
+										What is the stakeholder's level of influence on the project?
 									</Form.Label>
 								</Col>
 								<Col md={4}>
@@ -160,7 +160,7 @@ const InfluenceForm = ({ history, match }) => {
 							<Row>
 								<Col md={8}>
 									<Form.Label>
-										What is {firstName}'s level of impact on the project?
+										What is the stakeholder's level of impact on the project?
 									</Form.Label>
 								</Col>
 								<Col md={4}>

@@ -13,7 +13,7 @@ import { setAlert } from '../../../application/actions/alertActions';
 import { getProjectId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
 
-const MemberDropdownProject = ({ label, history }) => {
+const MemberDropdownProject = ({ label }) => {
 	// get projectId from localstorage
 	const projectId = getProjectId();
 	// get list of stakeholders

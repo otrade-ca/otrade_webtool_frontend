@@ -18,9 +18,7 @@ const ProjectAddScreen = ({ history }) => {
 	const [coordinates, setCoordinates] = useState('');
 	const [currency, setCurrency] = useState('');
 	const [measurements, setMeasurements] = useState('');
-	const [image, setImage] = useState('');
 	const [comment, setComment] = useState('');
-	const [uploading, setUploading] = useState(false);
 
 	const dispatch = useDispatch();
 	const userLogin = useSelector((state) => state.userLogin);
@@ -39,28 +37,6 @@ const ProjectAddScreen = ({ history }) => {
 			}
 		}
 	}, [dispatch, history, success, userInfo]);
-
-	const uploadFileHandler = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-		formData.append('image', file);
-		setUploading(true);
-
-		try {
-			const config = {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			};
-
-			const { data } = await axios.post('/api/v1/uploads', formData, config);
-
-			setImage(data);
-			setUploading(false);
-		} catch (error) {
-			setUploading(false);
-		}
-	};
 
 	const onTextChange = (e) => {
 		e.preventDefault();
@@ -97,7 +73,6 @@ const ProjectAddScreen = ({ history }) => {
 				coordinates,
 				currency,
 				measurements,
-				image,
 				comment,
 			})
 		);
@@ -210,36 +185,6 @@ const ProjectAddScreen = ({ history }) => {
 							</Form.Group>
 						</Col>
 					</Row>
-					{/* <hr />
-					<Row>
-						<Col>
-							<Form.Group controlId="image">
-								<Form.Label>Image</Form.Label>
-								<Row className="mb-3">
-									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
-										<Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File>
-									</Col>
-								</Row>
-							</Form.Group>
-						</Col>
-					</Row> */}
 					<hr />
 					<Row className="mt-3">
 						<Col>

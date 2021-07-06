@@ -9,6 +9,15 @@ import { useTranslation } from 'react-i18next';
 const UserAddScreen = ({ history }) => {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch();
+
+	//get logged-in user information
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
+	const userRegister = useSelector((state) => state.userRegister);
+	const { success } = userRegister;
+
 	//define states
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -19,19 +28,6 @@ const UserAddScreen = ({ history }) => {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [message, setMessage] = useState('');
-
-	//add fileupload
-	const [image, setImage] = useState('');
-	//const [uploading, setUploading] = useState(false);
-
-	const dispatch = useDispatch();
-
-	//get logged-in user information
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
-	const userRegister = useSelector((state) => state.userRegister);
-	const { success } = userRegister;
 
 	useEffect(() => {
 		if (!userInfo || userInfo.role !== 'admin') {
@@ -54,7 +50,6 @@ const UserAddScreen = ({ history }) => {
 				registerUser({
 					firstName,
 					lastName,
-					image,
 					email,
 					telephone,
 					role,
@@ -161,36 +156,6 @@ const UserAddScreen = ({ history }) => {
 								</Form.Group>
 							</Col>
 						</Row>
-						{/* <hr className="my-4" />
-					<Row>
-						<Col>
-							<Form.Group controlId="image">
-								<Form.Label>Image</Form.Label>
-								<Row className="mb-3">
-									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
-										<Form.File
-											id="image-file"
-											label="Choose File"
-											custom
-											onChange={uploadFileHandler}
-										>
-											{uploading && <Loader />}
-										</Form.File>
-									</Col>
-								</Row>
-							</Form.Group>
-						</Col>
-					</Row> */}
 						<hr className="my-4" />
 						<Row>
 							<Col md={6}>

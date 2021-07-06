@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { Accordion, Card, Button, Row } from 'react-bootstrap';
 import { useDispatch, connect } from 'react-redux';
 import { Loader, Message, Empty } from '../../components/HelperComponents';
@@ -24,7 +24,6 @@ const LocationStakeholders = ({
 	stakeholderLocationList: { loading, error, stakeholders, pages, page, count },
 }) => {
 	const communityId = match.params.id;
-	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;

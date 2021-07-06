@@ -21,6 +21,23 @@ const NewsView = ({ match }) => {
 	const newsDetails = useSelector((state) => state.newsDetails);
 	const { loading, news, error } = newsDetails;
 
+	console.log(news);
+
+	const stakeholderListDropdown = useSelector(
+		(state) => state.stakeholderListDropdown
+	);
+	const { stakeholders: members } = stakeholderListDropdown;
+
+	const locationListDropdown = useSelector(
+		(state) => state.locationListDropdown
+	);
+	const { locations: locs } = locationListDropdown;
+
+	const organizationDropdown = useSelector(
+		(state) => state.organizationDropdown
+	);
+	const { organizations: orgs } = organizationDropdown;
+
 	// define states
 	const [title, setTitle] = useState();
 	const [theme, setTheme] = useState();
@@ -28,6 +45,9 @@ const NewsView = ({ match }) => {
 	const [date, setDate] = useState();
 	const [projImpact, setProjImpact] = useState();
 	const [comment, setComment] = useState();
+	const [stakeholders, setStakeholders] = useState([{ member: '' }]);
+	const [communities, setCommunities] = useState([{ community: '' }]);
+	const [organizations, setOrganizations] = useState([{ organization: '' }]);
 
 	useEffect(() => {
 		if (!news.title || news._id !== newsId) {
@@ -39,8 +59,107 @@ const NewsView = ({ match }) => {
 			setDate(news.date.substring(0, 10));
 			setProjImpact(news.project_Impact);
 			setComment(news.comment);
+			setStakeholders(news.stakeholders || [{ member: '' }]);
+			setCommunities(news.communities || [{ community: '' }]);
+			setOrganizations(news.organizations || [{ organization: '' }]);
 		}
-	}, [dispatch, news, newsId]);
+	}, [dispatch, news, newsId, projectId]);
+
+	const renderStakeholders = () => {
+		return (
+			<Row className="mt-4">
+				<Col md={6}>
+					<Form.Label>Stakeholders</Form.Label>
+					{stakeholders &&
+						stakeholders.map((assignee) => (
+							<Row key={assignee._id}>
+								<Col md={8}>
+									<Form.Control
+										as="select"
+										value={assignee}
+										className="px-5 mb-3"
+										readOnly
+										disabled
+									>
+										<option value="">{t('action.select')}</option>
+										{members &&
+											members.map((stakeholder) => (
+												<option key={stakeholder._id} value={stakeholder._id}>
+													{stakeholder.firstName} {stakeholder.lastName}
+												</option>
+											))}
+									</Form.Control>
+								</Col>
+							</Row>
+						))}
+				</Col>
+			</Row>
+		);
+	};
+
+	const renderLocations = () => {
+		return (
+			<Row className="mt-4">
+				<Col md={6}>
+					<Form.Label>Communities</Form.Label>
+					{communities &&
+						communities.map((community, index) => (
+							<Row key={index}>
+								<Col md={8}>
+									<Form.Control
+										as="select"
+										value={community}
+										className="px-5 mb-3"
+										readOnly
+										disabled
+									>
+										<option value="">{t('action.select')}</option>
+										{locs &&
+											locs.map((loc, index) => (
+												<option key={loc._id} value={index}>
+													{loc.location}
+												</option>
+											))}
+									</Form.Control>
+								</Col>
+							</Row>
+						))}
+				</Col>
+			</Row>
+		);
+	};
+
+	const renderOrganizations = () => {
+		return (
+			<Row className="mt-4">
+				<Col md={6}>
+					<Form.Label>Organizations</Form.Label>
+					{organizations &&
+						organizations.map((organization, index) => (
+							<Row key={index}>
+								<Col md={8}>
+									<Form.Control
+										as="select"
+										value={organization}
+										className="px-5 mb-3"
+										readOnly
+										disabled
+									>
+										<option value="">{t('action.select')}</option>
+										{orgs &&
+											orgs.map((org, index) => (
+												<option key={index} value={org._id}>
+													{org.name}
+												</option>
+											))}
+									</Form.Control>
+								</Col>
+							</Row>
+						))}
+				</Col>
+			</Row>
+		);
+	};
 
 	return (
 		<>
@@ -147,10 +266,12 @@ const NewsView = ({ match }) => {
 								</Col>
 							</Row>
 							<hr />
-
+							{renderLocations()}
 							<hr />
-
-							<Row></Row>
+							{renderOrganizations()}
+							<hr />
+							{renderStakeholders()}
+							<hr />
 						</Form>
 					</Card.Body>
 				</Card>

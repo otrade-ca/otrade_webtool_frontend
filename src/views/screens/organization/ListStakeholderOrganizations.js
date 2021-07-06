@@ -3,7 +3,7 @@
  */
 import React, { useEffect } from 'react';
 import { Accordion, Button, Card, Row } from 'react-bootstrap';
-import { Route, Link, useRouteMatch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { useDispatch, connect } from 'react-redux';
 import {
 	listStakeholderOrganizations,
@@ -34,7 +34,6 @@ const StakeholderOrganizations = ({
 	organizationDelete: { success },
 }) => {
 	const stakeholderId = match.params.id;
-	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;

@@ -28,8 +28,6 @@ const NewsForm = ({ history }) => {
 	);
 	const { organizations } = organizationAssignment;
 
-	console.log(organizations);
-
 	// define states
 	const [title, setTitle] = useState();
 	const [theme, setTheme] = useState();
@@ -41,7 +39,6 @@ const NewsForm = ({ history }) => {
 	// handle submit form
 	const submitHandler = (e) => {
 		e.preventDefault();
-
 		dispatch(
 			addNews(
 				{

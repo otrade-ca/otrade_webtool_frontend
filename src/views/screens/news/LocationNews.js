@@ -60,10 +60,18 @@ const LocationNews = ({
 			) : (
 				<>
 					{news && news.length === 0 ? (
-						<Empty url={url} type={'News'} group={'news'} />
+						<Empty
+							itemLink={`/news/register`}
+							url={`/news`}
+							type={'News'}
+							group={'news'}
+						/>
 					) : (
 						<Card.Header className="my-card-header">
 							<h4>{`News (${count})`}</h4>
+							<Link to={`/news/register`} className="btn btn-primary ml-2">
+								<i className="fas fa-plus"></i> {t('action.register')}
+							</Link>
 						</Card.Header>
 					)}
 					<Card.Body>

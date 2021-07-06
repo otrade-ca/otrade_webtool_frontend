@@ -10,7 +10,7 @@ import { assignLocation } from '../../../application/actions/locationActions';
 import { setAlert } from '../../../application/actions/alertActions';
 import { Loader, Message } from '../../components/HelperComponents';
 
-const CommunityDropDown = ({ label, id }) => {
+const CommunityDropDown = ({ label, id, arr }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 	const locationListDropdown = useSelector(

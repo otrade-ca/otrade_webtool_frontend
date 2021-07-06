@@ -18,7 +18,7 @@ const UserProjects = memo(({ match }) => {
 
 	const dispatch = useDispatch();
 	const projectUser = useSelector((state) => state.projectUser);
-	const { loading, error, projects, filtered } = projectUser;
+	const { loading, error, projects } = projectUser;
 
 	useEffect(() => {
 		dispatch(listUserProjects(userId));

@@ -8,20 +8,17 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrganization } from '../../../application/actions/organizationAction';
 import { useTranslation } from 'react-i18next';
-import { getLocationId } from '../../../application/localStorage';
+import { getLocationId, getProjectId } from '../../../application/localStorage';
 import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 import { CardContainer } from '../../components/HelperComponents';
 
 const AddOrganizationScreen = ({ match, history }) => {
 	// id is either match or from localStorage
 	const id = match.params.id ? match.params.id : getLocationId();
+	const projectId = getProjectId();
 
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
-
-	//get project details
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
 
 	// get location details
 	const locationDetails = useSelector((state) => state.locationDetails);
@@ -56,7 +53,7 @@ const AddOrganizationScreen = ({ match, history }) => {
 					telephone,
 					website,
 					location: id || loc._id,
-					project: project._id,
+					project: projectId,
 					stakeholders: members,
 				},
 				routeInfo,
