@@ -23,6 +23,11 @@ import {
 	LOCATION_DROPDOWN_FAIL,
 	LOCATION_ASSIGN_REQUEST,
 	LOCATION_ASSIGN_SUCCESS,
+	LOCATION_LIST_DROPDOWN_REQUEST,
+	LOCATION_LIST_DROPDOWN_SUCCESS,
+	LOCATION_LIST_DROPDOWN_FAIL,
+	LOCATION_LIST_ASSIGN_REQUEST,
+	LOCATION_LIST_ASSIGN_SUCCESS,
 } from '../constants/locationConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL, getBucketInfo } from '../api';
@@ -311,6 +316,8 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 			},
 		};
 
+		console.log(data);
+
 		const {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/locations/user/${userId}`, config);
@@ -335,6 +342,7 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 export const listDropdownLocations =
 	(projectId) => async (dispatch, getState) => {
 		try {
+			dispatch({ type: LOCATION_LIST_DROPDOWN_REQUEST });
 			dispatch({ type: LOCATION_DROPDOWN_REQUEST });
 
 			// get logged in user
@@ -354,8 +362,17 @@ export const listDropdownLocations =
 				config
 			);
 
+			dispatch({ type: LOCATION_LIST_DROPDOWN_SUCCESS, payload: data });
 			dispatch({ type: LOCATION_DROPDOWN_SUCCESS, payload: data });
 		} catch (error) {
+			dispatch({
+				type: LOCATION_LIST_DROPDOWN_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+
 			dispatch({
 				type: LOCATION_DROPDOWN_FAIL,
 				payload:
@@ -367,7 +384,17 @@ export const listDropdownLocations =
 	};
 
 /**
- * adds a stakeholder to a list of stakeholders for dropdown
+ *
+ * @param {*} data
+ * @returns
+ */
+export const assignLocations = (data) => (dispatch) => {
+	dispatch({ type: LOCATION_LIST_ASSIGN_REQUEST });
+	dispatch({ type: LOCATION_LIST_ASSIGN_SUCCESS, payload: data });
+};
+
+/**
+ *
  * @param {*} data
  * @returns
  */

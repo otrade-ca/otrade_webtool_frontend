@@ -6,11 +6,11 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { listDropdownLocations } from '../../../application/actions/locationActions';
-import { assignLocation } from '../../../application/actions/locationActions';
+import { assignLocations } from '../../../application/actions/locationActions';
 import { setAlert } from '../../../application/actions/alertActions';
 import { Loader, Message } from '../../components/HelperComponents';
 
-const CommunityDropDown = ({ label, id, arr }) => {
+const CommunityDropDown = ({ label, id }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 	const locationListDropdown = useSelector(
@@ -57,7 +57,7 @@ const CommunityDropDown = ({ label, id, arr }) => {
 			);
 		} else {
 			list[i] = e.target.value;
-			dispatch(assignLocation(list));
+			dispatch(assignLocations(list));
 			setCommunities(list);
 		}
 	};

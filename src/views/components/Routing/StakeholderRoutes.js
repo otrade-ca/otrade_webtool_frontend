@@ -14,6 +14,11 @@ const StakeholderRoutes = () => {
 				path="/stakeholders/register/community/:id"
 				component={AddForm}
 			/>
+			<PrivateRoute
+				exact
+				path="/stakeholders/register/project/:id"
+				component={AddForm}
+			/>
 			<PrivateRoute path="/stakeholders/:id" component={UserStakeholders} />
 			<PrivateRoute path="/stakeholder/:id" component={StakeholderScreen} />
 		</Switch>

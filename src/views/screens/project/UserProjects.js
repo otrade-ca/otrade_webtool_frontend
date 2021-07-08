@@ -71,14 +71,6 @@ const UserProjects = memo(({ match }) => {
 												</div>
 											</div>
 										</div>
-										<div className="table-card-item">
-											<div className="item-two">
-												<div>
-													<>{project.createdAt.substring(0, 10)}</>{' '}
-												</div>
-												<div className="item-category">Registered</div>
-											</div>
-										</div>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey={index + 1}>
 										<Card.Body>
@@ -110,8 +102,6 @@ const UserProjects = memo(({ match }) => {
 															</>
 														)}
 													</p>
-												</div>
-												<div className="d-flex align-items-start mr-5">
 													<p>
 														<>{t('utility.status')}: </>
 														{project.status === 'open' ? (

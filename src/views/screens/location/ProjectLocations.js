@@ -153,6 +153,7 @@ const ProjectLocations = ({ match }) => {
 												</em>
 											</div>
 										</div>
+										<hr />
 										<div className="action-btns">
 											<Link
 												to={`/stakeholders/register/community/${location._id}`}

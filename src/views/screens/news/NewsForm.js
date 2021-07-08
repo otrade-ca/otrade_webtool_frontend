@@ -17,8 +17,8 @@ const NewsForm = ({ history }) => {
 	const { t } = useTranslation();
 
 	const dispatch = useDispatch();
-	const locationAssign = useSelector((state) => state.locationAssign);
-	const { locations } = locationAssign;
+	const locationsAssign = useSelector((state) => state.locationsAssign);
+	const { locations } = locationsAssign;
 
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;

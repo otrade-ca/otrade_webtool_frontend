@@ -8,6 +8,11 @@ const ActivityRoutes = () => {
 		<Switch>
 			<PrivateRoute
 				exact
+				path="/activities/register/project/:id"
+				component={ActivityForm}
+			/>
+			<PrivateRoute
+				exact
 				path="/activities/register/stakeholder/:id"
 				component={ActivityForm}
 			/>

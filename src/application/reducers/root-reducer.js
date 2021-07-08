@@ -90,6 +90,8 @@ import {
 	locationListReducer,
 	locationUserListReducer,
 	locationListDropdownReducer,
+	locationDropdownReducer,
+	locationsAssignReducer,
 	locationAssignReducer,
 } from './locationReducer';
 import {
@@ -205,7 +207,9 @@ const rootReducer = combineReducers({
 	locationList: locationListReducer,
 	locationUserList: locationUserListReducer,
 	locationAssign: locationAssignReducer,
+	locationsAssign: locationsAssignReducer,
 	locationListDropdown: locationListDropdownReducer,
+	locationDropdown: locationDropdownReducer,
 
 	// news reducers
 	newsAdd: newsAddReducer,

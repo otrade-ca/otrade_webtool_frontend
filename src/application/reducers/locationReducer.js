@@ -24,9 +24,15 @@ import {
 	LOCATION_DROPDOWN_REQUEST,
 	LOCATION_DROPDOWN_SUCCESS,
 	LOCATION_DROPDOWN_FAIL,
+	LOCATION_LIST_DROPDOWN_REQUEST,
+	LOCATION_LIST_DROPDOWN_SUCCESS,
+	LOCATION_LIST_DROPDOWN_FAIL,
 	LOCATION_ASSIGN_REQUEST,
 	LOCATION_ASSIGN_SUCCESS,
 	LOCATION_ASSIGN_RESET,
+	LOCATION_LIST_ASSIGN_REQUEST,
+	LOCATION_LIST_ASSIGN_SUCCESS,
+	LOCATION_LIST_ASSIGN_RESET,
 } from '../constants/locationConstants';
 
 /**
@@ -171,12 +177,35 @@ export const locationListDropdownReducer = (
 	action
 ) => {
 	switch (action.type) {
-		case LOCATION_DROPDOWN_REQUEST:
+		case LOCATION_LIST_DROPDOWN_REQUEST:
 			return { loading: true, locations: [] };
-		case LOCATION_DROPDOWN_SUCCESS:
+		case LOCATION_LIST_DROPDOWN_SUCCESS:
 			return {
 				loading: false,
 				locations: action.payload.locations,
+			};
+		case LOCATION_LIST_DROPDOWN_FAIL:
+			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
+/**
+ * get a location for dropdown
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const locationDropdownReducer = (state = { location: {} }, action) => {
+	switch (action.type) {
+		case LOCATION_DROPDOWN_REQUEST:
+			return { loading: true, location: {} };
+		case LOCATION_DROPDOWN_SUCCESS:
+			return {
+				loading: false,
+				location: action.payload.location,
 			};
 		case LOCATION_DROPDOWN_FAIL:
 			return { loading: false, error: action.payload };
@@ -187,19 +216,46 @@ export const locationListDropdownReducer = (
 };
 
 /**
- * assigns location to a project reducer
+ * assigns locations to a project reducer
  * @param {*} state
  * @param {*} action
  * @returns
  */
-export const locationAssignReducer = (state = { locations: [] }, action) => {
+export const locationsAssignReducer = (state = { locations: [] }, action) => {
+	switch (action.type) {
+		case LOCATION_LIST_ASSIGN_REQUEST:
+			return { loading: true, ...state };
+		case LOCATION_LIST_ASSIGN_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				locations: action.payload,
+			};
+		case LOCATION_LIST_ASSIGN_RESET:
+			return { locations: [] };
+		default:
+			return state;
+	}
+};
+
+/**
+ * assigns locations to a project reducer
+ * @param {*} state
+ * @param {*} action
+ * @returns
+ */
+export const locationAssignReducer = (state = { location: {} }, action) => {
 	switch (action.type) {
 		case LOCATION_ASSIGN_REQUEST:
 			return { loading: true, ...state };
 		case LOCATION_ASSIGN_SUCCESS:
-			return { loading: false, success: true, locations: action.payload };
+			return {
+				loading: false,
+				success: true,
+				location: action.payload,
+			};
 		case LOCATION_ASSIGN_RESET:
-			return { locations: [] };
+			return { location: {} };
 		default:
 			return state;
 	}

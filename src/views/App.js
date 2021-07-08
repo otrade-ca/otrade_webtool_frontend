@@ -68,7 +68,7 @@ const Home = () => {
 					{/**Admin Routes */}
 					<Route component={AdminRoutes} />
 				</Container>
-				<Footer />
+				{/* <Footer /> */}
 			</Wrapper>
 		</Router>
 	);

@@ -68,9 +68,10 @@ const ProjectScreen = ({ match }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<>
-											<strong>{project.projectName}</strong>
-										</>
+										<strong>
+											<em>Project: </em>
+											{project.projectName}
+										</strong>
 									</h1>
 
 									<Row className="middle-row d-flex justify-content-between">
@@ -138,19 +139,18 @@ const ProjectScreen = ({ match }) => {
 					) : (
 						<Loader />
 					)}
-
-					<Switch>
-						{routes.map((item, index) => (
-							<Route
-								key={index}
-								exact
-								path={`${path}${item.path}`}
-								render={item.component}
-							/>
-						))}
-					</Switch>
 				</>
 			)}
+			<Switch>
+				{routes.map((item, index) => (
+					<Route
+						key={index}
+						exact
+						path={`${path}${item.path}`}
+						render={item.component}
+					/>
+				))}
+			</Switch>
 		</>
 	);
 };

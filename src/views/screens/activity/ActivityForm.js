@@ -5,6 +5,7 @@ import { addActivity } from '../../../application/actions/activityActions';
 import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 import { useTranslation } from 'react-i18next';
 import { CardContainer } from '../../components/HelperComponents';
+import SingleCommunityDropdown from '../../components/Dropdown/SingleCommunityDropdown';
 
 const ActivityForm = ({ history }) => {
 	const { t } = useTranslation();
@@ -14,6 +15,11 @@ const ActivityForm = ({ history }) => {
 	const stakeholderAssign = useSelector((state) => state.stakeholderAssign);
 	const { members } = stakeholderAssign;
 
+	const locationAssign = useSelector((state) => state.locationAssign);
+	const { location } = locationAssign;
+
+	console.log('location', location);
+
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 
@@ -21,7 +27,7 @@ const ActivityForm = ({ history }) => {
 	const [activityType, setActivityType] = useState();
 	const [date, setDate] = useState();
 	const [actHours, setActHours] = useState();
-	const [location, setLocation] = useState();
+	const [address, setAddress] = useState();
 	const [disPoints, setDispoints] = useState();
 	const [compromise, setcompromise] = useState();
 
@@ -36,7 +42,7 @@ const ActivityForm = ({ history }) => {
 					activity: activityType,
 					date,
 					hours: actHours,
-					location,
+					address,
 					stakeholders: members,
 					discussPoints: disPoints,
 					compromise,
@@ -108,13 +114,15 @@ const ActivityForm = ({ history }) => {
 								type="text"
 								placeholder={t('activity.location.placeholder')}
 								value={location}
-								onChange={(e) => setLocation(e.target.value)}
+								onChange={(e) => setAddress(e.target.value)}
 							></Form.Control>
 						</Form.Group>
 					</Col>
 				</Row>
 				<hr />
 				<MemberDropdownProject label={'Stakeholders'} />
+				<hr />
+				<SingleCommunityDropdown label={'Community'} />
 				<hr />
 				<Form.Group controlId="discussion">
 					<Form.Label>{t('activity.discussion.label')}</Form.Label>

@@ -3,7 +3,7 @@
  */
 import React, { useEffect } from 'react';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
-import { Accordion, Button, Card, Row } from 'react-bootstrap';
+import { Accordion, Button, Card, Row, Col } from 'react-bootstrap';
 import { useDispatch, connect } from 'react-redux';
 import {
 	listProjectOrganizations,
@@ -151,15 +151,24 @@ const OrganizationsProjectList = ({
 														</>
 														<br />
 													</div>
-													<div className="d-flex align-items-center">
-														<Button
-															variant="danger"
-															onClick={() => deleteHandler(item._id)}
-														>
-															<i className="fas fa-trash"></i> Delete
-														</Button>
-													</div>
 												</div>
+												<hr />
+												<Row className="d-flex align-items-center">
+													<Col>
+														<Link
+															to={`/news/register`}
+															className="btn btn-secondary"
+														>
+															<i className="fas fa-plus" /> Add News
+														</Link>
+													</Col>
+													{/* <Button
+														variant="danger"
+														onClick={() => deleteHandler(item._id)}
+													>
+														<i className="fas fa-trash"></i> Delete
+													</Button> */}
+												</Row>
 											</Card.Body>
 										</Accordion.Collapse>
 									</Card>

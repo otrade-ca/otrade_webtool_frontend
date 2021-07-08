@@ -7,6 +7,7 @@ import OrganizationsProjectList from '../organization/OrganizationsProjectList';
 import ProjectNews from '../news/ProjectNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
+import Actions from '../project/Actions';
 
 export const btnlinks = [
 	{
@@ -19,17 +20,21 @@ export const btnlinks = [
 
 export const navbarlinks = [
 	{
+		link: '/about',
+		type: 'About',
+	},
+	{
 		link: '/communities',
 		type: 'Communities',
 	},
-	// {
-	// 	link: '/stakeholders',
-	// 	type: 'Stakeholders',
-	// },
-	// {
-	// 	link: '/organizations',
-	// 	type: 'Organizations',
-	// },
+	{
+		link: '/stakeholders',
+		type: 'Stakeholders',
+	},
+	{
+		link: '/organizations',
+		type: 'Organizations',
+	},
 	{
 		link: '/news',
 		type: 'News',
@@ -39,7 +44,7 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '',
-		component: ({ match }) => <ProjectDetailsScreen match={match} />,
+		component: ({ match }) => <Actions match={match} />,
 	},
 	{
 		path: '/dashboard',
@@ -65,38 +70,38 @@ export const routes = [
 		path: '/communities/search/:keyword/page/:pageNumber',
 		component: ({ match }) => <ProjectLocations match={match} />,
 	},
-	// {
-	// 	path: '/stakeholders',
-	// 	component: ({ match }) => <ProjectStakeholders match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/search/:keyword',
-	// 	component: ({ match }) => <ProjectStakeholders match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/page/:pageNumber',
-	// 	component: ({ match }) => <ProjectStakeholders match={match} />,
-	// },
-	// {
-	// 	path: '/stakeholders/search/:keyword/page/:pageNumber',
-	// 	component: ({ match }) => <ProjectStakeholders match={match} />,
-	// },
-	// {
-	// 	path: '/organizations',
-	// 	component: ({ match }) => <OrganizationsProjectList match={match} />,
-	// },
-	// {
-	// 	path: '/organizations/search/:keyword',
-	// 	component: ({ match }) => <OrganizationsProjectList match={match} />,
-	// },
-	// {
-	// 	path: '/organizations/page/:pageNumber',
-	// 	component: ({ match }) => <OrganizationsProjectList match={match} />,
-	// },
-	// {
-	// 	path: '/organizations/search/:keyword/page/:pageNumber',
-	// 	component: ({ match }) => <OrganizationsProjectList match={match} />,
-	// },
+	{
+		path: '/stakeholders',
+		component: ({ match }) => <ProjectStakeholders match={match} />,
+	},
+	{
+		path: '/stakeholders/search/:keyword',
+		component: ({ match }) => <ProjectStakeholders match={match} />,
+	},
+	{
+		path: '/stakeholders/page/:pageNumber',
+		component: ({ match }) => <ProjectStakeholders match={match} />,
+	},
+	{
+		path: '/stakeholders/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <ProjectStakeholders match={match} />,
+	},
+	{
+		path: '/organizations',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/search/:keyword',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/page/:pageNumber',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
+	{
+		path: '/organizations/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <OrganizationsProjectList match={match} />,
+	},
 	{
 		path: '/photo',
 		component: ({ match }) => <EditProjectPhoto match={match} />,

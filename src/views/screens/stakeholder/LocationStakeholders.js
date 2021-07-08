@@ -94,7 +94,7 @@ const LocationStakeholders = ({
 								)}
 							/>
 						)}
-						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
+						<Accordion defaultActiveKey={0} style={{ marginTop: '1rem' }}>
 							{stakeholders &&
 								stakeholders.map((item, index) => (
 									<Card className="table-card">

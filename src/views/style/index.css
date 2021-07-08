@@ -37,7 +37,7 @@ h3 {
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 28px !important;
 	line-height: 36px;
 }
 
@@ -70,7 +70,7 @@ td {
 }
 
 body {
-	background-color: rgba(219, 219, 219, 0.384) !important;
+	background-color: rgba(189, 205, 214, 0.3) !important;
 }
 
 /*customize the primary color for buttons*/
@@ -476,7 +476,7 @@ hr {
 .action-btns {
 	display: flex;
 	flex-direction: row;
-	justify-content: start;
+	justify-content: flex-start;
 	overflow-x: auto;
 }
 
@@ -488,4 +488,15 @@ hr {
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
+}
+
+.project-action-btns {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+}
+
+.project-action-btns a {
+	margin: 0.5rem 0.5rem 0.5rem 0;
+	width: 100%;
 }

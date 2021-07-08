@@ -150,22 +150,27 @@ const ProjectStakeholders = ({
 															</>
 														</p>
 													</div>
-													<div className="action-btns">
-														<Link
-															to={`/activities/register`}
-															className="btn btn-primary"
-														>
-															<i className="fas fa-plus" />{' '}
-															{t('tables.activity')}
-														</Link>
-														<Button
-															variant="danger"
-															onClick={() => deleteHandler(item._id)}
-														>
-															<i className="fas fa-trash"></i>{' '}
-															{t('action.delete')}
-														</Button>
-													</div>
+												</div>
+												<div className="action-btns">
+													<Link
+														to={`/activities/register`}
+														className="btn btn-primary"
+													>
+														<i className="fas fa-plus" /> {t('tables.activity')}
+													</Link>
+													<Link
+														to={`/news/register`}
+														className="btn btn-secondary"
+													>
+														<i className="fas fa-plus" /> News
+													</Link>
+													{/* <Button
+														variant="danger"
+														onClick={() => deleteHandler(item._id)}
+													>
+														<i className="fas fa-trash"></i>{' '}
+														{t('action.delete')}
+													</Button> */}
 												</div>
 											</Card.Body>
 										</Accordion.Collapse>
