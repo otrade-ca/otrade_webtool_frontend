@@ -2,7 +2,7 @@
  * List all organizations a stakeholder belongs to
  */
 import React, { useEffect } from 'react';
-import { Accordion, Button, Card, Row } from 'react-bootstrap';
+import { Accordion, Card, Row } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
 import { useDispatch, connect } from 'react-redux';
 import {
@@ -13,11 +13,9 @@ import { Empty, Message, Loader } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import { useTranslation } from 'react-i18next';
 import { ORGANIZATION_DELETE_REQUEST } from '../../../application/constants/organizationConstants';
-import { IconContext } from 'react-icons';
-import * as VscIcons from 'react-icons/vsc';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
-import Moment from 'react-moment';
+import Organization from '../../components/Entity/Organization';
 
 const StakeholderOrganizations = ({
 	match,
@@ -58,6 +56,29 @@ const StakeholderOrganizations = ({
 		listStakeholderOrganizations,
 	]);
 
+	const renderEmpty = () => (
+		<>
+			{organizations && organizations.length === 0 ? (
+				<Empty
+					itemLink={`/organizations/register/stakeholder/${stakeholderId}`}
+					url={'/organizations'}
+					type={t('tables.organization')}
+					group={'organizations'}
+				/>
+			) : (
+				<Card.Header className="my-card-header">
+					<h4>{`Organizations (${count})`}</h4>
+					<Link
+						to={`/organizations/register/stakeholder/${stakeholderId}`}
+						className="btn btn-primary ml-2"
+					>
+						<i className="fas fa-plus"></i> Organization
+					</Link>
+				</Card.Header>
+			)}
+		</>
+	);
+
 	//delete user
 	const deleteHandler = (id) => {
 		if (window.confirm('Click ok to delete')) {
@@ -73,24 +94,7 @@ const StakeholderOrganizations = ({
 				<Message>{error}</Message>
 			) : (
 				<>
-					{organizations && organizations.length === 0 ? (
-						<Empty
-							itemLink={`/organizations/register/stakeholder/${stakeholderId}`}
-							url={'/organizations'}
-							type={t('tables.organization')}
-							group={'organizations'}
-						/>
-					) : (
-						<Card.Header className="my-card-header">
-							<h4>{`Organizations (${count})`}</h4>
-							<Link
-								to={`/organizations/register/stakeholder/${stakeholderId}`}
-								className="btn btn-primary ml-2"
-							>
-								<i className="fas fa-plus"></i> Organization
-							</Link>
-						</Card.Header>
-					)}
+					{renderEmpty()}
 					<Card.Body>
 						{organizations && organizations.length === 0 ? null : (
 							<Route
@@ -107,76 +111,7 @@ const StakeholderOrganizations = ({
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{organizations &&
 								organizations.map((item, index) => (
-									<Card className="table-card" key={index}>
-										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<VscIcons.VscOrganization />
-													</IconContext.Provider>
-												</div>
-												<div className="item-two">
-													<div>{item.name}</div>
-													<div className="item-category">Organization</div>
-												</div>
-											</div>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey={index + 1}>
-											<Card.Body>
-												<div className="d-flex justify-content-between">
-													<div>
-														<p>
-															<>
-																<Link to={`/organization/${item._id}`}>
-																	{item.name}
-																</Link>
-															</>
-															<br />
-															<>
-																Address:{' '}
-																<em>{item.address ? item.address : 'N/A'}</em>
-															</>
-															<br />
-															<>
-																Email:{' '}
-																<em>{item.email ? item.email : 'N/A'}</em>
-															</>
-															<br />
-															<>
-																Telephone:{' '}
-																<em>
-																	{item.telephone ? item.telephone : 'N/A'}
-																</em>
-															</>
-															<br />
-															<>
-																Updated On:{' '}
-																<em>
-																	{item.updatedAt ? (
-																		<Moment format="MM-DD-YYYY">
-																			{item.updatedAt}
-																		</Moment>
-																	) : (
-																		'N/A'
-																	)}
-																</em>
-															</>
-														</p>
-													</div>
-												</div>
-												{/* <div className="action-btns">
-													<Button
-														variant="danger"
-														onClick={() => deleteHandler(item._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</div> */}
-											</Card.Body>
-										</Accordion.Collapse>
-									</Card>
+									<Organization item={item} index={index} />
 								))}
 						</Accordion>
 						<Row className="d-flex justify-content-center mt-2">

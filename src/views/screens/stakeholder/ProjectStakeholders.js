@@ -2,8 +2,8 @@
  * List of stakeholders belonging to a project
  */
 import React, { useEffect } from 'react';
-import { Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
-import { Accordion, Card, Button, Row } from 'react-bootstrap';
+import { Route, useRouteMatch, withRouter } from 'react-router-dom';
+import { Accordion, Card, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Loader, Message, Empty } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
@@ -12,11 +12,9 @@ import {
 	deleteStakeholder,
 } from '../../../application/actions/stakeholderActions';
 import { useTranslation } from 'react-i18next';
-import { IconContext } from 'react-icons';
-import * as IoIcons from 'react-icons/io';
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
-import Moment from 'react-moment';
+import Stakeholder from '../../components/Entity/Stakeholder';
 
 const ProjectStakeholders = ({
 	match,
@@ -40,6 +38,20 @@ const ProjectStakeholders = ({
 		}
 	}, [listProjectStakeholders, projectId, keyword, pageNumber, success]);
 
+	const renderEmpty = () => {
+		return (
+			<>
+				{stakeholders && stakeholders.length === 0 ? (
+					<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
+				) : (
+					<Card.Header className="my-card-header">
+						<h4>Stakeholders {`(${count})`}</h4>
+					</Card.Header>
+				)}
+			</>
+		);
+	};
+
 	//delete stakeholder
 	const deleteHandler = (id) => {
 		if (window.confirm('Click ok to delete')) {
@@ -55,13 +67,7 @@ const ProjectStakeholders = ({
 				<Message>{error}</Message>
 			) : (
 				<>
-					{stakeholders && stakeholders.length === 0 ? (
-						<Empty url={url} type={'Stakeholder'} group={'stakeholders'} />
-					) : (
-						<Card.Header className="my-card-header">
-							<h4>Stakeholders {`(${count})`}</h4>
-						</Card.Header>
-					)}
+					{renderEmpty()}
 					<Card.Body>
 						{stakeholders && stakeholders.length === 0 ? null : (
 							<Route
@@ -78,103 +84,11 @@ const ProjectStakeholders = ({
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholders &&
 								stakeholders.map((item, index) => (
-									<Card className="table-card" key={index}>
-										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<IoIcons.IoMdPerson />
-													</IconContext.Provider>
-												</div>
-												<div className="item-two">
-													<div>
-														{item.firstName} {item.lastName}
-													</div>
-													<div className="item-category">
-														Stakeholder |{' '}
-														{item.status === 'active' ? (
-															<strong className="text-success">
-																{item.status.substring(0, 1).toUpperCase() +
-																	item.status.substring(1, item.status.length)}
-															</strong>
-														) : (
-															<em className="text-danger">
-																{item.status.substring(0, 1).toUpperCase() +
-																	item.status.substring(1, item.status.length)}
-															</em>
-														)}
-													</div>
-												</div>
-											</div>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey={index + 1}>
-											<Card.Body>
-												<div className="d-flex justify-content-between">
-													<div>
-														<p>
-															<>
-																<Link to={`/stakeholder/${item._id}`}>
-																	{item.firstName} {item.lastName}
-																</Link>
-															</>
-															<br />
-															<>
-																Email:{' '}
-																<em>{item.email ? item.email : 'N/A'}</em>
-															</>
-															<br />
-															<>
-																Telephone:{' '}
-																<em>
-																	{item.telephone ? item.telephone : 'N/A'}
-																</em>
-															</>
-															<br />
-															<>
-																Updated on:{' '}
-																<em>
-																	{item.updatedAt ? (
-																		<Moment format="MM-DD-YYYY">
-																			{item.updatedAt}
-																		</Moment>
-																	) : (
-																		'N/A'
-																	)}
-																</em>
-															</>
-															<br />
-															<>
-																Community: <em>{item.location.location}</em>
-															</>
-														</p>
-													</div>
-												</div>
-												<div className="action-btns">
-													<Link
-														to={`/activities/register`}
-														className="btn btn-primary"
-													>
-														<i className="fas fa-plus" /> {t('tables.activity')}
-													</Link>
-													<Link
-														to={`/news/register`}
-														className="btn btn-secondary"
-													>
-														<i className="fas fa-plus" /> News
-													</Link>
-													{/* <Button
-														variant="danger"
-														onClick={() => deleteHandler(item._id)}
-													>
-														<i className="fas fa-trash"></i>{' '}
-														{t('action.delete')}
-													</Button> */}
-												</div>
-											</Card.Body>
-										</Accordion.Collapse>
-									</Card>
+									<Stakeholder
+										item={item}
+										index={index}
+										// deleteHandler={deleteHandler}
+									/>
 								))}
 						</Accordion>
 						<Row className="d-flex justify-content-center mt-2">

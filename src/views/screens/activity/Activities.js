@@ -3,7 +3,7 @@
  */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button, Accordion, Row } from 'react-bootstrap';
+import { Card, Accordion, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
 	listStakeholderActivities,
@@ -13,9 +13,7 @@ import { Message, Loader, Empty } from '../../components/HelperComponents';
 import Paginate from '../../components/Paginate';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { IconContext } from 'react-icons';
-import * as MdIcons from 'react-icons/md';
-import Moment from 'react-moment';
+import Activity from '../../components/Entity/Activity';
 
 const Activities = ({
 	match,
@@ -45,6 +43,31 @@ const Activities = ({
 		}
 	}, [stakeholderId, success, listStakeholderActivities, keyword, pageNumber]);
 
+	const renderEmpty = () => (
+		<>
+			{stakeholderactivities && stakeholderactivities.length === 0 ? (
+				<Empty
+					itemLink={`/activities/register/stakeholder/${stakeholderId}`}
+					url={'/activities'}
+					type={t('tables.activity')}
+					group={'activities'}
+				/>
+			) : (
+				<Card.Header className="my-card-header">
+					<h4>
+						{t('tables.activity')} {`(${count})`}
+					</h4>
+					<Link
+						to={`/activities/register/stakeholder/${stakeholderId}`}
+						className="btn btn-primary btn-sm ml-2"
+					>
+						<i className="fas fa-plus"></i> {t('tables.activity')}
+					</Link>
+				</Card.Header>
+			)}
+		</>
+	);
+
 	//delete activity
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
@@ -60,26 +83,7 @@ const Activities = ({
 				<Message>{error}</Message>
 			) : (
 				<>
-					{stakeholderactivities && stakeholderactivities.length === 0 ? (
-						<Empty
-							itemLink={`/activities/register/stakeholder/${stakeholderId}`}
-							url={'/activities'}
-							type={t('tables.activity')}
-							group={'activities'}
-						/>
-					) : (
-						<Card.Header className="my-card-header">
-							<h4>
-								{t('tables.activity')} {`(${count})`}
-							</h4>
-							<Link
-								to={`/activities/register/stakeholder/${stakeholderId}`}
-								className="btn btn-primary btn-sm ml-2"
-							>
-								<i className="fas fa-plus"></i> {t('tables.activity')}
-							</Link>
-						</Card.Header>
-					)}
+					{renderEmpty()}
 					<Card.Body>
 						{/* <Route
 							render={({ history }) => (
@@ -94,93 +98,12 @@ const Activities = ({
 						<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 							{stakeholderactivities &&
 								stakeholderactivities.map((item, index) => (
-									<Card className="table-card" key={index}>
-										<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-											<div className="table-card-item">
-												<div className="item-one">
-													<IconContext.Provider
-														value={{ color: '#008cba', size: '2em' }}
-													>
-														<MdIcons.MdEvent />
-													</IconContext.Provider>
-												</div>
-												<div className="item-two">
-													<div>
-														<>{item.activity}</>
-													</div>
-													<div className="item-category">Activity Type</div>
-												</div>
-											</div>
-										</Accordion.Toggle>
-										<Accordion.Collapse eventKey={index + 1}>
-											<Card.Body>
-												<div className="d-flex justify-content-between">
-													<div>
-														<>
-															<Link
-																to={`/stakeholder/${stakeholderId}/activities/${item._id}/view`}
-															>
-																View Details
-															</Link>
-														</>
-														<br />
-														Commitment:{' '}
-														<em>
-															{item.compromise === 'Yes' ? (
-																<Link
-																	to={`/stakeholder/${stakeholderId}/activities/${item._id}/commitment`}
-																>
-																	{item.compromise}
-																</Link>
-															) : (
-																<>{item.compromise}</>
-															)}
-														</em>
-														<br />
-														Other stakeholders:{' '}
-														<em>
-															{item.stakeholders &&
-															item.stakeholders.length < 2 ? (
-																'None'
-															) : (
-																<div className="activityStakeholders">
-																	{item.stakeholders &&
-																		item.stakeholders.map((person) => (
-																			<>
-																				<br />
-																				{person.firstName} {person.lastName}
-																			</>
-																		))}
-																</div>
-															)}
-														</em>
-														<br />
-														<>
-															Updated On:{' '}
-															<em>
-																{item.updatedAt ? (
-																	<Moment format="MM-DD-YYYY">
-																		{item.updatedAt}
-																	</Moment>
-																) : (
-																	'N/A'
-																)}
-															</em>
-														</>
-													</div>
-												</div>
-												{/* <div className="d-flex align-items-center">
-													<Button
-														variant="danger"
-														className=" ml-3"
-														onClick={() => deleteHandler(item._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</div> */}
-											</Card.Body>
-										</Accordion.Collapse>
-									</Card>
+									<Activity
+										item={item}
+										index={index}
+										linkView={`/stakeholder/${stakeholderId}/activities/${item._id}/view`}
+										linkCommitment={`/stakeholder/${stakeholderId}/activities/${item._id}/commitment`}
+									/>
 								))}
 						</Accordion>
 						<Row className="d-flex justify-content-center mt-2">

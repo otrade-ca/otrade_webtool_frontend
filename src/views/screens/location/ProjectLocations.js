@@ -17,6 +17,7 @@ import * as RiIcons from 'react-icons/ri';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 import Moment from 'react-moment';
+import Location from '../../components/Entity/Location';
 
 const ProjectLocations = ({ match }) => {
 	const projectId = match.params.id;
@@ -43,6 +44,29 @@ const ProjectLocations = ({ match }) => {
 		}
 	}, [dispatch, projectId, keyword, pageNumber, success]);
 
+	const renderEmpty = () => (
+		<>
+			{locations && locations.length === 0 ? (
+				<Empty
+					itemLink={`/communities/register/project/${projectId}`}
+					url={`/communities/register/project/${projectId}`}
+					type={t('tables.location')}
+					group={'locations'}
+				/>
+			) : (
+				<Card.Header className="my-card-header">
+					<h4>Communities {`(${count})`}</h4>
+					<Link
+						to={`/communities/register/project/${projectId}`}
+						className="btn btn-primary ml-2"
+					>
+						<i className="fas fa-plus"></i> Register
+					</Link>
+				</Card.Header>
+			)}
+		</>
+	);
+
 	//delete location
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure?')) {
@@ -57,26 +81,7 @@ const ProjectLocations = ({ match }) => {
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<>
-					{locations && locations.length === 0 ? (
-						<Empty
-							itemLink={`/communities/register/project/${projectId}`}
-							url={`/communities/register/project/${projectId}`}
-							type={t('tables.location')}
-							group={'locations'}
-						/>
-					) : (
-						<Card.Header className="my-card-header">
-							<h4>Communities {`(${count})`}</h4>
-							<Link
-								to={`/communities/register/project/${projectId}`}
-								className="btn btn-primary ml-2"
-							>
-								<i className="fas fa-plus"></i> Register
-							</Link>
-						</Card.Header>
-					)}
-				</>
+				<>{renderEmpty()}</>
 			)}
 			<Card.Body>
 				{locations && locations.length === 0 ? null : (
@@ -94,98 +99,7 @@ const ProjectLocations = ({ match }) => {
 				<Accordion defaultActiveKey={1} style={{ marginTop: '1rem' }}>
 					{locations &&
 						locations.map((location, index) => (
-							<Card className="table-card" key={index}>
-								<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-									<div className="table-card-item">
-										<div className="item-one">
-											<IconContext.Provider
-												value={{ color: '#008cba', size: '2em' }}
-											>
-												<RiIcons.RiCommunityLine />
-											</IconContext.Provider>
-										</div>
-										<div className="item-two">
-											<div>{location.location}</div>
-											<div className="item-category">Community</div>
-										</div>
-									</div>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey={index + 1}>
-									<Card.Body>
-										<div className="d-flex justify-content-between">
-											<div>
-												<>
-													<Link to={`/community/${location._id}`}>
-														{location.location}
-													</Link>
-												</>
-												<br />
-												<>{t('location.area_of_Influence.label')}</>
-												{': '}{' '}
-												<em>
-													{location.area_influence
-														? location.area_influence
-														: 'N/A'}
-												</em>
-												<br />
-												<>{t('location.organization_Type.label')}</>
-												{': '}{' '}
-												<em>
-													{location.organization_type
-														? location.organization_type
-														: 'N/A'}
-												</em>
-												<br />
-												<>{t('location.scope.label')}</>
-												{': '}{' '}
-												<em>{location.scope ? location.scope : 'N/A'}</em>
-												<br />
-												<>Updated On</>
-												{': '}{' '}
-												<em>
-													{location.updatedAt ? (
-														<Moment format="MM-DD-YYYY">
-															{location.updatedAt}
-														</Moment>
-													) : (
-														'N/A'
-													)}
-												</em>
-											</div>
-										</div>
-										<hr />
-										<div className="action-btns">
-											<Link
-												to={`/stakeholders/register/community/${location._id}`}
-												className="btn btn-primary"
-											>
-												<i className="fas fa-plus" />
-												{t('tables.stakeholder')}
-											</Link>
-											<Link
-												to={`/organizations/register/community/${location._id}`}
-												className="btn btn-primary"
-											>
-												<i className="fas fa-plus" />
-												{t('tables.organization')}
-											</Link>
-											<Link
-												to={`/news/register/community/${location._id}`}
-												className="btn btn-secondary"
-											>
-												<i className="fas fa-plus" />
-												{'News'}
-											</Link>
-											{/* <Button
-												variant="danger"
-												onClick={() => deleteHandler(location._id)}
-											>
-												<i className="fas fa-trash"></i> Delete
-											</Button> */}
-										</div>
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
+							<Location location={location} index={index} />
 						))}
 				</Accordion>
 				<Row className="d-flex justify-content-center mt-2">

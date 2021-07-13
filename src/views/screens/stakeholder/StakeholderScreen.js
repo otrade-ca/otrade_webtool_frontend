@@ -33,6 +33,20 @@ const StakeholderScreen = ({ match }) => {
 		dispatch(getStakeholderDetails(stakeholderId));
 	}, [dispatch, stakeholderId, locationId]);
 
+	const renderImage = () => (
+		<>
+			{stakeholder.image ? (
+				<img
+					src={`${prependURL}${stakeholder.image}`}
+					alt="profile"
+					className="profile-image"
+				/>
+			) : (
+				<img src={Placeholder} alt="profile" className="profile-image" />
+			)}
+		</>
+	);
+
 	return (
 		<>
 			{loading ? (
@@ -45,19 +59,7 @@ const StakeholderScreen = ({ match }) => {
 						<div className="profile-container">
 							<Row>
 								<Col md={2} className="image-container">
-									{stakeholder.image ? (
-										<img
-											src={`${prependURL}${stakeholder.image}`}
-											alt="profile"
-											className="profile-image"
-										/>
-									) : (
-										<img
-											src={Placeholder}
-											alt="profile"
-											className="profile-image"
-										/>
-									)}
+									{renderImage()}
 								</Col>
 								<Col md={10}>
 									<h1>

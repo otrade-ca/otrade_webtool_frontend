@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
 import Moment from 'react-moment';
 
-const Activity = ({ item, index, linkView, linkCommitment }) => {
+export const Influence = ({ item, index }) => {
 	const { t } = useTranslation();
 	return (
 		<Card className="table-card" key={index}>
@@ -14,14 +14,12 @@ const Activity = ({ item, index, linkView, linkCommitment }) => {
 				<div className="table-card-item">
 					<div className="item-one">
 						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
-							<MdIcons.MdEvent />
+							<MdIcons.MdAssessment />
 						</IconContext.Provider>
 					</div>
 					<div className="item-two">
-						<div>
-							<>{item.activity}</>
-						</div>
-						<div className="item-category">Activity Type</div>
+						<div>{item.activity && item.activity}</div>
+						<div className="item-category">Asessment</div>
 					</div>
 				</div>
 			</Accordion.Toggle>
@@ -29,52 +27,29 @@ const Activity = ({ item, index, linkView, linkCommitment }) => {
 				<Card.Body>
 					<div className="d-flex justify-content-between">
 						<div>
-							<>
-								<Link to={linkView}>View Details</Link>
-							</>
+							<>Type:</> <em>{item.type ? item.type : 'N/A'}</em>
 							<br />
-							Commitment:{' '}
+							<>Position:</> <em>{item.position ? item.position : 'N/A'}</em>
+							<br />
+							<>Influence: </>{' '}
+							<em>{item.influence ? item.influence : 'N/A'}</em>
+							<br />
+							<>Impact to project: </>{' '}
+							<em>{item.projImpact ? item.projImpact : 'N/A'}</em>
+							<br />
+							<>Updated On: </>
 							<em>
-								{item.compromise === 'Yes' ? (
-									<Link to={linkCommitment}>{item.compromise}</Link>
+								{item.updatedAt ? (
+									<Moment format="MM-DD-YYYY">{item.updatedAt}</Moment>
 								) : (
-									<>{item.compromise}</>
+									'N/A'
 								)}
 							</em>
-							<br />
-							Other stakeholders:{' '}
-							<em>
-								{item.stakeholders && item.stakeholders.length < 2 ? (
-									'None'
-								) : (
-									<div className="activityStakeholders">
-										{item.stakeholders &&
-											item.stakeholders.map((person) => (
-												<>
-													<br />
-													{person.firstName} {person.lastName}
-												</>
-											))}
-									</div>
-								)}
-							</em>
-							<br />
-							<>
-								Updated On:{' '}
-								<em>
-									{item.updatedAt ? (
-										<Moment format="MM-DD-YYYY">{item.updatedAt}</Moment>
-									) : (
-										'N/A'
-									)}
-								</em>
-							</>
 						</div>
 					</div>
 					{/* <div className="d-flex align-items-center">
 													<Button
 														variant="danger"
-														className=" ml-3"
 														onClick={() => deleteHandler(item._id)}
 													>
 														<i className="fas fa-trash"></i> Delete
@@ -85,5 +60,3 @@ const Activity = ({ item, index, linkView, linkCommitment }) => {
 		</Card>
 	);
 };
-
-export default Activity;
