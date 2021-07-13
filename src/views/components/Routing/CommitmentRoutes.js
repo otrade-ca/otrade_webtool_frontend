@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import CommitmentAdd from '../../screens/commitment/CommitmentAdd';
+import { CommitmentAdd } from '../../screens/commitment';
 
 const CommitmentRoutes = () => {
 	return (

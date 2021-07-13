@@ -1,9 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import UserStakeholders from '../../screens/stakeholder/UserStakeholders';
-import StakeholderAdd from '../../screens/stakeholder/StakeholderAdd';
-import Landing from '../../screens/stakeholder/Landing';
+import {
+	StakeholderAdd,
+	Landing,
+	UserStakeholders,
+} from '../../screens/stakeholder';
 
 const StakeholderRoutes = () => {
 	return (

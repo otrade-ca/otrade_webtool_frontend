@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import ActivityAdd from '../../screens/activity/ActivityAdd';
+import { ActivityAdd } from '../../screens/activity';
 
 const ActivityRoutes = () => {
 	return (

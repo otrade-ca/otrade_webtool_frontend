@@ -1,13 +1,9 @@
 import Dashboard from '../../components/Dashboard';
-import UploadPhoto from '../project/UploadPhoto';
-import ProjectView from '../project/ProjectView';
-import ProjectLocations from '../location/ProjectLocations';
-import ProjectStakeholders from '../stakeholder/ProjectStakeholders';
-import ProjectOrganizations from '../organization/ProjectOrganizations';
-import ProjectNews from '../news/ProjectNews';
-import NewsView from '../news/NewsView';
-import NewsEdit from '../news/NewsEdit';
-import Actions from '../project/Actions';
+import { UploadPhoto, ProjectView, Actions } from '../project';
+import { ProjectLocations } from '../location';
+import { ProjectStakeholders } from '../stakeholder';
+import { ProjectOrganizations } from '../organization';
+import { NewsView, NewsEdit, ProjectNews } from '../news';
 
 export const btnlinks = [
 	{

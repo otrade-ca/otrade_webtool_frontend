@@ -1,9 +1,5 @@
-import OrganizationView from './OrganizationView';
-import OrganizationEdit from './OrganizationEdit';
-import UploadPhoto from './UploadPhoto';
-import OrganizationNews from '../news/OrganizationNews';
-import NewsEdit from '../news/NewsEdit';
-import NewsView from '../news/NewsView';
+import { OrganizationView, OrganizationEdit, UploadPhoto } from './';
+import { NewsView, NewsEdit, OrganizationNews } from '../news';
 
 export const btnlinks = [
 	{

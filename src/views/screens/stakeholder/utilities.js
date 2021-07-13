@@ -1,16 +1,9 @@
-import StakeholderEdit from './StakeholderEdit';
-import StakeholderOrganizations from '../organization/StakeholderOrganizations';
-import Activities from '../activity/Activities';
-import ActivityView from '../activity/ActivityView';
-import ActivityEdit from '../activity/ActivityEdit';
-import StakeholderView from '../stakeholder/StakeholderView';
-import CommitmentEdit from '../commitment/CommitmentEdit';
-import Influences from '../influence/Influences';
-import Profile from './Profile';
-import StakeholderNews from '../news/StakeholderNews';
-import NewsView from '../news/NewsView';
-import NewsEdit from '../news/NewsEdit';
-import UploadPhoto from './UploadPhoto';
+import { StakeholderEdit, StakeholderView, Profile, UploadPhoto } from './';
+import { StakeholderOrganizations } from '../organization';
+import { Activities, ActivityEdit, ActivityView } from '../activity';
+import { CommitmentEdit } from '../commitment';
+import { Influences } from '../influence';
+import { NewsView, NewsEdit, StakeholderNews } from '../news';
 
 export const btnlinks = [
 	{

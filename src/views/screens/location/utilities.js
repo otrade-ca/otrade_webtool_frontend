@@ -5,7 +5,7 @@ import LocationStakeholders from '../stakeholder/LocationStakeholders';
 import LocationNews from '../news/LocationNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
-import { LocationEdit, LocationView, UploadPhoto } from './location';
+import { LocationEdit, LocationView, UploadPhoto } from './';
 
 export const btnlinks = [
 	{

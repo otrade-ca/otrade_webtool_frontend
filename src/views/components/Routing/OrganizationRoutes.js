@@ -1,8 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import OrganizationAdd from '../../screens/organization/OrganizationAdd';
-import Landing from '../../screens/organization/Landing';
+import { OrganizationAdd, Landing } from '../../screens/organization';
 
 const OrganizationRoutes = () => {
 	return (

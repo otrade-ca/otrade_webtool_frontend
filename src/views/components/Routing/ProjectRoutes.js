@@ -1,8 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import Landing from '../../screens/project/Landing';
-import UserProjects from '../../screens/project/UserProjects';
+import { UserProjects, Landing } from '../../screens/project';
 
 const ProjectRoutes = () => {
 	return (
