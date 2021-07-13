@@ -20,7 +20,7 @@ import * as VscIcons from 'react-icons/vsc';
 import Moment from 'react-moment';
 import Organization from '../../components/Entity/Organization';
 
-const OrganizationsList = ({
+const LocationOrganizations = ({
 	match,
 	listLocationOrganizations,
 	deleteOrganization,
@@ -132,7 +132,7 @@ const OrganizationsList = ({
 	);
 };
 
-OrganizationsList.propTypes = {
+LocationOrganizations.propTypes = {
 	listLocationOrganizations: PropTypes.func.isRequired,
 	deleteOrganization: PropTypes.func.isRequired,
 };
@@ -145,4 +145,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	listLocationOrganizations,
 	deleteOrganization,
-})(OrganizationsList);
+})(LocationOrganizations);

@@ -12,7 +12,7 @@ import { btnlinks, navbarlinks, routes } from './utilities';
 import { saveRouteInfo } from '../../../application/actions/routeActions';
 import { getBucketInfo } from '../../../application/api';
 
-const ProjectScreen = ({ match }) => {
+const Landing = ({ match }) => {
 	const projectId = match.params.id;
 
 	const { prependURL } = getBucketInfo('project');
@@ -155,4 +155,4 @@ const ProjectScreen = ({ match }) => {
 	);
 };
 
-export default memo(ProjectScreen);
+export default memo(Landing);

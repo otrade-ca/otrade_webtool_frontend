@@ -11,7 +11,7 @@ import {
 	Message,
 } from '../../components/HelperComponents';
 
-const InfluenceForm = ({ history, match }) => {
+const InfluenceAdd = ({ history, match }) => {
 	const id = match.params.stakeholderId;
 
 	// state
@@ -195,4 +195,4 @@ const InfluenceForm = ({ history, match }) => {
 	);
 };
 
-export default withRouter(InfluenceForm);
+export default withRouter(InfluenceAdd);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import AddOrganizationScreen from '../../screens/organization/AddOrganizationScreen';
+import OrganizationAdd from '../../screens/organization/OrganizationAdd';
 import Landing from '../../screens/organization/Landing';
 
 const OrganizationRoutes = () => {
@@ -10,22 +10,22 @@ const OrganizationRoutes = () => {
 			<PrivateRoute
 				exact
 				path="/organizations/register"
-				component={AddOrganizationScreen}
+				component={OrganizationAdd}
 			/>
 			<PrivateRoute
 				exact
 				path="/organizations/register/community/:id"
-				component={AddOrganizationScreen}
+				component={OrganizationAdd}
 			/>
 			<PrivateRoute
 				exact
 				path="/organizations/register/project/:id"
-				component={AddOrganizationScreen}
+				component={OrganizationAdd}
 			/>
 			<PrivateRoute
 				exact
 				path="/organizations/register/stakeholder/:id"
-				component={AddOrganizationScreen}
+				component={OrganizationAdd}
 			/>
 			<PrivateRoute path="/organization/:id" component={Landing} />
 		</Switch>

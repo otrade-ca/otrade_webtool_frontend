@@ -15,7 +15,7 @@ import { PROJECT_UPDATE_RESET } from '../../../application/constants/projectCons
 import { useTranslation } from 'react-i18next';
 import countries from '../../selectCountries.json';
 
-const ProjectEditScreen = ({ match, history }) => {
+const ProjectEdit = ({ match, history }) => {
 	const projectId = match.params.id;
 
 	const { t } = useTranslation();
@@ -276,4 +276,4 @@ const ProjectEditScreen = ({ match, history }) => {
 	);
 };
 
-export default ProjectEditScreen;
+export default ProjectEdit;

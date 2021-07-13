@@ -1,16 +1,16 @@
-import EditForm from './EditForm';
-import ListStakeholderOrganizations from '../organization/ListStakeholderOrganizations';
+import StakeholderEdit from './StakeholderEdit';
+import StakeholderOrganizations from '../organization/StakeholderOrganizations';
 import Activities from '../activity/Activities';
 import ActivityView from '../activity/ActivityView';
 import ActivityEdit from '../activity/ActivityEdit';
-import ViewForm from '../stakeholder/ViewForm';
-import FormDetails from '../commitment/FormDetails';
-import StakeholderInfluences from '../influence/StakeholderInfluences';
+import StakeholderView from '../stakeholder/StakeholderView';
+import CommitmentEdit from '../commitment/CommitmentEdit';
+import Influences from '../influence/Influences';
 import Profile from './Profile';
 import StakeholderNews from '../news/StakeholderNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
-import UploadPhoto from './PhotoUpload';
+import UploadPhoto from './UploadPhoto';
 
 export const btnlinks = [
 	{
@@ -49,11 +49,11 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '/',
-		component: ({ match }) => <ViewForm match={match} />,
+		component: ({ match }) => <StakeholderView match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <EditForm match={match} />,
+		component: ({ match }) => <StakeholderEdit match={match} />,
 	},
 	{
 		path: '/photo',
@@ -65,23 +65,23 @@ export const routes = [
 	},
 	{
 		path: '/profile/edit',
-		component: ({ match }) => <EditForm match={match} />,
+		component: ({ match }) => <StakeholderEdit match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword',
-		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+		component: ({ match }) => <StakeholderOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/page/:pageNumber',
-		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+		component: ({ match }) => <StakeholderOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+		component: ({ match }) => <StakeholderOrganizations match={match} />,
 	},
 	{
 		path: '/organizations',
-		component: ({ match }) => <ListStakeholderOrganizations match={match} />,
+		component: ({ match }) => <StakeholderOrganizations match={match} />,
 	},
 	{
 		path: '/activities',
@@ -109,23 +109,23 @@ export const routes = [
 	},
 	{
 		path: '/activities/:activityId/commitment',
-		component: ({ match }) => <FormDetails match={match} />,
+		component: ({ match }) => <CommitmentEdit match={match} />,
 	},
 	{
 		path: '/assessments',
-		component: ({ match }) => <StakeholderInfluences match={match} />,
+		component: ({ match }) => <Influences match={match} />,
 	},
 	{
 		path: '/assessments/search/:keyword',
-		component: ({ match }) => <StakeholderInfluences match={match} />,
+		component: ({ match }) => <Influences match={match} />,
 	},
 	{
 		path: '/assessments/page/:pageNumber',
-		component: ({ match }) => <StakeholderInfluences match={match} />,
+		component: ({ match }) => <Influences match={match} />,
 	},
 	{
 		path: '/assessments/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <StakeholderInfluences match={match} />,
+		component: ({ match }) => <Influences match={match} />,
 	},
 	{
 		path: '/news',

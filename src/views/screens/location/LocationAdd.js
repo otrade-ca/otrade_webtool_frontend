@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { addLocation } from '../../../application/actions/locationActions';
 import { useTranslation } from 'react-i18next';
 
-const FormAdd = ({ history }) => {
+const LocationAdd = ({ history }) => {
 	const { id } = useParams();
 	const { t } = useTranslation();
 
@@ -148,4 +148,4 @@ const FormAdd = ({ history }) => {
 	);
 };
 
-export default FormAdd;
+export default LocationAdd;

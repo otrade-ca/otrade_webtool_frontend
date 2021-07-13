@@ -3,31 +3,31 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	getLocationDetails,
-	updateLocationPhoto,
-} from '../../../application/actions/locationActions';
-import { LOCATION_UPDATE_RESET } from '../../../application/constants/locationConstants';
+	getStakeholderDetails,
+	updateStakeholderPhoto,
+} from '../../../application/actions/stakeholderActions';
+import { STAKEHOLDER_UPDATE_RESET } from '../../../application/constants/stakeholderConstants';
 import {
-	Loader,
 	Message,
+	Loader,
 	CardContainer,
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const PhotoEdit = ({ match, history }) => {
-	const locationId = match.params.id;
+const UploadPhoto = ({ match, history }) => {
+	const stakeholderId = match.params.id;
 
 	const { t } = useTranslation();
 
 	//define states
 	const [image, setImage] = useState('');
-	const [file, setFile] = useState(false);
+	const [file, setFile] = useState(null);
 
 	const dispatch = useDispatch();
 
 	//get the stakeholder
-	const locationDetails = useSelector((state) => state.locationDetails);
-	const { loading, error, location } = locationDetails;
+	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
+	const { loading, error, stakeholder } = stakeholderDetails;
 
 	//get success
 	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
@@ -35,12 +35,12 @@ const PhotoEdit = ({ match, history }) => {
 
 	useEffect(() => {
 		if (success) {
-			dispatch(getLocationDetails(locationId));
-			dispatch({ type: LOCATION_UPDATE_RESET });
+			dispatch(getStakeholderDetails(stakeholderId));
+			dispatch({ type: STAKEHOLDER_UPDATE_RESET });
 		} else {
-			setImage(location.image);
+			setImage();
 		}
-	}, [dispatch, location, locationId, success]);
+	}, [dispatch, stakeholder, stakeholderId, success]);
 
 	const uploadFileHandler = async (e) => {
 		setFile(e.target.files[0]);
@@ -48,11 +48,11 @@ const PhotoEdit = ({ match, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log('hello');
+		//check password against confirmPassword
 		dispatch(
-			updateLocationPhoto(
+			updateStakeholderPhoto(
 				{
-					id: locationId,
+					id: stakeholderId,
 				},
 				file,
 				history
@@ -97,7 +97,7 @@ const PhotoEdit = ({ match, history }) => {
 					<Row className="mt-3">
 						<Col>
 							<Button type="submit" variant="primary" className="px-5 mt-3">
-								{t('action.submit')}
+								{t('action.update')}
 							</Button>
 						</Col>
 					</Row>
@@ -107,4 +107,4 @@ const PhotoEdit = ({ match, history }) => {
 	);
 };
 
-export default withRouter(PhotoEdit);
+export default withRouter(UploadPhoto);

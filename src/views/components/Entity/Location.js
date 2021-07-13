@@ -68,21 +68,21 @@ const Location = ({ location, index }) => {
 							className="btn btn-primary"
 						>
 							<i className="fas fa-plus" />
-							{t('tables.stakeholder')}
+							Add {t('tables.stakeholder')}
 						</Link>
 						<Link
 							to={`/organizations/register/community/${location._id}`}
 							className="btn btn-primary"
 						>
 							<i className="fas fa-plus" />
-							{t('tables.organization')}
+							Add {t('tables.organization')}
 						</Link>
 						<Link
 							to={`/news/register/community/${location._id}`}
 							className="btn btn-secondary"
 						>
 							<i className="fas fa-plus" />
-							{'News'}
+							Add {'News'}
 						</Link>
 						{/* <Button
                     variant="danger"

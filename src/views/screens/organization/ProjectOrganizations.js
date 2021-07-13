@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Organization from '../../components/Entity/Organization';
 
-const OrganizationsProjectList = ({
+const ProjectOrganizations = ({
 	match,
 	listProjectOrganizations,
 	deleteOrganization,
@@ -119,7 +119,7 @@ const OrganizationsProjectList = ({
 	);
 };
 
-OrganizationsProjectList.propTypes = {
+ProjectOrganizations.propTypes = {
 	listProjectOrganizations: PropTypes.func.isRequired,
 	deleteOrganization: PropTypes.func.isRequired,
 };
@@ -132,4 +132,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	listProjectOrganizations,
 	deleteOrganization,
-})(OrganizationsProjectList);
+})(ProjectOrganizations);

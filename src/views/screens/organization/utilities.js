@@ -1,5 +1,5 @@
-import FormView from './FormView';
-import FormEdit from './FormEdit';
+import OrganizationView from './OrganizationView';
+import OrganizationEdit from './OrganizationEdit';
 import UploadPhoto from './UploadPhoto';
 import OrganizationNews from '../news/OrganizationNews';
 import NewsEdit from '../news/NewsEdit';
@@ -30,19 +30,19 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '/',
-		component: ({ match }) => <FormView match={match} />,
+		component: ({ match }) => <OrganizationView match={match} />,
 	},
 	{
 		path: '/profile',
-		component: ({ match }) => <FormView match={match} />,
+		component: ({ match }) => <OrganizationView match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <FormEdit match={match} />,
+		component: ({ match }) => <OrganizationEdit match={match} />,
 	},
 	{
 		path: '/profile/edit',
-		component: ({ match }) => <FormEdit match={match} />,
+		component: ({ match }) => <OrganizationEdit match={match} />,
 	},
 	{
 		path: '/photo',

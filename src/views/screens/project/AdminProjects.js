@@ -15,7 +15,7 @@ import { IconContext } from 'react-icons';
 import * as AiIcons from 'react-icons/ai';
 import Moment from 'react-moment';
 
-const ListProjectScreen = ({ history, match }) => {
+const AdminProjects = ({ history, match }) => {
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
@@ -200,4 +200,4 @@ const ListProjectScreen = ({ history, match }) => {
 	);
 };
 
-export default memo(ListProjectScreen);
+export default memo(AdminProjects);

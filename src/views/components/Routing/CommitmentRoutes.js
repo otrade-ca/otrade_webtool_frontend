@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import CommitmentForm from '../../screens/commitment/CommitmentForm';
+import CommitmentAdd from '../../screens/commitment/CommitmentAdd';
 
 const CommitmentRoutes = () => {
 	return (
 		<Switch>
 			<PrivateRoute
 				path="/commitments/register/activity/:activityId"
-				component={CommitmentForm}
+				component={CommitmentAdd}
 			/>
 		</Switch>
 	);

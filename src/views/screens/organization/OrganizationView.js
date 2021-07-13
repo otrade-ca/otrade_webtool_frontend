@@ -1,42 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Form, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	getOrganizationDetails,
-	updateOrganization,
-} from '../../../application/actions/organizationAction';
-import { ORGANIZATION_UPDATE_RESET } from '../../../application/constants/organizationConstants';
+import { getOrganizationDetails } from '../../../application/actions/organizationAction';
 import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
 import { getLocationId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
-import { setAlert } from '../../../application/actions/alertActions';
 import { useTranslation } from 'react-i18next';
 
-const FormEdit = ({ match, history }) => {
-	const projectId = match.params.projectId;
+const OrganizationView = ({ match }) => {
 	const organizationId = match.params.id;
+	const { url } = useRouteMatch();
 
 	const { t } = useTranslation();
 
 	// get locationId from localStorage
 	const locationId = getLocationId();
 
-	// get stakeholderList
 	const dispatch = useDispatch();
 
-	// get organization
+	// get organization details
 	const organzationDetails = useSelector((state) => state.organizationDetails);
 	const { loading, error, organization: orgDetails } = organzationDetails;
 
+	// get list of stakeholders from dropdown
 	const stakeholderListDropdown = useSelector(
 		(state) => state.stakeholderListDropdown
 	);
 	const { stakeholders: members } = stakeholderListDropdown;
-
-	// get success on update
-	const organizationUpdate = useSelector((state) => state.organizationUpdate);
-	const { success } = organizationUpdate;
 
 	// define states
 	const [organization, setOrganization] = useState('');
@@ -46,77 +37,50 @@ const FormEdit = ({ match, history }) => {
 	const [telephone, setTelephone] = useState('');
 	const [website, setWebsite] = useState('');
 	const [stakeholders, setStakeholders] = useState([{ member: '' }]);
+	const [updatedAt, setUpdatedAt] = useState('');
 
 	useEffect(() => {
-		if (success) {
+		if (!orgDetails.name || orgDetails._id !== organizationId) {
 			dispatch(getOrganizationDetails(organizationId));
-			dispatch({ type: ORGANIZATION_UPDATE_RESET });
+			dispatch(listLocationStakeholders(locationId));
 		} else {
-			if (!orgDetails.name || orgDetails._id !== organizationId) {
-				dispatch(getOrganizationDetails(organizationId));
-				dispatch(listLocationStakeholders(locationId));
-			} else {
-				setOrganization(orgDetails.name);
-				setDivision(orgDetails.division);
-				setLocation(orgDetails.address);
-				setEmail(orgDetails.email);
-				setTelephone(orgDetails.telephone);
-				setWebsite(orgDetails.website);
-				setStakeholders(orgDetails.stakeholders);
-			}
+			setOrganization(orgDetails.name);
+			setDivision(orgDetails.division);
+			setLocation(orgDetails.address);
+			setEmail(orgDetails.email);
+			setTelephone(orgDetails.telephone);
+			setWebsite(orgDetails.website);
+			setStakeholders(orgDetails.stakeholders);
+			setUpdatedAt(orgDetails.updatedAt);
 		}
-	}, [dispatch, orgDetails, organizationId, success, locationId]);
+	}, [dispatch, orgDetails, organizationId, locationId]);
 
-	//add select field
-	const addHandler = () => {
-		setStakeholders([...stakeholders, { stakeholder: '' }]);
-	};
-
-	//filter out element i
-	const removeHandler = (i) => {
-		const stakeholderToRemove = stakeholders[i];
-		const list = stakeholders.filter((i) => i !== stakeholderToRemove);
-		setStakeholders(list);
-	};
-
-	//add element to array && provide validation
-	const handleInputChange = (e, i) => {
-		e.preventDefault();
-		const list = [...stakeholders];
-
-		if (
-			list.includes(e.target.value) ||
-			list.some((item) => item._id === e.target.value)
-		) {
-			setAlert(
-				'Please make sure the same user is not assigned twice.',
-				'danger'
-			);
-		} else {
-			list[i] = e.target.value;
-			setStakeholders(list);
-		}
-	};
-
-	//submit form
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		dispatch(
-			updateOrganization(
-				{
-					name: organization,
-					division,
-					address: location,
-					email,
-					telephone,
-					website,
-					stakeholders,
-					project: projectId,
-				},
-				organizationId,
-				history
-			)
+	const renderStakeholders = () => {
+		return (
+			<>
+				{stakeholders &&
+					stakeholders.map((assignee) => (
+						<Row key={assignee._id}>
+							<Col md={7}>
+								<Form.Control
+									as="select"
+									value={assignee}
+									className="px-5 mb-3"
+									readOnly
+									disabled
+								>
+									<option value="">{t('action.select')}</option>
+									{members &&
+										members.map((stakeholder) => (
+											<option key={stakeholder._id} value={stakeholder._id}>
+												{stakeholder.firstName} {stakeholder.lastName}
+											</option>
+										))}
+								</Form.Control>
+							</Col>
+						</Row>
+					))}
+			</>
 		);
 	};
 
@@ -130,9 +94,12 @@ const FormEdit = ({ match, history }) => {
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
 						<h4>{t('tables.organization')}</h4>
+						<Link to={`${url}/edit`} className="btn btn-light ml-2">
+							<i className="fas fa-edit"></i> Edit
+						</Link>
 					</Card.Header>
 					<Card.Body>
-						<Form onSubmit={submitHandler}>
+						<Form>
 							<Row>
 								<Col md={6}>
 									<Form.Group controlId="organization">
@@ -145,8 +112,8 @@ const FormEdit = ({ match, history }) => {
 												'organization.organization_name.placeholder'
 											)}
 											value={organization}
-											required
-											onChange={(e) => setOrganization(e.target.value)}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -158,8 +125,8 @@ const FormEdit = ({ match, history }) => {
 										<Form.Control
 											as="select"
 											value={division}
-											required
-											onChange={(e) => setDivision(e.target.value)}
+											readOnly
+											disabled
 										>
 											<option value="">--Select--</option>
 											<option value={t('division.community')}>
@@ -189,7 +156,8 @@ const FormEdit = ({ match, history }) => {
 											type="location"
 											placeholder={t('organization.address.placeholder')}
 											value={location}
-											onChange={(e) => setLocation(e.target.value)}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -202,7 +170,8 @@ const FormEdit = ({ match, history }) => {
 											type="email"
 											placeholder={t('organization.email.placeholder')}
 											value={email}
-											onChange={(e) => setEmail(e.target.value)}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -213,7 +182,8 @@ const FormEdit = ({ match, history }) => {
 											type="telephone"
 											placeholder={t('organization.telephone.placeholder')}
 											value={telephone}
-											onChange={(e) => setTelephone(e.target.value)}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -228,7 +198,8 @@ const FormEdit = ({ match, history }) => {
 											type="website"
 											placeholder={t('organization.social_Media.placeholder')}
 											value={website}
-											onChange={(e) => setWebsite(e.target.value)}
+											readOnly
+											disabled
 										></Form.Control>
 									</Form.Group>
 								</Col>
@@ -240,58 +211,12 @@ const FormEdit = ({ match, history }) => {
 								</Form.Label>
 							</Row>
 							<Row>
-								<Col md={6}>
-									{stakeholders &&
-										stakeholders.map((assignee, i) => (
-											<Row key={assignee._id}>
-												<Col md={7}>
-													<Form.Control
-														as="select"
-														value={assignee}
-														onChange={(e) => handleInputChange(e, i)}
-														className="px-5 mb-2"
-													>
-														<option value="">{t('action.select')}</option>
-														{members &&
-															members.map((stakeholder) => (
-																<option
-																	key={stakeholder._id}
-																	value={stakeholder._id}
-																>
-																	{stakeholder.firstName} {stakeholder.lastName}
-																</option>
-															))}
-													</Form.Control>
-												</Col>
-												<Col md={5} className="mb-2">
-													{stakeholders.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3"
-															onClick={() => removeHandler(i)}
-														>
-															<i className="fas fa-trash"></i> Remove
-														</Button>
-													)}
-													{stakeholders.length - 1 === i && (
-														<Button
-															className="px-3"
-															onClick={() => addHandler(i)}
-														>
-															<i className="fas fa-plus"></i> Add
-														</Button>
-													)}
-												</Col>
-											</Row>
-										))}
-								</Col>
+								<Col md={6}>{renderStakeholders()}</Col>
 							</Row>
 							<hr />
 							<Row className="mt-3">
-								<Col>
-									<Button type="submit" variant="primary" className="px-5 mt-3">
-										{t('action.update')}
-									</Button>
+								<Col className="text-right">
+									<p>updated on: {updatedAt.substring(0, 10)}</p>
 								</Col>
 							</Row>
 						</Form>
@@ -302,4 +227,4 @@ const FormEdit = ({ match, history }) => {
 	);
 };
 
-export default withRouter(FormEdit);
+export default OrganizationView;

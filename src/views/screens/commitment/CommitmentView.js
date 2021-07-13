@@ -1,28 +1,42 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { getCommitment } from '../../../application/actions/commitmentActions';
 import { Loader, Message } from '../../components/HelperComponents';
-import Moment from 'react-moment';
-import PropTypes from 'prop-types';
 
-const FormDetails = ({
-	match,
-	getCommitment,
-	commitmentDetails: { commitment, loading, error },
-}) => {
+const CommitmentView = ({ match }) => {
 	const activityId = match.params.activityId;
 
+	//define states
+	const [comment, setComment] = useState('');
+	const [completionDate, setCompletionDate] = useState('');
+	const [isComplete, setIsComplete] = useState(false);
+	const [updatedDate, setUpdatedDate] = useState('');
+
+	// usedispatch
+	const dispatch = useDispatch();
+
+	// get commitmentdetails
+	const commitmentDetails = useSelector((state) => state.commitmentDetails);
+	const { commitment, loading, error } = commitmentDetails;
+
 	useEffect(() => {
-		getCommitment(activityId);
-	}, [getCommitment, activityId]);
+		if (!commitment || commitment.activity !== activityId) {
+			dispatch(getCommitment(activityId));
+		} else {
+			setComment(commitment.details);
+			setCompletionDate(commitment.completion_date);
+			setIsComplete(commitment.is_complete);
+			setUpdatedDate(commitment.updatedAt);
+		}
+	}, [dispatch, commitment, activityId]);
 
 	return (
 		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
-				<Message>{error}</Message>
+				<Message>{error.message}</Message>
 			) : (
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
@@ -39,7 +53,7 @@ const FormDetails = ({
 											as="textarea"
 											rows="4"
 											placeholder="Enter Details"
-											value={commitment && commitment.details}
+											value={comment}
 											readOnly
 											disabled
 										></Form.Control>
@@ -53,9 +67,7 @@ const FormDetails = ({
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											// value={
-											// 	commitment && commitment.completion_date.substring(0, 10)
-											// }
+											value={completionDate && completionDate.substring(0, 10)}
 											readOnly
 											disabled
 										></Form.Control>
@@ -66,7 +78,7 @@ const FormDetails = ({
 								<Form.Check
 									type="checkbox"
 									label="Completed?"
-									checked={commitment && commitment.is_complete}
+									checked={isComplete}
 									readOnly
 									disabled
 								></Form.Check>
@@ -75,10 +87,7 @@ const FormDetails = ({
 							<Row>
 								<Col className="text-right">
 									<p>
-										updated on:{' '}
-										<Moment format="YYYY-MM-DD">
-											{commitment && commitment.updatedAt}
-										</Moment>
+										updated on: {updatedDate && updatedDate.substring(0, 10)}
 									</p>
 								</Col>
 							</Row>
@@ -90,13 +99,4 @@ const FormDetails = ({
 	);
 };
 
-FormDetails.propTypes = {
-	getCommitment: PropTypes.func.isRequired,
-	commitmentDetails: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-	commitmentDetails: state.commitmentDetails,
-});
-
-export default connect(mapStateToProps, { getCommitment })(FormDetails);
+export default CommitmentView;

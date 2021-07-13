@@ -5,7 +5,7 @@ import { Form, Row, Col, Card } from 'react-bootstrap';
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const ProjectDetailsScreen = ({ match }) => {
+const ProjectView = ({ match }) => {
 	const id = match.params.id;
 	const { t } = useTranslation();
 
@@ -104,4 +104,4 @@ const ProjectDetailsScreen = ({ match }) => {
 	);
 };
 
-export default ProjectDetailsScreen;
+export default ProjectView;

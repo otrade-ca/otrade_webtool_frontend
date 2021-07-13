@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addCommitment } from '../../../application/actions/commitmentActions';
 import { CardContainer } from '../../components/HelperComponents';
 
-const CommitmentDetails = ({ match, history }) => {
+const CommitmentAdd = ({ match, history }) => {
 	const id = match.params.activityId;
 
 	//define states
@@ -87,4 +87,4 @@ const CommitmentDetails = ({ match, history }) => {
 	);
 };
 
-export default CommitmentDetails;
+export default CommitmentAdd;

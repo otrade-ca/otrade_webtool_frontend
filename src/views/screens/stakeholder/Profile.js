@@ -1,14 +1,14 @@
 import React from 'react';
 import Activities from '../activity/Activities';
-import StakeholderInfluences from '../influence/StakeholderInfluences';
-import ViewForm from './ViewForm';
+import Influences from '../influence/Influences';
+import StakeholderView from './StakeholderView';
 
 const Profile = ({ match }) => {
 	return (
 		<>
-			<ViewForm match={match} />
+			<StakeholderView match={match} />
 			<Activities match={match} />
-			<StakeholderInfluences match={match} />
+			<Influences match={match} />
 		</>
 	);
 };

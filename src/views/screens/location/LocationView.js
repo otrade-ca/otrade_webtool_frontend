@@ -6,7 +6,7 @@ import { getLocationDetails } from '../../../application/actions/locationActions
 import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const FormView = ({ match }) => {
+const LocationView = ({ match }) => {
 	const locationId = match.params.id;
 
 	const { url } = useRouteMatch();
@@ -163,4 +163,4 @@ const FormView = ({ match }) => {
 	);
 };
 
-export default memo(FormView);
+export default memo(LocationView);

@@ -1,42 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { getCommitment } from '../../../application/actions/commitmentActions';
 import { Loader, Message } from '../../components/HelperComponents';
+import Moment from 'react-moment';
+import PropTypes from 'prop-types';
 
-const CommitmentForm = ({ match }) => {
+const CommitmentEdit = ({
+	match,
+	getCommitment,
+	commitmentDetails: { commitment, loading, error },
+}) => {
 	const activityId = match.params.activityId;
 
-	//define states
-	const [comment, setComment] = useState('');
-	const [completionDate, setCompletionDate] = useState('');
-	const [isComplete, setIsComplete] = useState(false);
-	const [updatedDate, setUpdatedDate] = useState('');
-
-	// usedispatch
-	const dispatch = useDispatch();
-
-	// get commitmentdetails
-	const commitmentDetails = useSelector((state) => state.commitmentDetails);
-	const { commitment, loading, error } = commitmentDetails;
-
 	useEffect(() => {
-		if (!commitment || commitment.activity !== activityId) {
-			dispatch(getCommitment(activityId));
-		} else {
-			setComment(commitment.details);
-			setCompletionDate(commitment.completion_date);
-			setIsComplete(commitment.is_complete);
-			setUpdatedDate(commitment.updatedAt);
-		}
-	}, [dispatch, commitment, activityId]);
+		getCommitment(activityId);
+	}, [getCommitment, activityId]);
 
 	return (
 		<>
 			{loading ? (
 				<Loader />
 			) : error ? (
-				<Message>{error.message}</Message>
+				<Message>{error}</Message>
 			) : (
 				<Card className="my-card">
 					<Card.Header className="my-card-header">
@@ -53,7 +39,7 @@ const CommitmentForm = ({ match }) => {
 											as="textarea"
 											rows="4"
 											placeholder="Enter Details"
-											value={comment}
+											value={commitment && commitment.details}
 											readOnly
 											disabled
 										></Form.Control>
@@ -67,7 +53,9 @@ const CommitmentForm = ({ match }) => {
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											value={completionDate && completionDate.substring(0, 10)}
+											// value={
+											// 	commitment && commitment.completion_date.substring(0, 10)
+											// }
 											readOnly
 											disabled
 										></Form.Control>
@@ -78,7 +66,7 @@ const CommitmentForm = ({ match }) => {
 								<Form.Check
 									type="checkbox"
 									label="Completed?"
-									checked={isComplete}
+									checked={commitment && commitment.is_complete}
 									readOnly
 									disabled
 								></Form.Check>
@@ -87,7 +75,10 @@ const CommitmentForm = ({ match }) => {
 							<Row>
 								<Col className="text-right">
 									<p>
-										updated on: {updatedDate && updatedDate.substring(0, 10)}
+										updated on:{' '}
+										<Moment format="YYYY-MM-DD">
+											{commitment && commitment.updatedAt}
+										</Moment>
 									</p>
 								</Col>
 							</Row>
@@ -99,4 +90,13 @@ const CommitmentForm = ({ match }) => {
 	);
 };
 
-export default CommitmentForm;
+CommitmentEdit.propTypes = {
+	getCommitment: PropTypes.func.isRequired,
+	commitmentDetails: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	commitmentDetails: state.commitmentDetails,
+});
+
+export default connect(mapStateToProps, { getCommitment })(CommitmentEdit);

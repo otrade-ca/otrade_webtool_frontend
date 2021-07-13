@@ -3,7 +3,7 @@
  */
 import React, { useEffect } from 'react';
 import { Link, Route, withRouter } from 'react-router-dom';
-import { Accordion, Card, Button, Row } from 'react-bootstrap';
+import { Accordion, Card, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Empty, Message, Loader } from '../../components/HelperComponents';
 import {
@@ -12,11 +12,8 @@ import {
 } from '../../../application/actions/locationActions';
 import { LOCATION_DELETE_RESET } from '../../../application/constants/locationConstants';
 import { useTranslation } from 'react-i18next';
-import { IconContext } from 'react-icons';
-import * as RiIcons from 'react-icons/ri';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
-import Moment from 'react-moment';
 import Location from '../../components/Entity/Location';
 
 const ProjectLocations = ({ match }) => {
@@ -89,7 +86,7 @@ const ProjectLocations = ({ match }) => {
 						render={({ history }) => (
 							<SearchBox
 								history={history}
-								searchWord={'Location'}
+								searchWord={'community'}
 								searchQueryPath={`/project/${projectId}/communities/search/`}
 								searchQueryEmpty={`/project/${projectId}/communities`}
 							/>

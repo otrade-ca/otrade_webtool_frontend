@@ -9,7 +9,7 @@ import { Loader, Message } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import { LOCATION_UPDATE_RESET } from '../../../application/constants/locationConstants';
 
-const FormEdit = ({ match }) => {
+const LocationEdit = ({ match }) => {
 	const locationId = match.params.id;
 
 	const { t } = useTranslation();
@@ -189,4 +189,4 @@ const FormEdit = ({ match }) => {
 	);
 };
 
-export default FormEdit;
+export default LocationEdit;

@@ -1,9 +1,9 @@
 import Dashboard from '../../components/Dashboard';
-import EditProjectPhoto from '../project/EditProjectPhoto';
-import ProjectDetailsScreen from '../project/ProjectDetailsScreen';
+import UploadPhoto from '../project/UploadPhoto';
+import ProjectView from '../project/ProjectView';
 import ProjectLocations from '../location/ProjectLocations';
 import ProjectStakeholders from '../stakeholder/ProjectStakeholders';
-import OrganizationsProjectList from '../organization/OrganizationsProjectList';
+import ProjectOrganizations from '../organization/ProjectOrganizations';
 import ProjectNews from '../news/ProjectNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
@@ -52,7 +52,7 @@ export const routes = [
 	},
 	{
 		path: '/about',
-		component: ({ match }) => <ProjectDetailsScreen match={match} />,
+		component: ({ match }) => <ProjectView match={match} />,
 	},
 	{
 		path: '/communities',
@@ -88,23 +88,23 @@ export const routes = [
 	},
 	{
 		path: '/organizations',
-		component: ({ match }) => <OrganizationsProjectList match={match} />,
+		component: ({ match }) => <ProjectOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword',
-		component: ({ match }) => <OrganizationsProjectList match={match} />,
+		component: ({ match }) => <ProjectOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/page/:pageNumber',
-		component: ({ match }) => <OrganizationsProjectList match={match} />,
+		component: ({ match }) => <ProjectOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <OrganizationsProjectList match={match} />,
+		component: ({ match }) => <ProjectOrganizations match={match} />,
 	},
 	{
 		path: '/photo',
-		component: ({ match }) => <EditProjectPhoto match={match} />,
+		component: ({ match }) => <UploadPhoto match={match} />,
 	},
 	{
 		path: '/news',

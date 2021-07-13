@@ -1,20 +1,18 @@
 import { lazy } from 'react';
-const Dashboard = lazy(() => import('./Dashboard'));
-const FormAdd = lazy(() => import('./FormAdd'));
-const FormEdit = lazy(() => import('./FormEdit'));
-const FormView = lazy(() => import('./FormView'));
+const LocationAdd = lazy(() => import('./LocationAdd'));
+const LocationEdit = lazy(() => import('./LocationEdit'));
+const LocationView = lazy(() => import('./LocationView'));
 const LandingPage = lazy(() => import('./LandingPage'));
-const PhotoEdit = lazy(() => import('./PhotoEdit'));
+const UploadPhoto = lazy(() => import('./UploadPhoto'));
 const ProjectLocations = lazy(() => import('./ProjectLocations'));
 const UserLocations = lazy(() => import('./UserLocations'));
 
 export {
-	Dashboard,
-	FormAdd,
-	FormEdit,
-	FormView,
+	LocationAdd,
+	LocationEdit,
+	LocationView,
 	LandingPage,
-	PhotoEdit,
+	UploadPhoto,
 	ProjectLocations,
 	UserLocations,
 };

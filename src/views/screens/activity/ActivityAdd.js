@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { CardContainer } from '../../components/HelperComponents';
 import SingleCommunityDropdown from '../../components/Dropdown/SingleCommunityDropdown';
 
-const ActivityForm = ({ history }) => {
+const ActivityAdd = ({ history }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 
@@ -172,4 +172,4 @@ const ActivityForm = ({ history }) => {
 	);
 };
 
-export default ActivityForm;
+export default ActivityAdd;

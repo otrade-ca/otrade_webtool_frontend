@@ -1,13 +1,11 @@
 import StepForm from '../landownership/StepForm';
 import LandownershipList from '../landownership/LandownershipList';
-import ListOrganizations from '../organization/ListOrganizations';
+import LocationOrganizations from '../organization/LocationOrganizations';
 import LocationStakeholders from '../stakeholder/LocationStakeholders';
-import FormEdit from './FormEdit';
-import PhotoEdit from './PhotoEdit';
-import FormView from './FormView';
 import LocationNews from '../news/LocationNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
+import { LocationEdit, LocationView, UploadPhoto } from './location';
 
 export const btnlinks = [
 	{
@@ -42,43 +40,43 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '/',
-		component: ({ match }) => <FormView match={match} />,
+		component: ({ match }) => <LocationView match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <FormEdit match={match} />,
+		component: ({ match }) => <LocationEdit match={match} />,
 	},
 	{
 		path: '/edit',
-		component: ({ match }) => <FormEdit match={match} />,
+		component: ({ match }) => <LocationEdit match={match} />,
 	},
 	{
 		path: '/profile',
-		component: ({ match }) => <FormView match={match} />,
+		component: ({ match }) => <LocationView match={match} />,
 	},
 	{
 		path: '/profile/edit',
-		component: ({ match }) => <FormEdit match={match} />,
+		component: ({ match }) => <LocationEdit match={match} />,
 	},
 	{
 		path: '/photo',
-		component: ({ match }) => <PhotoEdit match={match} />,
+		component: ({ match }) => <UploadPhoto match={match} />,
 	},
 	{
 		path: '/organizations',
-		component: ({ match }) => <ListOrganizations match={match} />,
+		component: ({ match }) => <LocationOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword',
-		component: ({ match }) => <ListOrganizations match={match} />,
+		component: ({ match }) => <LocationOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/page/:pageNumber',
-		component: ({ match }) => <ListOrganizations match={match} />,
+		component: ({ match }) => <LocationOrganizations match={match} />,
 	},
 	{
 		path: '/organizations/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <ListOrganizations match={match} />,
+		component: ({ match }) => <LocationOrganizations match={match} />,
 	},
 	{
 		path: '/stakeholders',

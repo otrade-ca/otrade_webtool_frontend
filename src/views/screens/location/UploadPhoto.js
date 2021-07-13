@@ -3,10 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	updateProjectProfilePhoto,
-	listProjectDetails,
-} from '../../../application/actions/projectActions';
-import { PROJECT_UPDATE_RESET } from '../../../application/constants/projectConstants';
+	getLocationDetails,
+	updateLocationPhoto,
+} from '../../../application/actions/locationActions';
+import { LOCATION_UPDATE_RESET } from '../../../application/constants/locationConstants';
 import {
 	Loader,
 	Message,
@@ -14,33 +14,33 @@ import {
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const EditProjectPhoto = ({ match, history }) => {
-	const projectId = match.params.id;
+const UploadPhoto = ({ match, history }) => {
+	const locationId = match.params.id;
 
 	const { t } = useTranslation();
 
 	//define states
 	const [image, setImage] = useState('');
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState(false);
 
 	const dispatch = useDispatch();
 
-	//get project details
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { loading, error, project } = projectDetails;
+	//get the stakeholder
+	const locationDetails = useSelector((state) => state.locationDetails);
+	const { loading, error, location } = locationDetails;
 
-	//get success from project update
-	const projectUpdate = useSelector((state) => state.projectUpdate);
-	const { success: successUpdate } = projectUpdate;
+	//get success
+	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
+	const { success } = stakeholderUpdate;
 
 	useEffect(() => {
-		if (successUpdate) {
-			dispatch(listProjectDetails(projectId));
-			dispatch({ type: PROJECT_UPDATE_RESET });
+		if (success) {
+			dispatch(getLocationDetails(locationId));
+			dispatch({ type: LOCATION_UPDATE_RESET });
 		} else {
-			setImage(project.image);
+			setImage(location.image);
 		}
-	}, [dispatch, projectId, project, successUpdate]);
+	}, [dispatch, location, locationId, success]);
 
 	const uploadFileHandler = async (e) => {
 		setFile(e.target.files[0]);
@@ -48,10 +48,11 @@ const EditProjectPhoto = ({ match, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		console.log('hello');
 		dispatch(
-			updateProjectProfilePhoto(
+			updateLocationPhoto(
 				{
-					id: projectId,
+					id: locationId,
 				},
 				file,
 				history
@@ -106,4 +107,4 @@ const EditProjectPhoto = ({ match, history }) => {
 	);
 };
 
-export default withRouter(EditProjectPhoto);
+export default withRouter(UploadPhoto);

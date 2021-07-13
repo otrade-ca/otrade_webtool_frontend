@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../Routing/PrivateRoute';
-import ActivityForm from '../../screens/activity/ActivityForm';
+import ActivityAdd from '../../screens/activity/ActivityAdd';
 
 const ActivityRoutes = () => {
 	return (
@@ -9,12 +9,12 @@ const ActivityRoutes = () => {
 			<PrivateRoute
 				exact
 				path="/activities/register/project/:id"
-				component={ActivityForm}
+				component={ActivityAdd}
 			/>
 			<PrivateRoute
 				exact
 				path="/activities/register/stakeholder/:id"
-				component={ActivityForm}
+				component={ActivityAdd}
 			/>
 		</Switch>
 	);

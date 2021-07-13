@@ -12,7 +12,7 @@ import { getLocationId, getProjectId } from '../../../application/localStorage';
 import MemberDropdownProject from '../../components/Dropdown/MemberDropdownProject';
 import { CardContainer } from '../../components/HelperComponents';
 
-const AddOrganizationScreen = ({ match, history }) => {
+const OrganizationAdd = ({ match, history }) => {
 	// id is either match or from localStorage
 	const id = match.params.id ? match.params.id : getLocationId();
 	const projectId = getProjectId();
@@ -176,4 +176,4 @@ const AddOrganizationScreen = ({ match, history }) => {
 	);
 };
 
-export default withRouter(AddOrganizationScreen);
+export default withRouter(OrganizationAdd);

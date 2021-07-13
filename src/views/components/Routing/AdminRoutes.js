@@ -2,19 +2,13 @@ import React, { lazy } from 'react';
 import { Switch } from 'react-router-dom';
 import AdminPrivateRoute from '../Routing/AdminPrivateRoute';
 const UserListScreen = lazy(() => import('../../screens/user/UserListScreen'));
-const ListProjectScreen = lazy(() =>
-	import('../../screens/project/ListProjectScreen')
-);
-const ProjectEditScreen = lazy(() =>
-	import('../../screens/project/ProjectEditScreen')
-);
+const AdminProjects = lazy(() => import('../../screens/project/AdminProjects'));
+const ProjectEdit = lazy(() => import('../../screens/project/ProjectEdit'));
 const AdminEditUserProfileScreen = lazy(() =>
 	import('../../screens/user/AdminEditUserProfileScreen')
 );
 const UserAddScreen = lazy(() => import('../../screens/user/UserAddScreen'));
-const ProjectAddScreen = lazy(() =>
-	import('../../screens/project/ProjectAddScreen')
-);
+const ProjectAdd = lazy(() => import('../../screens/project/ProjectAdd'));
 const Assignment = lazy(() => import('../Assignment'));
 
 const AdminRoutes = () => {
@@ -56,32 +50,32 @@ const AdminRoutes = () => {
 			<AdminPrivateRoute
 				exact
 				path="/admin/projects"
-				component={ListProjectScreen}
+				component={AdminProjects}
 			/>
 			<AdminPrivateRoute
 				exact
 				path="/admin/projects/search/:keyword"
-				component={ListProjectScreen}
+				component={AdminProjects}
 			/>
 			<AdminPrivateRoute
 				exact
 				path="/admin/projects/page/:pageNumber"
-				component={ListProjectScreen}
+				component={AdminProjects}
 			/>
 			<AdminPrivateRoute
 				exact
 				path="/admin/projects/search/:keyword/page/:pageNumber"
-				component={ListProjectScreen}
+				component={AdminProjects}
 			/>
 			<AdminPrivateRoute
 				exact
 				path="/admin/projects/add"
-				component={ProjectAddScreen}
+				component={ProjectAdd}
 			/>
 			<AdminPrivateRoute
 				exact
 				path="/admin/project/:id/edit"
-				component={ProjectEditScreen}
+				component={ProjectEdit}
 			/>
 			<AdminPrivateRoute
 				exact

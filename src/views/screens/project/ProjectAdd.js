@@ -7,7 +7,7 @@ import { PROJECT_ADD_RESET } from '../../../application/constants/projectConstan
 import { useTranslation } from 'react-i18next';
 import countries from '../../selectCountries.json';
 
-const ProjectAddScreen = ({ history }) => {
+const ProjectAdd = ({ history }) => {
 	const { t } = useTranslation();
 
 	const [projectName, setProjectName] = useState('');
@@ -213,4 +213,4 @@ const ProjectAddScreen = ({ history }) => {
 	);
 };
 
-export default ProjectAddScreen;
+export default ProjectAdd;

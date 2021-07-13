@@ -316,8 +316,6 @@ export const listUserLocations = (userId) => async (dispatch, getState) => {
 			},
 		};
 
-		console.log(data);
-
 		const {
 			data: { data },
 		} = await axios.get(`${getURL()}/api/v1/locations/user/${userId}`, config);

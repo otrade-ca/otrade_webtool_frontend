@@ -7,7 +7,7 @@ import { CardContainer } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 import { getProjectId } from '../../../application/localStorage';
 
-const AddForm = ({ history }) => {
+const StakeholderAdd = ({ history }) => {
 	const { id } = useParams();
 
 	const projectId = getProjectId();
@@ -288,4 +288,4 @@ const AddForm = ({ history }) => {
 	);
 };
 
-export default withRouter(AddForm);
+export default withRouter(StakeholderAdd);

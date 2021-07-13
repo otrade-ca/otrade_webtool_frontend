@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	getStakeholderDetails,
-	updateStakeholder,
-} from '../../../application/actions/stakeholderActions';
-import { STAKEHOLDER_UPDATE_RESET } from '../../../application/constants/stakeholderConstants';
+import { getStakeholderDetails } from '../../../application/actions/stakeholderActions';
 import {
 	CardContainer,
 	Loader,
@@ -13,7 +9,7 @@ import {
 } from '../../components/HelperComponents';
 import { useTranslation } from 'react-i18next';
 
-const EditForm = ({ match }) => {
+const StakeholderView = ({ match }) => {
 	const stakeholderId = match.params.id;
 
 	const { t } = useTranslation();
@@ -22,14 +18,6 @@ const EditForm = ({ match }) => {
 	const dispatch = useDispatch();
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { loading, error, stakeholder } = stakeholderDetails;
-
-	//get project
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
-
-	//get success
-	const stakeholderUpdate = useSelector((state) => state.stakeholderUpdate);
-	const { success } = stakeholderUpdate;
 
 	//define states
 	const [firstName, setFirstName] = useState('');
@@ -44,11 +32,11 @@ const EditForm = ({ match }) => {
 	const [media, setMedia] = useState([{ website: '' }]);
 	const [organization, setOrganization] = useState();
 	const [orgPosition, setOrgPosition] = useState('');
+	const [updatedDate, setUpdatedDate] = useState('');
 
 	useEffect(() => {
-		if (success) {
+		if (!stakeholder.firstName || stakeholder._id !== stakeholderId) {
 			dispatch(getStakeholderDetails(stakeholderId));
-			dispatch({ type: STAKEHOLDER_UPDATE_RESET });
 		} else {
 			setFirstName(stakeholder.firstName);
 			setLastName(stakeholder.lastName);
@@ -59,53 +47,12 @@ const EditForm = ({ match }) => {
 			setTelephone(stakeholder.telephone);
 			setMedia(stakeholder.media);
 			setOrganization(stakeholder.organization);
+			setUpdatedDate(stakeholder.updatedAt);
 			setAlias(stakeholder.alias);
 			setAddress(stakeholder.address);
 			setOrgPosition(stakeholder.org_Position);
 		}
-	}, [dispatch, stakeholder, stakeholderId, success, project]);
-
-	//add input field
-	const addHandler = (i) => {
-		setMedia([...media, { website: '' }]);
-	};
-
-	const removeHandler = (i) => {
-		const removeItem = media[i];
-		const list = media.filter((i) => i !== removeItem);
-		setMedia(list);
-	};
-
-	//handle input change
-	const handleInputChange = (e, i) => {
-		e.preventDefault();
-		const list = [...media];
-		list[i] = e.target.value;
-		setMedia(list);
-	};
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-		dispatch(
-			updateStakeholder(
-				{
-					firstName,
-					lastName,
-					alias,
-					address,
-					telephone,
-					gender,
-					birthdate,
-					email,
-					ethnicity,
-					media,
-					organization,
-					org_Position: orgPosition,
-				},
-				stakeholderId
-			)
-		);
-	};
+	}, [dispatch, stakeholder, stakeholderId]);
 
 	return (
 		<>
@@ -114,8 +61,8 @@ const EditForm = ({ match }) => {
 			) : error ? (
 				<Message>{error}</Message>
 			) : (
-				<CardContainer title={'Stakeholder'}>
-					<Form onSubmit={submitHandler}>
+				<CardContainer title={'Stakeholder'} link={'edit'}>
+					<Form>
 						<Row>
 							<Col md={6}>
 								<Form.Group controlId="firstName">
@@ -124,7 +71,8 @@ const EditForm = ({ match }) => {
 										type="firstName"
 										placeholder={t('stakeholder.firstName.placeholder')}
 										value={firstName}
-										onChange={(e) => setFirstName(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -135,7 +83,8 @@ const EditForm = ({ match }) => {
 										type="lastName"
 										placeholder={t('stakeholder.lastName.placeholder')}
 										value={lastName}
-										onChange={(e) => setLastName(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -148,7 +97,8 @@ const EditForm = ({ match }) => {
 										type="alias"
 										placeholder={t('stakeholder.alias.placeholder')}
 										value={alias}
-										onChange={(e) => setAlias(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -158,11 +108,7 @@ const EditForm = ({ match }) => {
 							<Col md={4}>
 								<Form.Group controlId="gender">
 									<Form.Label>{t('stakeholder.gender.label')}</Form.Label>
-									<Form.Control
-										as="select"
-										value={gender}
-										onChange={(e) => setGender(e.target.value)}
-									>
+									<Form.Control as="select" value={gender} readOnly disabled>
 										<option value="">--Select--</option>
 										<option value={t('stakeholder.gender.male')}>
 											{t('stakeholder.gender.male')}
@@ -182,7 +128,8 @@ const EditForm = ({ match }) => {
 									<Form.Control
 										type="date"
 										value={birthdate && birthdate.substring(0, 10)}
-										onChange={(e) => setBirthdate(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -193,7 +140,8 @@ const EditForm = ({ match }) => {
 										type="ethnicity"
 										placeholder={t('stakeholder.ethnicity.placeholder')}
 										value={ethnicity}
-										onChange={(e) => setEthnicity(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -207,7 +155,8 @@ const EditForm = ({ match }) => {
 										type="address"
 										placeholder="Enter Address"
 										value={address}
-										onChange={(e) => setAddress(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -220,7 +169,8 @@ const EditForm = ({ match }) => {
 										type="email"
 										placeholder={t('stakeholder.email.placeholder')}
 										value={email}
-										onChange={(e) => setEmail(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -231,7 +181,8 @@ const EditForm = ({ match }) => {
 										type="telephone"
 										placeholder={t('stakeholder.telephone.placeholder')}
 										value={telephone}
-										onChange={(e) => setTelephone(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -250,27 +201,9 @@ const EditForm = ({ match }) => {
 															'stakeholder.social_Media.placeholder'
 														)}
 														value={site}
-														onChange={(e) => handleInputChange(e, i)}
+														readOnly
+														disabled
 													></Form.Control>
-												</Col>
-												<Col>
-													{media.length !== 1 && (
-														<Button
-															variant="danger"
-															className="btn-md mr-3 mb-1"
-															onClick={() => removeHandler(i)}
-														>
-															<i className="fas fa-trash"></i> Delete
-														</Button>
-													)}
-													{media.length - 1 === i && (
-														<Button
-															className="px-3"
-															onClick={() => addHandler(i)}
-														>
-															<i className="fas fa-plus"></i> Add
-														</Button>
-													)}
 												</Col>
 											</Row>
 										))}
@@ -287,8 +220,8 @@ const EditForm = ({ match }) => {
 									<Form.Control
 										as="select"
 										value={organization}
-										required
-										onChange={(e) => setOrganization(e.target.value)}
+										readOnly
+										disabled
 									>
 										<option value="">--Select--</option>
 										<option value="Yes">Yes</option>
@@ -309,19 +242,16 @@ const EditForm = ({ match }) => {
 										type="orgPosition"
 										placeholder={t('stakeholder.orgPosition.placeholder')}
 										value={orgPosition}
-										disabled={!organization || organization === 'No'}
-										onChange={(e) => setOrgPosition(e.target.value)}
+										readOnly
+										disabled
 									></Form.Control>
 								</Col>
 							</Row>
 						</Form.Group>
-
 						<hr />
 						<Row className="mt-3">
-							<Col>
-								<Button type="submit" variant="primary" className="mt-3 px-5">
-									{t('action.update')}
-								</Button>
+							<Col className="text-right">
+								<p>updated on: {updatedDate.substring(0, 10)}</p>
 							</Col>
 						</Row>
 					</Form>
@@ -331,4 +261,4 @@ const EditForm = ({ match }) => {
 	);
 };
 
-export default EditForm;
+export default StakeholderView;
