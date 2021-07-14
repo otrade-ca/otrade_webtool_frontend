@@ -213,7 +213,6 @@ export const updateOrganiaztionPhoto =
 				type: ORGANIZATION_UPDATE_SUCCESS,
 				payload: data,
 			});
-
 			history.go(-1);
 			dispatch(setAlert('User successfully updated', 'success'));
 		} catch (error) {

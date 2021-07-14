@@ -16,6 +16,8 @@ import { ORGANIZATION_DELETE_REQUEST } from '../../../application/constants/orga
 import PropTypes from 'prop-types';
 import SearchBox from '../../components/SearchBox';
 import Organization from '../../components/Entity/Organization';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const StakeholderOrganizations = ({
 	match,
@@ -72,7 +74,10 @@ const StakeholderOrganizations = ({
 						to={`/organizations/register/stakeholder/${stakeholderId}`}
 						className="btn btn-primary ml-2"
 					>
-						<i className="fas fa-plus"></i> Organization
+						<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+							<IoIcons.IoIosAdd />
+						</IconContext.Provider>{' '}
+						Organization
 					</Link>
 				</Card.Header>
 			)}

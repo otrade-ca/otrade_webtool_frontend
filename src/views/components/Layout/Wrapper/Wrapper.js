@@ -18,7 +18,7 @@ const Wrapper = ({ children }) => {
 
 	return (
 		<div className={userInfo && sidebar ? 'wrapper' : 'wrapper closed'}>
-			{userInfo && <Sidebar />}
+			{/* {userInfo && <Sidebar />} */}
 			<InnerWrapper>
 				<Header showSidebar={showSidebar} />
 				{children}

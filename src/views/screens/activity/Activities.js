@@ -14,6 +14,8 @@ import Paginate from '../../components/Paginate';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Activity from '../../components/Entity/Activity';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const Activities = ({
 	match,
@@ -61,7 +63,10 @@ const Activities = ({
 						to={`/activities/register/stakeholder/${stakeholderId}`}
 						className="btn btn-primary btn-sm ml-2"
 					>
-						<i className="fas fa-plus"></i> {t('tables.activity')}
+						<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+							<IoIcons.IoIosAdd />
+						</IconContext.Provider>{' '}
+						{t('tables.activity')}
 					</Link>
 				</Card.Header>
 			)}

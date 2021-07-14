@@ -8,9 +8,15 @@ import { NewsView, NewsEdit, ProjectNews } from '../news';
 export const btnlinks = [
 	{
 		link: '/photo',
-		class: 'btn btn-primary',
+		class: 'btn btn-primary mr-3',
 		icon: 'fas fa-edit',
 		type: 'Photo',
+	},
+	{
+		link: '/actions',
+		class: 'btn btn-primary',
+		icon: 'fas fa-edit',
+		type: 'Actions',
 	},
 ];
 
@@ -40,6 +46,10 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '',
+		component: ({ match }) => <Actions match={match} />,
+	},
+	{
+		path: '/actions',
 		component: ({ match }) => <Actions match={match} />,
 	},
 	{

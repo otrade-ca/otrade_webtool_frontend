@@ -5,8 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
+import Placeholder from '../../img/placeholder.png';
+import { getBucketInfo } from '../../../application/api';
 
 const Stakeholder = ({ item, index, deleteHandler }) => {
+	const { prependURL } = getBucketInfo('stakeholder');
 	const { t } = useTranslation();
 	return (
 		<>
@@ -15,9 +18,19 @@ const Stakeholder = ({ item, index, deleteHandler }) => {
 					<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 						<div className="table-card-item">
 							<div className="item-one">
-								<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
-									<IoIcons.IoMdPerson />
-								</IconContext.Provider>
+								{item.image ? (
+									<img
+										src={`${prependURL}${item.image}`}
+										alt="profile"
+										className="user-stakeholder-image"
+									/>
+								) : (
+									<img
+										src={Placeholder}
+										alt="profile"
+										className="user-stakeholder-image"
+									/>
+								)}
 							</div>
 							<div className="item-two">
 								<div>
@@ -71,18 +84,29 @@ const Stakeholder = ({ item, index, deleteHandler }) => {
 											</em>
 										</>
 										<br />
-										<>
+										{/* <>
 											Community: <em>{item.location.location}</em>
-										</>
+										</> */}
 									</p>
 								</div>
 							</div>
+							<hr />
 							<div className="action-btns">
 								<Link to={`/activities/register`} className="btn btn-primary">
-									<i className="fas fa-plus" /> {t('tables.activity')}
+									<IconContext.Provider
+										value={{ color: '#fff', size: '1.5em' }}
+									>
+										<IoIcons.IoIosAdd />
+									</IconContext.Provider>{' '}
+									{t('tables.activity')}
 								</Link>
-								<Link to={`/news/register`} className="btn btn-secondary">
-									<i className="fas fa-plus" /> News
+								<Link to={`/news/register`} className="btn btn-primary">
+									<IconContext.Provider
+										value={{ color: '#fff', size: '1.5em' }}
+									>
+										<IoIcons.IoIosAdd />
+									</IconContext.Provider>{' '}
+									News
 								</Link>
 								{/* <Button
 													variant="danger"

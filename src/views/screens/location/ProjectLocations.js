@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 import SearchBox from '../../components/SearchBox';
 import Paginate from '../../components/Paginate';
 import Location from '../../components/Entity/Location';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const ProjectLocations = ({ match }) => {
 	const projectId = match.params.id;
@@ -57,7 +59,10 @@ const ProjectLocations = ({ match }) => {
 						to={`/communities/register/project/${projectId}`}
 						className="btn btn-primary ml-2"
 					>
-						<i className="fas fa-plus"></i> Register
+						<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+							<IoIcons.IoIosAdd />
+						</IconContext.Provider>{' '}
+						Community
 					</Link>
 				</Card.Header>
 			)}

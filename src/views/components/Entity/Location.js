@@ -3,19 +3,32 @@ import { Link } from 'react-router-dom';
 import { Accordion, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as RiIcons from 'react-icons/ri';
+import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
+import Placeholder from '../../img/placeholder.png';
+import { getBucketInfo } from '../../../application/api';
 
 const Location = ({ location, index }) => {
+	const { prependURL } = getBucketInfo('location');
 	const { t } = useTranslation();
 	return (
 		<Card className="table-card" key={index}>
 			<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 				<div className="table-card-item">
 					<div className="item-one">
-						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
-							<RiIcons.RiCommunityLine />
-						</IconContext.Provider>
+						{location.image ? (
+							<img
+								src={`${prependURL}${location.image}`}
+								alt="profile"
+								className="user-stakeholder-image"
+							/>
+						) : (
+							<img
+								src={Placeholder}
+								alt="profile"
+								className="user-stakeholder-image"
+							/>
+						)}
 					</div>
 					<div className="item-two">
 						<div>{location.location}</div>
@@ -67,22 +80,28 @@ const Location = ({ location, index }) => {
 							to={`/stakeholders/register/community/${location._id}`}
 							className="btn btn-primary"
 						>
-							<i className="fas fa-plus" />
-							Add {t('tables.stakeholder')}
+							<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+								<IoIcons.IoIosAdd />
+							</IconContext.Provider>{' '}
+							{t('tables.stakeholder')}
 						</Link>
 						<Link
 							to={`/organizations/register/community/${location._id}`}
 							className="btn btn-primary"
 						>
-							<i className="fas fa-plus" />
-							Add {t('tables.organization')}
+							<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+								<IoIcons.IoIosAdd />
+							</IconContext.Provider>{' '}
+							{t('tables.organization')}
 						</Link>
 						<Link
 							to={`/news/register/community/${location._id}`}
-							className="btn btn-secondary"
+							className="btn btn-primary"
 						>
-							<i className="fas fa-plus" />
-							Add {'News'}
+							<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+								<IoIcons.IoIosAdd />
+							</IconContext.Provider>{' '}
+							{'News'}
 						</Link>
 						{/* <Button
                     variant="danger"

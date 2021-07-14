@@ -1,17 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const Actions = ({ match }) => {
 	const projectId = match.params.id;
 	const { t } = useTranslation();
-
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { project } = projectDetails;
-
-	console.log(project);
 
 	return (
 		<Card className="my-card">
@@ -26,8 +22,10 @@ const Actions = ({ match }) => {
 								to={`/communities/register/project/${projectId}`}
 								className="btn btn-primary"
 							>
-								<i className="fas fa-plus" />
-								{t('action.register')} {t('tables.location')}
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{t('tables.location')}
 							</Link>
 						</Col>
 						<Col md={3}>
@@ -35,8 +33,10 @@ const Actions = ({ match }) => {
 								to={`/stakeholders/register/project/${projectId}`}
 								className="btn btn-primary"
 							>
-								<i className="fas fa-plus" />
-								{t('action.register')} {t('tables.stakeholder')}
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{t('tables.stakeholder')}
 							</Link>
 						</Col>
 						<Col md={3}>
@@ -44,26 +44,32 @@ const Actions = ({ match }) => {
 								to={`/organizations/register/project/${projectId}`}
 								className="btn btn-primary"
 							>
-								<i className="fas fa-plus" />
-								{t('action.register')} {t('tables.organization')}
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{t('tables.organization')}
 							</Link>
 						</Col>
 						<Col md={3}>
 							<Link
 								to={`/activities/register/project/${projectId}`}
-								className="btn btn-secondary"
+								className="btn btn-primary"
 							>
-								<i className="fas fa-plus" />
-								{t('action.register')} {'Activity'}
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{'Activity'}
 							</Link>
 						</Col>
 						<Col md={3}>
 							<Link
 								to={`/news/register/project/${projectId}`}
-								className="btn btn-secondary"
+								className="btn btn-primary"
 							>
-								<i className="fas fa-plus" />
-								{t('action.register')} {'News'}
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{'News'}
 							</Link>
 						</Col>
 					</Row>

@@ -9,7 +9,7 @@ export const getURL = () => {
 export const getBucketInfo = (type) => {
 	switch (type) {
 		case 'user':
-			return process.env.NODE_ENV === 'production'
+			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
 							'https://users-bucket-00-dev.s3.us-east-2.amazonaws.com/',
@@ -21,7 +21,7 @@ export const getBucketInfo = (type) => {
 						bucket: 'users-bucket-00-prd',
 				  };
 		case 'project':
-			return process.env.NODE_ENV === 'production'
+			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
 							'https://projects-bucket-00-dev.s3.us-east-2.amazonaws.com/',
@@ -33,7 +33,7 @@ export const getBucketInfo = (type) => {
 						bucket: 'projects-bucket-00-prd',
 				  };
 		case 'location':
-			return process.env.NODE_ENV === 'production'
+			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
 							'https://communities-bucket-00-dev.s3.us-east-2.amazonaws.com/',
@@ -45,7 +45,7 @@ export const getBucketInfo = (type) => {
 						bucket: 'communities-bucket-00-prd',
 				  };
 		case 'organization':
-			return process.env.NODE_ENV === 'production'
+			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
 							'https://organizations-bucket-00-dev.s3.us-east-2.amazonaws.com/',
@@ -57,7 +57,7 @@ export const getBucketInfo = (type) => {
 						bucket: 'organizations-bucket-00-prd',
 				  };
 		case 'stakeholder':
-			return process.env.NODE_ENV === 'production'
+			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:
 							'https://stakeholders-bucket-00-dev.s3.us-east-2.amazonaws.com/',

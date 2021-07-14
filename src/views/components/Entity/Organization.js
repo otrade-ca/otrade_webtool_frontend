@@ -3,19 +3,32 @@ import { Link } from 'react-router-dom';
 import { Accordion, Card, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
-import * as VscIcons from 'react-icons/vsc';
+import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
+import Placeholder from '../../img/placeholder.png';
+import { getBucketInfo } from '../../../application/api';
 
 const Organization = ({ item, index }) => {
+	const { prependURL } = getBucketInfo('organization');
 	const { t } = useTranslation();
 	return (
 		<Card className="table-card" key={index}>
 			<Accordion.Toggle as={Card.Header} eventKey={index + 1}>
 				<div className="table-card-item">
 					<div className="item-one">
-						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
-							<VscIcons.VscOrganization />
-						</IconContext.Provider>
+						{item.image ? (
+							<img
+								src={`${prependURL}${item.image}`}
+								alt="profile"
+								className="user-stakeholder-image"
+							/>
+						) : (
+							<img
+								src={Placeholder}
+								alt="profile"
+								className="user-stakeholder-image"
+							/>
+						)}
 					</div>
 					<div className="item-two">
 						<div>{item.name}</div>
@@ -60,8 +73,11 @@ const Organization = ({ item, index }) => {
 					<hr />
 					<Row className="d-flex align-items-center">
 						<Col>
-							<Link to={`/news/register`} className="btn btn-secondary">
-								<i className="fas fa-plus" /> Add News
+							<Link to={`/news/register`} className="btn btn-primary">
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>{' '}
+								News
 							</Link>
 						</Col>
 						{/* <Button

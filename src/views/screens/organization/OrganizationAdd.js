@@ -63,7 +63,7 @@ const OrganizationAdd = ({ match, history }) => {
 	};
 
 	return (
-		<CardContainer title={'Organization Registration'}>
+		<CardContainer title={'Organization Information'}>
 			<Form onSubmit={submitHandler} className="mb-3">
 				<Row>
 					<Col md={6}>

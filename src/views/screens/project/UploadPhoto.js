@@ -71,22 +71,23 @@ const UploadPhoto = ({ match, history }) => {
 								<Form.Label>Image</Form.Label>
 								<Row className="mb-3">
 									<Col md={6}>
-										<Form.Control
-											type="text"
-											placeholder="Enter image url"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
-										></Form.Control>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={6}>
 										<input
 											type="file"
 											accept="image/*"
 											required
 											onChange={uploadFileHandler}
 										/>
+									</Col>
+								</Row>
+								<Row>
+									<Col md={6}>
+										<Form.Control
+											type="text"
+											value={image}
+											readOnly
+											disabled
+											onChange={(e) => setImage(e.target.value)}
+										></Form.Control>
 									</Col>
 								</Row>
 							</Form.Group>
