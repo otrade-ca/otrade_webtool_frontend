@@ -4,6 +4,7 @@ import { Activities, ActivityEdit, ActivityView } from '../activity';
 import { CommitmentEdit } from '../commitment';
 import { Influences } from '../influence';
 import { NewsView, NewsEdit, StakeholderNews } from '../news';
+import { DocumentEdit, DocumentView, StakeholderDocuments } from '../document';
 
 export const btnlinks = [
 	{
@@ -143,5 +144,29 @@ export const routes = [
 	{
 		path: '/news/:newsId/view/edit',
 		component: ({ match }) => <NewsEdit match={match} />,
+	},
+	{
+		path: '/documents',
+		component: ({ match }) => <StakeholderDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword',
+		component: ({ match }) => <StakeholderDocuments match={match} />,
+	},
+	{
+		path: '/documents/page/:pageNumber',
+		component: ({ match }) => <StakeholderDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <StakeholderDocuments match={match} />,
+	},
+	{
+		path: '/documents/:documentId/view',
+		component: ({ match }) => <DocumentView match={match} />,
+	},
+	{
+		path: '/documents/:documentId/view/edit',
+		component: ({ match }) => <DocumentEdit match={match} />,
 	},
 ];

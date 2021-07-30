@@ -4,6 +4,7 @@ import { ProjectLocations } from '../location';
 import { ProjectStakeholders } from '../stakeholder';
 import { ProjectOrganizations } from '../organization';
 import { NewsView, NewsEdit, ProjectNews } from '../news';
+import { ProjectDocuments } from '../document';
 
 export const btnlinks = [
 	{
@@ -40,6 +41,10 @@ export const navbarlinks = [
 	{
 		link: '/news',
 		type: 'News',
+	},
+	{
+		link: '/documents',
+		type: 'Documents',
 	},
 ];
 
@@ -134,6 +139,30 @@ export const routes = [
 	},
 	{
 		path: '/news/:newsId/view/edit',
+		component: ({ match }) => <NewsEdit match={match} />,
+	},
+	{
+		path: '/documents',
+		component: ({ match }) => <ProjectDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword',
+		component: ({ match }) => <ProjectDocuments match={match} />,
+	},
+	{
+		path: '/documents/page/:pageNumber',
+		component: ({ match }) => <ProjectDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <ProjectDocuments match={match} />,
+	},
+	{
+		path: '/documents/:newsId/view',
+		component: ({ match }) => <NewsView match={match} />,
+	},
+	{
+		path: '/documents/:newsId/view/edit',
 		component: ({ match }) => <NewsEdit match={match} />,
 	},
 ];

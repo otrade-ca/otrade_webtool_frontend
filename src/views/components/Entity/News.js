@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Accordion, Card } from 'react-bootstrap';
 import { IconContext } from 'react-icons';
 import * as FaIcons from 'react-icons/fa';
+import * as BiIcons from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 import Moment from 'react-moment';
 
@@ -35,6 +36,11 @@ export const News = ({ item, index, linkPath }) => {
 								</em>
 							)}
 						</div>
+					</div>
+					<div className="item-three">
+						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
+							<BiIcons.BiCaretRight />
+						</IconContext.Provider>
 					</div>
 				</div>
 			</Accordion.Toggle>

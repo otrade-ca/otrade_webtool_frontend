@@ -1,5 +1,6 @@
 import { OrganizationView, OrganizationEdit, UploadPhoto } from './';
 import { NewsView, NewsEdit, OrganizationNews } from '../news';
+import { OrganizationDocuments, DocumentView, DocumentEdit } from '../document';
 
 export const btnlinks = [
 	{
@@ -67,5 +68,29 @@ export const routes = [
 	{
 		path: '/news/:newsId/view/edit',
 		component: ({ match }) => <NewsEdit match={match} />,
+	},
+	{
+		path: '/documents',
+		component: ({ match }) => <OrganizationDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword',
+		component: ({ match }) => <OrganizationDocuments match={match} />,
+	},
+	{
+		path: '/documents/page/:pageNumber',
+		component: ({ match }) => <OrganizationDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <OrganizationDocuments match={match} />,
+	},
+	{
+		path: '/documents/:documentId/view',
+		component: ({ match }) => <DocumentView match={match} />,
+	},
+	{
+		path: '/documents/:documensId/view/edit',
+		component: ({ match }) => <DocumentEdit match={match} />,
 	},
 ];

@@ -10,6 +10,7 @@ import {
 } from '../../components/HelperComponents';
 import { IconContext } from 'react-icons';
 import * as AiIcons from 'react-icons/ai';
+import * as BiIcons from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 
 const UserProjects = memo(({ match }) => {
@@ -69,6 +70,13 @@ const UserProjects = memo(({ match }) => {
 														</em>
 													)}
 												</div>
+											</div>
+											<div className="item-three">
+												<IconContext.Provider
+													value={{ color: '#008cba', size: '2em' }}
+												>
+													<BiIcons.BiCaretRight />
+												</IconContext.Provider>
 											</div>
 										</div>
 									</Accordion.Toggle>

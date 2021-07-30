@@ -6,6 +6,7 @@ import LocationNews from '../news/LocationNews';
 import NewsView from '../news/NewsView';
 import NewsEdit from '../news/NewsEdit';
 import { LocationEdit, LocationView, UploadPhoto } from './';
+import { CommunityDocuments, DocumentEdit, DocumentView } from '../document';
 
 export const btnlinks = [
 	{
@@ -125,5 +126,29 @@ export const routes = [
 	{
 		path: '/news/:newsId/view/edit',
 		component: ({ match }) => <NewsEdit match={match} />,
+	},
+	{
+		path: '/documents',
+		component: ({ match }) => <CommunityDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword',
+		component: ({ match }) => <CommunityDocuments match={match} />,
+	},
+	{
+		path: '/documents/page/:pageNumber',
+		component: ({ match }) => <CommunityDocuments match={match} />,
+	},
+	{
+		path: '/documents/search/:keyword/page/:pageNumber',
+		component: ({ match }) => <CommunityDocuments match={match} />,
+	},
+	{
+		path: '/documents/:documentId/view',
+		component: ({ match }) => <DocumentView match={match} />,
+	},
+	{
+		path: '/documents/:documentId/view/edit',
+		component: ({ match }) => <DocumentEdit match={match} />,
 	},
 ];

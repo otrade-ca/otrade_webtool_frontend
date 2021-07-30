@@ -4,6 +4,7 @@ import { Accordion, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
+import * as BiIcons from 'react-icons/bi';
 import Moment from 'react-moment';
 import Placeholder from '../../img/placeholder.png';
 import { getBucketInfo } from '../../../application/api';
@@ -50,6 +51,11 @@ const Stakeholder = ({ item, index, deleteHandler }) => {
 										</em>
 									)}
 								</div>
+							</div>
+							<div className="item-three">
+								<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
+									<BiIcons.BiCaretRight />
+								</IconContext.Provider>
 							</div>
 						</div>
 					</Accordion.Toggle>
@@ -108,13 +114,6 @@ const Stakeholder = ({ item, index, deleteHandler }) => {
 									</IconContext.Provider>{' '}
 									News
 								</Link>
-								{/* <Button
-													variant="danger"
-													onClick={() => deleteHandler(item._id)}
-												>
-													<i className="fas fa-trash"></i>{' '}
-													{t('action.delete')}
-												</Button> */}
 							</div>
 						</Card.Body>
 					</Accordion.Collapse>
