@@ -61,6 +61,8 @@ const Actions = ({ match }) => {
 								{'Activity'}
 							</Link>
 						</Col>
+					</Row>
+					<Row>
 						<Col md={3}>
 							<Link
 								to={`/news/register/project/${projectId}`}
@@ -70,6 +72,17 @@ const Actions = ({ match }) => {
 									<IoIcons.IoIosAdd />
 								</IconContext.Provider>
 								{'News'}
+							</Link>
+						</Col>
+						<Col md={3}>
+							<Link
+								to={`/documents/register/project/${projectId}`}
+								className="btn btn-primary"
+							>
+								<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+									<IoIcons.IoIosAdd />
+								</IconContext.Provider>
+								{'Documents'}
 							</Link>
 						</Col>
 					</Row>

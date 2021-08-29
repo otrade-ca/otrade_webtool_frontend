@@ -115,7 +115,7 @@ import {
 	documentListStakeholderReducer,
 } from './documentReducer';
 
-import { routeSaveReducer } from './routeReducer';
+import { routeSaveReducer, breadCrumbSaveReducer } from './routeReducer';
 import { alertReducer } from './alertReducer';
 import { geocodeFetchReducer } from './geocodeReducer';
 
@@ -233,6 +233,9 @@ const rootReducer = combineReducers({
 
 	// route reducer
 	routeSave: routeSaveReducer,
+
+	// breadcrumb reducer
+	breadCrumbSave: breadCrumbSaveReducer,
 
 	// alert reducer
 	alertReducer,

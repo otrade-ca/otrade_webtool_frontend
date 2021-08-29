@@ -26,7 +26,7 @@ import {
 	DOCUMENT_LIST_ORGANIZATION_FAIL,
 } from '../constants/documentConstants';
 import { setAlert } from '../actions/alertActions';
-import { getURL } from '../api';
+import { getBucketInfo, getURL } from '../api';
 
 /**
  * adds a document
@@ -35,7 +35,7 @@ import { getURL } from '../api';
  * @returns
  */
 export const addDocument =
-	(document, history) => async (dispatch, getState) => {
+	(document, file, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: DOCUMENT_ADD_REQUEST });
 
@@ -50,6 +50,23 @@ export const addDocument =
 				},
 			};
 
+			// instructions
+			const instructions = getBucketInfo('document');
+			instructions.id = document.id;
+			instructions.contentType = file.type;
+
+			// get presignedUrl
+			const {
+				data: { key, url },
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
+
+			// upload to aws
+			await axios.put(url, file, { 'Content-Type': file.type });
+
+			// append link to document
+			document.link = key;
+
+			// post document to db
 			const { data } = await axios.post(
 				`${getURL()}/api/v1/documents`,
 				document,

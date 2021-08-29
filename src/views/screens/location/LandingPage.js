@@ -9,6 +9,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { getBucketInfo } from '../../../application/api';
+import { saveBreadcrumb } from '../../../application/actions/routeActions';
 import { getLocationDetails } from '../../../application/actions/locationActions';
 import { listLocationStakeholders } from '../../../application/actions/stakeholderActions';
 import { listLocationOrganizations } from '../../../application/actions/organizationAction';
@@ -27,11 +28,19 @@ const LandingPage = ({ match, history }) => {
 	const locationDetails = useSelector((state) => state.locationDetails);
 	const { loading, error, location } = locationDetails;
 
+	const breadCrumbSave = useSelector((state) => state.breadCrumbSave);
+	const { breadcrumbs } = breadCrumbSave;
+
 	useEffect(() => {
 		dispatch(listLocationStakeholders(locationId));
 		dispatch(getLocationDetails(locationId));
 		dispatch(listLocationOrganizations(locationId));
 	}, [dispatch, locationId]);
+
+	const breadCrumbHelper = (e) => {
+		//e.preventDefault();
+		dispatch(saveBreadcrumb(breadcrumbs, url));
+	};
 
 	return (
 		<>
@@ -95,6 +104,7 @@ const LandingPage = ({ match, history }) => {
 															textDecoration: 'underline',
 														}}
 														to={`${url}${item.link}`}
+														onClick={breadCrumbHelper}
 													>
 														{item.type}
 													</NavLink>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Wrapper from './components/Layout/Wrapper/Wrapper';
 import Footer from './components/Layout/Footer';
+import Breadcrumbs from './components/Breadcrumbs';
 import { HomePage, LoginPage } from './screens/landing/landing';
 import Loader from '../views/components/Loader';
 import Alert from '../views/components/Layout/Alert';
@@ -20,6 +21,7 @@ import {
 	InfluenceRoutes,
 	CommitmentRoutes,
 	NewsRoutes,
+	DocumentRoutes,
 } from './components/Routing/AccessRoutes';
 
 const Home = () => {
@@ -51,6 +53,7 @@ const Home = () => {
 			<Wrapper>
 				<Container fluid="lg" className="content-container">
 					<Alert />
+					<Breadcrumbs />
 					<Route exact path="/" component={HomePage} />
 					<Route exact path="/login" component={LoginPage} />
 
@@ -61,6 +64,7 @@ const Home = () => {
 					<Route component={StakeholderRoutes} />
 					<Route component={OrganizationRoutes} />
 					<Route component={NewsRoutes} />
+					<Route component={DocumentRoutes} />
 					<Route component={ActivityRoutes} />
 					<Route component={InfluenceRoutes} />
 					<Route component={CommitmentRoutes} />

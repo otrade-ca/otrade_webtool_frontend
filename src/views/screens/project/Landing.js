@@ -9,14 +9,15 @@ import { NavLink, Link } from 'react-router-dom';
 import Placeholder from '../../img/placeholder.png';
 import { useTranslation } from 'react-i18next';
 import { btnlinks, navbarlinks, routes } from './utilities';
-import { saveRouteInfo } from '../../../application/actions/routeActions';
+import {
+	saveRouteInfo,
+	saveBreadcrumb,
+} from '../../../application/actions/routeActions';
 import { getBucketInfo } from '../../../application/api';
 
 const Landing = ({ match }) => {
 	const projectId = match.params.id;
-
 	const { prependURL } = getBucketInfo('project');
-
 	const { url, path } = useRouteMatch();
 	const { t } = useTranslation();
 
@@ -34,11 +35,19 @@ const Landing = ({ match }) => {
 	const projectDetails = useSelector((state) => state.projectDetails);
 	const { loading, error, project } = projectDetails;
 
+	const breadCrumbSave = useSelector((state) => state.breadCrumbSave);
+	const { breadcrumbs } = breadCrumbSave;
+
 	useEffect(() => {
 		if (!project.projectName || project._id !== projectId) {
 			dispatch(listProjectDetails(projectId));
 		}
 	}, [dispatch, projectId, project]);
+
+	const breadCrumbHelper = (e) => {
+		//e.preventDefault();
+		dispatch(saveBreadcrumb(breadcrumbs, url));
+	};
 
 	return (
 		<>
@@ -126,6 +135,7 @@ const Landing = ({ match }) => {
 															textDecoration: 'underline',
 														}}
 														to={`${url}${item.link}`}
+														onClick={breadCrumbHelper}
 													>
 														{item.type}
 													</NavLink>

@@ -53,7 +53,7 @@ const DocumentAdd = ({ match, history }) => {
 		<>
 			{/* {error && <Message variant="danger">{error}</Message>}
 			{loading && <Loader />} */}
-			<CardContainer title={'Upload Photo'}>
+			<CardContainer title={'Upload Document'}>
 				<Form onSubmit={submitHandler}>
 					<Row>
 						<Col>

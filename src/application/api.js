@@ -65,8 +65,20 @@ export const getBucketInfo = (type) => {
 				  }
 				: {
 						prependURL:
-							'https://stakeholders-bucket-00-prd.s3.us-east-2.amazonaws.com/',
-						bucket: 'stakeholders-bucket-00-prd',
+							'https://stakeholders-bucket-prd.s3.us-east-2.amazonaws.com/',
+						bucket: 'stakeholders-bucket-prd',
+				  };
+		case 'documents':
+			return process.env.NODE_ENV === 'development'
+				? {
+						prependURL:
+							'https://documents-bucket-00-dev.s3.us-east-2.amazonaws.com/',
+						bucket: 'documents-bucket-00-dev',
+				  }
+				: {
+						prependURL:
+							'https://documents-bucket-00-prd.s3.us-east-2.amazonaws.com/',
+						bucket: 'documents-bucket-00-prd',
 				  };
 		default:
 			return 'NO RESOURCE FOUND';
