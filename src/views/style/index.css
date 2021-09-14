@@ -125,7 +125,7 @@ label {
 .profile-container,
 .profile {
 	display: block;
-	max-width: 1000px;
+	/* max-width: 1000px; */
 	margin: 0 auto;
 }
 
@@ -352,7 +352,7 @@ hr {
 
 .my-card {
 	border-radius: 5px !important;
-	max-width: 1000px;
+	/* max-width: 1000px; */
 	min-height: 10rem;
 	margin: 0.5rem auto 0 auto !important;
 }
@@ -504,4 +504,13 @@ hr {
 .project-action-btns a {
 	margin: 0.5rem 0.5rem 0.5rem 0;
 	width: 100%;
+}
+
+.breadcrumb {
+	border: none !important;
+	border-radius: none !important;
+	font-weight: normal !important;
+	padding: 0 !important;
+	max-width: 1000px !important;
+	overflow-x: auto !important;
 }

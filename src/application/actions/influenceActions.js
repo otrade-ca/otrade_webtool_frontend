@@ -45,21 +45,9 @@ export const addInfluence =
 
 			dispatch({ type: INFLUENCE_ADD_SUCCESS, payload: data });
 
-			console.log('routeInfo is', routeInfo, 'length', routeInfo.length);
-
-			// routeinfo has at least 1 route, pos[0] is the origin
-			// if routeInfo has more than 1 route, navigate user through
-			if (routeInfo.length > 1) {
-				const route = routeInfo.pop();
-				dispatch(saveRouteInfo(routeInfo));
-				history.push(route.path);
-				// if there is only 1 route, push to origin
-			} else {
-				const route = routeInfo.pop();
-				history.push(route.path);
-				dispatch(removeRouteInfo());
-				dispatch(setAlert('Assessment Successfully Updated', 'success'));
-			}
+			history.push(`/stakeholder/${stakeholderId}/assessments`);
+			dispatch(setAlert('Assessment Successfully Updated', 'success'));
+			//}
 		} catch (error) {
 			dispatch({
 				type: INFLUENCE_ADD_FAIL,

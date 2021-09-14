@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { btnlinks, navbarlinks, routes } from './utilities';
 import { getLocationId } from '../../../application/localStorage';
 import { getBucketInfo } from '../../../application/api';
+import { saveBreadcrumb } from '../../../application/actions/routeActions';
 
 const StakeholderScreen = ({ match }) => {
 	//get the stakeholderId passed in
@@ -22,16 +23,24 @@ const StakeholderScreen = ({ match }) => {
 
 	//get path and url
 	const { path, url } = useRouteMatch();
-
 	const dispatch = useDispatch();
 
 	//get stakeholder
 	const stakeholderDetails = useSelector((state) => state.stakeholderDetails);
 	const { loading, error, stakeholder } = stakeholderDetails;
 
+	//setup breadcrumbs
+	const breadCrumbSave = useSelector((state) => state.breadCrumbSave);
+	const { breadcrumbs } = breadCrumbSave;
+
 	useEffect(() => {
 		dispatch(getStakeholderDetails(stakeholderId));
 	}, [dispatch, stakeholderId, locationId]);
+
+	const breadCrumbHelper = (e) => {
+		//e.preventDefault();
+		dispatch(saveBreadcrumb(breadcrumbs, url));
+	};
 
 	const renderImage = () => (
 		<>
@@ -122,6 +131,7 @@ const StakeholderScreen = ({ match }) => {
 															textDecoration: 'underline',
 														}}
 														to={`${url}${item.link}`}
+														onClick={breadCrumbHelper}
 													>
 														{item.type}
 													</NavLink>

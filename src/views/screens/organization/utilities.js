@@ -22,6 +22,10 @@ export const navbarlinks = [
 		link: '/news',
 		type: 'News',
 	},
+	{
+		link: '/documents',
+		type: 'Documents',
+	},
 ];
 
 export const routes = [

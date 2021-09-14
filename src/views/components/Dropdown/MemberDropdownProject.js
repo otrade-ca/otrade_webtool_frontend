@@ -12,6 +12,8 @@ import {
 import { setAlert } from '../../../application/actions/alertActions';
 import { getProjectId } from '../../../application/localStorage';
 import { Loader, Message } from '../../components/HelperComponents';
+import { IconContext } from 'react-icons';
+import * as BsIcons from 'react-icons/bs';
 
 const MemberDropdownProject = ({ label }) => {
 	// get projectId from localstorage
@@ -73,8 +75,8 @@ const MemberDropdownProject = ({ label }) => {
 			) : error ? (
 				<Message>{error.message}</Message>
 			) : (
-				<Row className="mt-4">
-					<Col md={6}>
+				<Row className="mt-2">
+					<Col md={12}>
 						<Form.Label>{label}</Form.Label>
 						{members &&
 							members.map((assignee, i) => (
@@ -88,8 +90,8 @@ const MemberDropdownProject = ({ label }) => {
 										>
 											<option value="">--Select--</option>
 											{stakeholders &&
-												stakeholders.map((stakeholder) => (
-													<option key={stakeholder._id} value={stakeholder._id}>
+												stakeholders.map((stakeholder, index) => (
+													<option key={index} value={stakeholder._id}>
 														{stakeholder.firstName} {stakeholder.lastName}
 													</option>
 												))}
@@ -102,12 +104,20 @@ const MemberDropdownProject = ({ label }) => {
 												className="btn-md mr-3"
 												onClick={() => removeHandler(i)}
 											>
-												<i className="fas fa-trash"></i> Remove
+												<IconContext.Provider
+													value={{ color: '#eeee', size: '1em' }}
+												>
+													<BsIcons.BsTrash />
+												</IconContext.Provider>
 											</Button>
 										)}
 										{members && members.length - 1 === i && (
 											<Button className="px-3" onClick={() => addHandler(i)}>
-												<i className="fas fa-plus"></i> Add
+												<IconContext.Provider
+													value={{ color: '#eeee', size: '1.5em' }}
+												>
+													<BsIcons.BsPersonPlus />
+												</IconContext.Provider>
 											</Button>
 										)}
 									</Col>

@@ -9,9 +9,7 @@ import { listDropdownLocations } from '../../../application/actions/locationActi
 import { assignLocation } from '../../../application/actions/locationActions';
 import { Loader, Message } from '../../components/HelperComponents';
 
-const SingleCommunityDropdown = ({ label, match }) => {
-	const projectId = match.params.id;
-
+const SingleCommunityDropdown = ({ label, id }) => {
 	// get list of stakeholders
 	const dispatch = useDispatch();
 	const locationListDropdown = useSelector(
@@ -23,8 +21,8 @@ const SingleCommunityDropdown = ({ label, match }) => {
 	const [community, setCommunity] = useState('');
 
 	useEffect(() => {
-		dispatch(listDropdownLocations(projectId));
-	}, [dispatch, projectId]);
+		dispatch(listDropdownLocations(id));
+	}, [dispatch, id]);
 
 	const handleInputChange = (e) => {
 		e.preventDefault();
@@ -37,7 +35,7 @@ const SingleCommunityDropdown = ({ label, match }) => {
 			<option value="">--Select--</option>
 			{locations &&
 				locations.map((item, index) => (
-					<option value={item.location} key={index}>
+					<option value={item._id} key={index}>
 						{item.location}
 					</option>
 				))}
@@ -51,8 +49,8 @@ const SingleCommunityDropdown = ({ label, match }) => {
 			) : error ? (
 				<Message>{error.message}</Message>
 			) : (
-				<Row>
-					<Col md={4}>
+				<Row className="mt-2">
+					<Col md={8}>
 						<Form.Label>{label}</Form.Label>
 						<Form.Control
 							as="select"

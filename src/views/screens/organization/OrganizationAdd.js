@@ -162,7 +162,11 @@ const OrganizationAdd = ({ match, history }) => {
 					</Col>
 				</Row>
 				<hr className="mt-3" />
-				<MemberDropdownProject label={'Organization Members'} />
+				<Row>
+					<Col md={6}>
+						<MemberDropdownProject label={'Organization Members'} />
+					</Col>
+				</Row>
 				<hr />
 				<Row className="mt-3">
 					<Col>

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { getCommitment } from '../../../application/actions/commitmentActions';
-import { Loader, Message } from '../../components/HelperComponents';
+import {
+	Loader,
+	Message,
+	CardContainer,
+} from '../../components/HelperComponents';
 
 const CommitmentView = ({ match }) => {
 	const activityId = match.params.activityId;
@@ -19,6 +23,8 @@ const CommitmentView = ({ match }) => {
 	// get commitmentdetails
 	const commitmentDetails = useSelector((state) => state.commitmentDetails);
 	const { commitment, loading, error } = commitmentDetails;
+
+	console.log(commitment);
 
 	useEffect(() => {
 		if (!commitment || commitment.activity !== activityId) {
@@ -38,9 +44,9 @@ const CommitmentView = ({ match }) => {
 			) : error ? (
 				<Message>{error.message}</Message>
 			) : (
-				<Card className="my-card">
+				<CardContainer className="my-card" link={'edit'}>
 					<Card.Header className="my-card-header">
-						<h4>Commitment</h4>
+						<h4>Commitment Hello</h4>
 					</Card.Header>
 					<Card.Body>
 						<Form className="mb-3">
@@ -93,7 +99,7 @@ const CommitmentView = ({ match }) => {
 							</Row>
 						</Form>
 					</Card.Body>
-				</Card>
+				</CardContainer>
 			)}
 		</>
 	);

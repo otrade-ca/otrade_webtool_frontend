@@ -22,6 +22,8 @@ const ActivityView = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
+	console.log(activity);
+
 	const stakeholderProjectList = useSelector(
 		(state) => state.stakeholderProjectList
 	);
@@ -32,8 +34,8 @@ const ActivityView = ({ match }) => {
 	const [date, setDate] = useState();
 	const [members, setMembers] = useState([{ member: '' }]);
 	const [actHours, setActHours] = useState();
-	const [location, setLocation] = useState();
-	const [disPoints, setDispoints] = useState([{ point: '' }]);
+	const [address, setAddress] = useState();
+	const [disPoints, setDispoints] = useState('');
 	const [compromise, setcompromise] = useState('');
 	const [updatedDate, setUpdatedDate] = useState('');
 
@@ -45,7 +47,7 @@ const ActivityView = ({ match }) => {
 			setActivityType(activity.activity);
 			setActHours(activity.hours);
 			setDate(activity.date.substring(0, 10));
-			setLocation(activity.location);
+			setAddress(activity.address);
 			setMembers(activity.stakeholders);
 			setcompromise(activity.compromise);
 			setDispoints(activity.discussPoints);
@@ -128,7 +130,7 @@ const ActivityView = ({ match }) => {
 										<Form.Control
 											type="text"
 											placeholder="Enter Location"
-											value={location}
+											value={address}
 											disabled
 											readOnly
 										></Form.Control>

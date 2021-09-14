@@ -70,7 +70,7 @@ const LandingPage = ({ match, history }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<>{location.location}</>
+										<strong>{location.location}</strong>
 									</h1>
 									<Row className="middle-row d-flex justify-content-between">
 										<div className="ml-3">

@@ -104,6 +104,7 @@ const Activities = ({
 							{stakeholderactivities &&
 								stakeholderactivities.map((item, index) => (
 									<Activity
+										stakeholderId={stakeholderId}
 										item={item}
 										index={index}
 										linkView={`/stakeholder/${stakeholderId}/activities/${item._id}/view`}

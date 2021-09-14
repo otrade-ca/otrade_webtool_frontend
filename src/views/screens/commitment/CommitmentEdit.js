@@ -40,8 +40,6 @@ const CommitmentEdit = ({
 											rows="4"
 											placeholder="Enter Details"
 											value={commitment && commitment.details}
-											readOnly
-											disabled
 										></Form.Control>
 									</Col>
 								</Row>
@@ -53,11 +51,10 @@ const CommitmentEdit = ({
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											// value={
-											// 	commitment && commitment.completion_date.substring(0, 10)
-											// }
-											readOnly
-											disabled
+											value={
+												commitment.completion_date &&
+												commitment.completion_date.substring(0, 10)
+											}
 										></Form.Control>
 									</Col>
 								</Row>
@@ -67,8 +64,6 @@ const CommitmentEdit = ({
 									type="checkbox"
 									label="Completed?"
 									checked={commitment && commitment.is_complete}
-									readOnly
-									disabled
 								></Form.Check>
 							</Form.Group>
 							<hr />

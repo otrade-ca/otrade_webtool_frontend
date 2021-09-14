@@ -9,6 +9,8 @@ import { listDropdownLocations } from '../../../application/actions/locationActi
 import { assignLocations } from '../../../application/actions/locationActions';
 import { setAlert } from '../../../application/actions/alertActions';
 import { Loader, Message } from '../../components/HelperComponents';
+import { IconContext } from 'react-icons';
+import * as BsIcons from 'react-icons/bs';
 
 const CommunityDropDown = ({ label, id }) => {
 	// get list of stakeholders
@@ -69,8 +71,8 @@ const CommunityDropDown = ({ label, id }) => {
 			) : error ? (
 				<Message>{error.message}</Message>
 			) : (
-				<Row className="mt-4">
-					<Col md={6}>
+				<Row className="mt-2">
+					<Col md={12}>
 						<Form.Label>{label}</Form.Label>
 						{communities &&
 							communities.map((assignee, i) => (
@@ -98,7 +100,11 @@ const CommunityDropDown = ({ label, id }) => {
 												className="btn-md mr-3"
 												onClick={() => removeHandler(i)}
 											>
-												<i className="fas fa-trash"></i> Remove
+												<IconContext.Provider
+													value={{ color: '#eeee', size: '1em' }}
+												>
+													<BsIcons.BsTrash />
+												</IconContext.Provider>
 											</Button>
 										)}
 										{communities && communities.length - 1 === i && (

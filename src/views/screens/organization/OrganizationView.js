@@ -61,7 +61,7 @@ const OrganizationView = ({ match }) => {
 				{stakeholders &&
 					stakeholders.map((assignee) => (
 						<Row key={assignee._id}>
-							<Col md={7}>
+							<Col md={4}>
 								<Form.Control
 									as="select"
 									value={assignee}
@@ -210,9 +210,7 @@ const OrganizationView = ({ match }) => {
 									{t('organization.organization_Members.label')}
 								</Form.Label>
 							</Row>
-							<Row>
-								<Col md={6}>{renderStakeholders()}</Col>
-							</Row>
+							{renderStakeholders()}
 							<hr />
 							<Row className="mt-3">
 								<Col className="text-right">

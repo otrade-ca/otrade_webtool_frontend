@@ -4,9 +4,10 @@ import { Card, Accordion } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
+import * as IoIcons from 'react-icons/io';
 import Moment from 'react-moment';
 
-const Activity = ({ item, index, linkView, linkCommitment }) => {
+const Activity = ({ stakeholderId, item, index, linkView, linkCommitment }) => {
 	const { t } = useTranslation();
 	return (
 		<Card className="table-card" key={index}>
@@ -71,15 +72,18 @@ const Activity = ({ item, index, linkView, linkCommitment }) => {
 							</>
 						</div>
 					</div>
-					{/* <div className="d-flex align-items-center">
-													<Button
-														variant="danger"
-														className=" ml-3"
-														onClick={() => deleteHandler(item._id)}
-													>
-														<i className="fas fa-trash"></i> Delete
-													</Button>
-												</div> */}
+					<hr />
+					<div className="action-btns">
+						<Link
+							to={`/influences/register/stakeholder/${stakeholderId}`}
+							className="btn btn-primary"
+						>
+							<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>
+								<IoIcons.IoIosAdd />
+							</IconContext.Provider>{' '}
+							{`Asessment`}
+						</Link>
+					</div>
 				</Card.Body>
 			</Accordion.Collapse>
 		</Card>

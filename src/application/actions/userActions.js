@@ -35,6 +35,7 @@ import {
 import { ORGANIZATION_PROJECT_LIST_RESET } from '../constants/organizationConstants';
 import { ACTIVITY_LIST_RESET } from '../constants/activityConstants';
 import { setAlert } from '../actions/alertActions';
+import { BREADCRUMB_SAVE_RESET } from '../constants/routeConstants';
 
 /**
  * logins a user
@@ -133,6 +134,7 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: STAKEHOLDER_PROJECT_LIST_RESET });
 	dispatch({ type: ORGANIZATION_PROJECT_LIST_RESET });
 	dispatch({ type: ACTIVITY_LIST_RESET });
+	dispatch({ type: BREADCRUMB_SAVE_RESET });
 };
 
 /**

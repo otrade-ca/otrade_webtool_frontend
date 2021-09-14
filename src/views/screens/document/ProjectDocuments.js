@@ -31,6 +31,8 @@ const ProjectDocuments = ({
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
+	console.log(url);
+
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
@@ -45,7 +47,12 @@ const ProjectDocuments = ({
 	const renderEmpty = () => (
 		<>
 			{documents && documents.length === 0 ? (
-				<Empty url={url} type={'documents'} group={'documents'} />
+				<Empty
+					itemLink={`${url}/upload`}
+					url={url}
+					type={'Documents'}
+					group={'documents'}
+				/>
 			) : (
 				<Card.Header className="my-card-header">
 					<h4>{`Documents (${count})`}</h4>

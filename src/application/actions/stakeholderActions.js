@@ -73,6 +73,8 @@ export const addStakeholder =
 			// get copy of updatedRoutes
 			let updatedRoutes = [...routeInfo];
 
+			console.log('updatedRoutes', updatedRoutes);
+
 			updatedRoutes.push({
 				route: 'assessment',
 				path: `/influences/register/stakeholder/${_id}`,
@@ -88,6 +90,7 @@ export const addStakeholder =
 			} else {
 				// else navigate to assessment
 				const navigateToRoute = updatedRoutes.pop();
+				console.log(navigateToRoute);
 				// save route
 				dispatch(saveRouteInfo(updatedRoutes));
 				// go to influence page

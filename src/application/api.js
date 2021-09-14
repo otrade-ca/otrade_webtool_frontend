@@ -68,7 +68,7 @@ export const getBucketInfo = (type) => {
 							'https://stakeholders-bucket-prd.s3.us-east-2.amazonaws.com/',
 						bucket: 'stakeholders-bucket-prd',
 				  };
-		case 'documents':
+		case 'document':
 			return process.env.NODE_ENV === 'development'
 				? {
 						prependURL:

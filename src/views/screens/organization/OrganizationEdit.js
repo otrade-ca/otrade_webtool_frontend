@@ -240,7 +240,7 @@ const OrganizationEdit = ({ match, history }) => {
 								</Form.Label>
 							</Row>
 							<Row>
-								<Col md={6}>
+								<Col md={7}>
 									{stakeholders &&
 										stakeholders.map((assignee, i) => (
 											<Row key={assignee._id}>
@@ -278,7 +278,7 @@ const OrganizationEdit = ({ match, history }) => {
 															className="px-3"
 															onClick={() => addHandler(i)}
 														>
-															<i className="fas fa-plus"></i> Add
+															<i className="fas fa-plus"></i> Stakeholder
 														</Button>
 													)}
 												</Col>

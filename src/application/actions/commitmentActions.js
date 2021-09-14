@@ -46,8 +46,8 @@ export const addCommitment =
 			);
 
 			dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
-			console.log(routeInfo);
-			history.push(routeInfo[routeInfo.length - 1].path);
+			// console.log(routeInfo);
+			// history.push(routeInfo[routeInfo.length - 1].path);
 		} catch (error) {
 			dispatch({
 				type: COMMITMENT_ADD_FAIL,

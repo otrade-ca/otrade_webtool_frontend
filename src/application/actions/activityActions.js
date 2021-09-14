@@ -42,7 +42,7 @@ export const addActivity =
 			const {
 				userLogin: { userInfo },
 			} = getState();
-
+			console.log('activity', activity);
 			const config = {
 				headers: {
 					'Content-Type': 'application/json',
@@ -60,39 +60,39 @@ export const addActivity =
 			// get id, stakeholders, and comp value from returned data
 			const { _id, stakeholders, compromise } = data;
 			// create routes array
-			const updatedRoutes = [...routeInfo];
+			//const updatedRoutes = [...routeInfo];
 
-			console.log(
-				'updatedRoutes before adding stakeholders',
-				updatedRoutes,
-				'length',
-				updatedRoutes.length
-			);
+			// console.log(
+			// 	'updatedRoutes before adding stakeholders',
+			// 	updatedRoutes,
+			// 	'length',
+			// 	updatedRoutes.length
+			// );
 
 			// loop through stakeholders array and push id values into routes
-			stakeholders.forEach((id) => {
-				updatedRoutes.push({
-					route: 'assessment',
-					path: `/influences/register/stakeholder/${id}`,
-				});
-			});
-			//save assessment routes to redux
-			dispatch(saveRouteInfo(updatedRoutes));
-			console.log(
-				'updatedRoutes',
-				updatedRoutes,
-				'length',
-				updatedRoutes.length
-			);
+			// stakeholders.forEach((id) => {
+			// 	updatedRoutes.push({
+			// 		route: 'assessment',
+			// 		path: `/influences/register/stakeholder/${id}`,
+			// 	});
+			// });
+			// //save assessment routes to redux
+			// dispatch(saveRouteInfo(updatedRoutes));
+			// console.log(
+			// 	'updatedRoutes',
+			// 	updatedRoutes,
+			// 	'length',
+			// 	updatedRoutes.length
+			// );
 
 			// if yes to comp, push to collect commitment info
 			if (compromise === 'Yes' || compromise === 'yes') {
 				history.push(`/commitments/register/activity/${_id}`);
 			} else {
 				// else push to collect assessement
-				const navigateToRoute = updatedRoutes.pop();
-				dispatch(saveRouteInfo(updatedRoutes));
-				history.push(navigateToRoute.path);
+				// const navigateToRoute = updatedRoutes.pop();
+				// dispatch(saveRouteInfo(updatedRoutes));
+				history.push(`/influences/register/stakeholder/${stakeholders[0]}`);
 			}
 		} catch (error) {
 			dispatch({

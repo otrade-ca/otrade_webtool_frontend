@@ -4,7 +4,7 @@ import { ProjectLocations } from '../location';
 import { ProjectStakeholders } from '../stakeholder';
 import { ProjectOrganizations } from '../organization';
 import { NewsView, NewsEdit, ProjectNews } from '../news';
-import { ProjectDocuments } from '../document';
+import { ProjectDocuments, DocumentAdd } from '../document';
 
 export const btnlinks = [
 	{
@@ -13,12 +13,12 @@ export const btnlinks = [
 		icon: 'fas fa-edit',
 		type: 'Photo',
 	},
-	{
-		link: '/actions',
-		class: 'btn btn-primary',
-		icon: 'fas fa-edit',
-		type: 'Actions',
-	},
+	// {
+	// 	link: '/actions',
+	// 	class: 'btn btn-primary',
+	// 	icon: 'fas fa-edit',
+	// 	type: 'Actions',
+	// },
 ];
 
 export const navbarlinks = [
@@ -30,14 +30,14 @@ export const navbarlinks = [
 		link: '/communities',
 		type: 'Communities',
 	},
-	{
-		link: '/stakeholders',
-		type: 'Stakeholders',
-	},
-	{
-		link: '/organizations',
-		type: 'Organizations',
-	},
+	// {
+	// 	link: '/stakeholders',
+	// 	type: 'Stakeholders',
+	// },
+	// {
+	// 	link: '/organizations',
+	// 	type: 'Organizations',
+	// },
 	{
 		link: '/news',
 		type: 'News',
@@ -51,12 +51,12 @@ export const navbarlinks = [
 export const routes = [
 	{
 		path: '',
-		component: ({ match }) => <Actions match={match} />,
+		component: ({ match }) => <ProjectView match={match} />,
 	},
-	{
-		path: '/actions',
-		component: ({ match }) => <Actions match={match} />,
-	},
+	// {
+	// 	path: '/actions',
+	// 	component: ({ match }) => <Actions match={match} />,
+	// },
 	{
 		path: '/dashboard',
 		component: ({ match }) => <Dashboard match={match} />,
@@ -144,6 +144,10 @@ export const routes = [
 	{
 		path: '/documents',
 		component: ({ match }) => <ProjectDocuments match={match} />,
+	},
+	{
+		path: '/documents/upload',
+		component: ({ match }) => <DocumentAdd match={match} />,
 	},
 	{
 		path: '/documents/search/:keyword',

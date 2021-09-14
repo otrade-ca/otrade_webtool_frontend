@@ -77,10 +77,7 @@ const Landing = ({ match }) => {
 								</Col>
 								<Col md={10}>
 									<h1>
-										<strong>
-											<em>Project: </em>
-											{project.projectName}
-										</strong>
+										<strong>{project.projectName}</strong>
 									</h1>
 
 									<Row className="middle-row d-flex justify-content-between">

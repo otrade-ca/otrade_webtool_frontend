@@ -254,8 +254,10 @@ const persistConfig = {
 		'userLogin',
 		'stakeholderListDropdown',
 		'locationListDropdown',
+		'locationAssign',
 		'organizationDropdown',
 		'routeSave',
+		'breadCrumbSave',
 	],
 };
 

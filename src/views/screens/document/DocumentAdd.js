@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDocument } from '../../../application/actions/documentActions';
+import { addProjectDocument } from '../../../application/actions/documentActions';
 import { useTranslation } from 'react-i18next';
 import { CardContainer } from '../../components/HelperComponents';
+import { getProjectId } from '../../../application/localStorage';
 
 const DocumentAdd = ({ match, history }) => {
-	const projectId = match.params.id;
+	const projectId = match.params.id ? match.params.id : getProjectId();
 
 	const { t } = useTranslation();
 
 	//define states
 	const [image, setImage] = useState('');
+	const [title, setTitle] = useState('');
 	const [file, setFile] = useState(null);
 
 	const dispatch = useDispatch();
 
-	//get project details
-	const projectDetails = useSelector((state) => state.projectDetails);
-	const { loading, error, project } = projectDetails;
+	// //get project details
+	// const projectDetails = useSelector((state) => state.projectDetails);
+	// const { loading, error, project } = projectDetails;
 
-	//get success from project update
-	const projectUpdate = useSelector((state) => state.projectUpdate);
-	const { success: successUpdate } = projectUpdate;
+	// //get success from project update
+	// const projectUpdate = useSelector((state) => state.projectUpdate);
+	// const { success: successUpdate } = projectUpdate;
 
 	// useEffect(() => {
 	// 	if (successUpdate) {
@@ -39,14 +41,16 @@ const DocumentAdd = ({ match, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch();
-		// updateProjectProfilePhoto(
-		// 	{
-		// 		id: projectId,
-		// 	},
-		// 	file,
-		// 	history
-		// )
+		dispatch(
+			addProjectDocument(
+				{
+					id: projectId,
+					title: title,
+				},
+				file,
+				history
+			)
+		);
 	};
 
 	return (
@@ -67,6 +71,20 @@ const DocumentAdd = ({ match, history }) => {
 											required
 											onChange={uploadFileHandler}
 										/>
+									</Col>
+								</Row>
+							</Form.Group>
+							<Form.Group controlId="title">
+								<Row className="mb-3">
+									<Col md={6}>
+										<Form.Label>Title</Form.Label>
+										<Form.Control
+											type="text"
+											placeholder={'Document Title'}
+											value={title}
+											required
+											onChange={(e) => setTitle(e.target.value)}
+										></Form.Control>
 									</Col>
 								</Row>
 								<Row>

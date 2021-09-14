@@ -38,6 +38,10 @@ export const navbarlinks = [
 		link: '/news',
 		type: 'News',
 	},
+	{
+		link: '/documents',
+		type: 'Documents',
+	},
 ];
 
 export const routes = [
@@ -55,7 +59,7 @@ export const routes = [
 	},
 	{
 		path: '/profile',
-		component: ({ match }) => <Profile match={match} />,
+		component: ({ match }) => <StakeholderView match={match} />,
 	},
 	{
 		path: '/profile/edit',
@@ -149,24 +153,24 @@ export const routes = [
 		path: '/documents',
 		component: ({ match }) => <StakeholderDocuments match={match} />,
 	},
-	{
-		path: '/documents/search/:keyword',
-		component: ({ match }) => <StakeholderDocuments match={match} />,
-	},
-	{
-		path: '/documents/page/:pageNumber',
-		component: ({ match }) => <StakeholderDocuments match={match} />,
-	},
-	{
-		path: '/documents/search/:keyword/page/:pageNumber',
-		component: ({ match }) => <StakeholderDocuments match={match} />,
-	},
-	{
-		path: '/documents/:documentId/view',
-		component: ({ match }) => <DocumentView match={match} />,
-	},
-	{
-		path: '/documents/:documentId/view/edit',
-		component: ({ match }) => <DocumentEdit match={match} />,
-	},
+	// {
+	// 	path: '/documents/search/:keyword',
+	// 	component: ({ match }) => <StakeholderDocuments match={match} />,
+	// },
+	// {
+	// 	path: '/documents/page/:pageNumber',
+	// 	component: ({ match }) => <StakeholderDocuments match={match} />,
+	// },
+	// {
+	// 	path: '/documents/search/:keyword/page/:pageNumber',
+	// 	component: ({ match }) => <StakeholderDocuments match={match} />,
+	// },
+	// {
+	// 	path: '/documents/:documentId/view',
+	// 	component: ({ match }) => <DocumentView match={match} />,
+	// },
+	// {
+	// 	path: '/documents/:documentId/view/edit',
+	// 	component: ({ match }) => <DocumentEdit match={match} />,
+	// },
 ];

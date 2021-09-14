@@ -11,6 +11,7 @@ const ActivityRoutes = () => {
 				path="/activities/register/project/:id"
 				component={ActivityAdd}
 			/>
+			<PrivateRoute exact path="/activities/register" component={ActivityAdd} />
 			<PrivateRoute
 				exact
 				path="/activities/register/stakeholder/:id"

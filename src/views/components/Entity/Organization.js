@@ -37,7 +37,7 @@ const Organization = ({ item, index }) => {
 					</div>
 					<div className="item-three">
 						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
-							<BiIcons.BiCaretRight />
+							<BiIcons.BiCaretDown />
 						</IconContext.Provider>
 					</div>
 				</div>

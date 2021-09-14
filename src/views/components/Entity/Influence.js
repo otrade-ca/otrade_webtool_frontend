@@ -4,6 +4,8 @@ import { Card, Accordion } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
+import * as IoIcons from 'react-icons/io';
+import * as BiIcons from 'react-icons/bi';
 import Moment from 'react-moment';
 
 export const Influence = ({ item, index }) => {
@@ -19,7 +21,19 @@ export const Influence = ({ item, index }) => {
 					</div>
 					<div className="item-two">
 						<div>{item.activity && item.activity}</div>
-						<div className="item-category">Asessment</div>
+						<div className="item-category">
+							Asessment | Updated on:{' '}
+							{item.updatedAt ? (
+								<Moment format="MM-DD-YYYY">{item.updatedAt}</Moment>
+							) : (
+								'N/A'
+							)}
+						</div>
+					</div>
+					<div className="item-three">
+						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
+							<BiIcons.BiCaretDown />
+						</IconContext.Provider>
 					</div>
 				</div>
 			</Accordion.Toggle>
@@ -47,6 +61,7 @@ export const Influence = ({ item, index }) => {
 							</em>
 						</div>
 					</div>
+
 					{/* <div className="d-flex align-items-center">
 													<Button
 														variant="danger"
