@@ -2,7 +2,7 @@
  * List of news belonging to a project
  */
 import React, { useEffect } from 'react';
-import { withRouter, useRouteMatch, Route } from 'react-router-dom';
+import { Link, withRouter, useRouteMatch, Route } from 'react-router-dom';
 import { Accordion, Card, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -49,17 +49,20 @@ const StakeholderNews = ({
 			) : (
 				<Card.Header className="my-card-header">
 					<h4>{`News (${count})`}</h4>
+					<Link to={`/news/register`} className="btn btn-primary ml-2">
+						<i className="fas fa-plus"></i> {t('action.register')}
+					</Link>
 				</Card.Header>
 			)}
 		</>
 	);
 
 	//delete stakeholder
-	const deleteHandler = (id) => {
-		if (window.confirm('Click ok to delete')) {
-			deleteNews(id);
-		}
-	};
+	// const deleteHandler = (id) => {
+	// 	if (window.confirm('Click ok to delete')) {
+	// 		deleteNews(id);
+	// 	}
+	// };
 
 	return (
 		<Card className="my-card">

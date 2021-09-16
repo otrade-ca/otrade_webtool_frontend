@@ -149,11 +149,26 @@ const NewsForm = ({ history }) => {
 					</Col>
 				</Row>
 				<hr />
-				<CommunityDropdown label={'Community'} id={projectId} />
+				<Row>
+					<Col md={8}>
+						<CommunityDropdown label={'Community'} id={projectId} />
+					</Col>
+				</Row>
 				<hr />
-				<MemberDropdownProject label={'Members'} />
+				<Row>
+					<Col md={8}>
+						<MemberDropdownProject label={'Members'} />
+					</Col>
+				</Row>
 				<hr />
-				<OrganizationDropdown label={'Organizations'} projectId={projectId} />
+				<Row>
+					<Col md={8}>
+						<OrganizationDropdown
+							label={'Organizations'}
+							projectId={projectId}
+						/>
+					</Col>
+				</Row>
 				<hr />
 				<Row>
 					<Col>

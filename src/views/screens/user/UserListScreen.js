@@ -152,7 +152,7 @@ const UserListScreen = ({ history, match }) => {
 														</>
 													</p>
 												</div>
-												<div className="action-btns">
+												<div className="action-btns-2">
 													<LinkContainer to={`/admin/user/${user._id}/edit`}>
 														<Button variant="light" className="btn-md ml-3 ">
 															<i className="fas fa-edit" /> {t('action.update')}

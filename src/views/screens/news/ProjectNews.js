@@ -58,11 +58,11 @@ const ProjectNews = ({
 	);
 
 	//delete stakeholder
-	const deleteHandler = (id) => {
-		if (window.confirm('Click ok to delete')) {
-			deleteNews(id);
-		}
-	};
+	// const deleteHandler = (id) => {
+	// 	if (window.confirm('Click ok to delete')) {
+	// 		deleteNews(id);
+	// 	}
+	// };
 
 	return (
 		<Card className="my-card">

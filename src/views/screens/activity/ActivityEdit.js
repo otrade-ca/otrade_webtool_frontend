@@ -12,7 +12,6 @@ import {
 	CardContainer,
 } from '../../components/HelperComponents';
 
-import { listStakeholdersDropdown } from '../../../application/actions/stakeholderActions';
 import { getLocationId } from '../../../application/localStorage';
 import { setAlert } from '../../../application/actions/alertActions';
 
@@ -42,7 +41,7 @@ const ActivityScreen = ({ match }) => {
 	const [date, setDate] = useState();
 	const [stakeholders, setStakeholders] = useState([{ member: '' }]);
 	const [actHours, setActHours] = useState();
-	const [location, setLocation] = useState();
+	const [address, setAddress] = useState();
 	const [disPoints, setDispoints] = useState([{ point: '' }]);
 	const [compromise, setcompromise] = useState('');
 
@@ -57,7 +56,7 @@ const ActivityScreen = ({ match }) => {
 				setActivityType(activity.activity);
 				setActHours(activity.hours);
 				setDate(activity.date.substring(0, 10));
-				setLocation(activity.location);
+				setAddress(activity.address);
 				setStakeholders(activity.stakeholders);
 				setcompromise(activity.compromise);
 				setDispoints(activity.discussPoints);
@@ -105,7 +104,7 @@ const ActivityScreen = ({ match }) => {
 					activity: activityType,
 					date,
 					hours: actHours,
-					location,
+					address,
 					stakeholders: members,
 					compromise,
 					discussPoints: disPoints,
@@ -180,8 +179,8 @@ const ActivityScreen = ({ match }) => {
 									<Form.Control
 										type="text"
 										placeholder="Enter Location"
-										value={location}
-										onChange={(e) => setLocation(e.target.value)}
+										value={address}
+										onChange={(e) => setAddress(e.target.value)}
 									></Form.Control>
 								</Form.Group>
 							</Col>
@@ -191,7 +190,7 @@ const ActivityScreen = ({ match }) => {
 							<Col>
 								<Form.Group controlId="compromise" className="mt-3">
 									<Row>
-										<Col md={9}>
+										<Col md={10}>
 											<Form.Label>Is there a commitment?</Form.Label>
 										</Col>
 										<Col md={2}>

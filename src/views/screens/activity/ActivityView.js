@@ -22,8 +22,6 @@ const ActivityView = ({ match }) => {
 	const activityDetails = useSelector((state) => state.activityDetails);
 	const { loading, error, activity } = activityDetails;
 
-	console.log(activity);
-
 	const stakeholderProjectList = useSelector(
 		(state) => state.stakeholderProjectList
 	);
@@ -142,10 +140,10 @@ const ActivityView = ({ match }) => {
 								<Col>
 									<Form.Group controlId="compromise" className="mt-3">
 										<Row>
-											<Col md={8}>
+											<Col md={10}>
 												<Form.Label>Is there a commitment?</Form.Label>
 											</Col>
-											<Col md={4}>
+											<Col md={2}>
 												<Form.Control
 													as="select"
 													value={compromise}

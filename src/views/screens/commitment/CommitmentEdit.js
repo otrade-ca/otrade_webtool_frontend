@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Row, Col, Card } from 'react-bootstrap';
-import { getCommitment } from '../../../application/actions/commitmentActions';
+import { Form, Row, Col, Card, Button } from 'react-bootstrap';
+import {
+	getCommitment,
+	updateCommitment,
+} from '../../../application/actions/commitmentActions';
 import { Loader, Message } from '../../components/HelperComponents';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
@@ -9,13 +12,38 @@ import PropTypes from 'prop-types';
 const CommitmentEdit = ({
 	match,
 	getCommitment,
+	updateCommitment,
 	commitmentDetails: { commitment, loading, error },
+	commitmentUpdate: { success },
 }) => {
 	const activityId = match.params.activityId;
 
+	const [details, setDetails] = useState('');
+	const [completionDate, setCompletionDate] = useState('');
+	const [isComplete, setIsComplete] = useState(null);
+	const [updatedAt, setUpdatedAt] = useState('');
+
 	useEffect(() => {
-		getCommitment(activityId);
-	}, [getCommitment, activityId]);
+		if (!commitment.details || commitment._id !== activityId) {
+			getCommitment(activityId);
+		} else {
+			setDetails(commitment.details);
+			setCompletionDate(commitment.completion_date);
+			setIsComplete(commitment.is_complete);
+			setUpdatedAt(commitment.updatedAt);
+		}
+	}, [getCommitment, activityId, success, commitment]);
+
+	const submitHandler = (e) => {
+		updateCommitment(
+			{
+				details,
+				completion_date: completionDate,
+				is_complete: isComplete,
+			},
+			activityId
+		);
+	};
 
 	return (
 		<>
@@ -29,7 +57,7 @@ const CommitmentEdit = ({
 						<h4>Commitment</h4>
 					</Card.Header>
 					<Card.Body>
-						<Form className="mb-3">
+						<Form className="mb-3" onSubmit={submitHandler}>
 							<Form.Group controlId="discussion">
 								<Form.Label>Commitment Details</Form.Label>
 								<Row>
@@ -39,7 +67,8 @@ const CommitmentEdit = ({
 											as="textarea"
 											rows="4"
 											placeholder="Enter Details"
-											value={commitment && commitment.details}
+											value={details}
+											onChange={(e) => setDetails(e.target.value)}
 										></Form.Control>
 									</Col>
 								</Row>
@@ -51,10 +80,8 @@ const CommitmentEdit = ({
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
-											value={
-												commitment.completion_date &&
-												commitment.completion_date.substring(0, 10)
-											}
+											value={completionDate}
+											onChange={(e) => setCompletionDate(e.target.value)}
 										></Form.Control>
 									</Col>
 								</Row>
@@ -63,17 +90,20 @@ const CommitmentEdit = ({
 								<Form.Check
 									type="checkbox"
 									label="Completed?"
-									checked={commitment && commitment.is_complete}
+									checked={isComplete}
+									onchange={(e) => setIsComplete(e.target.value)}
 								></Form.Check>
 							</Form.Group>
 							<hr />
 							<Row>
+								<Col>
+									<Button type="submit" variant="primary" className="px-5 mt-3">
+										Update
+									</Button>
+								</Col>
 								<Col className="text-right">
 									<p>
-										updated on:{' '}
-										<Moment format="YYYY-MM-DD">
-											{commitment && commitment.updatedAt}
-										</Moment>
+										updated on: <Moment format="YYYY-MM-DD">{updatedAt}</Moment>
 									</p>
 								</Col>
 							</Row>
@@ -92,6 +122,9 @@ CommitmentEdit.propTypes = {
 
 const mapStateToProps = (state) => ({
 	commitmentDetails: state.commitmentDetails,
+	commitmentUpdate: state.commitmentUpdate,
 });
 
-export default connect(mapStateToProps, { getCommitment })(CommitmentEdit);
+export default connect(mapStateToProps, { getCommitment, updateCommitment })(
+	CommitmentEdit
+);

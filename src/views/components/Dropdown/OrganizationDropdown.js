@@ -72,8 +72,8 @@ const OrganizationDropdown = ({ label, projectId }) => {
 			) : error ? (
 				<Message>{error.message}</Message>
 			) : (
-				<Row className="mt-4">
-					<Col md={6}>
+				<Row className="mt-2">
+					<Col md={12}>
 						<Form.Label>{label}</Form.Label>
 						{organizations &&
 							organizations.map((assignee, i) => (

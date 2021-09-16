@@ -153,7 +153,7 @@ const AdminProjects = ({ history, match }) => {
 														) : null}
 													</p>
 												</div>
-												<div className="action-btns">
+												<div className="action-btns-2">
 													<LinkContainer
 														to={`/admin/project/${project._id}/assign`}
 													>
