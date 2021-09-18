@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Row, Col, Card, Button } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import {
 	getCommitment,
 	updateCommitment,
 } from '../../../application/actions/commitmentActions';
 import { Loader, Message } from '../../components/HelperComponents';
 import Moment from 'react-moment';
-import PropTypes from 'prop-types';
+import { COMMITMENT_UPDATE_RESET } from '../../../application/constants/commitmentConstants';
 
-const CommitmentEdit = ({
-	match,
-	getCommitment,
-	updateCommitment,
-	commitmentDetails: { commitment, loading, error },
-	commitmentUpdate: { success },
-	history,
-}) => {
+const CommitmentEdit = ({ match, history }) => {
 	const activityId = match.params.activityId;
+
+	const dispatch = useDispatch();
+	const commitmentDetails = useSelector((state) => state.commitmentDetails);
+	const { loading, error, commitment } = commitmentDetails;
+
+	const commitmentUpdate = useSelector((state) => state.commitmentUpdate);
+	const { success } = commitmentUpdate;
 
 	const [details, setDetails] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
@@ -25,26 +26,33 @@ const CommitmentEdit = ({
 	const [updatedAt, setUpdatedAt] = useState('');
 
 	useEffect(() => {
-		if (!commitment._id) {
-			getCommitment(activityId);
+		if (success) {
+			dispatch(getCommitment(activityId));
+			dispatch({ type: COMMITMENT_UPDATE_RESET });
 		} else {
-			setDetails(commitment.details);
-			setCompletionDate(commitment.completion_date.substring(0, 10));
-			setIsComplete(commitment.is_complete);
-			setUpdatedAt(commitment.updatedAt);
+			if (!commitment._id) {
+				dispatch(getCommitment(activityId));
+			} else {
+				setDetails(commitment.details);
+				setCompletionDate(commitment.completion_date.substring(0, 10));
+				setIsComplete(commitment.is_complete);
+				setUpdatedAt(commitment.updatedAt);
+			}
 		}
-	}, [getCommitment, activityId, success, commitment]);
+	}, [dispatch, activityId, commitment, success]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		updateCommitment(
-			{
-				details,
-				completion_date: completionDate,
-				is_complete: isComplete,
-			},
-			activityId,
-			history
+		dispatch(
+			updateCommitment(
+				{
+					details,
+					completion_date: completionDate,
+					is_complete: isComplete,
+				},
+				activityId,
+				history
+			)
 		);
 	};
 
@@ -118,16 +126,4 @@ const CommitmentEdit = ({
 	);
 };
 
-CommitmentEdit.propTypes = {
-	getCommitment: PropTypes.func.isRequired,
-	commitmentDetails: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-	commitmentDetails: state.commitmentDetails,
-	commitmentUpdate: state.commitmentUpdate,
-});
-
-export default connect(mapStateToProps, { getCommitment, updateCommitment })(
-	CommitmentEdit
-);
+export default withRouter(CommitmentEdit);

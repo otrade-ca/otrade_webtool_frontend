@@ -317,7 +317,7 @@ hr {
 
 /*Alerts*/
 .alert {
-	max-width: 1000px;
+	max-width: 1140px;
 	padding: 0.8rem;
 	margin: 1rem auto;
 	opacity: 0.9;
@@ -507,7 +507,7 @@ hr {
 .project-action-btns {
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .project-action-btns a {

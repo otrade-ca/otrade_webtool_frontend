@@ -16,6 +16,7 @@ import {
 	COMMITMENT_LIST_SUCCESS,
 	COMMITMENT_LIST_FAIL,
 } from '../constants/commitmentConstants';
+import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
 
 // add commitment
@@ -123,8 +124,7 @@ export const updateCommitment =
 			);
 
 			dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
-			// go back to activities
-			history.go(-1);
+			dispatch(setAlert('Commitment successfully updated', 'success'));
 		} catch (error) {
 			dispatch({
 				type: COMMITMENT_UPDATE_FAIL,
