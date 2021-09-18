@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import * as MdIcons from 'react-icons/md';
 import * as IoIcons from 'react-icons/io';
+import * as BiIcons from 'react-icons/bi';
 import Moment from 'react-moment';
 
 const Activity = ({ stakeholderId, item, index, linkView, linkCommitment }) => {
+	const id = stakeholderId;
 	const { t } = useTranslation();
 	return (
 		<Card className="table-card" key={index}>
@@ -23,6 +25,11 @@ const Activity = ({ stakeholderId, item, index, linkView, linkCommitment }) => {
 							<>{item.activity}</>
 						</div>
 						<div className="item-category">Activity Type</div>
+					</div>
+					<div className="item-three">
+						<IconContext.Provider value={{ color: '#008cba', size: '2em' }}>
+							<BiIcons.BiCaretDown />
+						</IconContext.Provider>
 					</div>
 				</div>
 			</Accordion.Toggle>
@@ -61,6 +68,17 @@ const Activity = ({ stakeholderId, item, index, linkView, linkCommitment }) => {
 							</em>
 							<br />
 							<>
+								Date:{' '}
+								<em>
+									{item.updatedAt ? (
+										<Moment format="MM-DD-YYYY">{item.date}</Moment>
+									) : (
+										'N/A'
+									)}
+								</em>
+							</>
+							<br />
+							<>
 								Updated On:{' '}
 								<em>
 									{item.updatedAt ? (
@@ -75,7 +93,7 @@ const Activity = ({ stakeholderId, item, index, linkView, linkCommitment }) => {
 					<hr />
 					<div className="action-btns">
 						<Link
-							to={`/influences/register/stakeholder/${stakeholderId}`}
+							to={`/influences/register/stakeholder/${id}`}
 							className="btn btn-primary"
 						>
 							<IconContext.Provider value={{ color: '#fff', size: '1.5em' }}>

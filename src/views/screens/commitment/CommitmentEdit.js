@@ -15,33 +15,36 @@ const CommitmentEdit = ({
 	updateCommitment,
 	commitmentDetails: { commitment, loading, error },
 	commitmentUpdate: { success },
+	history,
 }) => {
 	const activityId = match.params.activityId;
 
 	const [details, setDetails] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
-	const [isComplete, setIsComplete] = useState(null);
+	const [isComplete, setIsComplete] = useState(false);
 	const [updatedAt, setUpdatedAt] = useState('');
 
 	useEffect(() => {
-		if (!commitment.details || commitment._id !== activityId) {
+		if (!commitment._id) {
 			getCommitment(activityId);
 		} else {
 			setDetails(commitment.details);
-			setCompletionDate(commitment.completion_date);
+			setCompletionDate(commitment.completion_date.substring(0, 10));
 			setIsComplete(commitment.is_complete);
 			setUpdatedAt(commitment.updatedAt);
 		}
 	}, [getCommitment, activityId, success, commitment]);
 
 	const submitHandler = (e) => {
+		e.preventDefault();
 		updateCommitment(
 			{
 				details,
 				completion_date: completionDate,
 				is_complete: isComplete,
 			},
-			activityId
+			activityId,
+			history
 		);
 	};
 
@@ -76,7 +79,7 @@ const CommitmentEdit = ({
 							<Form.Group controlId="date">
 								<Row>
 									<Col md={4}>
-										<Form.Label>Completion Date</Form.Label>
+										<Form.Label>Completion Date </Form.Label>
 										<Form.Control
 											type="date"
 											placeholder="Enter Date"
@@ -91,7 +94,7 @@ const CommitmentEdit = ({
 									type="checkbox"
 									label="Completed?"
 									checked={isComplete}
-									onchange={(e) => setIsComplete(e.target.value)}
+									onChange={(e) => setIsComplete(e.target.checked)}
 								></Form.Check>
 							</Form.Group>
 							<hr />

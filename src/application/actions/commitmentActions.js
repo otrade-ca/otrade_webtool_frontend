@@ -97,7 +97,7 @@ export const getCommitment = (id) => async (dispatch, getState) => {
 
 // update commitment
 export const updateCommitment =
-	(commitment, id) => async (dispatch, getState) => {
+	(commitment, id, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: COMMITMENT_UPDATE_REQUEST });
 
@@ -117,12 +117,14 @@ export const updateCommitment =
 			const {
 				data: { data },
 			} = await axios.put(
-				`${getURL()}/api/v1/commitment/${id}`,
+				`${getURL()}/api/v1/commitments/${id}`,
 				commitment,
 				config
 			);
 
 			dispatch({ type: COMMITMENT_UPDATE_SUCCESS, payload: data });
+			// go back to activities
+			history.go(-1);
 		} catch (error) {
 			dispatch({
 				type: COMMITMENT_UPDATE_FAIL,
