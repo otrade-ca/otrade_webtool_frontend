@@ -73,8 +73,6 @@ export const addStakeholder =
 			// get copy of updatedRoutes
 			let updatedRoutes = [...routeInfo];
 
-			console.log('updatedRoutes', updatedRoutes);
-
 			updatedRoutes.push({
 				route: 'assessment',
 				path: `/influences/register/stakeholder/${_id}`,

@@ -18,6 +18,7 @@ import {
 } from '../constants/commitmentConstants';
 import { setAlert } from '../actions/alertActions';
 import { getURL } from '../api';
+import { saveRouteInfo } from './routeActions';
 
 // add commitment
 export const addCommitment =
@@ -47,8 +48,11 @@ export const addCommitment =
 			);
 
 			dispatch({ type: COMMITMENT_ADD_SUCCESS, payload: data });
-			// console.log(routeInfo);
-			// history.push(routeInfo[routeInfo.length - 1].path);
+
+			let updatedRoutes = [...routeInfo];
+			let visitNext = updatedRoutes.pop();
+			dispatch(saveRouteInfo(updatedRoutes));
+			history.push(visitNext.path);
 		} catch (error) {
 			dispatch({
 				type: COMMITMENT_ADD_FAIL,

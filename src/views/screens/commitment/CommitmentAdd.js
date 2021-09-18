@@ -7,14 +7,14 @@ import { CardContainer } from '../../components/HelperComponents';
 const CommitmentAdd = ({ match, history }) => {
 	const id = match.params.activityId;
 
+	const dispatch = useDispatch();
+	const routeSave = useSelector((state) => state.routeSave);
+	const { routeInfo } = routeSave;
+
 	//define states
 	const [comment, setComment] = useState('');
 	const [completionDate, setCompletionDate] = useState('');
 	const [isComplete, setIsComplete] = useState(false);
-
-	const dispatch = useDispatch();
-	const routeSave = useSelector((state) => state.routeSave);
-	const { routeInfo } = routeSave;
 
 	//handle submit form
 	const submitHandler = (e) => {

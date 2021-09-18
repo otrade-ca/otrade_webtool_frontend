@@ -9,13 +9,11 @@ import { getProjectId } from '../../../application/localStorage';
 
 const StakeholderAdd = ({ history }) => {
 	const { id } = useParams();
-
 	const projectId = getProjectId();
 	const { t } = useTranslation();
 
 	//get projectDetails
 	const dispatch = useDispatch();
-
 	const routeSave = useSelector((state) => state.routeSave);
 	const { routeInfo } = routeSave;
 
