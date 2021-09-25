@@ -22,8 +22,6 @@ const UserLocationsList = ({ match }) => {
 	const locationUserList = useSelector((state) => state.locationUserList);
 	const { loading, error, locations } = locationUserList;
 
-	console.log(locations);
-
 	const locationDelete = useSelector((state) => state.locationDelete);
 	const { success } = locationDelete;
 

@@ -88,7 +88,7 @@ export const addStakeholder =
 			} else {
 				// else navigate to assessment
 				const navigateToRoute = updatedRoutes.pop();
-				console.log(navigateToRoute);
+
 				// save route
 				dispatch(saveRouteInfo(updatedRoutes));
 				// go to influence page

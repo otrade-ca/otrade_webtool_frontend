@@ -21,8 +21,6 @@ const NewsView = ({ match }) => {
 	const newsDetails = useSelector((state) => state.newsDetails);
 	const { loading, news, error } = newsDetails;
 
-	console.log(news);
-
 	const stakeholderListDropdown = useSelector(
 		(state) => state.stakeholderListDropdown
 	);

@@ -42,7 +42,7 @@ export const addActivity =
 			const {
 				userLogin: { userInfo },
 			} = getState();
-			console.log('activity', activity);
+
 			const config = {
 				headers: {
 					'Content-Type': 'application/json',
@@ -59,8 +59,6 @@ export const addActivity =
 			// determine if to push to collect org or assessment info
 			// get id, stakeholders, and comp value from returned data
 			const { _id, stakeholders, compromise } = data;
-
-			console.log(stakeholders);
 
 			// get copy of updatedRoutes
 			let updatedRoutes = [...routeInfo];

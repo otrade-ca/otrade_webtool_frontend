@@ -31,8 +31,6 @@ const ProjectDocuments = ({
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
-	console.log(url);
-
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 

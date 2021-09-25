@@ -45,8 +45,6 @@ const OrganizationDropdown = ({ label, projectId }) => {
 		// spread all organizations into a list
 		const list = [...organizations];
 
-		console.log(list);
-
 		// validate e.target.value
 		if (
 			list.includes(e.target.value) ||

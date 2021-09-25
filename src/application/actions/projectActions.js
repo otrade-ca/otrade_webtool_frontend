@@ -90,8 +90,6 @@ export const listProjectDetails = (id) => async (dispatch, getState) => {
 			config
 		);
 
-		console.log(data);
-
 		dispatch({ type: PROJECT_DETAILS_SUCCESS, payload: data });
 
 		// everytime project details are gathered, store the projectId in localstorage

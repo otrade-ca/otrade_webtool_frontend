@@ -48,7 +48,6 @@ const UploadPhoto = ({ match, history }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log('hello');
 		dispatch(
 			updateLocationPhoto(
 				{
