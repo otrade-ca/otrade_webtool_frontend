@@ -18,7 +18,9 @@ import {
 	deleteDocument,
 	listProjectDocuments,
 } from '../../../application/actions/documentActions';
-import { Document } from '../../components/Entity/Document';
+import Document from '../../components/Entity/Document';
+import { IconContext } from 'react-icons';
+import * as IoIcons from 'react-icons/io';
 
 const StakeholderDocuments = ({
 	match,
@@ -42,7 +44,25 @@ const StakeholderDocuments = ({
 		}
 	}, [listProjectDocuments, projectId, success, keyword, pageNumber]);
 
-	const renderEmpty = () => <></>;
+	const renderEmpty = () => (
+		<>
+			{documents && documents.length === 0 ? (
+				<Empty
+					itemLink={`${url}/upload`}
+					url={url}
+					type={'Documents'}
+					group={'documents'}
+				/>
+			) : (
+				<Card.Header className="my-card-header">
+					<h4>{`Documents (${count})`}</h4>
+					<Link to={`/news/register`} className="btn btn-primary ml-2">
+						<i className="fas fa-plus"></i> {t('action.register')}
+					</Link>
+				</Card.Header>
+			)}
+		</>
+	);
 
 	const deleteHandler = (id) => {
 		if (window.confirm('Click ok to delete')) {
@@ -51,7 +71,7 @@ const StakeholderDocuments = ({
 	};
 
 	return (
-		<Card>
+		<Card className="my-card">
 			{loading ? (
 				<Loader />
 			) : error ? (

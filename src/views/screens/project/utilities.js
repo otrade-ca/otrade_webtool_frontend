@@ -165,8 +165,8 @@ export const routes = [
 		path: '/documents/:newsId/view',
 		component: ({ match }) => <NewsView match={match} />,
 	},
-	{
-		path: '/documents/:newsId/view/edit',
-		component: ({ match }) => <NewsEdit match={match} />,
-	},
+	// {
+	// 	path: '/documents/:newsId/view/edit',
+	// 	component: ({ match }) => <NewsEdit match={match} />,
+	// },
 ];

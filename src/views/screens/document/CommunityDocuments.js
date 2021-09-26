@@ -18,7 +18,7 @@ import {
 	deleteDocument,
 	listProjectDocuments,
 } from '../../../application/actions/documentActions';
-import { Document } from '../../components/Entity/Document';
+import Document from '../../components/Entity/Document';
 
 const CommunityDocuments = ({
 	match,

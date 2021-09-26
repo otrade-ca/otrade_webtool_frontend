@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addProjectDocument } from '../../../application/actions/documentActions';
 import { useTranslation } from 'react-i18next';
 import { CardContainer } from '../../components/HelperComponents';
 import { getProjectId } from '../../../application/localStorage';
 
 const DocumentAdd = ({ match, history }) => {
-	const projectId = match.params.id ? match.params.id : getProjectId();
-
+	const id = match.params.id ? match.params.id : getProjectId();
 	const { t } = useTranslation();
 
 	//define states
@@ -17,23 +16,6 @@ const DocumentAdd = ({ match, history }) => {
 	const [file, setFile] = useState(null);
 
 	const dispatch = useDispatch();
-
-	// //get project details
-	// const projectDetails = useSelector((state) => state.projectDetails);
-	// const { loading, error, project } = projectDetails;
-
-	// //get success from project update
-	// const projectUpdate = useSelector((state) => state.projectUpdate);
-	// const { success: successUpdate } = projectUpdate;
-
-	// useEffect(() => {
-	// 	if (successUpdate) {
-	// 		dispatch(listProjectDetails(projectId));
-	// 		dispatch({ type: PROJECT_UPDATE_RESET });
-	// 	} else {
-	// 		setImage(project.image);
-	// 	}
-	// }, [dispatch, projectId, project, successUpdate]);
 
 	const uploadFileHandler = async (e) => {
 		setFile(e.target.files[0]);
@@ -44,7 +26,7 @@ const DocumentAdd = ({ match, history }) => {
 		dispatch(
 			addProjectDocument(
 				{
-					id: projectId,
+					id: id,
 					title: title,
 				},
 				file,

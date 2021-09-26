@@ -49,23 +49,18 @@ export const addProjectDocument =
 					Authorization: `Bearer ${userInfo.token}`,
 				},
 			};
-
 			// instructions
 			const instructions = getBucketInfo('document');
 			instructions.id = document.id;
 			instructions.contentType = file.type;
-
 			//get presignedUrl
 			const {
 				data: { key, url },
 			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
-
 			// upload to aws
 			await axios.put(url, file, { 'Content-Type': file.type });
-
 			// append link to document
 			document.link = key;
-
 			//post document to db
 			const { data } = await axios.post(
 				`${getURL()}/api/v1/documents`,
@@ -94,6 +89,65 @@ export const addProjectDocument =
  * @returns
  */
 export const addCommunityDocument =
+	(document, file, history) => async (dispatch, getState) => {
+		try {
+			dispatch({ type: DOCUMENT_ADD_REQUEST });
+
+			const {
+				userLogin: { userInfo },
+			} = getState();
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			// instructions
+			const instructions = getBucketInfo('document');
+			instructions.id = document.id;
+			instructions.contentType = file.type;
+
+			// get presignedUrl
+			const {
+				data: { key, url },
+			} = await axios.post(`${getURL()}/api/v1/upload`, instructions, config);
+
+			// upload to aws
+			await axios.put(url, file, { 'Content-Type': file.type });
+
+			// append link to document
+			document.link = key;
+
+			// post document to db
+			const { data } = await axios.post(
+				`${getURL()}/api/v1/documents`,
+				document,
+				config
+			);
+
+			dispatch({ type: DOCUMENT_ADD_SUCCESS, payload: data });
+			history.go(-1);
+			dispatch(setAlert('Document successfully added', 'success'));
+		} catch (error) {
+			dispatch({
+				type: DOCUMENT_ADD_FAIL,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.messsage,
+			});
+		}
+	};
+
+/**
+ * adds a document
+ * @param {*} document
+ * @param {*} history
+ * @returns
+ */
+export const addStakeholderDocument =
 	(document, file, history) => async (dispatch, getState) => {
 		try {
 			dispatch({ type: DOCUMENT_ADD_REQUEST });
@@ -282,9 +336,11 @@ export const listProjectDocuments =
 			};
 
 			const { data } = await axios.get(
-				`${getURL()}/api/v1/projects/${projectId}/activities?keyword=${keyword}&pageNumber=${pageNumber}`,
+				`${getURL()}/api/v1/projects/${projectId}/documents?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
+
+			console.log('returned data', data);
 
 			dispatch({ type: DOCUMENT_LIST_PROJECT_SUCCESS, payload: data });
 		} catch (error) {

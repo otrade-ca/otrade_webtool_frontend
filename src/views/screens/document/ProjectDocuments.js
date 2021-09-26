@@ -18,7 +18,7 @@ import {
 	deleteDocument,
 	listProjectDocuments,
 } from '../../../application/actions/documentActions';
-import { Document } from '../../components/Entity/Document';
+import Document from '../../components/Entity/Document';
 
 const ProjectDocuments = ({
 	match,
@@ -34,13 +34,13 @@ const ProjectDocuments = ({
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	// useEffect(() => {
-	// 	if (success) {
-	// 		listProjectDocuments(projectId, keyword, pageNumber);
-	// 	} else {
-	// 		listProjectDocuments(projectId, keyword, pageNumber);
-	// 	}
-	// }, [listProjectDocuments, projectId, success, keyword, pageNumber]);
+	useEffect(() => {
+		if (success) {
+			listProjectDocuments(projectId, keyword, pageNumber);
+		} else {
+			listProjectDocuments(projectId, keyword, pageNumber);
+		}
+	}, [listProjectDocuments, projectId, success, keyword, pageNumber]);
 
 	const renderEmpty = () => (
 		<>
@@ -54,6 +54,9 @@ const ProjectDocuments = ({
 			) : (
 				<Card.Header className="my-card-header">
 					<h4>{`Documents (${count})`}</h4>
+					<Link to={`/documents/register`} className="btn btn-primary ml-2">
+						<i className="fas fa-plus"></i> {t('action.register')}
+					</Link>
 				</Card.Header>
 			)}
 		</>
@@ -80,7 +83,7 @@ const ProjectDocuments = ({
 								render={({ history }) => (
 									<SearchBox
 										history={history}
-										searchWord={'title'}
+										searchWord={'filename'}
 										searchQueryPath={`/project/${projectId}/documents/search/`}
 										searchQueryEmpty={`/project/${projectId}/documents`}
 									/>
