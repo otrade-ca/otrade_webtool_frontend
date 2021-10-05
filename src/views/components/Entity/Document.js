@@ -9,7 +9,7 @@ import Moment from 'react-moment';
 import Placeholder from '../../img/placeholder.png';
 import { getBucketInfo } from '../../../application/api';
 
-const Document = ({ item, index, deleteHandler }) => {
+const Document = ({ item, index, linkPath }) => {
 	const { prependURL } = getBucketInfo('document');
 	const { t } = useTranslation();
 	return (
@@ -58,7 +58,7 @@ const Document = ({ item, index, deleteHandler }) => {
 									</>
 									<br />
 									<>
-										<Link to={`/stakeholder/${item._id}`}>View Document</Link>
+										<Link to={linkPath}>View Document</Link>
 									</>
 								</div>
 							</div>

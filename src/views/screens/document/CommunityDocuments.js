@@ -16,39 +16,47 @@ import Paginate from '../../components/Paginate';
 import { useTranslation } from 'react-i18next';
 import {
 	deleteDocument,
-	listProjectDocuments,
+	listLocationDocuments,
 } from '../../../application/actions/documentActions';
 import Document from '../../components/Entity/Document';
 
 const CommunityDocuments = ({
 	match,
-	listProjectDocuments,
+	listLocationDocuments,
 	deleteDocument,
-	documentListProject: { loading, error, documents, pages, page, count },
+	documentListLocation: { loading, error, documents, pages, page, count },
 	documentDelete: { success },
 }) => {
-	const projectId = match.params.id;
+	const communityId = match.params.id;
 	const { url } = useRouteMatch();
 	const { t } = useTranslation();
 
 	const keyword = match.params.keyword;
 	const pageNumber = match.params.pageNumber || 1;
 
-	// useEffect(() => {
-	// 	if (success) {
-	// 		listProjectDocuments(projectId, keyword, pageNumber);
-	// 	} else {
-	// 		listProjectDocuments(projectId, keyword, pageNumber);
-	// 	}
-	// }, [listProjectDocuments, projectId, success, keyword, pageNumber]);
+	useEffect(() => {
+		if (success) {
+			listLocationDocuments(communityId, keyword, pageNumber);
+		} else {
+			listLocationDocuments(communityId, keyword, pageNumber);
+		}
+	}, [listLocationDocuments, communityId, success, keyword, pageNumber]);
 
 	const renderEmpty = () => (
 		<>
 			{documents && documents.length === 0 ? (
-				<Empty url={url} type={'documents'} group={'documents'} />
+				<Empty
+					//itemLink={`${url}/upload`}
+					url={url}
+					type={'Documents'}
+					group={'documents'}
+				/>
 			) : (
 				<Card.Header className="my-card-header">
 					<h4>{`Documents (${count})`}</h4>
+					<Link to={`/documents/register`} className="btn btn-primary ml-2">
+						<i className="fas fa-plus"></i> {t('action.register')}
+					</Link>
 				</Card.Header>
 			)}
 		</>
@@ -76,8 +84,8 @@ const CommunityDocuments = ({
 									<SearchBox
 										history={history}
 										searchWord={'title'}
-										searchQueryPath={`/project/${projectId}/documents/search/`}
-										searchQueryEmpty={`/project/${projectId}/documents`}
+										searchQueryPath={`/coummunity/${communityId}/documents/search/`}
+										searchQueryEmpty={`/coummunity/${communityId}/documents`}
 									/>
 								)}
 							/>
@@ -88,7 +96,7 @@ const CommunityDocuments = ({
 									<Document
 										item={item}
 										index={index}
-										linkPath={`/project/${projectId}/documents/${item._id}/view`}
+										linkPath={`/coummunity/${communityId}/documents/${item._id}/view`}
 									/>
 								))}
 						</Accordion>
@@ -96,8 +104,8 @@ const CommunityDocuments = ({
 							<Paginate
 								pages={pages}
 								page={page}
-								urlOne={`/project/${projectId}/documents/search/`}
-								urlTwo={`/project/${projectId}/documents/page/`}
+								urlOne={`/coummunity/${communityId}/documents/search/`}
+								urlTwo={`/coummunity/${communityId}/documents/page/`}
 							/>
 						</Row>
 					</Card.Body>
@@ -108,16 +116,16 @@ const CommunityDocuments = ({
 };
 
 CommunityDocuments.propTypes = {
-	listProjectDocuments: PropTypes.func.isRequired,
+	listLocationDocuments: PropTypes.func.isRequired,
 	deleteDocument: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-	documentListProject: state.documentListProject,
+	documentListLocation: state.documentListLocation,
 	documentDelete: state.documentDelete,
 });
 
 export default connect(mapStateToProps, {
-	listProjectDocuments,
+	listLocationDocuments,
 	deleteDocument,
 })(withRouter(CommunityDocuments));

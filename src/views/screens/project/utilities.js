@@ -4,7 +4,7 @@ import { ProjectLocations } from '../location';
 import { ProjectStakeholders } from '../stakeholder';
 import { ProjectOrganizations } from '../organization';
 import { NewsView, NewsEdit, ProjectNews } from '../news';
-import { ProjectDocuments, DocumentAdd } from '../document';
+import { ProjectDocuments, DocumentAdd, DocumentView } from '../document';
 
 export const btnlinks = [
 	{
@@ -162,11 +162,7 @@ export const routes = [
 		component: ({ match }) => <ProjectDocuments match={match} />,
 	},
 	{
-		path: '/documents/:newsId/view',
-		component: ({ match }) => <NewsView match={match} />,
+		path: '/documents/:documentId/view',
+		component: ({ match }) => <DocumentView match={match} />,
 	},
-	// {
-	// 	path: '/documents/:newsId/view/edit',
-	// 	component: ({ match }) => <NewsEdit match={match} />,
-	// },
 ];

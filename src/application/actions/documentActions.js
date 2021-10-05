@@ -219,7 +219,7 @@ export const getDocumentDetails = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.post(
+		const { data } = await axios.get(
 			`${getURL()}/api/v1/documents/${id}`,
 			config
 		);
@@ -339,8 +339,6 @@ export const listProjectDocuments =
 				`${getURL()}/api/v1/projects/${projectId}/documents?keyword=${keyword}&pageNumber=${pageNumber}`,
 				config
 			);
-
-			console.log('returned data', data);
 
 			dispatch({ type: DOCUMENT_LIST_PROJECT_SUCCESS, payload: data });
 		} catch (error) {

@@ -16,7 +16,7 @@ import Paginate from '../../components/Paginate';
 import { useTranslation } from 'react-i18next';
 import {
 	deleteDocument,
-	listProjectDocuments,
+	listStakeholderDocuments,
 } from '../../../application/actions/documentActions';
 import Document from '../../components/Entity/Document';
 import { IconContext } from 'react-icons';
@@ -24,9 +24,9 @@ import * as IoIcons from 'react-icons/io';
 
 const StakeholderDocuments = ({
 	match,
-	listProjectDocuments,
+	listStakeholderDocuments,
 	deleteDocument,
-	documentListProject: { loading, error, documents, pages, page, count },
+	documentListStakeholder: { loading, error, documents, pages, page, count },
 	documentDelete: { success },
 }) => {
 	const projectId = match.params.id;
@@ -38,17 +38,17 @@ const StakeholderDocuments = ({
 
 	useEffect(() => {
 		if (success) {
-			listProjectDocuments(projectId, keyword, pageNumber);
+			listStakeholderDocuments(projectId, keyword, pageNumber);
 		} else {
-			listProjectDocuments(projectId, keyword, pageNumber);
+			listStakeholderDocuments(projectId, keyword, pageNumber);
 		}
-	}, [listProjectDocuments, projectId, success, keyword, pageNumber]);
+	}, [listStakeholderDocuments, projectId, success, keyword, pageNumber]);
 
 	const renderEmpty = () => (
 		<>
 			{documents && documents.length === 0 ? (
 				<Empty
-					itemLink={`${url}/upload`}
+					//itemLink={`${url}/upload`}
 					url={url}
 					type={'Documents'}
 					group={'documents'}
@@ -56,7 +56,7 @@ const StakeholderDocuments = ({
 			) : (
 				<Card.Header className="my-card-header">
 					<h4>{`Documents (${count})`}</h4>
-					<Link to={`/news/register`} className="btn btn-primary ml-2">
+					<Link to={`/documents/register`} className="btn btn-primary ml-2">
 						<i className="fas fa-plus"></i> {t('action.register')}
 					</Link>
 				</Card.Header>
@@ -118,16 +118,16 @@ const StakeholderDocuments = ({
 };
 
 StakeholderDocuments.propTypes = {
-	listProjectDocuments: PropTypes.func.isRequired,
+	listStakeholderDocuments: PropTypes.func.isRequired,
 	deleteDocument: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-	documentListProject: state.documentListProject,
+	documentListStakeholder: state.documentListStakeholder,
 	documentDelete: state.documentDelete,
 });
 
 export default connect(mapStateToProps, {
-	listProjectDocuments,
+	listStakeholderDocuments,
 	deleteDocument,
 })(withRouter(StakeholderDocuments));
